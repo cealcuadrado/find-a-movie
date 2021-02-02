@@ -1,13 +1,24 @@
 .welcome {
+  background: url('./../../assets/img/bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 98vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /*
   @media screen and (max-width: 991px) {
     padding-top: 4rem;
   }
 
   @media screen and (min-width: 992px) {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+  }
+  */
+
+  .welcome-text {
+    border: 1px solid black;
   }
 }
