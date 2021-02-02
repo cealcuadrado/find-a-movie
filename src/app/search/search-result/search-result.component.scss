@@ -1,0 +1,27 @@
+a.search-result {
+  text-decoration: none;
+
+  .search-result-body {
+    border: 1px solid black;
+    background: url('https://via.placeholder.com/150x300');
+    background-size: cover;
+    height: 300px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .search-result-content {
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+    }
+  }
+
+  &:hover {
+    .search-result-body {
+      .search-result-content {
+        background-color: black;
+      }
+    }
+  }
+}
