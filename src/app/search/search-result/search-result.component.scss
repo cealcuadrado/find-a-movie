@@ -1,10 +1,9 @@
 a.search-result {
+  z-index: 100;
   text-decoration: none;
 
   .search-result-body {
     border: 1px solid black;
-    background: url('https://via.placeholder.com/150x300');
-    background-size: cover;
     height: 300px;
     margin-bottom: 1rem;
     display: flex;
@@ -12,15 +11,23 @@ a.search-result {
     justify-content: flex-end;
 
     .search-result-content {
-      background-color: rgba(0,0,0,0.5);
+      font-size: 0.7rem;
+      width: 100%;
+      padding: 0.5rem;
+      background-color: rgba(0,0,0,0.75);
       color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
     }
   }
 
   &:hover {
     .search-result-body {
+      opacity: 0.75;
       .search-result-content {
-        background-color: black;
+        // background-color: black;
       }
     }
   }
