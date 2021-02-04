@@ -21,11 +21,11 @@ export class SearchResultComponent implements OnInit {
     return !posterPath
       ? 'https://via.placeholder.com/500x300?text=No+poster+available'
       : `${this.imageUrl}${this.searchResult.poster_path}`;
-
-    if (!posterPath) {
-      return
-    }
-    return `${this.imageUrl}`;
   }
+
+  isDateEmpty(dateStr: string): boolean {
+    return dateStr.length == 0;
+  }
+
 
 }

@@ -3,7 +3,9 @@
     [ngStyle]="{'background':'url(' + setImageUrl(searchResult.poster_path) + ')', 'background-size':'cover', 'background-position':'center'}">
     <div class="search-result-content">
       <strong>{{searchResult.title}}</strong>
-      <br>({{searchResult.release_date | date:'yyyy'}})
+      <br>
+      <span *ngIf="!isDateEmpty(searchResult.release_date)">({{searchResult.release_date | date:'yyyy'}})</span>
+      <span *ngIf="isDateEmpty(searchResult.release_date)">No Release Date</span>
     </div>
   </div>
 </a>
