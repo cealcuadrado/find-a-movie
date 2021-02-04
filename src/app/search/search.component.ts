@@ -14,7 +14,7 @@ import { QuerySearchResult } from '../shared/interfaces/query-search-result';
 export class SearchComponent implements OnInit {
 
   public flagLoadingResults: boolean = false;
-  public query: string = 'indiana jones';
+  public query: string = 'money';
   public imageUrl: string = environment.imageUrl;
 
   public currentPage: number = 1;
@@ -25,20 +25,30 @@ export class SearchComponent implements OnInit {
   public searchResults: MovieListResult[] = [];
 
   constructor(
-    private search: SearchService
+    private search: SearchService,
+    private window: Window
   ) { }
 
   ngOnInit(): void {
+    this.searchMovies();
+  }
+
+  searchMovies(): void {
     this.flagLoadingResults = true;
-    this.search.searchMovies(this.query, 1).subscribe((querySearchResult) => {
-      this.searchResults = querySearchResult.results;
-      this.totalResults = querySearchResult.total_results;
-      this.totalPages = querySearchResult.total_pages;
-    }, (error) => {
+    this.search.searchMovies(this.query, this.currentPage).subscribe(
+      (querySearchResult) => {
+        this.searchResults = querySearchResult.results;
+        console.log(this.searchResults);
+        this.totalResults = querySearchResult.total_results;
+        this.totalPages = querySearchResult.total_pages;
+      },
+      (error) => {
         console.log(error);
-    }, () => {
+      },
+      () => {
         this.flagLoadingResults = false;
-    });
+      }
+    );
   }
 
   calculateLeftCounter(): number {
@@ -47,9 +57,12 @@ export class SearchComponent implements OnInit {
 
 
   calculateRightCounter(): number {
-    return ((this.resultsPerPage * this.currentPage) < this.totalPages) ? this.totalResults : (this.resultsPerPage * this.currentPage);
+    return (this.resultsPerPage * this.currentPage) < this.totalResults ? (this.resultsPerPage * this.currentPage) : this.totalResults;
   }
 
-
-
+  onPageChange(event: any): void {
+    this.currentPage = event;
+    this.window.scrollTo({ top: 0 });
+    this.searchMovies();
+  }
 }

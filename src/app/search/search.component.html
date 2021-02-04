@@ -4,17 +4,27 @@
        <h1><i class="fas fa-search fa-fw"></i>{{query}}</h1>
 
        <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
-         <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of <strong>{{totalResults}}</strong> total Results</div>
+         <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of <strong>{{totalResults}}</strong> total results</div>
          <div>Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></div>
        </div>
 
        <hr />
 
        <div class="row">
-         <div *ngFor="let searchResult of searchResults" class="col-12 col-md-4 col-lg-2">
+         <div *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}"
+              class="col-12 col-md-4 col-lg-2">
            <app-search-result [searchResult]="searchResult"></app-search-result>
          </div>
        </div>
+
+       <div class="d-flex justify-content-center align-items-center">
+        <pagination-controls
+          (pageChange)="onPageChange($event)"
+          [autoHide]="true"
+          [maxSize]="7">
+        </pagination-controls>
+       </div>
+
     </div>
     <ng-template #loadingResults>
       <p><i class="fas fa-spinner fa-spin fa-fw"></i> Loading...</p>

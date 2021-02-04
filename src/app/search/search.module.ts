@@ -1,3 +1,4 @@
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +11,8 @@ import { SearchResultComponent } from './search-result/search-result.component';
   declarations: [SearchComponent, SearchResultComponent],
   imports: [
     CommonModule,
-    SearchRoutingModule
+    SearchRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class SearchModule { }

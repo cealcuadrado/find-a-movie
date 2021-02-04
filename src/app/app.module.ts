@@ -21,9 +21,12 @@ import { MainComponent } from './basic-layout/main/main.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: Window,
+    useValue: window
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
