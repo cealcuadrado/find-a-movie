@@ -4,9 +4,14 @@
     <div class="search-result-content">
       <strong>{{searchResult.title}}</strong>
       <br>
-      <span *ngIf="!isDateEmpty(searchResult.release_date)">({{searchResult.release_date | date:'yyyy'}})</span>
-      <span *ngIf="isDateEmpty(searchResult.release_date)">No Release Date</span>
+      <div *ngIf="searchResult.release_date; else noReleaseDate">
+        <span *ngIf="!isDateEmpty(searchResult.release_date); else noReleaseDate">{{searchResult.release_date | date:'yyyy'}}</span>
+        <!--<span *ngIf="isDateEmpty(searchResult.release_date)">No Release Date</span> -->
+      </div>
     </div>
   </div>
 </a>
+<ng-template #noReleaseDate>
+  <span >No Release Date</span>
+</ng-template>
 
