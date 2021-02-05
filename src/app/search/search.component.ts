@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QuerySearchResult } from '../shared/interfaces/query-search-result';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -14,31 +15,41 @@ import { QuerySearchResult } from '../shared/interfaces/query-search-result';
 export class SearchComponent implements OnInit {
 
   public flagLoadingResults: boolean = false;
-  public query: string = 'money';
   public imageUrl: string = environment.imageUrl;
 
-  public currentPage: number = 1;
+  public currentPage: number;
   public resultsPerPage = 20;
 
   public totalResults: number;
   public totalPages: number;
   public searchResults: MovieListResult[] = [];
 
+  public searchQuery: string;
+
   constructor(
+    private activatedRoute: ActivatedRoute,
     private search: SearchService,
     private window: Window
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.searchQuery = params.query;
+      this.firstSearch();
+    });
+  }
+
+  firstSearch(): void {
+    this.currentPage = 1;
     this.searchMovies();
   }
 
   searchMovies(): void {
     this.flagLoadingResults = true;
-    this.search.searchMovies(this.query, this.currentPage).subscribe(
+    this.search.searchMovies(this.searchQuery, this.currentPage).subscribe(
       (querySearchResult) => {
         this.searchResults = querySearchResult.results;
-        console.log(this.searchResults);
+        // console.log(this.searchResults);
         this.totalResults = querySearchResult.total_results;
         this.totalPages = querySearchResult.total_pages;
       },

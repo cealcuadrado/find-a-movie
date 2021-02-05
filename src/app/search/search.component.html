@@ -1,16 +1,16 @@
 <section class="search">
   <div class="container-fluid">
     <div *ngIf="!flagLoadingResults; else loadingResults">
-       <h1><i class="fas fa-search fa-fw"></i>{{query}}</h1>
+       <h1><i class="fas fa-search fa-fw"></i>{{searchQuery}}</h1>
 
-       <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
+       <div class="d-flex flex-column flex-lg-row justify-content-lg-between" *ngIf="searchResults.length > 0">
          <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of <strong>{{totalResults}}</strong> total results</div>
          <div>Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></div>
        </div>
 
        <hr />
 
-       <div class="row">
+       <div class="row" *ngIf="searchResults.length > 0; else noResultsFound">
          <div *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}"
               class="col-12 col-md-4 col-lg-2">
            <app-search-result [searchResult]="searchResult"></app-search-result>
@@ -28,6 +28,9 @@
     </div>
     <ng-template #loadingResults>
       <p><i class="fas fa-spinner fa-spin fa-fw"></i> Loading...</p>
+    </ng-template>
+    <ng-template #noResultsFound>
+      <p>Sorry, no results found.</p>
     </ng-template>
   </div>
 
