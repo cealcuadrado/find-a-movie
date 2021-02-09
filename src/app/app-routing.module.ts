@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
   },
   {
+    path: 'movie',
+    loadChildren: () => import('./movie/movie.module').then(m => m.MovieModule)
+  },
+  {
     path: '**',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -20,7 +24,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
