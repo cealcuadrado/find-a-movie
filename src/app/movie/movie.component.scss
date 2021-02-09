@@ -1,4 +1,42 @@
 .movie {
-  padding-top: 4rem;
   padding-bottom: 4rem;
+
+  header {
+    height: 400px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: url('https://via.placeholder.com/500x300?text=No+poster+available');
+    background-position: center;
+
+    .header-title {
+      padding: 1rem;
+      color: white;
+      background-color: rgba(0,0,0,0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: relative;
+    }
+
+    .movie-poster {
+      position: absolute;
+      border: 1px solid white;
+      width: 150px;
+      height: 225px;
+      right: 0;
+      margin: 1rem;
+      background-image: url('https://via.placeholder.com/500x300?text=No+poster+available');
+      background-position: center;
+
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+  }
+
+  main {
+
+  }
 }
