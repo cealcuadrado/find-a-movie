@@ -1,6 +1,6 @@
 <a class="search-result" href="#" [routerLink]="['/movie', searchResult.id]" [title]="searchResult.title">
   <div class="search-result-body"
-    [ngStyle]="{'background':'url(' + setImageUrl(searchResult.poster_path) + ')', 'background-size':'cover', 'background-position':'center'}">
+    [ngStyle]="{'background':'url(' + setPosterUrl(searchResult.poster_path) + ')', 'background-size':'cover', 'background-position':'center'}">
     <div class="search-result-content">
       <strong>{{searchResult.title}}</strong>
       <br>

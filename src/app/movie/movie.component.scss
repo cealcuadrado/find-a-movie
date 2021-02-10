@@ -20,12 +20,13 @@
       position: relative;
 
       .header-heading {
+        border: 1px solid white;
         background-color: rgba(0,0,0,0.75);
         padding: 1rem;
       }
 
       .movie-poster {
-        border: 1px solid black;
+        border: 1px solid white;
         width: 150px;
         height: 225px;
         box-shadow: 5px 5px 10px black;

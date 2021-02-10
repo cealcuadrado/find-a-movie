@@ -1,5 +1,5 @@
 <section class="movie" *ngIf="movieDetail; else loadingMovie">
-  <header>
+  <header [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
     <section class="header-title">
       <div class="header-heading">
         <h1>
@@ -16,7 +16,9 @@
         </h1>
         <span>Dir. YYYY {{movieDetail.runtime | runtime}}</span>
       </div>
-      <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}" class="movie-poster">
+      <div>
+        <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}" class="movie-poster">
+        </div>
       </div>
     </section>
   </header>

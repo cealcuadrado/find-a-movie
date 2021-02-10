@@ -7,7 +7,8 @@ export const environment = {
   apiKey: 'ebd8351b7505bd9785d1ea8ffee77e7d',
   apiUrl: 'https://api.themoviedb.org/3',
   language: 'en-US',
-  imageUrl: 'https://image.tmdb.org/t/p/w500'
+  posterUrl: 'https://image.tmdb.org/t/p/w500',
+  backdropUrl: 'https://image.tmdb.org/t/p/original'
 };
 
 /*

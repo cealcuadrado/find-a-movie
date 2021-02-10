@@ -12,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class MovieComponent implements OnInit {
   public movieDetail: MovieDetail;
   public id: string;
-  private imageUrl: string = environment.imageUrl;
+  private posterUrl: string = environment.posterUrl;
+  private backdropUrl: string = environment.backdropUrl;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,7 +37,11 @@ export class MovieComponent implements OnInit {
   setPosterUrl(posterPath: string | null): string {
     return !posterPath
       ? 'https://via.placeholder.com/600x450?text=No+poster+available'
-      : `${this.imageUrl}${posterPath}`;
+      : `${this.posterUrl}${posterPath}`;
+  }
+
+  setBackdropUrl(backdropPath: string | null): string {
+    return !backdropPath ? 'https://via.placeholder.com/600x450?text=No+image+available' : `${this.backdropUrl}${backdropPath}`;
   }
 
   isDateEmpty(dateStr: string): boolean {

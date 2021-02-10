@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SearchComponent implements OnInit {
 
   public flagLoadingResults: boolean = false;
-  public imageUrl: string = environment.imageUrl;
+  public posterUrl: string = environment.posterUrl;
 
   public currentPage: number;
   public resultsPerPage = 20;

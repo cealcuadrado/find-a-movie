@@ -9,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SearchResultComponent implements OnInit {
 
-  private imageUrl: string = environment.imageUrl;
+  private posterUrl: string = environment.posterUrl;
   @Input() searchResult: MovieListResult;
 
   constructor() { }
@@ -17,10 +17,10 @@ export class SearchResultComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setImageUrl(posterPath: string | null) {
+  setPosterUrl(posterPath: string | null) {
     return !posterPath
       ? 'https://via.placeholder.com/500x300?text=No+poster+available'
-      : `${this.imageUrl}${this.searchResult.poster_path}`;
+      : `${this.posterUrl}${this.searchResult.poster_path}`;
   }
 
   isDateEmpty(dateStr: string): boolean {
