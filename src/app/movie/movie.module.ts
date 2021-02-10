@@ -1,3 +1,4 @@
+import { SharedComponentsModule } from './../shared/shared-components/shared-components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,8 @@ import { MovieComponent } from './movie.component';
   declarations: [MovieComponent],
   imports: [
     CommonModule,
-    MovieRoutingModule
+    MovieRoutingModule,
+    SharedComponentsModule
   ]
 })
 export class MovieModule { }
