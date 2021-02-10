@@ -7,15 +7,22 @@ export class RuntimePipe implements PipeTransform {
 
   transform(runtime: number | null): unknown {
     console.log(runtime);
-    if (runtime == null) {
-      return '';
+    let runTimeStr: string = '';
+
+    if ((runtime == 0) || (runtime == null)) {
+      runTimeStr = runTimeStr.concat('| No runtime defined');
     } else {
       if (Math.floor(runtime / 60) >= 1) {
-        return `| ${Math.floor(runtime / 60)}h ${runtime % 60}min.`
+        runTimeStr = runTimeStr.concat(`| ${Math.floor(runtime / 60)}h`);
+        if (runtime % 60 > 0) {
+          runTimeStr = runTimeStr.concat(` ${runtime % 60}min.`);
+        }
       } else {
-        return `| ${runtime % 60}min`
+        runTimeStr = runTimeStr.concat(`| ${runtime % 60}min.`);
       }
     }
+
+    return runTimeStr;
   }
 
 }
