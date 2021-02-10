@@ -1,13 +1,24 @@
 <section class="movie" *ngIf="movieDetail; else loadingMovie">
   <header>
     <section class="header-title">
-      <div>
-        <h1>Movie Title <small>(year)</small></h1>
-        <span>Dir. YYYY | H hr. MM min.</span>
+      <div class="header-heading">
+        <h1>
+          {{movieDetail.title}}
+          <span *ngIf="movieDetail.release_date; else noReleaseDate">
+            <small
+              *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">
+              ({{movieDetail.release_date | date:'yyyy'}})
+            </small>
+          </span>
+          <ng-template #noReleaseDate>
+            <small>(No Release Date)</small>
+          </ng-template>
+        </h1>
+        <span>Dir. YYYY {{movieDetail.runtime | runtime}}</span>
+      </div>
+      <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}" class="movie-poster">
       </div>
     </section>
-    <div class="movie-poster">
-    </div>
   </header>
 
   <div class="container-fluid">
@@ -26,17 +37,14 @@
         </div>
         <div class="col-12 col-lg-6 order-1 order-lg-2">
           <section class="description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed scelerisque orci in ante cursus euismod.
-              Etiam
-              facilisis convallis nulla at mattis. Curabitur eget tellus malesuada, dignissim nunc tincidunt, commodo
-              augue.
-              Proin mattis consectetur sagittis. Nam blandit consectetur ultricies. Nam condimentum massa risus, nec
-              auctor
-              metus eleifend quis. Integer venenatis urna vitae molestie eleifend. Donec eleifend eget eros eget
-              aliquet.
-              Sed
-              sagittis imperdiet tortor, a vestibulum nisl volutpat ut. Donec laoreet eu eros non blandit.</p>
+            <div *ngIf="movieDetail.overview; else noOverview">
+              <p>{{movieDetail.overview}}</p>
+            </div>
+            <ng-template #noOverview>
+              <p>No overview available.</p>
+            </ng-template>
           </section>
+          <hr/>
           <section class="crew">
             <p><strong>Directed by:</strong> Director</p>
             <p><strong>Written by:</strong> Writer</p>
@@ -63,7 +71,6 @@
     </main>
   </div>
 </section>
-
 <ng-template #loadingMovie>
   <app-loading></app-loading>
 </ng-template>
