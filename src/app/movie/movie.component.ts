@@ -1,3 +1,5 @@
+import { MovieService } from './movie.service';
+import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,13 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieComponent implements OnInit {
 
+  public movieDetail: MovieDetail;
+  public id: string;
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private movie: MovieService
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      console.log(params);
+      this.id = params.id;
+      this.getDetails();
+    });
+  }
+
+  getDetails(): void {
+    this.movie.getMovieDetail(this.id).subscribe(detail => {
+      console.log(detail);
+      this.movieDetail = detail;
     });
   }
 
