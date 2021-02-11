@@ -14,6 +14,7 @@ export class MovieComponent implements OnInit {
   public id: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
+  private imdbUrl: string = environment.imdbUrl;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,5 +47,13 @@ export class MovieComponent implements OnInit {
 
   isDateEmpty(dateStr: string): boolean {
     return dateStr.length == 0;
+  }
+
+  setImdbUrl(imdbId: string): string {
+    return `${this.imdbUrl}${imdbId}`;
+  }
+
+  setTmdbUrl(tmdbId: string): string {
+    return 'foo';
   }
 }

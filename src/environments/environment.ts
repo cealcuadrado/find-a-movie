@@ -8,7 +8,9 @@ export const environment = {
   apiUrl: 'https://api.themoviedb.org/3',
   language: 'en-US',
   posterUrl: 'https://image.tmdb.org/t/p/w500',
-  backdropUrl: 'https://image.tmdb.org/t/p/original'
+  backdropUrl: 'https://image.tmdb.org/t/p/original',
+  imdbUrl: 'https://www.imdb.com/title/',
+  tmdbUrl: '',
 };
 
 /*
