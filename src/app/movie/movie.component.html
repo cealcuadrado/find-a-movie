@@ -28,13 +28,69 @@
       <div class="row">
         <div class="col-12 col-lg-3 order-2 order-lg-1">
           <section class="basic-info">
-            <p><strong>Genre:</strong><br>Genre</p>
-            <p><strong>Studio:</strong><br>Studio</p>
-            <p><strong>Release Date:</strong><br>Release Date</p>
-            <p><strong>Country:</strong><br>Country</p>
-            <p><strong>Language:</strong><br>Language</p>
-            <p><strong>Runtime:</strong><br>{{movieDetail.runtime | runtime}}</p>
-            <p><strong>Aspect Ratio:</strong><br>Aspect Ratio</p>
+            <p>
+              <strong>Genre(s):</strong>
+              <br>
+              <span *ngFor="let genre of movieDetail.genres; let i = index">
+                {{genre.name}}
+                <br>
+              </span>
+            </p>
+            <p>
+              <strong>Release Date:</strong>
+              <br>{{movieDetail.release_date | date}}
+            </p>
+            <p>
+              <strong>Production Countries:</strong>
+              <br>
+              <span *ngFor="let country of movieDetail.production_countries; let i = index">
+                {{country.name}}
+                <br>
+              </span>
+            </p>
+            <p>
+              <strong>Language(s):</strong>
+              <br>
+              <span *ngFor="let language of movieDetail.spoken_languages; let i = index">
+                {{language.name}}<span *ngIf="i != movieDetail.spoken_languages.length - 1"></span>
+              </span>
+            </p>
+            <p>
+              <strong>Runtime:</strong>
+              <br>{{movieDetail.runtime | runtime}}
+            </p>
+            <p>
+              <strong>Aspect Ratio:</strong>
+              <br>Aspect Ratio
+            </p>
+            <p>
+              <strong>Production Companies:</strong>
+              <br>
+              <span *ngFor="let company of movieDetail.production_companies; let i = index">
+                {{company.name}}
+                <br>
+              </span>
+            </p>
+            <p>
+              <strong>Budget:</strong>
+              <br>
+              <span *ngIf="movieDetail.budget != 0; else noBudgetAvailable">
+                {{movieDetail.budget | currency:'USD':'symbol':'3.0'}}
+              </span>
+              <ng-template #noBudgetAvailable>
+                No Budget Available
+              </ng-template>
+            </p>
+            <p>
+              <strong>Box Office Revenue:</strong>
+              <br>
+              <span *ngIf="movieDetail.revenue != 0; else noRevenueAvailable">
+                {{movieDetail.revenue | currency:'USD':'symbol':'3.0'}}
+              </span>
+              <ng-template #noRevenueAvailable>
+                No Revenue Available
+              </ng-template>
+            </p>
           </section>
         </div>
         <div class="col-12 col-lg-6 order-1 order-lg-2">
