@@ -52,7 +52,8 @@
               <strong>Language(s):</strong>
               <br>
               <span *ngFor="let language of movieDetail.spoken_languages; let i = index">
-                {{language.name}}<span *ngIf="i != movieDetail.spoken_languages.length - 1"></span>
+                {{language.english_name}}<span *ngIf="i != movieDetail.spoken_languages.length - 1"></span>
+                <br>
               </span>
             </p>
             <p>
@@ -126,7 +127,7 @@
             TMDB Profile
           </a>
           -->
-          <a *ngIf="movieDetail.homepage != null" [href]="movieDetail.homepage" target="_blank" class="btn btn-block btn-warning">
+          <a *ngIf="isHomepageEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank" class="btn btn-block btn-warning">
             <i class="fas fa-globe fa-fw"></i> Official Website
           </a>
         </div>

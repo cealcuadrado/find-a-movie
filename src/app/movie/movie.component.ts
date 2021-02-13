@@ -42,7 +42,9 @@ export class MovieComponent implements OnInit {
   }
 
   setBackdropUrl(backdropPath: string | null): string {
-    return !backdropPath ? 'https://via.placeholder.com/600x450?text=No+image+available' : `${this.backdropUrl}${backdropPath}`;
+    return !backdropPath
+      ? 'https://via.placeholder.com/600x450?text=No+image+available'
+      : `${this.backdropUrl}${backdropPath}`;
   }
 
   isDateEmpty(dateStr: string): boolean {
@@ -55,5 +57,15 @@ export class MovieComponent implements OnInit {
 
   setTmdbUrl(tmdbId: string): string {
     return 'foo';
+  }
+
+  isHomepageEmpty(homepagePath: string | null): boolean {
+    if (homepagePath == null) {
+      return false;
+    } else if (homepagePath.length == 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
