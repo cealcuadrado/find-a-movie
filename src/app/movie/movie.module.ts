@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MovieRoutingModule } from './movie-routing.module';
 import { MovieComponent } from './movie.component';
 import { RuntimePipe } from './runtime.pipe';
-
+import { CastAndCrewComponent } from './cast-and-crew/cast-and-crew.component';
 
 @NgModule({
-  declarations: [MovieComponent, RuntimePipe],
+  declarations: [MovieComponent, RuntimePipe, CastAndCrewComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
