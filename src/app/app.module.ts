@@ -1,9 +1,11 @@
+/* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { EmbeddedMediaModule } from 'ngx-embedded-media';
 
+/* Components */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicLayoutComponent } from './layouts/basic-layout/basic-layout.component';
@@ -24,7 +26,8 @@ import { MainComponent } from './layouts/basic-layout/main/main.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // EmbeddedMediaModule.forRoot()
   ],
   providers: [{
     provide: Window,

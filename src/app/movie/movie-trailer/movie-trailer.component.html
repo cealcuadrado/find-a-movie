@@ -1,0 +1,9 @@
+<div *ngIf="youtubeId; else noTrailer">
+  <embedded-media
+  [video]='key'
+  provider="youtube"
+  attributes='{"width": "100%", "height": 500}'>
+  </embedded-media>
+</div>
+<ng-template #noTrailer>
+</ng-template>

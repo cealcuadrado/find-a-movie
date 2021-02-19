@@ -93,6 +93,7 @@
               </ng-template>
             </p>
           </section>
+          <hr/>
         </div>
         <div class="col-12 col-lg-6 order-1 order-lg-2">
           <section class="description">
@@ -110,7 +111,7 @@
           <app-cast-and-crew></app-cast-and-crew>
           <hr>
           <section class="trailer">
-            <p>Here is the space for a trailer</p>
+            <app-movie-trailer [movieId]="id"></app-movie-trailer>
           </section>
         </div>
         <div class="col-12 col-lg-3 order-3 order-lg-3">
