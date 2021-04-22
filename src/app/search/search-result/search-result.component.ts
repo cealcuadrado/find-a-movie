@@ -19,8 +19,12 @@ export class SearchResultComponent implements OnInit {
 
   setPosterUrl(posterPath: string | null) {
     return !posterPath
-      ? 'https://via.placeholder.com/500x300?text=No+poster+available'
+      ? 'null'
       : `${this.posterUrl}${this.searchResult.poster_path}`;
+  }
+
+  isPosterUrl(posterPath: string | null) {
+    return posterPath;
   }
 
   isDateEmpty(dateStr: string): boolean {

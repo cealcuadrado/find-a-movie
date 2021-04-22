@@ -37,8 +37,12 @@ export class MovieComponent implements OnInit {
 
   setPosterUrl(posterPath: string | null): string {
     return !posterPath
-      ? 'https://via.placeholder.com/600x450?text=No+poster+available'
+      ? 'null'
       : `${this.posterUrl}${posterPath}`;
+  }
+
+  isPosterUrl(posterPath: string | null) {
+    return posterPath;
   }
 
   setBackdropUrl(backdropPath: string | null): string {
