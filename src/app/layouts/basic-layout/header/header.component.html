@@ -1,18 +1,23 @@
 <header class="bg-danger">
-  <nav class="navbar nav-expand-lg justify-content-start">
+  <nav class="navbar navbar-expand-lg justify-content-start">
     <a class="navbar-brand text-white" href="#" [routerLink]="'/home'">
       Find a Movie
     </a>
-    <form class="form-inline flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-      <div class="input-group w-100">
-        <input type="search" class="form-control" placeholder="Enter a title" formControlName="searchQuery"/>
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-light btn-outline-dark">
-            <i class="fas fa-search fa-fw"></i>
-          </button>
+    <button class="navbar-toggler text-white ml-auto pr-0 border-0" type="button" (click)="toggleCollapse()">
+      <i class="fa fa-bars fa-fw"></i>
+    </button>
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <form class="flex-grow-1 search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <input type="search" class="form-control" placeholder="Enter a title" formControlName="searchQuery" />
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-light btn-outline-dark">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </nav>
 </header>
 

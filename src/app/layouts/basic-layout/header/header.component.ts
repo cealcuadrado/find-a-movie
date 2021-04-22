@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
+  isMenuCollapsed = true;
 
   constructor(
     private fb: FormBuilder,
@@ -25,5 +26,9 @@ export class HeaderComponent implements OnInit {
   onSubmit(): void {
     let value = this.searchForm.value.searchQuery;
     this.router.navigate(['/search', value]);
+  }
+
+  toggleCollapse(): void {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 }
