@@ -21,6 +21,10 @@ export class CastAndCrewComponent implements OnInit {
   public production: string[];
   public movieCast: string[];
 
+  public isBasedOnWork: boolean;
+
+  public basedOnWork: string[];
+
   constructor(
     private movie: MovieService
   ) { }
@@ -30,6 +34,7 @@ export class CastAndCrewComponent implements OnInit {
       this.cast = result.cast;
       this.crew = result.crew;
       console.log(this.crew);
+      console.log(this.crew.filter(member => member.known_for_department == 'Writing'));
 
       this.getDirection();
       this.getWriting();
@@ -37,6 +42,7 @@ export class CastAndCrewComponent implements OnInit {
       this.getStory();
       this.getProducers();
       this.getCast();
+      this.getBasedOnWork();
     });
   }
 
@@ -54,6 +60,21 @@ export class CastAndCrewComponent implements OnInit {
 
   getStory(): void {
     this.story = this.crew.filter(member => member.job == 'Story').map(member => member.name);
+  }
+
+  getBasedOnWork(): void {
+    let basedOnWorkOf = this.crew.
+      filter(member => {
+        return (member.job === 'Novel' || member.job === 'Author')
+      })
+      .map(member => member.name);
+
+    if (basedOnWorkOf.length > 0) {
+      this.isBasedOnWork = true;
+      this.basedOnWork = basedOnWorkOf;
+    } else {
+      this.isBasedOnWork = false;
+    }
   }
 
   getProducers(): void {
