@@ -3,4 +3,10 @@ header {
   z-index: 999;
   top: 0;
   width: 100%;
+
+  .search-form {
+    @media screen and (max-width: 991px) {
+      margin-top: 0.5rem;
+    }
+  }
 }
