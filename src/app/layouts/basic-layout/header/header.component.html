@@ -17,12 +17,28 @@
           </div>
         </div>
         <div class="search-autocomplete" *ngIf="barResults.length > 0">
-          <div *ngFor="let barResult of barResults" class="bar-result p-1">
-            Result!
+          <div *ngFor="let barResult of barResults" class="bar-result">
+            <div class="d-flex align-items-center">
+              <!--
+              <div class="movie-icon border rounded mr-2">
+              </div>
+              -->
+              <div>
+                {{barResult.title}}
+                <span *ngIf="barResult.release_date; else noReleaseDate">
+                  <span
+                    *ngIf="!isDateEmpty(barResult.release_date); else noReleaseDate">({{barResult.release_date | date:'yyyy'}})</span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </form>
     </div>
   </nav>
 </header>
+
+<ng-template #noReleaseDate>
+  <span>(No Release Date)</span>
+</ng-template>
 

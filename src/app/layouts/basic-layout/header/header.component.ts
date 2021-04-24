@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   searchForm: FormGroup;
   isMenuCollapsed = true;
 
@@ -21,17 +20,19 @@ export class HeaderComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private movieSearch: MovieSearchService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      searchQuery: new FormControl('')
+      searchQuery: new FormControl(''),
     });
   }
 
   onSubmit(): void {
     let value = this.searchForm.value.searchQuery;
-    this.router.navigate(['/search', value]);
+    this.router.navigate(['/search', value]).then(result => {
+      this.barResults = [];
+    });
   }
 
   toggleCollapse(): void {
@@ -41,15 +42,19 @@ export class HeaderComponent implements OnInit {
   onSearchInput(): void {
     let query = this.searchForm.value.searchQuery;
 
-    if (query.length < 3) {
+    if (query.length < 2) {
       this.barResults = [];
       console.log(this.barResults);
       return;
     }
 
-    this.movieSearch.searchMovies(query, 1).subscribe(querySearchResult => {
+    this.movieSearch.searchMovies(query, 1).subscribe((querySearchResult) => {
       this.barResults = querySearchResult.results.slice(0, 5);
       console.log(this.barResults);
     });
+  }
+
+  isDateEmpty(dateStr: string): boolean {
+    return dateStr.length == 0;
   }
 }
