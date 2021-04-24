@@ -14,6 +14,9 @@ import { FooterComponent } from './layouts/basic-layout/footer/footer.component'
 import { MainComponent } from './layouts/basic-layout/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+/* Services */
+import { MovieSearchService } from './shared/shared-services/movie-search.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,10 +34,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     // EmbeddedMediaModule.forRoot()
   ],
-  providers: [{
-    provide: Window,
-    useValue: window
-  }],
+  providers: [
+    {
+      provide: Window,
+      useValue: window
+    },
+    MovieSearchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

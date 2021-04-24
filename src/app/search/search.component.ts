@@ -1,5 +1,5 @@
+import { MovieSearchService } from './../shared/shared-services/movie-search.service';
 import { MovieListResult } from './../shared/interfaces/movie-list-result';
-import { SearchService } from './search.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private search: SearchService,
+    private search: MovieSearchService,
     private window: Window
   ) { }
 
