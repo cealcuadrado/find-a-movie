@@ -66,7 +66,6 @@ export class SearchComponent implements OnInit {
     return (this.resultsPerPage * (this.currentPage - 1)) + 1;
   }
 
-
   calculateRightCounter(): number {
     return (this.resultsPerPage * this.currentPage) < this.totalResults ? (this.resultsPerPage * this.currentPage) : this.totalResults;
   }

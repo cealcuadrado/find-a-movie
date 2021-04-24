@@ -1,3 +1,6 @@
+import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
+import { MovieService } from './../../../movie/movie.service';
+import { MovieSearchService } from './../../../shared/shared-services/movie-search.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,9 +15,12 @@ export class HeaderComponent implements OnInit {
   searchForm: FormGroup;
   isMenuCollapsed = true;
 
+  public barResults: MovieListResult[] = [];
+
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private movieSearch: MovieSearchService
   ) { }
 
   ngOnInit(): void {
@@ -30,5 +36,20 @@ export class HeaderComponent implements OnInit {
 
   toggleCollapse(): void {
     this.isMenuCollapsed = !this.isMenuCollapsed;
+  }
+
+  onSearchInput(): void {
+    let query = this.searchForm.value.searchQuery;
+
+    if (query.length < 3) {
+      this.barResults = [];
+      console.log(this.barResults);
+      return;
+    }
+
+    this.movieSearch.searchMovies(query, 1).subscribe(querySearchResult => {
+      this.barResults = querySearchResult.results.slice(0, 5);
+      console.log(this.barResults);
+    });
   }
 }

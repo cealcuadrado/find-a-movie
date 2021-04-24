@@ -5,8 +5,24 @@ header {
   width: 100%;
 
   .search-form {
+    position: relative;
+
     @media screen and (max-width: 991px) {
       margin-top: 0.5rem;
+    }
+
+    .search-autocomplete {
+      position: absolute;
+      width: 100%;
+      background-color: white;
+      box-shadow: 5px 5px 5px black;
+
+      .bar-result {
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
     }
   }
 }

@@ -9,11 +9,16 @@
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <form class="flex-grow-1 search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
         <div class="input-group">
-          <input type="search" class="form-control" placeholder="Enter a title" formControlName="searchQuery" />
+          <input type="search" class="form-control" placeholder="Enter a title" formControlName="searchQuery" (input)="onSearchInput()" />
           <div class="input-group-append">
             <button type="submit" class="btn btn-light btn-outline-dark">
               <i class="fas fa-search fa-fw"></i>
             </button>
+          </div>
+        </div>
+        <div class="search-autocomplete" *ngIf="barResults.length > 0">
+          <div *ngFor="let barResult of barResults" class="bar-result p-1">
+            Result!
           </div>
         </div>
       </form>
