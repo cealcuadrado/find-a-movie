@@ -11,5 +11,4 @@ export class BasicLayoutComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
