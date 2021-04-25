@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./movie-trailer.component.scss'],
 })
 export class MovieTrailerComponent implements OnInit {
+  public loading: boolean = true;
+
   @Input() movieId: string;
   private youtubeBaseUrl: string = 'https://www.youtube.com/embed/';
   public youtubeId: string;
@@ -17,9 +19,18 @@ export class MovieTrailerComponent implements OnInit {
   constructor(private movieTrailer: MovieTrailerService) {}
 
   ngOnInit(): void {
+    this.setTrailer();
+  }
+
+  ngOnChanges(): void {
+    this.loading = true;
+    this.setTrailer();
+  }
+
+  setTrailer(): void {
     this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
       let results = result.results;
-      results = results.filter(x => x.type === 'Trailer');
+      results = results.filter((x) => x.type === 'Trailer');
 
       if (results.length > 0) {
         if (results[0].site == 'YouTube') {
@@ -28,6 +39,8 @@ export class MovieTrailerComponent implements OnInit {
           this.provider = results[0].site.toLowerCase();
         }
       }
+
+      this.loading = false;
     });
   }
 }
