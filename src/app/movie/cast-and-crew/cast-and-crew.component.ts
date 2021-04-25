@@ -10,6 +10,8 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 })
 export class CastAndCrewComponent implements OnInit {
 
+  public loading: boolean = true;
+
   @Input() id: string;
   private cast: Cast[];
   private crew: Crew[];
@@ -34,6 +36,7 @@ export class CastAndCrewComponent implements OnInit {
   }
 
   ngOnChanges(): void {
+    this.loading = true;
     this.setCastAndCrew();
   }
 
@@ -53,6 +56,7 @@ export class CastAndCrewComponent implements OnInit {
       this.getProducers();
       this.getCast();
       this.getBasedOnWork();
+      this.loading = false;
     });
   }
 

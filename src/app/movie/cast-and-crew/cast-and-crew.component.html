@@ -1,44 +1,49 @@
 <section class="crew">
-  <p>
-    <strong>Directed by:</strong>
-    <span *ngFor="let director of direction; let i = index">
-      {{director}}<span *ngIf="i+1 != direction.length">,</span>
-    </span>
-  </p>
-  <p *ngIf="writing && writing.length > 0">
-    <strong>Written by:</strong>
-    <span *ngFor="let writer of writing; let i = index">
-      {{writer}}<span *ngIf="i+1 != writing.length">,</span>
-    </span>
-  </p>
-  <p *ngIf="screenPlayers && screenPlayers.length > 0">
-    <strong>Screenplay by:</strong>
-    <span *ngFor="let screenPlayer of screenPlayers; let i = index">
-      {{screenPlayer}}<span *ngIf="i+1 != screenPlayers.length">,</span>
-    </span>
-  </p>
-  <p *ngIf="story && story.length > 0">
-    <strong>Story by:</strong>
-    <span *ngFor="let storyPerson of story; let i = index">
-      {{storyPerson}}<span *ngIf="i+1 != story.length">,</span>
-    </span>
-  </p>
-  <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
-    <strong>Based on the work by:</strong>
-    <span *ngFor="let author of basedOnWork; let i = index">
-      {{author}}<span *ngIf="i+1 != basedOnWork.length">, </span>
-    </span>
-  </p>
-  <p *ngIf="production && production.length > 0">
-    <strong>Produced by:</strong>
-    <span *ngFor="let producer of production; let i = index">
-      {{producer}}<span *ngIf="i+1 != production.length">,</span>
-    </span>
-  </p>
-  <p>
-    <strong>Starring:</strong>
-    <span *ngFor="let actor of movieCast; let i = index">
-      {{actor}}<span *ngIf="i+1 != movieCast.length">,</span>
-    </span>
-  </p>
+  <div *ngIf="!loading; else nowLoading">
+    <p>
+      <strong>Directed by:</strong>
+      <span *ngFor="let director of direction; let i = index">
+        {{director}}<span *ngIf="i+1 != direction.length">,</span>
+      </span>
+    </p>
+    <p *ngIf="writing && writing.length > 0">
+      <strong>Written by:</strong>
+      <span *ngFor="let writer of writing; let i = index">
+        {{writer}}<span *ngIf="i+1 != writing.length">,</span>
+      </span>
+    </p>
+    <p *ngIf="screenPlayers && screenPlayers.length > 0">
+      <strong>Screenplay by:</strong>
+      <span *ngFor="let screenPlayer of screenPlayers; let i = index">
+        {{screenPlayer}}<span *ngIf="i+1 != screenPlayers.length">,</span>
+      </span>
+    </p>
+    <p *ngIf="story && story.length > 0">
+      <strong>Story by:</strong>
+      <span *ngFor="let storyPerson of story; let i = index">
+        {{storyPerson}}<span *ngIf="i+1 != story.length">,</span>
+      </span>
+    </p>
+    <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
+      <strong>Based on the work by:</strong>
+      <span *ngFor="let author of basedOnWork; let i = index">
+        {{author}}<span *ngIf="i+1 != basedOnWork.length">, </span>
+      </span>
+    </p>
+    <p *ngIf="production && production.length > 0">
+      <strong>Produced by:</strong>
+      <span *ngFor="let producer of production; let i = index">
+        {{producer}}<span *ngIf="i+1 != production.length">,</span>
+      </span>
+    </p>
+    <p>
+      <strong>Starring:</strong>
+      <span *ngFor="let actor of movieCast; let i = index">
+        {{actor}}<span *ngIf="i+1 != movieCast.length">,</span>
+      </span>
+    </p>
+  </div>
 </section>
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas  fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>
