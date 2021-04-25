@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="search-autocomplete" *ngIf="barResults.length > 0">
-          <div *ngFor="let barResult of barResults" class="bar-result">
+          <div *ngFor="let barResult of barResults" class="bar-result" (click)="goToMovie(barResult.id)">
             <div class="d-flex align-items-center">
               <!--
               <div class="movie-icon border rounded mr-2">

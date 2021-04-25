@@ -1,7 +1,7 @@
 import { Crew } from './../../shared/interfaces/crew';
 import { Cast } from './../../shared/interfaces/cast';
 import { MovieService } from './../movie.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-cast-and-crew',
@@ -30,11 +30,21 @@ export class CastAndCrewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.movie.getCastAndCrew(this.id).subscribe(result => {
+    this.setCastAndCrew();
+  }
+
+  ngOnChanges(): void {
+    this.setCastAndCrew();
+  }
+
+  setCastAndCrew(): void {
+    this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
       console.log(this.crew);
-      console.log(this.crew.filter(member => member.known_for_department == 'Writing'));
+      console.log(
+        this.crew.filter((member) => member.known_for_department == 'Writing')
+      );
 
       this.getDirection();
       this.getWriting();

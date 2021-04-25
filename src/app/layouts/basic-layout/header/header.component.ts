@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private movieSearch: MovieSearchService
+    private movieSearch: MovieSearchService,
   ) {}
 
   ngOnInit(): void {
@@ -56,5 +56,11 @@ export class HeaderComponent implements OnInit {
 
   isDateEmpty(dateStr: string): boolean {
     return dateStr.length == 0;
+  }
+
+  goToMovie(id: number): void {
+    this.router.navigate(['/movie', id]).then(result => {
+      this.barResults = [];
+    });
   }
 }
