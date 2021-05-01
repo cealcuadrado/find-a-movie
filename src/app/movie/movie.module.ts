@@ -10,11 +10,13 @@ import { EmbeddedMediaModule } from 'ngx-embedded-media';
 import { MovieComponent } from './movie.component';
 import { CastAndCrewComponent } from './cast-and-crew/cast-and-crew.component';
 import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
+import { MovieSpecsComponent } from './movie-specs/movie-specs.component';
 
+/* Pipes */
 import { RuntimePipe } from './runtime.pipe';
 
 @NgModule({
-  declarations: [MovieComponent, RuntimePipe, CastAndCrewComponent, MovieTrailerComponent],
+  declarations: [MovieComponent, RuntimePipe, CastAndCrewComponent, MovieTrailerComponent, MovieSpecsComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
