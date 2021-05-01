@@ -1,6 +1,6 @@
 <section class="crew">
   <div *ngIf="!loading; else nowLoading">
-    <p>
+    <p *ngIf="direction && direction.length > 0">
       <strong>Directed by:</strong>
       <span *ngFor="let director of direction; let i = index">
         {{director}}<span *ngIf="i+1 != direction.length">,</span>
@@ -36,7 +36,7 @@
         {{producer}}<span *ngIf="i+1 != production.length">,</span>
       </span>
     </p>
-    <p>
+    <p *ngIf="movieCast && movieCast.length > 0">
       <strong>Starring:</strong>
       <span *ngFor="let actor of movieCast; let i = index">
         {{actor}}<span *ngIf="i+1 != movieCast.length">,</span>
