@@ -1,3 +1,4 @@
+import { VideoResult } from './../../shared/interfaces/video-result';
 import { MovieTrailerService } from './movie-trailer.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -27,20 +28,31 @@ export class MovieTrailerComponent implements OnInit {
     this.setTrailer();
   }
 
+  /*
+  resetMovieTrailer(): void {
+    this.loading = true;
+    this.setTrailer();
+  }
+  */
+
   setTrailer(): void {
     this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
-      let results = result.results;
-      results = results.filter((x) => x.type === 'Trailer');
+      let results: VideoResult[];
+      let filteredResults: VideoResult[];
+      
+      if (result.results) {
+        filteredResults = result.results.filter((x) => x.type === 'Trailer');
 
-      if (results.length > 0) {
-        if (results[0].site == 'YouTube') {
-          this.youtubeId = results[0].key;
-          this.key = results[0].key;
-          this.provider = results[0].site.toLowerCase();
+        if (filteredResults.length > 0) {
+          if (filteredResults[0].site == 'YouTube') {
+            this.youtubeId = filteredResults[0].key;
+            this.key = filteredResults[0].key;
+            this.provider = filteredResults[0].site.toLowerCase();
+          }
         }
-      }
 
-      this.loading = false;
+        this.loading = false;
+      }
     });
   }
 }
