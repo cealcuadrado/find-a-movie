@@ -1,5 +1,5 @@
 <section class="movie-specs">
-  <p>
+  <p *ngIf="movieDetail.genres && movieDetail.genres.length > 0">
     <strong>Genre(s):</strong>
     <br>
     <span *ngFor="let genre of movieDetail.genres; let i = index">
@@ -7,11 +7,11 @@
       <br>
     </span>
   </p>
-  <p>
+  <p *ngIf="movieDetail.release_date">
     <strong>Release Date:</strong>
     <br>{{movieDetail.release_date | date}}
   </p>
-  <p>
+  <p *ngIf="movieDetail.production_countries && movieDetail.production_countries.length > 0">
     <strong>Production Countries:</strong>
     <br>
     <span *ngFor="let country of movieDetail.production_countries; let i = index">
@@ -19,7 +19,7 @@
       <br>
     </span>
   </p>
-  <p>
+  <p *ngIf="movieDetail.spoken_languages && movieDetail.spoken_languages.length > 0">
     <strong>Language(s):</strong>
     <br>
     <span *ngFor="let language of movieDetail.spoken_languages; let i = index">
@@ -27,11 +27,11 @@
       <br>
     </span>
   </p>
-  <p>
+  <p *ngIf="movieDetail.runtime">
     <strong>Runtime:</strong>
     <br>{{movieDetail.runtime | runtime}}
   </p>
-  <p>
+  <p *ngIf="movieDetail.production_companies">
     <strong>Production Companies:</strong>
     <br>
     <span *ngFor="let company of movieDetail.production_companies; let i = index">
@@ -39,7 +39,7 @@
       <br>
     </span>
   </p>
-  <p>
+  <p *ngIf="movieDetail.budget">
     <strong>Budget:</strong>
     <br>
     <span *ngIf="movieDetail.budget != 0; else noBudgetAvailable">
@@ -49,7 +49,7 @@
       No Budget Available
     </ng-template>
   </p>
-  <p>
+  <p *ngIf="movieDetail.revenue">
     <strong>Box Office Revenue:</strong>
     <br>
     <span *ngIf="movieDetail.revenue != 0; else noRevenueAvailable">
