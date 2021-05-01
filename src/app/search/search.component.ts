@@ -48,10 +48,12 @@ export class SearchComponent implements OnInit {
     this.flagLoadingResults = true;
     this.search.searchMovies(this.searchQuery, this.currentPage).subscribe(
       (querySearchResult) => {
-        this.searchResults = querySearchResult.results;
-        // console.log(this.searchResults);
-        this.totalResults = querySearchResult.total_results;
-        this.totalPages = querySearchResult.total_pages;
+        console.log(querySearchResult);
+        if (querySearchResult.results) {
+          this.searchResults = querySearchResult.results;
+          this.totalResults = querySearchResult.total_results;
+          this.totalPages = querySearchResult.total_pages;
+        }
       },
       (error) => {
         console.log(error);

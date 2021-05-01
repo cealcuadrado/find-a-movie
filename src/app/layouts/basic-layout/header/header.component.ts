@@ -49,8 +49,11 @@ export class HeaderComponent implements OnInit {
     }
 
     this.movieSearch.searchMovies(query, 1).subscribe((querySearchResult) => {
-      this.barResults = querySearchResult.results.slice(0, 5);
-      console.log(this.barResults);
+      console.log(querySearchResult);
+      if (querySearchResult.results) {
+        this.barResults = querySearchResult.results.slice(0, 5);
+        console.log(this.barResults);
+      }
     });
   }
 
