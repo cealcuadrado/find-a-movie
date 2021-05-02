@@ -1,7 +1,9 @@
 .welcome {
   background: url('./../../assets/img/bg.jpg');
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   height: 98vh;
   display: flex;
   flex-direction: column;
@@ -20,5 +22,11 @@
 
   .welcome-text {
     border: 1px solid black;
+    background-color: rgba(17,17,17,0.9);
+    color: white;
+
+    hr {
+      border-top: 1px solid white;
+    }
   }
 }
