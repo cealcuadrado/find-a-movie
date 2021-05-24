@@ -3,9 +3,9 @@
     <header class="movie-header"
       [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
       <section class="header-title">
-        <div class="header-heading">
-          <h1>{{movieDetail.title}}</h1>
-          <span>
+        <h1>{{movieDetail.title}}</h1>
+        <div>
+          <span class="year-and-runtime">
             <span *ngIf="movieDetail.release_date; else noReleaseDate">
               <span *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">
                 {{movieDetail.release_date | date:'yyyy'}}
@@ -17,15 +17,15 @@
             {{movieDetail.runtime | runtime:' | '}}
           </span>
         </div>
-        <div>
-          <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}"
-            [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
-            <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
-              No poster available
-            </span>
-          </div>
-        </div>
       </section>
+      <div class="header-poster">
+        <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}"
+          [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
+          <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
+            No poster available
+          </span>
+        </div>
+      </div>
     </header>
 
     <section class="movie-body">

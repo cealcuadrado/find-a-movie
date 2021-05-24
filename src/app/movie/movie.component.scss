@@ -7,26 +7,43 @@
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     background-image: url('https://via.placeholder.com/500x300?text=No+poster+available');
     background-position: center;
     box-shadow: 3px 3px 5px black;
 
     .header-title {
-      padding: 0rem 1rem;
+      padding: 15px;
       color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: relative;
+      display: inline;
 
-      .header-heading {
+      h1 {
         border: 1px solid white;
-        background-color: rgba(0,0,0,0.75);
-        padding: 1rem;
+        background-color: rgba(0,0,0,0.85);
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+
+        @media screen and (min-width: 992px) {
+          max-width: 75%;
+        }
       }
 
+      .year-and-runtime {
+        border: 1px solid white;
+        background-color: rgba(0,0,0,0.85);
+        padding: 0.5rem;
+      }
+    }
+
+    .header-poster {
+      position: relative;
+
       .movie-poster {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
         border: 1px solid white;
         width: 150px;
         height: 225px;
