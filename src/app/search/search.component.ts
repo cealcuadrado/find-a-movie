@@ -1,19 +1,15 @@
 import { MovieSearchService } from './../shared/shared-services/movie-search.service';
 import { MovieListResult } from './../shared/interfaces/movie-list-result';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuerySearchResult } from '../shared/interfaces/query-search-result';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-
   public flagLoadingResults: boolean = false;
   public posterUrl: string = environment.posterUrl;
 
@@ -26,14 +22,17 @@ export class SearchComponent implements OnInit {
 
   public searchQuery: string;
 
+  public pageNumbers: number[];
+  public selectPage: number;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private search: MovieSearchService,
-    private window: Window
-  ) { }
+    private window: Window,
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params.subscribe((params) => {
       this.searchQuery = params.query;
       this.firstSearch();
     });
@@ -41,6 +40,7 @@ export class SearchComponent implements OnInit {
 
   firstSearch(): void {
     this.currentPage = 1;
+    this.selectPage = 1;
     this.searchMovies();
   }
 
@@ -53,6 +53,8 @@ export class SearchComponent implements OnInit {
           this.searchResults = querySearchResult.results;
           this.totalResults = querySearchResult.total_results;
           this.totalPages = querySearchResult.total_pages;
+          console.log(this.totalPages);
+          this.generateSelectPageNumbers();
         }
       },
       (error) => {
@@ -65,15 +67,31 @@ export class SearchComponent implements OnInit {
   }
 
   calculateLeftCounter(): number {
-    return (this.resultsPerPage * (this.currentPage - 1)) + 1;
+    return this.resultsPerPage * (this.currentPage - 1) + 1;
   }
 
   calculateRightCounter(): number {
-    return (this.resultsPerPage * this.currentPage) < this.totalResults ? (this.resultsPerPage * this.currentPage) : this.totalResults;
+    return this.resultsPerPage * this.currentPage < this.totalResults
+      ? this.resultsPerPage * this.currentPage
+      : this.totalResults;
+  }
+
+  generateSelectPageNumbers(): void {
+    this.pageNumbers = [];
+    for (let i = 0; i < this.totalPages; i++) {
+      this.pageNumbers.push(i + 1);
+    }
+    console.log(this.pageNumbers);
+  }
+
+  changeSelectPage(event: any) {
+    this.onPageChange(event.target.value);
   }
 
   onPageChange(event: any): void {
+    console.log(event);
     this.currentPage = event;
+    this.selectPage = this.currentPage;
     this.window.scrollTo({ top: 0 });
     this.searchMovies();
   }
