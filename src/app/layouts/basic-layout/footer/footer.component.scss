@@ -1,19 +1,24 @@
 footer {
   color: white;
-  font-size: 0.7rem;
+  // font-size: 0.7rem;
+  text-align: center;
   width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 15px;
   background-color: #333333;
   font-family: 'Jost', 'Arial', 'sans-serif';
 
   @media screen and (min-width: 992px) {
-    position: fixed;
+    // position: fixed;
     bottom: 0;
   }
 
   a {
     color: white;
     text-decoration: underline;
+    transition: opacity 0.1s linear;
+
+    &:hover {
+      opacity: 0.5;
+    }
   }
 }

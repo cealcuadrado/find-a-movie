@@ -1,33 +1,32 @@
-.welcome {
-  background: url('./../../assets/img/bg.jpg');
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 98vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+main {
+  section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  /*
-  @media screen and (max-width: 991px) {
-    padding-top: 4rem;
-  }
+    &.welcome {
+      background: url('./../../assets/img/bg.jpg');
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
 
-  @media screen and (min-width: 992px) {
+    &.description {
+      background: url('./../../assets/img/bg2.jpg');
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
 
-  }
-  */
-
-  .welcome-text {
-    border: 1px solid black;
-    background-color: rgba(17,17,17,0.9);
-    color: white;
-    font-family: 'Jost', 'Arial', 'sans-serif';
-
-    hr {
-      border-top: 1px solid white;
+    .main-text {
+      border: 1px solid black;
+      background-color: rgba(17,17,17,0.9);
+      color: white;
+      font-family: 'Jost', 'Arial', 'sans-serif';
     }
   }
 }
