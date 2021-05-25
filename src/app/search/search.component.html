@@ -42,10 +42,14 @@
       </section>
     </div>
     <ng-template #loadingResults>
-      <p><i class="fas fa-circle-notch fa-spin fa-fw"></i> Loading...</p>
+      <div class="loading">
+        <p><i class="fas fa-circle-notch fa-spin fa-fw"></i> Loading...</p>
+      </div>
     </ng-template>
     <ng-template #noResultsFound>
-      <p>Sorry, no results found.</p>
+      <div class="no-results">
+        <p>Sorry, no results found.</p>
+      </div>
     </ng-template>
   </div>
 </main>
