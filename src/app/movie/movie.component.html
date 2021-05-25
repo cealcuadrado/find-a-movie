@@ -4,17 +4,18 @@
       [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
       <section class="header-title">
         <h1>{{movieDetail.title}}</h1>
-        <div>
-          <span class="year-and-runtime">
+        <div class="year-and-runtime">
+          <span class="year">
             <span *ngIf="movieDetail.release_date; else noReleaseDate">
-              <span *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">
-                {{movieDetail.release_date | date:'yyyy'}}
-              </span>
+              <span
+                *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">{{movieDetail.release_date | date:'yyyy'}}</span>
             </span>
             <ng-template #noReleaseDate>
               <span>No Release Date</span>
             </ng-template>
-            {{movieDetail.runtime | runtime:' | '}}
+          </span>
+          <span class="runtime">
+            <i class="fas fa-clock fa-fw"></i> {{movieDetail.runtime | runtime}}
           </span>
         </div>
       </section>
@@ -48,9 +49,9 @@
                   <p>No overview available.</p>
                 </ng-template>
               </section>
-              <hr />
+              <hr/>
               <app-cast-and-crew [id]="id"></app-cast-and-crew>
-              <hr>
+              <hr/>
               <section class="trailer">
                 <app-movie-trailer [movieId]="id"></app-movie-trailer>
               </section>
