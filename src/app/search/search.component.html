@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div *ngIf="!flagLoadingResults; else loadingResults">
       <header>
-        <h1><i class="fas fa-search fa-fw"></i>{{searchQuery}}</h1>
+        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>{{searchQuery}}</h1>
 
         <div class="d-flex flex-column flex-lg-row justify-content-lg-between" *ngIf="searchResults.length > 0">
           <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of
