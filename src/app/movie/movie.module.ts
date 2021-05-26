@@ -14,6 +14,7 @@ import { MovieSpecsComponent } from './movie-specs/movie-specs.component';
 
 /* Pipes */
 import { RuntimePipe } from './runtime.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [MovieComponent, RuntimePipe, CastAndCrewComponent, MovieTrailerComponent, MovieSpecsComponent],
@@ -21,7 +22,8 @@ import { RuntimePipe } from './runtime.pipe';
     CommonModule,
     MovieRoutingModule,
     SharedComponentsModule,
-    EmbeddedMediaModule.forRoot()
+    EmbeddedMediaModule.forRoot(),
+    RouterModule
   ]
 })
 export class MovieModule { }
