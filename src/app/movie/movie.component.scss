@@ -1,6 +1,6 @@
 .movie {
   padding-top: 3rem;
-  padding-bottom: 4rem;
+  margin-bottom: 1rem;
 
   header {
     height: 400px;
@@ -76,8 +76,35 @@
   }
 }
 
+.loading-movie, .no-movie-found {
+  height: 100vh;
+}
+
+.loading-movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .no-movie-found {
   text-align: center;
-  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-family: 'Jost', 'Arial', 'sans-serif';
+    text-transform: uppercase;
+  }
+
+  .no-movie-found-text {
+    border: 1px solid black;
+    background-color: rgba(17,17,17,0.9);
+    color: white;
+    font-family: 'Jost', 'Arial', 'sans-serif';
+  }
 }
+
 

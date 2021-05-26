@@ -1,4 +1,4 @@
-<main class="movie" *ngIf="!loading">
+<main class="movie" *ngIf="!loading; else loadingMovie">
   <div class="movie-content" *ngIf="movieDetail; else noMovieFound">
     <header class="movie-header"
       [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
@@ -73,20 +73,24 @@
   </div>
   <ng-template #noMovieFound>
     <section class="no-movie-found">
-      <div class="container-fluid">
+      <div class="no-movie-found-content">
         <div class="mb-3">
           <span class="fa-stack fa-5x">
             <i class="fas fa-film fa-stack-1x"></i>
             <i class="fas fa-times fa-stack-2x text-danger"></i>
           </span>
         </div>
-        <h2 class="mb-4">The movie associated with this ID ({{id}}), doesn't exists</h2>
-        <p>This app uses the TMDB API. Probably there isn't a movie associated with this ID.</p>
-        <p>Try another ID, or just use the search bar to find a movie.</p>
+        <div class="no-movie-found-text p-4 mx-3">
+          <h1 class="mb-4">Movie not found</h1>
+          <p>This app uses the TMDB API. Probably there isn't a movie associated with this ID.</p>
+          <p>Try another ID, or just use the search bar again to find another movie.</p>
+        </div>
       </div>
     </section>
   </ng-template>
 </main>
 <ng-template #loadingMovie>
-  <app-loading></app-loading>
+  <div class="loading-movie">
+    <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>
+  </div>
 </ng-template>
