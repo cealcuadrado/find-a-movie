@@ -24,6 +24,8 @@ export class MovieTrailerComponent implements OnInit {
   }
 
   ngOnChanges(): void {
+    console.log('onChanges()')
+    this.youtubeId = '';
     this.loading = true;
     this.setTrailer();
   }
@@ -36,10 +38,11 @@ export class MovieTrailerComponent implements OnInit {
   */
 
   setTrailer(): void {
+    console.log('setTrailer()');
     this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
       let results: VideoResult[];
       let filteredResults: VideoResult[];
-      
+
       if (result.results) {
         filteredResults = result.results.filter((x) => x.type === 'Trailer');
 
