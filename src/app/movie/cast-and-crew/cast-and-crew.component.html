@@ -22,9 +22,10 @@
       </span>
     </p>
     <p *ngIf="story && story.length > 0">
-      <strong>Story by:</strong>
+      <strong class="mr-1">Story by:</strong>
       <span *ngFor="let storyPerson of story; let i = index">
-        {{storyPerson}}<span *ngIf="i+1 != story.length">,</span>
+        <a href="#" [routerLink]="['/person', storyPerson.id]">{{storyPerson.name}}</a>
+        <span *ngIf="i+1 != story.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
