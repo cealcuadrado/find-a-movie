@@ -21,7 +21,7 @@ export class CastAndCrewComponent implements OnInit {
   public screenPlayers: PersonLink[];
   public story: PersonLink[];
   public production: PersonLink[];
-  public movieCast: string[];
+  public movieCast: PersonLink[];
 
   public isBasedOnWork: boolean;
   public basedOnWork: PersonLink[];
@@ -113,7 +113,7 @@ export class CastAndCrewComponent implements OnInit {
   }
 
   getCast(): void {
-    this.movieCast = this.cast.slice(0, 7).map((member) => member.name);
+    this.movieCast = this.cast.slice(0, 7).map((member) => {return {name: member.name, id:member.id}});
   }
 
   atLeastItsOneField(): boolean {

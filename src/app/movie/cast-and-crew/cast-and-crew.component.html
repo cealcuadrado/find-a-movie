@@ -43,9 +43,10 @@
       </span>
     </p>
     <p *ngIf="movieCast && movieCast.length > 0">
-      <strong>Starring:</strong>
+      <strong class="mr-1">Starring:</strong>
       <span *ngFor="let actor of movieCast; let i = index">
-        {{actor}}<span *ngIf="i+1 != movieCast.length">,</span>
+        <a href="#" [routerLink]="['/person', actor.id]">{{actor.name}}</a>
+        <span *ngIf="i+1 != movieCast.length" class="mr-1">,</span>
       </span>
     </p>
     <!--
