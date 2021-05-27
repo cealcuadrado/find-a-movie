@@ -29,9 +29,10 @@
       </span>
     </p>
     <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
-      <strong>Based on the work by:</strong>
+      <strong class="mr-1">Based on the work by:</strong>
       <span *ngFor="let author of basedOnWork; let i = index">
-        {{author}}<span *ngIf="i+1 != basedOnWork.length">, </span>
+        <a href="#" [routerLink]="['/person', author.id]">{{author.name}}</a>
+        <span *ngIf="i+1 != basedOnWork.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="production && production.length > 0">

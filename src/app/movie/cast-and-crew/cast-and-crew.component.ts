@@ -24,8 +24,7 @@ export class CastAndCrewComponent implements OnInit {
   public movieCast: string[];
 
   public isBasedOnWork: boolean;
-
-  public basedOnWork: string[];
+  public basedOnWork: PersonLink[];
 
   constructor(private movie: MovieService) {}
 
@@ -97,7 +96,7 @@ export class CastAndCrewComponent implements OnInit {
       .filter((member) => {
         return member.job === 'Novel' || member.job === 'Author';
       })
-      .map((member) => member.name);
+      .map((member) => {return {name: member.name, id:member.id}});
 
     if (basedOnWorkOf.length > 0) {
       this.isBasedOnWork = true;
