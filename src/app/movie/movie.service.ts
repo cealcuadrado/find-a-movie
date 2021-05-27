@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { MovieDetail } from '../shared/interfaces/movie-detail';
 import { catchError } from 'rxjs/operators';
+import { ExternalIds } from '../shared/interfaces/external-ids';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,16 @@ export class MovieService {
   getCastAndCrew(id: string): Observable<CastCrewResult> {
     return this.http.get<CastCrewResult>(
         `${this.url}/movie/${id}/credits?api_key=${this.key}&language=${this.language}`
+    ).pipe(
+      catchError((error: any): Observable<any> => {
+        return of({});
+      })
+    );
+  }
+
+  getExternalIds(id: string): Observable<ExternalIds> {
+    return this.http.get<ExternalIds>(
+      `${this.url}/movie/${id}/external_ids?api_key=${this.key}`
     ).pipe(
       catchError((error: any): Observable<any> => {
         return of({});
