@@ -35,9 +35,10 @@
       </span>
     </p>
     <p *ngIf="production && production.length > 0">
-      <strong>Produced by:</strong>
+      <strong class="mr-1">Produced by:</strong>
       <span *ngFor="let producer of production; let i = index">
-        {{producer}}<span *ngIf="i+1 != production.length">,</span>
+        <a href="#" [routerLink]="['/person', producer.id]">{{producer.name}}</a>
+        <span *ngIf="i+1 != production.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="movieCast && movieCast.length > 0">

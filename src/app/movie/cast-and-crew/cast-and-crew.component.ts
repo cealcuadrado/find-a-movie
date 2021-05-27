@@ -20,7 +20,7 @@ export class CastAndCrewComponent implements OnInit {
   public writing: PersonLink[];
   public screenPlayers: PersonLink[];
   public story: PersonLink[];
-  public production: string[];
+  public production: PersonLink[];
   public movieCast: string[];
 
   public isBasedOnWork: boolean;
@@ -110,7 +110,7 @@ export class CastAndCrewComponent implements OnInit {
   getProducers(): void {
     this.production = this.crew
       .filter((member) => member.job == 'Producer')
-      .map((member) => member.name);
+      .map((member) => { return {name: member.name, id: member.id}});
   }
 
   getCast(): void {
