@@ -18,7 +18,7 @@ export class CastAndCrewComponent implements OnInit {
 
   public direction: PersonLink[];
   public writing: PersonLink[];
-  public screenPlayers: string[];
+  public screenPlayers: PersonLink[];
   public story: string[];
   public production: string[];
   public movieCast: string[];
@@ -71,19 +71,19 @@ export class CastAndCrewComponent implements OnInit {
   getDirection(): void {
     this.direction = this.crew
       .filter((member) => member.job == 'Director')
-      .map((member) => { return { name: member.name, id: member.id }; });
+      .map((member) => { return { name: member.name, id: member.id }});
   }
 
   getWriting(): void {
     this.writing = this.crew
       .filter((member) => member.job == 'Writer')
-      .map((member) => { return {name: member.name, id: member.id};});
+      .map((member) => { return {name: member.name, id: member.id}});
   }
 
   getScreenplay(): void {
     this.screenPlayers = this.crew
       .filter((member) => member.job == 'Screenplay')
-      .map((member) => member.name);
+      .map((member) => { return {name: member.name, id: member.id}});
   }
 
   getStory(): void {

@@ -15,9 +15,10 @@
       </span>
     </p>
     <p *ngIf="screenPlayers && screenPlayers.length > 0">
-      <strong>Screenplay by:</strong>
+      <strong class="mr-1">Screenplay by:</strong>
       <span *ngFor="let screenPlayer of screenPlayers; let i = index">
-        {{screenPlayer}}<span *ngIf="i+1 != screenPlayers.length">,</span>
+        <a href="#" [routerLink]="['/person', screenPlayer.id]">{{screenPlayer.name}}</a>
+        <span *ngIf="i+1 != screenPlayers.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="story && story.length > 0">
