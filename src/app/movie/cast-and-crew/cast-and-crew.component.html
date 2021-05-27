@@ -1,15 +1,17 @@
 <section class="crew">
   <div *ngIf="!loading; else nowLoading">
     <p *ngIf="direction && direction.length > 0">
-      <strong>Directed by:</strong>
+      <strong class="mr-1">Directed by:</strong>
       <span *ngFor="let director of direction; let i = index">
-        {{director}}<span *ngIf="i+1 != direction.length">,</span>
+        <a href="#" [routerLink]="['/person', director.id]">{{director.name}}</a>
+        <span *ngIf="i+1 != direction.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="writing && writing.length > 0">
-      <strong>Written by:</strong>
+      <strong class="mr-1">Written by:</strong>
       <span *ngFor="let writer of writing; let i = index">
-        {{writer}}<span *ngIf="i+1 != writing.length">,</span>
+        <a href="#" [routerLink]="['/person', writer.id]">{{writer.name}}</a>
+        <span *ngIf="i+1 != writing.length" class="mr-1">,</span>
       </span>
     </p>
     <p *ngIf="screenPlayers && screenPlayers.length > 0">
@@ -42,8 +44,13 @@
         {{actor}}<span *ngIf="i+1 != movieCast.length">,</span>
       </span>
     </p>
+    <!--
+    <div *ngIf="!atLeastItsOneField()">
+      <p>No cast and crew available</p>
+    </div>
+    -->
   </div>
 </section>
 <ng-template #nowLoading>
-  <p>Loading... <i class="fas  fa-circle-notch fa-spin fa-fw"></i></p>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
 </ng-template>
