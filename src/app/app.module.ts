@@ -1,10 +1,10 @@
 /* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
-// import { EmbeddedMediaModule } from 'ngx-embedded-media';
 
 /* Components */
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* Services */
 import { MovieSearchService } from './shared/shared-services/movie-search.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,12 +30,13 @@ import { MovieSearchService } from './shared/shared-services/movie-search.servic
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    ToastrModule.forRoot(),
     SharedComponentsModule
-    // EmbeddedMediaModule.forRoot()
   ],
   providers: [
     {
