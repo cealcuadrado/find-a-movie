@@ -3,6 +3,7 @@ import { MovieSearchService } from './../../../shared/shared-services/movie-sear
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,8 @@ export class HeaderComponent implements OnInit {
   public barResults: MovieListResult[] = [];
   public currentResult: number = 0;
 
+  public movieSearchSubscription: Subscription;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,11 +31,15 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  toggleCollapse(): void {
+  ngOnDestroy(): void {
+    this.movieSearchSubscription.unsubscribe();
+  }
+
+  public toggleCollapse(): void {
     this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
-  onSearchInput(): void {
+  public onSearchInput(): void {
     let query = this.searchForm.value.searchQuery;
 
     if (query.length < 2) {
@@ -41,7 +48,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    this.movieSearch.searchMovies(query, 1).subscribe((querySearchResult) => {
+    this.movieSearchSubscription = this.movieSearch.searchMovies(query, 1).subscribe((querySearchResult) => {
       if (querySearchResult.results) {
         this.barResults = querySearchResult.results.slice(0, 5);
         this.resetCurrentResult();
@@ -49,7 +56,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onSubmit(event: any): void {
+  public onSubmit(event: any): void {
     if (this.currentResult != 0) {
       event.preventDefault();
       this.goToMovie(this.barResults[this.currentResult - 1].id);
@@ -61,20 +68,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  goToMovie(id: number): void {
+  public goToMovie(id: number): void {
     this.router.navigate(['/movie', id]).then((result) => {
       this.barResults = [];
     });
   }
 
-  getFormattedTitle(title: string, release_date: string): string {
+  public getFormattedTitle(title: string, release_date: string): string {
     let date = new Date(release_date);
     return `${title} `.concat(
       release_date ? `(${date.getFullYear()})` : '(No Release Date)'
     );
   }
 
-  onSearchKeyDown(event: any): void {
+  public onSearchKeyDown(event: any): void {
     if (this.barResults.length > 0) {
       if (event.keyCode == 40) {
         this.setCurrentResult('subtract');
@@ -84,11 +91,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  onMouseOver(event: any, index: number): void {
+  public onMouseOver(event: any, index: number): void {
     this.currentResult = index + 1;
   }
 
-  setCurrentResult(op: string): void {
+  public setCurrentResult(op: string): void {
     if (op == 'add') {
       this.currentResult =
         this.currentResult - 1 < 0
@@ -102,7 +109,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  resetCurrentResult(): void {
+  public resetCurrentResult(): void {
     this.currentResult = 0;
   }
 }
