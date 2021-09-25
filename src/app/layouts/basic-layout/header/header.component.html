@@ -3,42 +3,35 @@
     <a class="navbar-brand text-white font-weight-bold" href="#" [routerLink]="'/home'">
       <i class="fas fa-film fa-fw"></i> Find a Movie
     </a>
-    <button class="navbar-toggler text-white ml-auto pr-0 border-0" type="button" (click)="toggleCollapse()">
+    <button class="navbar-toggler text-white ml-auto px-0 border-0" type="button" (click)="toggleCollapse()">
       <i class="fa fa-bars fa-fw"></i>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-      <form class="flex-grow-1 search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-        <div class="input-group">
-          <input type="search" class="form-control" placeholder="Enter a title" formControlName="searchQuery" (input)="onSearchInput()" />
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-light btn-outline-dark">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-        <div class="search-autocomplete" *ngIf="barResults.length > 0">
-          <div *ngFor="let barResult of barResults" class="bar-result" (click)="goToMovie(barResult.id)">
-            <div class="d-flex align-items-center">
-              <!--
-              <div class="movie-icon border rounded mr-2">
-              </div>
-              -->
-              <div>
-                {{barResult.title}}
-                <span *ngIf="barResult.release_date; else noReleaseDate">
-                  <span
-                    *ngIf="!isDateEmpty(barResult.release_date); else noReleaseDate">({{barResult.release_date | date:'yyyy'}})</span>
-                </span>
-              </div>
+      <div class="search-form w-100">
+        <form class="flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
+          <div class="input-group">
+            <input type="search" class="form-control" placeholder="Enter a title" list="foo"
+              formControlName="searchQuery"
+              (input)="onSearchInput()"
+              (keydown)="onSearchKeyDown($event)" />
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-light btn-outline-dark">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
             </div>
           </div>
-        </div>
-      </form>
+          <div class="search-autocomplete" *ngIf="barResults.length > 0">
+            <input
+              *ngFor="let barResult of barResults; let i = index"
+              class="bar-result"
+              [ngClass]="{'active' : i+1 == currentResult}"
+              (click)="goToMovie(barResult.id)"
+              (mouseover)="onMouseOver($event, i)"
+              [value]="getFormattedTitle(barResult.title, barResult.release_date)">
+          </div>
+        </form>
+      </div>
     </div>
   </nav>
 </header>
-
-<ng-template #noReleaseDate>
-  <span>(No Release Date)</span>
-</ng-template>
 

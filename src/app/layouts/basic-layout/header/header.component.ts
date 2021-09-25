@@ -1,5 +1,4 @@
 import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
-import { MovieService } from './../../../movie/movie.service';
 import { MovieSearchService } from './../../../shared/shared-services/movie-search.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -15,6 +14,7 @@ export class HeaderComponent implements OnInit {
   isMenuCollapsed = true;
 
   public barResults: MovieListResult[] = [];
+  public currentResult: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -28,11 +28,16 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    let value = this.searchForm.value.searchQuery;
-    this.router.navigate(['/search', value]).then(result => {
-      this.barResults = [];
-    });
+  onSubmit(event: any): void {
+    if (this.currentResult != 0) {
+      event.preventDefault();
+      this.goToMovie(this.barResults[this.currentResult - 1].id);
+    } else {
+      let value = this.searchForm.value.searchQuery;
+      this.router.navigate(['/search', value]).then((result) => {
+        this.barResults = [];
+      });
+    }
   }
 
   toggleCollapse(): void {
@@ -49,10 +54,9 @@ export class HeaderComponent implements OnInit {
     }
 
     this.movieSearch.searchMovies(query, 1).subscribe((querySearchResult) => {
-      console.log(querySearchResult);
       if (querySearchResult.results) {
         this.barResults = querySearchResult.results.slice(0, 5);
-        console.log(this.barResults);
+        this.resetCurrentResult();
       }
     });
   }
@@ -62,8 +66,47 @@ export class HeaderComponent implements OnInit {
   }
 
   goToMovie(id: number): void {
-    this.router.navigate(['/movie', id]).then(result => {
+    this.router.navigate(['/movie', id]).then((result) => {
       this.barResults = [];
     });
+  }
+
+  getFormattedTitle(title: string, release_date: string): string {
+    let date = new Date(release_date);
+    return `${title} `.concat(
+      release_date ? `(${date.getFullYear()})` : '(No Release Date)'
+    );
+  }
+
+  onSearchKeyDown(event: any): void {
+    if (this.barResults.length > 0) {
+      if (event.keyCode == 40) {
+        this.setCurrentResult('subtract');
+      } else if (event.keyCode == 38) {
+        this.setCurrentResult('add');
+      }
+    }
+  }
+
+  onMouseOver(event: any, index: number): void {
+    this.currentResult = index + 1;
+  }
+
+  resetCurrentResult(): void {
+    this.currentResult = 0;
+  }
+
+  setCurrentResult(op: string): void {
+    if (op == 'add') {
+      this.currentResult =
+        this.currentResult - 1 < 0
+          ? this.barResults.length
+          : this.currentResult - 1;
+    } else if (op == 'subtract') {
+      this.currentResult =
+        this.currentResult + 1 > this.barResults.length
+          ? 0
+          : this.currentResult + 1;
+    }
   }
 }
