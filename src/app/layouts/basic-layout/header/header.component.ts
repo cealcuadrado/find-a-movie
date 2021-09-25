@@ -19,25 +19,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private movieSearch: MovieSearchService,
+    private movieSearch: MovieSearchService
   ) {}
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       searchQuery: new FormControl(''),
     });
-  }
-
-  onSubmit(event: any): void {
-    if (this.currentResult != 0) {
-      event.preventDefault();
-      this.goToMovie(this.barResults[this.currentResult - 1].id);
-    } else {
-      let value = this.searchForm.value.searchQuery;
-      this.router.navigate(['/search', value]).then((result) => {
-        this.barResults = [];
-      });
-    }
   }
 
   toggleCollapse(): void {
@@ -61,8 +49,16 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  isDateEmpty(dateStr: string): boolean {
-    return dateStr.length == 0;
+  onSubmit(event: any): void {
+    if (this.currentResult != 0) {
+      event.preventDefault();
+      this.goToMovie(this.barResults[this.currentResult - 1].id);
+    } else {
+      let value = this.searchForm.value.searchQuery;
+      this.router.navigate(['/search', value]).then((result) => {
+        this.barResults = [];
+      });
+    }
   }
 
   goToMovie(id: number): void {
@@ -92,10 +88,6 @@ export class HeaderComponent implements OnInit {
     this.currentResult = index + 1;
   }
 
-  resetCurrentResult(): void {
-    this.currentResult = 0;
-  }
-
   setCurrentResult(op: string): void {
     if (op == 'add') {
       this.currentResult =
@@ -108,5 +100,9 @@ export class HeaderComponent implements OnInit {
           ? 0
           : this.currentResult + 1;
     }
+  }
+
+  resetCurrentResult(): void {
+    this.currentResult = 0;
   }
 }
