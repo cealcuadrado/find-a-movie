@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchDefaultComponent } from './search-default/search-default.component';
 
 
 @NgModule({
-  declarations: [SearchComponent, SearchResultComponent],
+  declarations: [SearchComponent, SearchResultComponent, SearchDefaultComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
