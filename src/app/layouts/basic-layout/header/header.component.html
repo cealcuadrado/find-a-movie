@@ -7,29 +7,8 @@
       <i class="fa fa-bars fa-fw"></i>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-      <div class="search-form w-100">
-        <form class="flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
-          <div class="input-group">
-            <input type="search" class="form-control" placeholder="Enter a title" list="foo"
-              formControlName="searchQuery"
-              (input)="onSearchInput()"
-              (keydown)="onSearchKeyDown($event)" />
-            <div class="input-group-append">
-              <button type="submit" class="btn btn-light btn-outline-dark">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-          <div class="search-autocomplete" *ngIf="barResults.length > 0">
-            <input
-              *ngFor="let barResult of barResults; let i = index"
-              class="bar-result"
-              [ngClass]="{'active' : i+1 == currentResult}"
-              (click)="goToMovie(barResult.id)"
-              (mouseover)="onMouseOver($event, i)"
-              [value]="getFormattedTitle(barResult.title, barResult.release_date)">
-          </div>
-        </form>
+      <div class="w-100">
+        <app-search-bar></app-search-bar>
       </div>
     </div>
   </nav>

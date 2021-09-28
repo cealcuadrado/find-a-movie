@@ -1,3 +1,4 @@
+import { SearchBarModule } from './shared/shared-modules/search-bar/search-bar.module';
 /* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -36,7 +37,8 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     NgbModule,
     ToastrModule.forRoot(),
-    SharedComponentsModule
+    SharedComponentsModule,
+    SearchBarModule
   ],
   providers: [
     {

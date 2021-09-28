@@ -1,3 +1,4 @@
+import { SearchBarModule } from './../shared/shared-modules/search-bar/search-bar.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,8 @@ import { SearchDefaultComponent } from './search-default/search-default.componen
     SearchRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SearchBarModule
   ]
 })
 export class SearchModule { }
