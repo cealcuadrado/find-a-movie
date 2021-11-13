@@ -4,7 +4,10 @@
       [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
       <section class="header-title">
         <h1>{{movieDetail.title}}</h1>
-        <div class="year-and-runtime">
+        <div class="header-info">
+          <span class="director" *ngIf="director">
+            Dir. {{director}}
+          </span>
           <span class="year">
             <span *ngIf="movieDetail.release_date; else noReleaseDate">
               <span
@@ -93,6 +96,7 @@
     </section>
   </ng-template>
 </main>
+
 <ng-template #loadingMovie>
   <div class="loading-movie">
     <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>

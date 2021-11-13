@@ -4,8 +4,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { MovieDetail } from '../shared/interfaces/movie-detail';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ExternalIds } from '../shared/interfaces/external-ids';
+import { Crew } from '../shared/interfaces/crew';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,16 @@ export class MovieService {
     ).pipe(
       catchError((error: any): Observable<any> => {
         return of({});
+      })
+    );
+  }
+
+  getDirector(id: string): Observable<Crew> {
+    return this.getCastAndCrew(id).pipe(
+      map(castAndCrew => castAndCrew.crew.filter(member => member.job == 'Director')[0])
+    ).pipe(
+      catchError((error: any): Observable<any> => {
+        return of({})
       })
     );
   }

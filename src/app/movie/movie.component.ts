@@ -15,6 +15,7 @@ export class MovieComponent implements OnInit {
   public loading = true;
   public movieDetail: MovieDetail;
   public id: string;
+  public director: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
   private imdbUrl: string = environment.imdbUrl;
@@ -44,6 +45,7 @@ export class MovieComponent implements OnInit {
       if (params.id) {
         this.id = params.id;
         this.getDetails();
+        this.getDirector();
       }
     });
   }
@@ -55,6 +57,12 @@ export class MovieComponent implements OnInit {
         this.movieDetail = detail;
       }
       this.loading = false;
+    });
+  }
+
+  getDirector(): void {
+    this.movie.getDirector(this.id).subscribe((director) => {
+      this.director = director.name;
     });
   }
 

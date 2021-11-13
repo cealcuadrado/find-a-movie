@@ -31,19 +31,25 @@
         }
       }
 
-      .year {
-        border: 1px solid white;
-        background-color: rgba(0,0,0,0.8);
-        margin-right: 0.5rem;
-        display: inline-block;
-        padding: 0.5rem;
-      }
+      .header-info {
+        & > span {
+          border: 1px solid white;
+          background-color: rgba(0,0,0,0.8);
+          display: inline-block;
+          padding: 0.5rem;
 
-      .runtime {
-        border: 1px solid white;
-        background-color: rgba(0,0,0,0.8);
-        display: inline-block;
-        padding: 0.5rem;
+          &:not(:last-child) {
+            margin-right: 0.5rem;
+          }
+        }
+
+        .director {
+          text-transform: uppercase;
+
+          @media screen and (max-width: 991px) {
+            display: none;
+          }
+        }
       }
     }
 
