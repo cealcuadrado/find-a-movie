@@ -5,6 +5,7 @@ import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movie',
@@ -25,7 +26,8 @@ export class MovieComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private movie: MovieService
+    private movie: MovieService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class MovieComponent implements OnInit {
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
+        this.setTitle();
       }
       this.loading = false;
     });
@@ -64,6 +67,11 @@ export class MovieComponent implements OnInit {
     this.movie.getDirector(this.id).subscribe((director) => {
       this.director = director.name;
     });
+  }
+
+  setTitle(): void {
+    let date = new Date(this.movieDetail.release_date);
+    this.titleService.setTitle(`${this.movieDetail.title} (${date.getFullYear()}) | Find a Movie`);
   }
 
   setPosterUrl(posterPath: string | null) {
