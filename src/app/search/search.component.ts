@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { MovieSearchService } from './../shared/shared-services/movie-search.service';
 import { MovieListResult } from './../shared/interfaces/movie-list-result';
 import { Component, OnInit } from '@angular/core';
@@ -29,6 +30,7 @@ export class SearchComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private search: MovieSearchService,
     private window: Window,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class SearchComponent implements OnInit {
           this.totalResults = querySearchResult.total_results;
           this.totalPages = querySearchResult.total_pages;
           console.log(this.totalPages);
+          this.titleService.setTitle(`Search Results for: ${this.searchQuery} | Find a Movie`);
           this.generateSelectPageNumbers();
         }
       },
