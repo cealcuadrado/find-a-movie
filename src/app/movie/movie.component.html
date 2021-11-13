@@ -1,7 +1,7 @@
 <main class="movie" *ngIf="!loading; else loadingMovie">
   <div class="movie-content" *ngIf="movieDetail; else noMovieFound">
     <header class="movie-header"
-      [ngStyle]="{'background-image':'url(' + setBackdropUrl(movieDetail.backdrop_path) +')', 'background-size':'cover', 'background-position':'top'}">
+      [ngStyle]="setHeaderBackdrop(this.movieDetail.backdrop_path)">
       <section class="header-title">
         <h1>{{movieDetail.title}}</h1>
         <div class="header-info">
@@ -23,7 +23,7 @@
         </div>
       </section>
       <div class="header-poster">
-        <div [ngStyle]="{'background-image':'url(' + setPosterUrl(movieDetail.poster_path) + ')'}"
+        <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
           [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
           <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
             No poster available

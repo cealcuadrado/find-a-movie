@@ -66,10 +66,10 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  setPosterUrl(posterPath: string | null): string {
-    return !posterPath
-      ? 'null'
-      : `${this.posterUrl}${posterPath}`;
+  setPosterUrl(posterPath: string | null) {
+    return {
+      backgroundImage: posterPath ? `url(${this.posterUrl}${posterPath})` : null
+    };
   }
 
   isPosterUrl(posterPath: string | null) {
@@ -80,6 +80,22 @@ export class MovieComponent implements OnInit {
     return !backdropPath
       ? 'https://via.placeholder.com/600x450?text=No+image+available'
       : `${this.backdropUrl}${backdropPath}`;
+  }
+
+  setHeaderBackdrop(backdropPath: string | null) {
+    if (backdropPath) {
+      return {
+        backgroundImage: `url(${this.setBackdropUrl(this.movieDetail.backdrop_path)})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'top',
+      };
+    } else {
+      return {
+        backgroundImage: `url(${this.setBackdropUrl(this.movieDetail.backdrop_path)})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      };
+    }
   }
 
   isDateEmpty(dateStr: string): boolean {
