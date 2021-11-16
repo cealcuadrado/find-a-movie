@@ -12,7 +12,7 @@
     <div class="search-autocomplete" *ngIf="barResults.length > 0">
       <input *ngFor="let barResult of barResults; let i = index" class="bar-result"
         [ngClass]="{'active' : i+1 == currentResult}" (click)="goToMovie(barResult.id)"
-        (mouseover)="onMouseOver($event, i)" [value]="getFormattedTitle(barResult.title, barResult.release_date)">
+        (mouseover)="onMouseOver($event, i)" [value]="getFormattedTitle(barResult, barResult.release_date)">
     </div>
   </form>
 </div>

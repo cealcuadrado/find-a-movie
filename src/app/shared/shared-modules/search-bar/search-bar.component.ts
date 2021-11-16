@@ -71,11 +71,16 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  public getFormattedTitle(title: string, release_date: string): string {
+  public getFormattedTitle(result: MovieListResult, release_date: string
+  ): string {
     let date = new Date(release_date);
-    return `${title} `.concat(
+    return `${this.setLocalOrForeignTitle(result)} `.concat(
       release_date ? `(${date.getFullYear()})` : '(No Release Date)'
     );
+  }
+
+  public setLocalOrForeignTitle(result: MovieListResult): string {
+    return result.original_language.match('en') ? result.title : `${result.title} (${result.original_title})`;
   }
 
   public onSearchKeyDown(event: any): void {
