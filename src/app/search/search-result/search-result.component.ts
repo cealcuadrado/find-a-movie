@@ -5,17 +5,15 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.scss']
+  styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent implements OnInit {
-
   private posterUrl: string = environment.posterUrl;
   @Input() searchResult: MovieListResult;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setPosterUrl(posterPath: string | null) {
     return !posterPath
@@ -27,9 +25,13 @@ export class SearchResultComponent implements OnInit {
     return posterPath;
   }
 
+  setLocalOrForeignTitle(): string {
+    return !this.searchResult.original_language.match('en') && !this.searchResult.original_title.match(this.searchResult.title)
+      ? `${this.searchResult.title} (${this.searchResult.original_title})`
+      : this.searchResult.title;
+  }
+
   isDateEmpty(dateStr: string): boolean {
     return dateStr.length == 0;
   }
-
-
 }

@@ -47,6 +47,7 @@ export class SearchBarComponent implements OnInit {
       .searchMovies(query, 1)
       .subscribe((querySearchResult) => {
         if (querySearchResult.results) {
+          console.log(querySearchResult.results);
           this.barResults = querySearchResult.results.slice(0, 5);
           this.resetCurrentResult();
         }
@@ -80,7 +81,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   public setLocalOrForeignTitle(result: MovieListResult): string {
-    return result.original_language.match('en') ? result.title : `${result.title} (${result.original_title})`;
+    return !result.original_language.match('en') && !result.original_title.match(result.title)
+      ? `${result.title} (${result.original_title})`
+      : result.title;
   }
 
   public onSearchKeyDown(event: any): void {

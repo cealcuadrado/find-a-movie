@@ -80,7 +80,9 @@ export class MovieComponent implements OnInit {
   }
 
   setLocalOrForeignTitle(detail: MovieDetail): string {
-    return detail.original_language.match('en') ? detail.title: `${detail.title} (${detail.original_title})`;
+    return !detail.original_language.match('en') && !detail.original_title.match(detail.title)
+      ? `${detail.title} (${detail.original_title})`
+      : detail.title;
   }
 
   setPosterUrl(posterPath: string | null) {

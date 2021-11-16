@@ -1,5 +1,5 @@
 <section class="movie-specs">
-  <p *ngIf="movieDetail.release_date && movieDetail.original_language != 'en'">
+  <p *ngIf="movieDetail.original_language != 'en' && !movieDetail.original_title.match(movieDetail.title)">
     <strong>Original Title:</strong>
     <br>{{movieDetail.original_title}}
   </p>
