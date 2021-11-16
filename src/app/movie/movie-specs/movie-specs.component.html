@@ -1,4 +1,8 @@
 <section class="movie-specs">
+  <p *ngIf="movieDetail.release_date && movieDetail.original_language != 'en'">
+    <strong>Original Title:</strong>
+    <br>{{movieDetail.original_title}}
+  </p>
   <p *ngIf="movieDetail.genres && movieDetail.genres.length > 0">
     <strong>
       Genre<span *ngIf="movieDetail.genres.length > 1">s</span>:

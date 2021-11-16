@@ -21,17 +21,19 @@ export class MovieComponent implements OnInit {
   private backdropUrl: string = environment.backdropUrl;
   private imdbUrl: string = environment.imdbUrl;
 
-  @ViewChild(CastAndCrewComponent, { static: true }) castAndCrew: CastAndCrewComponent;
-  @ViewChild(MovieTrailerComponent, { static: true }) movieTrailer: MovieTrailerComponent;
+  @ViewChild(CastAndCrewComponent, { static: true })
+  castAndCrew: CastAndCrewComponent;
+  @ViewChild(MovieTrailerComponent, { static: true })
+  movieTrailer: MovieTrailerComponent;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
-    private titleService: Title
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit movie')
+    console.log('ngOnInit movie');
     this.getMovie();
   }
 
@@ -53,11 +55,11 @@ export class MovieComponent implements OnInit {
   }
 
   getDetails(): void {
-    console.log('getDetails()');
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
+        console.log(detail);
         this.movieDetail = detail;
-        this.setTitle();
+        this.setWindowTitle();
       }
       this.loading = false;
     });
@@ -69,14 +71,23 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  setTitle(): void {
+  setWindowTitle(): void {
     let date = new Date(this.movieDetail.release_date);
-    this.titleService.setTitle(`${this.movieDetail.title} (${date.getFullYear()}) | Find a Movie`);
+    let detail = this.movieDetail;
+    this.titleService.setTitle(
+      `${this.setLocalOrForeignTitle(detail)} (${date.getFullYear()}) | Find a Movie`
+    );
+  }
+
+  setLocalOrForeignTitle(detail: MovieDetail): string {
+    return detail.original_language.match('en') ? detail.title: `${detail.title} (${detail.original_title})`;
   }
 
   setPosterUrl(posterPath: string | null) {
     return {
-      backgroundImage: posterPath ? `url(${this.posterUrl}${posterPath})` : null
+      backgroundImage: posterPath
+        ? `url(${this.posterUrl}${posterPath})`
+        : null,
     };
   }
 
@@ -93,13 +104,17 @@ export class MovieComponent implements OnInit {
   setHeaderBackdrop(backdropPath: string | null) {
     if (backdropPath) {
       return {
-        backgroundImage: `url(${this.setBackdropUrl(this.movieDetail.backdrop_path)})`,
+        backgroundImage: `url(${this.setBackdropUrl(
+          this.movieDetail.backdrop_path
+        )})`,
         backgroundSize: 'cover',
         backgroundPosition: 'top',
       };
     } else {
       return {
-        backgroundImage: `url(${this.setBackdropUrl(this.movieDetail.backdrop_path)})`,
+        backgroundImage: `url(${this.setBackdropUrl(
+          this.movieDetail.backdrop_path
+        )})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       };

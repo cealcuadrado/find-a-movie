@@ -22,14 +22,14 @@
           </span>
         </div>
       </section>
-      <div class="header-poster">
+      <section class="header-poster">
         <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
           [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
           <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
             No poster available
           </span>
         </div>
-      </div>
+      </section>
     </header>
 
     <section class="movie-body">
