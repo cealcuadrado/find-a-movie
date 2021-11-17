@@ -13,8 +13,8 @@ export class CastAndCrewComponent implements OnInit {
   public loading: boolean = true;
 
   @Input() id: string;
-  private cast: Cast[];
-  private crew: Crew[];
+  @Input() cast: Cast[] = [];
+  @Input() crew: Crew[] = [];
 
   public direction: PersonLink[];
   public writing: PersonLink[];
@@ -45,27 +45,24 @@ export class CastAndCrewComponent implements OnInit {
   */
 
   setCastAndCrew(): void {
+    this.getDirection();
+    this.getWriting();
+    this.getScreenplay();
+    this.getStory();
+    this.getProducers();
+    this.getCast();
+    this.getBasedOnWork();
+    this.loading = false;
+
+    /*
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
-      // console.log(result);
-      this.cast = result.cast;
-      this.crew = result.crew;
-      // console.log(this.crew);
-      /*
       console.log(
         this.crew.filter((member) => member.known_for_department == 'Writing')
       );
-      */
-
-      this.getDirection();
-      this.getWriting();
-      this.getScreenplay();
-      this.getStory();
-      this.getProducers();
-      this.getCast();
-      this.getBasedOnWork();
-      this.loading = false;
     });
+    */
   }
+
 
   getDirection(): void {
     this.direction = this.crew

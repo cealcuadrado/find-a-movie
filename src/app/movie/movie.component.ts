@@ -6,6 +6,8 @@ import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Cast } from '../shared/interfaces/cast';
+import { Crew } from '../shared/interfaces/crew';
 
 @Component({
   selector: 'app-movie',
@@ -20,6 +22,9 @@ export class MovieComponent implements OnInit {
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
   private imdbUrl: string = environment.imdbUrl;
+
+  public cast: Cast[] = [];
+  public crew: Crew[] = [];
 
   @ViewChild(CastAndCrewComponent, { static: true })
   castAndCrew: CastAndCrewComponent;
@@ -50,6 +55,7 @@ export class MovieComponent implements OnInit {
         this.id = params.id;
         this.getDetails();
         this.getDirector();
+        this.getCastAndCrew();
       }
     });
   }
@@ -68,6 +74,13 @@ export class MovieComponent implements OnInit {
   getDirector(): void {
     this.movie.getDirector(this.id).subscribe((director) => {
       this.director = director.name;
+    });
+  }
+
+  getCastAndCrew(): void {
+    this.movie.getCastAndCrew(this.id).subscribe((result) => {
+      this.cast = result.cast;
+      this.crew = result.crew;
     });
   }
 
