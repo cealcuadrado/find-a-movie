@@ -1,5 +1,5 @@
+import { CastAndCrewSummaryComponent } from './cast-and-crew-summary/cast-and-crew-summary.component';
 import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
-import { CastAndCrewComponent } from './cast-and-crew/cast-and-crew.component';
 import { environment } from './../../environments/environment';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
@@ -26,10 +26,11 @@ export class MovieComponent implements OnInit {
   public cast: Cast[] = [];
   public crew: Crew[] = [];
 
-  @ViewChild(CastAndCrewComponent, { static: true })
-  castAndCrew: CastAndCrewComponent;
+  @ViewChild(CastAndCrewSummaryComponent, { static: true })
+  castAndCrewSummary: CastAndCrewSummaryComponent;
   @ViewChild(MovieTrailerComponent, { static: true })
   movieTrailer: MovieTrailerComponent;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,

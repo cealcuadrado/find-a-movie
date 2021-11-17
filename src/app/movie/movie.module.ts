@@ -12,23 +12,23 @@ import { RuntimePipe } from './runtime.pipe';
 
 /* Components */
 import { MovieComponent } from './movie.component';
-import { CastAndCrewComponent } from './cast-and-crew/cast-and-crew.component';
 import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
 import { MovieSpecsComponent } from './movie-specs/movie-specs.component';
 import { MovieSocialNetworksComponent } from './movie-social-networks/movie-social-networks.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
+import { CastAndCrewSummaryComponent } from './cast-and-crew-summary/cast-and-crew-summary.component';
 
 @NgModule({
   declarations: [
     MovieComponent,
     RuntimePipe,
-    CastAndCrewComponent,
     MovieTrailerComponent,
     MovieSpecsComponent,
     MovieSocialNetworksComponent,
     MovieCastComponent,
     MovieCrewComponent,
+    CastAndCrewSummaryComponent,
   ],
   imports: [
     CommonModule,
