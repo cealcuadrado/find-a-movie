@@ -1,7 +1,6 @@
 import { PersonLink } from './../../shared/interfaces/person-link';
 import { Component, Input, OnInit } from '@angular/core';
 import { Crew } from 'src/app/shared/interfaces/crew';
-import { MergeMapSubscriber } from 'rxjs/internal/operators/mergeMap';
 
 @Component({
   selector: 'app-movie-crew',
@@ -23,6 +22,10 @@ export class MovieCrewComponent implements OnInit {
   public productionDesigners: PersonLink[] = [];
   public editors: PersonLink[] = [];
   public costumeDesigners: PersonLink[] = [];
+  public musicComposers: PersonLink[] = [];
+  public musicSupervisors: PersonLink[] = [];
+  public coProducers: PersonLink[] = [];
+  public castingPeople: PersonLink[] = [];
 
   public isBasedOnWork: boolean = false;
   public basedOnWorkAuthors: PersonLink[] = [];
@@ -46,6 +49,10 @@ export class MovieCrewComponent implements OnInit {
     this.getProductionDesigners();
     this.getEditors();
     this.getCostumeDesigners();
+    this.getMusicComposers();
+    this.getMusicSupervisors();
+    this.getCoProducers();
+    this.getCastingPeople();
   }
 
   private getDirection(): void {
@@ -117,7 +124,7 @@ export class MovieCrewComponent implements OnInit {
     this.cinematographers = this.crew
       .filter(member => member.job === 'Director of Photography')
       .map(member => {
-        return { name: member.name, id: member.id }
+        return { name: member.name, id: member.id };
       });
   }
 
@@ -125,7 +132,7 @@ export class MovieCrewComponent implements OnInit {
     this.productionDesigners = this.crew
       .filter(member => member.job === 'Production Design')
       .map(member => {
-        return { name: member.name, id: member.id}
+        return { name: member.name, id: member.id };
       });
   }
 
@@ -133,7 +140,7 @@ export class MovieCrewComponent implements OnInit {
     this.editors = this.crew
       .filter(member => member.job === 'Editor')
       .map(member => {
-        return { name: member.name, id: member.id}
+        return { name: member.name, id: member.id };
       });
   }
 
@@ -141,7 +148,39 @@ export class MovieCrewComponent implements OnInit {
     this.costumeDesigners = this.crew
       .filter(member => member.job === 'Costume Design')
       .map(member => {
-        return { name: member.name, id: member.id}
+        return { name: member.name, id: member.id };
+      });
+  }
+
+  private getMusicComposers(): void {
+    this.musicComposers = this.crew
+      .filter(member => member.job === 'Original Music Composer')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+  }
+
+  private getMusicSupervisors(): void {
+    this.musicSupervisors = this.crew
+      .filter(member => member.job === 'Music Supervisor')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+  }
+
+  private getCoProducers(): void {
+    this.coProducers = this.crew
+      .filter(member => member.job === 'Co-Producer')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+  }
+
+  private getCastingPeople(): void {
+    this.castingPeople = this.crew
+      .filter(member => member.job === 'Casting')
+      .map(member => {
+        return { name: member.name, id: member.id };
       });
   }
 }

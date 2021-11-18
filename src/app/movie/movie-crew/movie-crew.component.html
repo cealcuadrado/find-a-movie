@@ -119,6 +119,50 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="musicComposers && musicComposers.length > 0">
+            <th>Music by:</th>
+            <td>
+              <div *ngFor="let musicComposer of musicComposers">
+                <a href="#" [routerLink]="['/person', musicComposer.id]">
+                  {{musicComposer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="musicSupervisors && musicSupervisors.length > 0">
+            <th>
+              Music Supervisor<span *ngIf="musicSupervisors.length > 1">s</span>:
+            </th>
+            <td>
+              <div *ngFor="let musicSupervisor of musicSupervisors">
+                <a href="#" [routerLink]="['/person', musicSupervisor.id]">
+                  {{musicSupervisor.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="coProducers && coProducers.length > 0">
+            <th>
+              Co-Producer<span *ngIf="coProducers.length > 1">s</span>:
+            </th>
+            <td>
+              <div *ngFor="let coProducer of coProducers">
+                <a href="#" [routerLink]="['/person', coProducer.id]">
+                  {{coProducer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="castingPeople && castingPeople.length > 0">
+            <th>Casting by:</th>
+            <td>
+              <div *ngFor="let castingPerson of castingPeople">
+                <a href="#" [routerLink]="['/person', castingPerson.id]">
+                  {{castingPerson.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
