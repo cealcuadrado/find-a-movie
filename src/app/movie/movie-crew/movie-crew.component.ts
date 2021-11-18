@@ -17,6 +17,7 @@ export class MovieCrewComponent implements OnInit {
   public writing: PersonLink[] = [];
   public screenPlayers: PersonLink[] = [];
   public storyPlayers: PersonLink[] = [];
+  public producers: PersonLink[] = [];
 
   public isBasedOnWork: boolean = false;
   public basedOnWorkAuthors: PersonLink[] = [];
@@ -34,6 +35,7 @@ export class MovieCrewComponent implements OnInit {
     this.getScreenPlayers();
     this.getStoryPlayers();
     this.getBasedOnWork();
+    this.getProducers();
   }
 
   private getDirection(): void {
@@ -83,5 +85,13 @@ export class MovieCrewComponent implements OnInit {
     }  else {
       this.isBasedOnWork = false;
     }
+  }
+
+  private getProducers(): void {
+    this.producers = this.crew
+      .filter(member => member.job === 'Producer')
+      .map(member => {
+        return { name: member.name, id: member.id}
+      });
   }
 }
