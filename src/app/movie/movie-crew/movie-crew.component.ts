@@ -18,6 +18,9 @@ export class MovieCrewComponent implements OnInit {
   public screenPlayers: PersonLink[] = [];
   public storyPlayers: PersonLink[] = [];
 
+  public isBasedOnWork: boolean = false;
+  public basedOnWorkAuthors: PersonLink[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
@@ -30,6 +33,7 @@ export class MovieCrewComponent implements OnInit {
     this.getWriting();
     this.getScreenPlayers();
     this.getStoryPlayers();
+    this.getBasedOnWork();
   }
 
   private getDirection(): void {
@@ -42,7 +46,7 @@ export class MovieCrewComponent implements OnInit {
 
   private getWriting(): void {
     this.writing = this.crew
-      .filter(member => member.job == 'Writer')
+      .filter(member => member.job === 'Writer')
       .map(member => {
         return { name: member.name, id: member.id };
     })
@@ -50,7 +54,7 @@ export class MovieCrewComponent implements OnInit {
 
   private getScreenPlayers(): void {
     this.screenPlayers = this.crew
-      .filter(member => member.job == 'Screenplay')
+      .filter(member => member.job === 'Screenplay')
       .map(member => {
         return { name: member.name, id: member.id };
       })
@@ -58,9 +62,26 @@ export class MovieCrewComponent implements OnInit {
 
   private getStoryPlayers(): void {
     this.storyPlayers = this.crew
-      .filter(member => member.job == 'Story' )
+      .filter(member => member.job === 'Story' )
       .map(member => {
         return { name: member.name, id: member.id };
       })
+  }
+
+  private getBasedOnWork(): void {
+    let basedOnWorkAuthors = this.crew
+      .filter(member => {
+        return member.job === 'Novel' || member.job === 'Author'
+      })
+      .map(member => {
+        return { name: member.name, id: member.id }
+      });
+
+    if (basedOnWorkAuthors.length > 0) {
+      this.isBasedOnWork = true;
+      this.basedOnWorkAuthors = basedOnWorkAuthors;
+    }  else {
+      this.isBasedOnWork = false;
+    }
   }
 }
