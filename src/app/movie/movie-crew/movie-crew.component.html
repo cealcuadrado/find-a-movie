@@ -99,6 +99,26 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="editors && editors.length > 0">
+            <th>Edited by:</th>
+            <td>
+              <div *ngFor="let editor of editors">
+                <a href="#" [routerLink]="['/person', editor.id]">
+                  {{editor.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="costumeDesigners && costumeDesigners.length > 0">
+            <th>Costume Design:</th>
+            <td>
+              <div *ngFor="let costumeDesigner of costumeDesigners">
+                <a href="#" [routerLink]="['/person', costumeDesigner.id]">
+                  {{costumeDesigner.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
