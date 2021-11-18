@@ -13,10 +13,18 @@
                 {{castMember.name}}
               </a>
             </td>
-            <td>{{castMember.character}}</td>
+            <td>
+              <span *ngIf="castMember.character; else noCharacter">
+                {{castMember.character}}
+              </span>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </section>
+
+<ng-template #noCharacter>
+  No character specified
+</ng-template>
