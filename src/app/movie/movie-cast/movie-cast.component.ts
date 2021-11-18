@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Cast } from 'src/app/shared/interfaces/cast';
 
 @Component({
   selector: 'app-movie-cast',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieCastComponent implements OnInit {
 
+  public loading: boolean = true;
+
+  @Input() cast: Cast[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  setCast(): void {
+    this.loading = false;
+  }
 }

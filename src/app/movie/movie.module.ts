@@ -6,6 +6,7 @@ import { MovieRoutingModule } from './movie-routing.module';
 import { EmbeddedMediaModule } from 'ngx-embedded-media';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Pipes */
 import { RuntimePipe } from './runtime.pipe';
@@ -36,7 +37,9 @@ import { CastAndCrewSummaryComponent } from './cast-and-crew-summary/cast-and-cr
     SharedComponentsModule,
     EmbeddedMediaModule.forRoot(),
     RouterModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MovieModule { }

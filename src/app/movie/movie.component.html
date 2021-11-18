@@ -35,7 +35,7 @@
     <section class="movie-body">
       <div class="container-fluid">
         <main>
-          <nav ngbNav #nav="ngbNav" class="nav-tabs" [destroyOnHide]="false">
+          <nav ngbNav #nav="ngbNav" [(activeId)]="currentTab" class="nav-tabs">
             <ng-container ngbNavItem>
               <a ngbNavLink>Main</a>
               <ng-template ngbNavContent>
@@ -83,7 +83,7 @@
             <ng-container ngbNavItem>
               <a ngbNavLink>Cast</a>
               <ng-template ngbNavContent>
-                <app-movie-cast></app-movie-cast>
+                <app-movie-cast [cast]="cast"></app-movie-cast>
               </ng-template>
             </ng-container>
             <ng-container ngbNavItem>

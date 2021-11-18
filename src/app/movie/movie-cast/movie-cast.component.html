@@ -1,1 +1,22 @@
-<p>movie-cast works!</p>
+<section class="cast">
+  <div class="row">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th>Actor</th>
+            <th>Character</th>
+          </tr>
+          <tr *ngFor="let castMember of cast">
+            <td>
+              <a href="#" [routerLink]="['/person', castMember.id]">
+                {{castMember.name}}
+              </a>
+            </td>
+            <td>{{castMember.character}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
