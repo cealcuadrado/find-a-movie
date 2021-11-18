@@ -63,6 +63,30 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="executiveProducers && executiveProducers.length > 0">
+            <th>
+              Executive Producer<span *ngIf="executiveProducers.length > 1">s</span>:
+            </th>
+            <td>
+              <div *ngFor="let executiveProducer of executiveProducers">
+                <a href="#" [routerLink]="['/person', executiveProducer.id]">
+                  {{executiveProducer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="cinematographers && cinematographers.length > 0">
+            <th>
+              Director<span *ngIf="cinematographers.length > 1">s</span> of Photography:
+            </th>
+            <td>
+              <div *ngFor="let cinematographer of cinematographers">
+                <a href="#" [routerLink]="['/person', cinematographer.id]">
+                  {{cinematographer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
