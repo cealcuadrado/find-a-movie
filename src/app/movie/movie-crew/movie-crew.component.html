@@ -1,1 +1,21 @@
-<p>movie-crew works!</p>
+<section class="crew">
+  <div class="row">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <div class="table-responsive">
+        <table class="table">
+          <tr *ngIf="direction && direction.length > 0">
+            <th>Directed by:</th>
+            <td>
+              <div *ngFor="let director of direction">
+                <a href="#" [routerLink]="['/person', director.id]">
+                  {{director.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
