@@ -13,7 +13,8 @@ export class MovieCrewComponent implements OnInit {
 
   @Input() crew: Crew[] = [];
 
-  public direction: PersonLink[];
+  public direction: PersonLink[] = [];
+  public writing: PersonLink[] = [];
 
   constructor() { }
 
@@ -24,6 +25,7 @@ export class MovieCrewComponent implements OnInit {
   setCrew(): void {
     this.loading = false;
     this.getDirection();
+    this.getWriting();
   }
 
   private getDirection(): void {
@@ -32,5 +34,13 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id }
       })
+  }
+
+  private getWriting(): void {
+    this.writing = this.crew
+      .filter((member) => member.job == 'Writer')
+      .map((member) => {
+      return { name: member.name, id: member.id }
+    })
   }
 }

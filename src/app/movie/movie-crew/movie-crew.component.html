@@ -13,6 +13,16 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="writing && writing.length > 0">
+            <th>Written by</th>
+            <td>
+              <div *ngFor="let writer of writing">
+                <a href="#" [routerLink]="['/person', writer.id]">
+                  {{writer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
