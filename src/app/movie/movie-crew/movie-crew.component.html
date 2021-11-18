@@ -87,6 +87,18 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="productionDesigners && productionDesigners.length > 0">
+            <th>
+              Production Design:
+            </th>
+            <td>
+              <div *ngFor="let productionDesign of productionDesigners">
+                <a href="#" [routerLink]="['/person', productionDesign.id]">
+                  {{productionDesign.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
