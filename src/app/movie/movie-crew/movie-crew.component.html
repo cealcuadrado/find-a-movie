@@ -23,6 +23,26 @@
               </div>
             </td>
           </tr>
+          <tr *ngIf="screenPlayers && screenPlayers.length > 0">
+            <th>Screenplay by:</th>
+            <td>
+              <div *ngFor="let screenPlayer of screenPlayers">
+                <a href="#" [routerLink]="['/person', screenPlayer.id]">
+                  {{screenPlayer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="storyPlayers && storyPlayers.length > 0">
+            <th>Story by:</th>
+            <td>
+              <div *ngFor="let storyPlayer of storyPlayers">
+                <a href="#" [routerLink]="['/person', storyPlayer.id]">
+                  {{storyPlayer.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>

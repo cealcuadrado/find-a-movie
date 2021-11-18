@@ -15,6 +15,8 @@ export class MovieCrewComponent implements OnInit {
 
   public direction: PersonLink[] = [];
   public writing: PersonLink[] = [];
+  public screenPlayers: PersonLink[] = [];
+  public storyPlayers: PersonLink[] = [];
 
   constructor() { }
 
@@ -26,21 +28,39 @@ export class MovieCrewComponent implements OnInit {
     this.loading = false;
     this.getDirection();
     this.getWriting();
+    this.getScreenPlayers();
+    this.getStoryPlayers();
   }
 
   private getDirection(): void {
     this.direction = this.crew
-      .filter((member) => member.job == 'Director')
-      .map((member) => {
-        return { name: member.name, id: member.id }
+      .filter(member => member.job == 'Director')
+      .map(member => {
+        return { name: member.name, id: member.id };
       })
   }
 
   private getWriting(): void {
     this.writing = this.crew
-      .filter((member) => member.job == 'Writer')
-      .map((member) => {
-      return { name: member.name, id: member.id }
+      .filter(member => member.job == 'Writer')
+      .map(member => {
+        return { name: member.name, id: member.id };
     })
+  }
+
+  private getScreenPlayers(): void {
+    this.screenPlayers = this.crew
+      .filter(member => member.job == 'Screenplay')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      })
+  }
+
+  private getStoryPlayers(): void {
+    this.storyPlayers = this.crew
+      .filter(member => member.job == 'Story' )
+      .map(member => {
+        return { name: member.name, id: member.id };
+      })
   }
 }
