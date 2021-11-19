@@ -1,4 +1,4 @@
-import { SpokenLanguage } from './spoken-language';
+import { Language } from './language';
 import { ProductionCountry } from './production-country';
 import { ProductionCompany } from './production-company';
 import { Genre } from './genre';
@@ -22,7 +22,7 @@ export interface MovieDetail {
   release_date: string;
   revenue: number;
   runtime: number | null;
-  spoken_languages: SpokenLanguage[];
+  spoken_languages: Language[];
   status: string;
   tagline: string | null;
   title: string;
