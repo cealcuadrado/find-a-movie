@@ -1,11 +1,18 @@
 <section class="person">
-  <header class="person-header">
-
-  </header>
-  <section class="person-body">
-    <div class="container-fluid">
-      <p>ID: {{id}}</p>
-    </div>
-  </section>
+  <div *ngIf="!loading; else loadingPerson">
+    <header class="person-header">
+      <h1>{{personDetail.name}}</h1>
+    </header>
+    <section class="person-body">
+      <div class="container-fluid">
+        <p>ID: {{id}}</p>
+      </div>
+    </section>
+  </div>
 </section>
 
+<ng-template #loadingPerson>
+  <div class="loading-person">
+    <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>
+  </div>
+</ng-template>
