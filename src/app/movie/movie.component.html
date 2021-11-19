@@ -25,7 +25,7 @@
               <app-movie-cast [cast]="cast"></app-movie-cast>
             </ng-template>
           </li>
-          <li [ngbNavItem]="3">
+          <li [ngbNavItem]="3" *ngIf="crew.length > 0">
             <a ngbNavLink>Crew</a>
             <ng-template ngbNavContent>
               <app-movie-crew [crew]="crew"></app-movie-crew>
