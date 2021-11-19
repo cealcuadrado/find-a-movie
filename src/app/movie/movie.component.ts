@@ -55,7 +55,6 @@ export class MovieComponent implements OnInit {
       if (params.id) {
         this.id = params.id;
         this.getDetails();
-        this.getDirector();
         this.getCastAndCrew();
       }
     });
@@ -72,17 +71,16 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  getDirector(): void {
-    this.movie.getDirector(this.id).subscribe((director) => {
-      this.director = director.name;
-    });
-  }
-
   getCastAndCrew(): void {
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
+      this.getDirector();
     });
+  }
+
+  getDirector(): void {
+    this.director = this.crew.filter((member) => member.job === 'Director')[0].name;
   }
 
   setWindowTitle(): void {

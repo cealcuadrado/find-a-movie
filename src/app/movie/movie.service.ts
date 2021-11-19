@@ -47,14 +47,4 @@ export class MovieService {
       })
     );
   }
-
-  getDirector(id: string): Observable<Crew> {
-    return this.getCastAndCrew(id).pipe(
-      map(castAndCrew => castAndCrew.crew.filter(member => member.job == 'Director')[0])
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({})
-      })
-    );
-  }
 }
