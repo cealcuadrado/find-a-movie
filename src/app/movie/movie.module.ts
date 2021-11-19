@@ -13,12 +13,12 @@ import { RuntimePipe } from './runtime.pipe';
 
 /* Components */
 import { MovieComponent } from './movie.component';
-import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
-import { MovieSpecsComponent } from './movie-specs/movie-specs.component';
-import { MovieSocialNetworksComponent } from './movie-social-networks/movie-social-networks.component';
+import { MovieTrailerComponent } from './movie-main/movie-trailer/movie-trailer.component';
+import { MovieSpecsComponent } from './movie-main/movie-specs/movie-specs.component';
+import { MovieSocialNetworksComponent } from './movie-main/movie-social-networks/movie-social-networks.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
-import { CastAndCrewSummaryComponent } from './cast-and-crew-summary/cast-and-crew-summary.component';
+import { CastAndCrewSummaryComponent } from './movie-main/cast-and-crew-summary/cast-and-crew-summary.component';
 import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component';
 import { MovieMainComponent } from './movie-main/movie-main.component';
 
