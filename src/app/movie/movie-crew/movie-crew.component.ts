@@ -36,6 +36,10 @@ export class MovieCrewComponent implements OnInit {
     this.setCrew();
   }
 
+  ngOnChanges(): void {
+    this.setCrew();
+  }
+
   setCrew(): void {
     this.loading = false;
     this.getDirection();
@@ -154,7 +158,7 @@ export class MovieCrewComponent implements OnInit {
 
   private getMusicComposers(): void {
     this.musicComposers = this.crew
-      .filter(member => member.job === 'Original Music Composer')
+      .filter(member => member.job === 'Original Music Composer' || member.job === 'Music')
       .map(member => {
         return { name: member.name, id: member.id };
       });
