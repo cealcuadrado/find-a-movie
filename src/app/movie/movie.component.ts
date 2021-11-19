@@ -75,12 +75,7 @@ export class MovieComponent implements OnInit {
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
-      this.getDirector();
     });
-  }
-
-  getDirector(): void {
-    this.director = this.crew.filter((member) => member.job === 'Director')[0].name;
   }
 
   setWindowTitle(): void {
@@ -98,51 +93,5 @@ export class MovieComponent implements OnInit {
       !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`
       : detail.title;
-  }
-
-  setPosterUrl(posterPath: string | null) {
-    return {
-      backgroundImage: posterPath
-        ? `url(${this.posterUrl}${posterPath})`
-        : null,
-    };
-  }
-
-  isPosterUrl(posterPath: string | null) {
-    return posterPath;
-  }
-
-  setBackdropUrl(backdropPath: string | null): string {
-    return !backdropPath
-      ? 'https://via.placeholder.com/600x450?text=No+image+available'
-      : `${this.backdropUrl}${backdropPath}`;
-  }
-
-  setHeaderBackdrop(backdropPath: string | null) {
-    if (backdropPath) {
-      return {
-        backgroundImage: `url(${this.setBackdropUrl(
-          this.movieDetail.backdrop_path
-        )})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'top',
-      };
-    } else {
-      return {
-        backgroundImage: `url(${this.setBackdropUrl(
-          this.movieDetail.backdrop_path
-        )})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      };
-    }
-  }
-
-  isDateEmpty(dateStr: string): boolean {
-    return dateStr.length == 0;
-  }
-
-  setTmdbUrl(tmdbId: string): string {
-    return 'foo';
   }
 }
