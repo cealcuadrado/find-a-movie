@@ -21,6 +21,7 @@ import { MovieCrewComponent } from './movie-crew/movie-crew.component';
 import { CastAndCrewSummaryComponent } from './movie-main/cast-and-crew-summary/cast-and-crew-summary.component';
 import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component';
 import { MovieMainComponent } from './movie-main/movie-main.component';
+import { MovieHeaderComponent } from './movie-header/movie-header.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MovieMainComponent } from './movie-main/movie-main.component';
     CastAndCrewSummaryComponent,
     NoMovieFoundComponent,
     MovieMainComponent,
+    MovieHeaderComponent,
   ],
   imports: [
     CommonModule,

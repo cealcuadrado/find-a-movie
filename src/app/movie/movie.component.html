@@ -1,36 +1,9 @@
 <main class="movie" *ngIf="!loading; else loadingMovie">
   <div class="movie-content" *ngIf="movieDetail; else noMovieFound">
-    <header class="movie-header"
-      [ngStyle]="setHeaderBackdrop(this.movieDetail.backdrop_path)">
-      <section class="header-title">
-        <h1>{{movieDetail.title}}</h1>
-        <div class="header-info">
-          <span class="director" *ngIf="director">
-            Dir. {{director}}
-          </span>
-          <span class="year">
-            <span *ngIf="movieDetail.release_date; else noReleaseDate">
-              <span
-                *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">{{movieDetail.release_date | date:'yyyy'}}</span>
-            </span>
-            <ng-template #noReleaseDate>
-              <span>No Release Date</span>
-            </ng-template>
-          </span>
-          <span class="runtime">
-            <i class="fas fa-clock fa-fw"></i> {{movieDetail.runtime | runtime}}
-          </span>
-        </div>
-      </section>
-      <section class="header-poster">
-        <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
-          [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
-          <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
-            No poster available
-          </span>
-        </div>
-      </section>
-    </header>
+    <app-movie-header
+      [movieDetail]="movieDetail"
+      [crew]="crew">
+    </app-movie-header>
 
     <section class="movie-body">
       <div class="container-fluid">
