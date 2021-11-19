@@ -1,0 +1,16 @@
+<aside class="external-links" *ngIf="!loading; else nowLoading">
+  <a *ngIf="movieDetail.imdb_id != null" [href]="setImdbUrl(movieDetail.imdb_id)" target="_blank"
+    class="btn btn-block btn-warning">
+    <i class="fab fa-imdb fa-fw"></i> IMDB Profile
+  </a>
+  <a *ngIf="isHomepageEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank"
+    class="btn btn-block btn-primary">
+    <i class="fas fa-globe fa-fw"></i> Official Website
+  </a>
+  <br>
+  <app-movie-social-networks [id]="id"></app-movie-social-networks>
+</aside>
+
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>
