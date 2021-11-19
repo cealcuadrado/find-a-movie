@@ -1,4 +1,4 @@
-<section class="movie-specs">
+<aside class="movie-specs" *ngIf="!loading; else nowLoading">
   <p *ngIf="movieDetail.original_language != 'en' && !movieDetail.original_title.match(movieDetail.title)">
     <strong>Original Title:</strong>
     <br>{{movieDetail.original_title}}
@@ -28,7 +28,7 @@
     </span>
   </p>
   <p *ngIf="movieDetail.spoken_languages && movieDetail.spoken_languages.length > 0">
-    <strong>Language<span *ngIf="movieDetail.spoken_languages.length > 1">s</span>:</strong>
+    <strong>Spoken Language<span *ngIf="movieDetail.spoken_languages.length > 1">s</span>:</strong>
     <br>
     <span *ngFor="let language of movieDetail.spoken_languages; let i = index">
       {{language.english_name}}<span *ngIf="i != movieDetail.spoken_languages.length - 1"></span>
@@ -69,4 +69,8 @@
       No Revenue Available
     </ng-template>
   </p>
-</section>
+</aside>
+
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>

@@ -8,11 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MovieSpecsComponent implements OnInit {
 
+  public loading: boolean = true;
+
   @Input() movieDetail: MovieDetail;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.loading = false;
   }
 
 }
