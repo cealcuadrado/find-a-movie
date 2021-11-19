@@ -1,4 +1,4 @@
-import { VideoResult } from './../../shared/interfaces/video-result';
+import { VideoResult } from '../../../shared/interfaces/video-result';
 import { MovieTrailerService } from './movie-trailer.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -24,7 +24,7 @@ export class MovieTrailerComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    console.log('onChanges()')
+    // console.log('onChanges()')
     this.youtubeId = '';
     this.loading = true;
     this.setTrailer();
@@ -38,7 +38,7 @@ export class MovieTrailerComponent implements OnInit {
   */
 
   setTrailer(): void {
-    console.log('setTrailer()');
+    // console.log('setTrailer()');
     this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
       let results: VideoResult[];
       let filteredResults: VideoResult[];

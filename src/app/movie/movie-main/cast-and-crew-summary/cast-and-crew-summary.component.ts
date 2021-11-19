@@ -1,5 +1,5 @@
-import { PersonLink } from './../../shared/interfaces/person-link';
-import { Cast } from './../../shared/interfaces/cast';
+import { PersonLink } from '../../../shared/interfaces/person-link';
+import { Cast } from '../../../shared/interfaces/cast';
 import { Component, Input, OnInit } from '@angular/core';
 import { Crew } from 'src/app/shared/interfaces/crew';
 
@@ -14,12 +14,12 @@ export class CastAndCrewSummaryComponent implements OnInit {
   @Input() cast: Cast[] = [];
   @Input() crew: Crew[] = [];
 
-  public direction: PersonLink[];
-  public writing: PersonLink[];
-  public screenPlayers: PersonLink[];
-  public story: PersonLink[];
-  public production: PersonLink[];
-  public movieCast: PersonLink[];
+  public direction: PersonLink[] = [];
+  public writing: PersonLink[] = [];
+  public screenPlayers: PersonLink[] = [];
+  public story: PersonLink[] = [];
+  public production: PersonLink[] = [];
+  public movieCast: PersonLink[] = [];
 
   public isBasedOnWork: boolean = false;
   public basedOnWork: PersonLink[];

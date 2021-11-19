@@ -1,4 +1,4 @@
-import { MovieDetail } from './../../shared/interfaces/movie-detail';
+import { MovieDetail } from '../../../shared/interfaces/movie-detail';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MovieSpecsComponent implements OnInit {
 
   @Input() movieDetail: MovieDetail;
-  
+
   constructor() { }
 
   ngOnInit(): void {
