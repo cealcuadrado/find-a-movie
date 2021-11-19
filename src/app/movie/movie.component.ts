@@ -15,7 +15,6 @@ import { Crew } from '../shared/interfaces/crew';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  public currentTab = 'ngb-nav-0';
   public loading = true;
   public movieDetail: MovieDetail;
   public id: string;
@@ -31,7 +30,6 @@ export class MovieComponent implements OnInit {
   castAndCrewSummary: CastAndCrewSummaryComponent;
   @ViewChild(MovieTrailerComponent, { static: true })
   movieTrailer: MovieTrailerComponent;
-
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -63,10 +61,11 @@ export class MovieComponent implements OnInit {
   }
 
   getDetails(): void {
+    console.log('getDetails()');
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
-        console.log(detail);
-        this.currentTab = 'ngb-nav-0';
+        // console.log(detail);
+
         this.movieDetail = detail;
         this.setWindowTitle();
       }
@@ -84,7 +83,7 @@ export class MovieComponent implements OnInit {
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
-      console.log(this.crew);
+      // console.log(this.crew);
     });
   }
 
