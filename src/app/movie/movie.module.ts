@@ -20,7 +20,6 @@ import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
 import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component';
-import { MovieMainComponent } from './movie-main/movie-main.component';
 import { MovieHeaderComponent } from './movie-header/movie-header.component';
 import { MovieExternalLinksComponent } from './movie-overview/movie-external-links/movie-external-links.component';
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
@@ -36,7 +35,6 @@ import { MovieOverviewComponent } from './movie-overview/movie-overview.componen
     MovieCrewComponent,
     CastAndCrewSummaryComponent,
     NoMovieFoundComponent,
-    MovieMainComponent,
     MovieHeaderComponent,
     MovieExternalLinksComponent,
     MovieOverviewComponent,
