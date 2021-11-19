@@ -1,4 +1,3 @@
-import { SearchBarModule } from './shared/shared-modules/search-bar/search-bar.module';
 /* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,6 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
+import { SearchBarModule } from './shared/shared-modules/search-bar/search-bar.module';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 
 /* Components */
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +20,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* Services */
 import { MovieSearchService } from './shared/shared-services/movie-search.service';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     ToastrModule.forRoot(),
     SharedComponentsModule,
-    SearchBarModule
+    SearchBarModule,
+    RouterModule
   ],
   providers: [
     {
