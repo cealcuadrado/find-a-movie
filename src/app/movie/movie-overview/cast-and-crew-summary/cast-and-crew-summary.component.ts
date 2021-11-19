@@ -9,6 +9,7 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./cast-and-crew-summary.component.scss'],
 })
 export class CastAndCrewSummaryComponent implements OnInit {
+  
   public loading: boolean = true;
 
   @Input() cast: Cast[] = [];

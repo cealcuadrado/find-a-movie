@@ -15,8 +15,10 @@ import { Crew } from '../shared/interfaces/crew';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
+
   public active = 1;
   public loading = true;
+
   public movieDetail: MovieDetail;
   public id: string;
   public director: string;
@@ -46,11 +48,11 @@ export class MovieComponent implements OnInit {
     this.getMovie();
   }
 
-  setMainTab() {
+  private setMainTab() {
     this.active = 1;
   }
 
-  getMovie(): void {
+  private getMovie(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
@@ -60,7 +62,7 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  getDetails(): void {
+  private getDetails(): void {
     this.setMainTab();
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
@@ -71,14 +73,14 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  getCastAndCrew(): void {
+  private getCastAndCrew(): void {
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
     });
   }
 
-  setWindowTitle(): void {
+  private setWindowTitle(): void {
     let date = new Date(this.movieDetail.release_date);
     let detail = this.movieDetail;
     this.titleService.setTitle(
@@ -88,7 +90,7 @@ export class MovieComponent implements OnInit {
     );
   }
 
-  setLocalOrForeignTitle(detail: MovieDetail): string {
+  private setLocalOrForeignTitle(detail: MovieDetail): string {
     return !detail.original_language.match('en') &&
       !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`

@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+
   public flagLoadingResults: boolean = false;
   public posterUrl: string = environment.posterUrl;
 
@@ -40,13 +41,13 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  firstSearch(): void {
+  private firstSearch(): void {
     this.currentPage = 1;
     this.selectPage = 1;
     this.searchMovies();
   }
 
-  searchMovies(): void {
+  private searchMovies(): void {
     this.flagLoadingResults = true;
     this.search.searchMovies(this.searchQuery, this.currentPage).subscribe(
       (querySearchResult) => {
@@ -69,17 +70,17 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  calculateLeftCounter(): number {
+  public calculateLeftCounter(): number {
     return this.resultsPerPage * (this.currentPage - 1) + 1;
   }
 
-  calculateRightCounter(): number {
+  public calculateRightCounter(): number {
     return this.resultsPerPage * this.currentPage < this.totalResults
       ? this.resultsPerPage * this.currentPage
       : this.totalResults;
   }
 
-  generateSelectPageNumbers(): void {
+  private generateSelectPageNumbers(): void {
     this.pageNumbers = [];
     for (let i = 0; i < this.totalPages; i++) {
       this.pageNumbers.push(i + 1);
@@ -87,11 +88,11 @@ export class SearchComponent implements OnInit {
     console.log(this.pageNumbers);
   }
 
-  changeSelectPage(event: any) {
+  public changeSelectPage(event: any) {
     this.onPageChange(event.target.value);
   }
 
-  onPageChange(event: any): void {
+  public onPageChange(event: any): void {
     console.log(event);
     this.currentPage = event;
     this.selectPage = this.currentPage;

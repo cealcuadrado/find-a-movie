@@ -40,8 +40,7 @@ export class MovieCrewComponent implements OnInit {
     this.setCrew();
   }
 
-  setCrew(): void {
-    this.loading = false;
+  private setCrew(): void {
     this.getDirection();
     this.getWriting();
     this.getScreenPlayers();
@@ -57,6 +56,7 @@ export class MovieCrewComponent implements OnInit {
     this.getMusicSupervisors();
     this.getCoProducers();
     this.getCastingPeople();
+    this.loading = false;
   }
 
   private getDirection(): void {

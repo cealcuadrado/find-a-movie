@@ -7,6 +7,7 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
   styleUrls: ['./up-icon.component.scss'],
 })
 export class UpIconComponent implements OnInit {
+  
   showUpIcon: boolean;
 
   constructor(
@@ -18,7 +19,7 @@ export class UpIconComponent implements OnInit {
     this.checkScroll();
   }
 
-  checkScroll(): void {
+  private checkScroll(): void {
     console.log('checkScroll()');
     console.log(this.window.scrollY);
     this.showUpIcon = this.window.scrollY > 50 ? true : false;
@@ -28,7 +29,7 @@ export class UpIconComponent implements OnInit {
     this.showUpIcon = (document.documentElement.scrollTop > 50) ? true : false;
   }
 
-  scrollToTop(): void {
+  public scrollToTop(): void {
     this.window.scrollTo({
       top: 0,
       behavior: 'smooth',

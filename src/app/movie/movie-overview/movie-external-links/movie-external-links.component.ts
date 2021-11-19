@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-external-links.component.scss'],
 })
 export class MovieExternalLinksComponent implements OnInit {
+  
   @Input() movieDetail: MovieDetail;
   @Input() id: string;
 
@@ -21,11 +22,11 @@ export class MovieExternalLinksComponent implements OnInit {
     this.loading = false;
   }
 
-  setImdbUrl(imdbId: string): string {
+  public setImdbUrl(imdbId: string): string {
     return `${this.imdbUrl}${imdbId}`;
   }
 
-  isHomepageEmpty(homepagePath: string | null): boolean {
+  public isHomepageEmpty(homepagePath: string | null): boolean {
     if (homepagePath == null) {
       return false;
     } else if (homepagePath.length == 0) {

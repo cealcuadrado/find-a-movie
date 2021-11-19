@@ -16,7 +16,6 @@ export class MovieSocialNetworksComponent implements OnInit {
   public instagramId: string | null;
   public twitterId: string | null;
 
-
   constructor(
     private movie: MovieService
   ) { }
@@ -30,7 +29,7 @@ export class MovieSocialNetworksComponent implements OnInit {
     this.setExternalIds();
   }
 
-  setExternalIds(): void {
+  private setExternalIds(): void {
     this.movie.getExternalIds(this.id).subscribe((result) => {
       this.facebookId = result.facebook_id;
       this.instagramId = result.instagram_id;

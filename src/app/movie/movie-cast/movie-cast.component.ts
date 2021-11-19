@@ -15,9 +15,14 @@ export class MovieCastComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.setCast();
   }
 
-  setCast(): void {
+  ngOnChanges(): void {
+    this.setCast();
+  }
+
+  private setCast(): void {
     this.loading = false;
   }
 }

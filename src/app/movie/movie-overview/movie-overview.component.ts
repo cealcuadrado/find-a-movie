@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-overview.component.scss'],
 })
 export class MovieOverviewComponent implements OnInit {
+
   @Input() id: string;
   @Input() movieDetail: MovieDetail;
   @Input() cast: Cast[];
@@ -20,18 +21,4 @@ export class MovieOverviewComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  setImdbUrl(imdbId: string): string {
-    return `${this.imdbUrl}${imdbId}`;
-  }
-
-  isHomepageEmpty(homepagePath: string | null): boolean {
-    if (homepagePath == null) {
-      return false;
-    } else if (homepagePath.length == 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 }

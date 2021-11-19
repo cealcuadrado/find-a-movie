@@ -9,9 +9,12 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./movie-header.component.scss'],
 })
 export class MovieHeaderComponent implements OnInit {
+
   public loading = true;
+
   @Input() movieDetail: MovieDetail;
   @Input() crew: Crew[];
+  
   public director: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
@@ -28,11 +31,11 @@ export class MovieHeaderComponent implements OnInit {
     this.loading = false;
   }
 
-  setDirector(): void {
+  private setDirector(): void {
     this.director = this.crew.filter((member) => member.job === 'Director')[0].name;
   }
 
-  setPosterUrl(posterPath: string | null) {
+  public setPosterUrl(posterPath: string | null) {
     return {
       backgroundImage: posterPath
         ? `url(${this.posterUrl}${posterPath})`
@@ -40,17 +43,17 @@ export class MovieHeaderComponent implements OnInit {
     };
   }
 
-  isPosterUrl(posterPath: string | null) {
+  public isPosterUrl(posterPath: string | null) {
     return posterPath;
   }
 
-  setBackdropUrl(backdropPath: string | null): string {
+  private setBackdropUrl(backdropPath: string | null): string {
     return !backdropPath
       ? 'https://via.placeholder.com/600x450?text=No+image+available'
       : `${this.backdropUrl}${backdropPath}`;
   }
 
-  setHeaderBackdrop(backdropPath: string | null) {
+  public setHeaderBackdrop(backdropPath: string | null) {
     if (backdropPath) {
       return {
         backgroundImage: `url(${this.setBackdropUrl(
@@ -70,7 +73,7 @@ export class MovieHeaderComponent implements OnInit {
     }
   }
 
-  isDateEmpty(dateStr: string): boolean {
+  public isDateEmpty(dateStr: string): boolean {
     return dateStr.length == 0;
   }
 }

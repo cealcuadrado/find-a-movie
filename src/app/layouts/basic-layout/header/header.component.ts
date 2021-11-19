@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  
   isMenuCollapsed = true;
 
   constructor() {}

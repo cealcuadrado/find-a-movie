@@ -11,6 +11,7 @@ import { MovieListResult } from '../../interfaces/movie-list-result';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
+  
   searchForm: FormGroup;
 
   public barResults: MovieListResult[] = [];
