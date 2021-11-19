@@ -1,5 +1,5 @@
-import { CastAndCrewSummaryComponent } from './cast-and-crew-summary/cast-and-crew-summary.component';
-import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
+import { CastAndCrewSummaryComponent } from './movie-main/cast-and-crew-summary/cast-and-crew-summary.component';
+import { MovieTrailerComponent } from './movie-main/movie-trailer/movie-trailer.component';
 import { environment } from './../../environments/environment';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
@@ -15,6 +15,7 @@ import { Crew } from '../shared/interfaces/crew';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
+  public active = 1;
   public loading = true;
   public movieDetail: MovieDetail;
   public id: string;
@@ -33,7 +34,7 @@ export class MovieComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
-    private titleService: Title,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +44,10 @@ export class MovieComponent implements OnInit {
   ngOnChanges(): void {
     this.loading = true;
     this.getMovie();
+  }
+
+  setMainTab() {
+    this.active = 1;
   }
 
   getMovie(): void {
@@ -57,6 +62,7 @@ export class MovieComponent implements OnInit {
   }
 
   getDetails(): void {
+    this.setMainTab();
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
@@ -83,12 +89,15 @@ export class MovieComponent implements OnInit {
     let date = new Date(this.movieDetail.release_date);
     let detail = this.movieDetail;
     this.titleService.setTitle(
-      `${this.setLocalOrForeignTitle(detail)} (${date.getFullYear()}) | Find a Movie`
+      `${this.setLocalOrForeignTitle(
+        detail
+      )} (${date.getFullYear()}) | Find a Movie`
     );
   }
 
   setLocalOrForeignTitle(detail: MovieDetail): string {
-    return !detail.original_language.match('en') && !detail.original_title.match(detail.title)
+    return !detail.original_language.match('en') &&
+      !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`
       : detail.title;
   }

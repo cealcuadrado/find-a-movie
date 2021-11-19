@@ -34,8 +34,7 @@
 
     <section class="movie-body">
       <div class="container-fluid">
-
-        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
             <a ngbNavLink>Main</a>
             <ng-template ngbNavContent>
