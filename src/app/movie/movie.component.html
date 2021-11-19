@@ -19,7 +19,7 @@
               </app-movie-overview>
             </ng-template>
           </li>
-          <li [ngbNavItem]="2">
+          <li [ngbNavItem]="2" *ngIf="cast.length > 0">
             <a ngbNavLink>Cast</a>
             <ng-template ngbNavContent>
               <app-movie-cast [cast]="cast"></app-movie-cast>
