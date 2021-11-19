@@ -1,5 +1,5 @@
-import { CastAndCrewSummaryComponent } from './movie-main/cast-and-crew-summary/cast-and-crew-summary.component';
-import { MovieTrailerComponent } from './movie-main/movie-trailer/movie-trailer.component';
+import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
+import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
 import { environment } from './../../environments/environment';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';

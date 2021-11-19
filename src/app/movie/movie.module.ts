@@ -13,16 +13,17 @@ import { RuntimePipe } from './runtime.pipe';
 
 /* Components */
 import { MovieComponent } from './movie.component';
-import { MovieTrailerComponent } from './movie-main/movie-trailer/movie-trailer.component';
-import { MovieSpecsComponent } from './movie-main/movie-specs/movie-specs.component';
-import { MovieSocialNetworksComponent } from './movie-main/movie-external-links/movie-social-networks/movie-social-networks.component';
+import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
+import { MovieSpecsComponent } from './movie-overview/movie-specs/movie-specs.component';
+import { MovieSocialNetworksComponent } from './movie-overview/movie-external-links/movie-social-networks/movie-social-networks.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
-import { CastAndCrewSummaryComponent } from './movie-main/cast-and-crew-summary/cast-and-crew-summary.component';
+import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
 import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component';
 import { MovieMainComponent } from './movie-main/movie-main.component';
 import { MovieHeaderComponent } from './movie-header/movie-header.component';
-import { MovieExternalLinksComponent } from './movie-main/movie-external-links/movie-external-links.component';
+import { MovieExternalLinksComponent } from './movie-overview/movie-external-links/movie-external-links.component';
+import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MovieExternalLinksComponent } from './movie-main/movie-external-links/m
     MovieMainComponent,
     MovieHeaderComponent,
     MovieExternalLinksComponent,
+    MovieOverviewComponent,
   ],
   imports: [
     CommonModule,

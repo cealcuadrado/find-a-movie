@@ -1,25 +1,25 @@
-import { MovieDetail } from './../../../shared/interfaces/movie-detail';
+import { MovieDetail } from './../../shared/interfaces/movie-detail';
 import { Component, Input, OnInit } from '@angular/core';
+import { Cast } from 'src/app/shared/interfaces/cast';
+import { Crew } from 'src/app/shared/interfaces/crew';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-movie-external-links',
-  templateUrl: './movie-external-links.component.html',
-  styleUrls: ['./movie-external-links.component.scss'],
+  selector: 'app-movie-overview',
+  templateUrl: './movie-overview.component.html',
+  styleUrls: ['./movie-overview.component.scss'],
 })
-export class MovieExternalLinksComponent implements OnInit {
-  @Input() movieDetail: MovieDetail;
+export class MovieOverviewComponent implements OnInit {
   @Input() id: string;
+  @Input() movieDetail: MovieDetail;
+  @Input() cast: Cast[];
+  @Input() crew: Crew[];
 
-  public loading: boolean = true;
-  
   private imdbUrl: string = environment.imdbUrl;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.loading = false;
-  }
+  ngOnInit(): void {}
 
   setImdbUrl(imdbId: string): string {
     return `${this.imdbUrl}${imdbId}`;

@@ -9,14 +9,14 @@
       <div class="container-fluid">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
-            <a ngbNavLink>Main</a>
+            <a ngbNavLink>Overview</a>
             <ng-template ngbNavContent>
-              <app-movie-main
+              <app-movie-overview
                 [id]="id"
                 [movieDetail]="movieDetail"
                 [cast]="cast"
                 [crew]="crew">
-              </app-movie-main>
+              </app-movie-overview>
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
