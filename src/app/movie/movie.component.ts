@@ -21,7 +21,6 @@ export class MovieComponent implements OnInit {
   public director: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
-  private imdbUrl: string = environment.imdbUrl;
 
   public cast: Cast[] = [];
   public crew: Crew[] = [];
@@ -38,18 +37,15 @@ export class MovieComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit movie');
     this.getMovie();
   }
 
   ngOnChanges(): void {
-    console.log('ngOnChanges() movie');
     this.loading = true;
     this.getMovie();
   }
 
   getMovie(): void {
-    console.log('getMovie()');
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
@@ -61,11 +57,8 @@ export class MovieComponent implements OnInit {
   }
 
   getDetails(): void {
-    console.log('getDetails()');
     this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
-        // console.log(detail);
-
         this.movieDetail = detail;
         this.setWindowTitle();
       }
@@ -83,7 +76,6 @@ export class MovieComponent implements OnInit {
     this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
-      // console.log(this.crew);
     });
   }
 
@@ -143,21 +135,7 @@ export class MovieComponent implements OnInit {
     return dateStr.length == 0;
   }
 
-  setImdbUrl(imdbId: string): string {
-    return `${this.imdbUrl}${imdbId}`;
-  }
-
   setTmdbUrl(tmdbId: string): string {
     return 'foo';
-  }
-
-  isHomepageEmpty(homepagePath: string | null): boolean {
-    if (homepagePath == null) {
-      return false;
-    } else if (homepagePath.length == 0) {
-      return false;
-    } else {
-      return true;
-    }
   }
 }
