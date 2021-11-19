@@ -1,4 +1,4 @@
-<header [ngStyle]="setHeaderBackdrop(this.movieDetail.backdrop_path)" *ngIf="!loading">
+<div class="header-backdrop" [ngStyle]="setHeaderBackdrop(this.movieDetail.backdrop_path)" *ngIf="!loading">
   <section class="header-title">
     <h1>{{movieDetail.title}}</h1>
     <div class="header-info">
@@ -27,4 +27,4 @@
       </span>
     </div>
   </section>
-</header>
+</div>

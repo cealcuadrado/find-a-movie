@@ -1,11 +1,11 @@
-<main class="movie" *ngIf="!loading; else loadingMovie">
-  <div class="movie-content" *ngIf="movieDetail; else noMovieFound">
-    <app-movie-header
-      [movieDetail]="movieDetail"
-      [crew]="crew">
-    </app-movie-header>
+<div class="movie-content" *ngIf="!loading; else loadingMovie">
+  <section class="movie" *ngIf="movieDetail; else noMovieFound">
+    <header>
+      <app-movie-header [movieDetail]="movieDetail" [crew]="crew">
+      </app-movie-header>
+    </header>
 
-    <section class="movie-body">
+    <main class="movie-body">
       <div class="container-fluid">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
@@ -35,12 +35,12 @@
 
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
       </div>
-    </section>
-  </div>
+    </main>
+  </section>
   <ng-template #noMovieFound>
     <app-no-movie-found></app-no-movie-found>
   </ng-template>
-</main>
+</div>
 
 <ng-template #loadingMovie>
   <div class="loading-movie">
