@@ -1,61 +1,55 @@
-<section class="cast-and-crew-summary">
-  <div *ngIf="!loading; else nowLoading">
-    <p *ngIf="direction && direction.length > 0">
-      <strong class="mr-1">Directed by:</strong>
-      <span *ngFor="let director of direction; let i = index">
-        <a href="#" [routerLink]="['/person', director.id]">{{director.name}}</a>
-        <span *ngIf="i+1 != direction.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="writing && writing.length > 0">
-      <strong class="mr-1">Written by:</strong>
-      <span *ngFor="let writer of writing; let i = index">
-        <a href="#" [routerLink]="['/person', writer.id]">{{writer.name}}</a>
-        <span *ngIf="i+1 != writing.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="screenPlayers && screenPlayers.length > 0">
-      <strong class="mr-1">Screenplay by:</strong>
-      <span *ngFor="let screenPlayer of screenPlayers; let i = index">
-        <a href="#" [routerLink]="['/person', screenPlayer.id]">{{screenPlayer.name}}</a>
-        <span *ngIf="i+1 != screenPlayers.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="story && story.length > 0">
-      <strong class="mr-1">Story by:</strong>
-      <span *ngFor="let storyPerson of story; let i = index">
-        <a href="#" [routerLink]="['/person', storyPerson.id]">{{storyPerson.name}}</a>
-        <span *ngIf="i+1 != story.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
-      <strong class="mr-1">Based on the work by:</strong>
-      <span *ngFor="let author of basedOnWork; let i = index">
-        <a href="#" [routerLink]="['/person', author.id]">{{author.name}}</a>
-        <span *ngIf="i+1 != basedOnWork.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="production && production.length > 0">
-      <strong class="mr-1">Produced by:</strong>
-      <span *ngFor="let producer of production; let i = index">
-        <a href="#" [routerLink]="['/person', producer.id]">{{producer.name}}</a>
-        <span *ngIf="i+1 != production.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <p *ngIf="movieCast && movieCast.length > 0">
-      <strong class="mr-1">Starring:</strong>
-      <span *ngFor="let actor of movieCast; let i = index">
-        <a href="#" [routerLink]="['/person', actor.id]">{{actor.name}}</a>
-        <span *ngIf="i+1 != movieCast.length" class="mr-1">,</span>
-      </span>
-    </p>
-    <!--
-    <div *ngIf="!atLeastItsOneField()">
-      <p>No cast and crew available</p>
-    </div>
-    -->
-  </div>
+<section class="cast-and-crew-summary" *ngIf="!loading; else nowLoading">
+  <p *ngIf="direction && direction.length > 0">
+    <strong class="mr-1">Directed by:</strong>
+    <span *ngFor="let director of direction; let i = index">
+      <a href="#" [routerLink]="['/person', director.id]">{{director.name}}</a>
+      <span *ngIf="i+1 != direction.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="writing && writing.length > 0">
+    <strong class="mr-1">Written by:</strong>
+    <span *ngFor="let writer of writing; let i = index">
+      <a href="#" [routerLink]="['/person', writer.id]">{{writer.name}}</a>
+      <span *ngIf="i+1 != writing.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="screenPlayers && screenPlayers.length > 0">
+    <strong class="mr-1">Screenplay by:</strong>
+    <span *ngFor="let screenPlayer of screenPlayers; let i = index">
+      <a href="#" [routerLink]="['/person', screenPlayer.id]">{{screenPlayer.name}}</a>
+      <span *ngIf="i+1 != screenPlayers.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="story && story.length > 0">
+    <strong class="mr-1">Story by:</strong>
+    <span *ngFor="let storyPerson of story; let i = index">
+      <a href="#" [routerLink]="['/person', storyPerson.id]">{{storyPerson.name}}</a>
+      <span *ngIf="i+1 != story.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="isBasedOnWork && basedOnWork && basedOnWork.length > 0">
+    <strong class="mr-1">Based on the work by:</strong>
+    <span *ngFor="let author of basedOnWork; let i = index">
+      <a href="#" [routerLink]="['/person', author.id]">{{author.name}}</a>
+      <span *ngIf="i+1 != basedOnWork.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="production && production.length > 0">
+    <strong class="mr-1">Produced by:</strong>
+    <span *ngFor="let producer of production; let i = index">
+      <a href="#" [routerLink]="['/person', producer.id]">{{producer.name}}</a>
+      <span *ngIf="i+1 != production.length" class="mr-1">,</span>
+    </span>
+  </p>
+  <p *ngIf="movieCast && movieCast.length > 0">
+    <strong class="mr-1">Starring:</strong>
+    <span *ngFor="let actor of movieCast; let i = index">
+      <a href="#" [routerLink]="['/person', actor.id]">{{actor.name}}</a>
+      <span *ngIf="i+1 != movieCast.length" class="mr-1">,</span>
+    </span>
+  </p>
 </section>
+
 <ng-template #nowLoading>
   <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
 </ng-template>
