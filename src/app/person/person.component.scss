@@ -64,6 +64,21 @@
       }
     }
   }
+
+  main {
+    .external-links {
+      font-family: 'Jost', 'Arial', 'sans-serif';
+    }
+
+    .nav-tabs {
+      &.nav {
+        a {
+          font-family: 'Jost', 'Arial', 'sans-serif';
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
 }
 
 .loading-person {

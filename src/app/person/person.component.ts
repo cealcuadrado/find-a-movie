@@ -11,6 +11,8 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./person.component.scss'],
 })
 export class PersonComponent implements OnInit {
+
+  public active = 1;
   public id: string;
   public loading = true;
 
@@ -32,6 +34,10 @@ export class PersonComponent implements OnInit {
     this.getPerson();
   }
 
+  private setMainTab() {
+    this.active = 1;
+  }
+
   private getPerson(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
@@ -42,6 +48,7 @@ export class PersonComponent implements OnInit {
   }
 
   private getPersonDetail(): void {
+    this.setMainTab();
     this.person.getPerson(this.id).subscribe((person) => {
       console.log(person);
       if (Object.values(person).length > 0) {
