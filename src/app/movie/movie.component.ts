@@ -82,9 +82,11 @@ export class MovieComponent implements OnInit {
   }
 
   private getDirector(): void {
-    this.director = this.crew.filter(
-      (member) => member.job === 'Director'
-    )[0].name;
+    if (this.crew) {
+      this.director = this.crew.filter(
+        (member) => member.job === 'Director'
+      )[0].name;
+    }
   }
 
   private setWindowTitle(): void {
