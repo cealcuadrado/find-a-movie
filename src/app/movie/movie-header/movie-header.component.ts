@@ -14,25 +14,18 @@ export class MovieHeaderComponent implements OnInit {
 
   @Input() movieDetail: MovieDetail;
   @Input() crew: Crew[];
-  
-  public director: string;
+  @Input() director: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.setDirector();
     this.loading = false;
   }
 
   ngOnChanges(): void {
-    this.setDirector();
     this.loading = false;
-  }
-
-  private setDirector(): void {
-    this.director = this.crew.filter((member) => member.job === 'Director')[0].name;
   }
 
   public setPosterUrl(posterPath: string | null) {
