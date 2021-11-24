@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
-import { SearchBarModule } from './shared/shared-modules/search-bar/search-bar.module';
+import { SharedComponentsModule } from './shared/components/shared-components.module';
+import { SearchBarModule } from './shared/modules/search-bar/search-bar.module';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { MainComponent } from './layouts/basic-layout/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* Services */
-import { MovieSearchService } from './shared/shared-services/movie-search.service';
+import { MovieSearchService } from './shared/services/movie-search.service';
 
 @NgModule({
   declarations: [

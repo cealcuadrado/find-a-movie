@@ -1,5 +1,5 @@
 import { Title } from '@angular/platform-browser';
-import { MovieSearchService } from './../shared/shared-services/movie-search.service';
+import { MovieSearchService } from '../shared/services/movie-search.service';
 import { MovieListResult } from './../shared/interfaces/movie-list-result';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';

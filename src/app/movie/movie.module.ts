@@ -1,5 +1,5 @@
 /* Modules */
-import { SharedComponentsModule } from './../shared/shared-components/shared-components.module';
+import { SharedComponentsModule } from '../shared/components/shared-components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieRoutingModule } from './movie-routing.module';

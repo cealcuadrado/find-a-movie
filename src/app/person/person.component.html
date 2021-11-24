@@ -1,15 +1,59 @@
-<section class="person">
-  <div *ngIf="!loading; else loadingPerson">
-    <header class="person-header">
-      <h1>{{personDetail.name}}</h1>
-    </header>
-    <section class="person-body">
-      <div class="container-fluid">
-        <p>ID: {{id}}</p>
+<div class="person-content" *ngIf="!loading; else loadingPerson">
+  <section class="person" *ngIf="personDetail; else noPersonFound">
+    <header>
+      <div class="header-backdrop" [ngStyle]="setHeaderProfile(this.personDetail.profile_path)">
+        <section class="header-title">
+          <h1>{{personDetail.name}}</h1>
+          <div class="header-info">
+            <span class="birth-and-death-years"
+              *ngIf="hasAtLeastBirthOrDeathDay(personDetail.birthday, personDetail.deathday)">
+              <span *ngIf="personDetail.birthday; else dateUnknown">{{personDetail.birthday | date:'yyyy'}}</span>
+               -
+              <span *ngIf="personDetail.deathday">{{personDetail.deathday | date:'yyyy'}}</span>
+            </span>
+            <span class="known-for" *ngIf="personDetail.known_for_department">
+              Known for: {{personDetail.known_for_department}}
+            </span>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-</section>
+    </header>
+    <main class="person-body">
+      <div class="container-fluid">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>Overview</a>
+            <ng-template ngbNavContent>
+              <app-person-overview [personDetail]="personDetail"></app-person-overview>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>Cast Filmography</a>
+            <ng-template ngbNavContent>
+              <app-person-cast></app-person-cast>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink>Crew Filmography</a>
+            <ng-template ngbNavContent>
+              <app-person-crew></app-person-crew>
+            </ng-template>
+          </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      </div>
+    </main>
+  </section>
+</div>
+
+<ng-template #dateUnknown>
+  Unknown
+</ng-template>
+
+<ng-template #noPersonFound>
+  <app-no-person-found></app-no-person-found>
+</ng-template>
 
 <ng-template #loadingPerson>
   <div class="loading-person">
