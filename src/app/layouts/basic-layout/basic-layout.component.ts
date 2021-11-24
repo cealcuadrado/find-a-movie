@@ -1,9 +1,9 @@
+import { ConfigurationService } from './../../shared/services/configuration.service';
 import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
-import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-basic-layout',
@@ -17,7 +17,7 @@ export class BasicLayoutComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
-    private language: LanguageService,
+    private configuration: ConfigurationService,
     private localStorageService: LocalStorageService
   ) { }
 
@@ -49,7 +49,7 @@ export class BasicLayoutComponent implements OnInit {
   }
 
   private setLanguages(): void {
-    this.language.getLanguages().subscribe((languages) => {
+    this.configuration.getLanguages().subscribe((languages) => {
       console.log(languages);
       this.localStorageService.set('languages', languages);
     });
