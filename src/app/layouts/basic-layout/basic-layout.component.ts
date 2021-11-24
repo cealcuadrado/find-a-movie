@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-basic-layout',
@@ -12,6 +13,7 @@ import { filter, map } from 'rxjs/operators';
 })
 export class BasicLayoutComponent implements OnInit {
 
+  private langSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -24,6 +26,10 @@ export class BasicLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.setTitleByRoute();
     this.setLanguages();
+  }
+
+  ngOnDestroy(): void {
+    this.langSubscription.unsubscribe();
   }
 
   private setTitleByRoute(): void {
@@ -49,8 +55,7 @@ export class BasicLayoutComponent implements OnInit {
   }
 
   private setLanguages(): void {
-    this.configuration.getLanguages().subscribe((languages) => {
-      console.log(languages);
+    this.langSubscription = this.configuration.getLanguages().subscribe(languages => {
       this.localStorageService.set('languages', languages);
     });
   }
