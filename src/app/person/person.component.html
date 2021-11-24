@@ -28,34 +28,15 @@
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
-            <a ngbNavLink>Filmography</a>
+            <a ngbNavLink>Cast Filmography</a>
             <ng-template ngbNavContent>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at lobortis enim. Nulla elit lacus,
-                rutrum ut sapien vitae, egestas maximus libero. Nullam faucibus velit vel egestas porttitor. Donec
-                molestie leo eros, quis pharetra ante consequat in. Praesent ultricies nulla nec lacinia interdum. Morbi
-                id lacinia magna. Aenean pretium, sapien id tincidunt pharetra, sem odio euismod nulla, quis posuere
-                odio nibh sodales mauris. Fusce ante felis, ullamcorper at aliquet sed, ultricies eget nisl. Maecenas
-                efficitur, metus ut interdum accumsan, dolor felis dignissim elit, eget porttitor est tellus quis ante.
-                Pellentesque molestie rhoncus nisi a iaculis.</p>
-
-              <p>Maecenas diam lectus, aliquet quis ante sit amet, mollis aliquet sem. Praesent a consectetur eros.
-                Aliquam eu porttitor magna. Integer posuere suscipit lorem tempus laoreet. Integer tortor dolor, semper
-                quis porttitor vel, lobortis a leo. Morbi sed enim vitae quam ornare sagittis. Duis lacinia ut tellus at
-                placerat. Etiam interdum nec velit ac tincidunt. Phasellus convallis ligula nec nibh vulputate, eget
-                fermentum lectus maximus. Etiam tristique nunc quis tincidunt sollicitudin. Sed at tellus sollicitudin
-                felis cursus vestibulum. Vivamus non ornare turpis. Morbi aliquet sapien vitae vehicula congue. Nullam
-                gravida, arcu ut egestas mattis, lacus nunc pulvinar enim, quis hendrerit tortor lacus sit amet velit.
-              </p>
-
-              <p>Nam ut accumsan dui, non accumsan turpis. Vestibulum vitae tristique felis. Aenean consectetur leo
-                ligula, nec vestibulum metus placerat a. Pellentesque lobortis sit amet nunc nec varius. Donec a nunc
-                nec ex finibus pulvinar ac eu mi. Vestibulum sed eros quis turpis semper iaculis sed id magna. Aliquam
-                sagittis lectus nisi, a tristique velit varius aliquet. Integer quis nibh non dolor mollis aliquam.
-                Phasellus accumsan libero sit amet faucibus semper. Sed vulputate semper purus vel pretium. Nunc feugiat
-                scelerisque risus, sit amet laoreet turpis pulvinar aliquet. Sed lectus elit, rutrum id lorem vel,
-                rhoncus condimentum lorem. Cras sem ex, ultricies non vulputate quis, scelerisque id lorem. Maecenas
-                sodales nulla ac libero volutpat, in tempus leo congue. Suspendisse potenti. Pellentesque habitant morbi
-                tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+              <app-person-cast></app-person-cast>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink>Crew Filmography</a>
+            <ng-template ngbNavContent>
+              <app-person-crew></app-person-crew>
             </ng-template>
           </li>
         </ul>
