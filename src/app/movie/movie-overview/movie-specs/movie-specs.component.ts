@@ -21,13 +21,23 @@ export class MovieSpecsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
+    console.log(this.movieDetail);
     this.setOriginalLanguage();
   }
 
-  setOriginalLanguage(): void {
+  ngOnChanges() {
+    this.loading = false;
+    this.setOriginalLanguage();
+  }
+
+  private setOriginalLanguage(): void {
     const languages = this.localStorageService.get('languages');
     this.originalLanguage = languages.filter((language: Language) => {
       return language.iso_639_1 === this.movieDetail.original_language
     })[0];
+  }
+
+  public setBoxOfficeMojoLink(): string {
+    return `https://www.boxofficemojo.com/title/${this.movieDetail.imdb_id}/`;
   }
 }
