@@ -1,4 +1,4 @@
-import { MovieSearchService } from './../../shared-services/movie-search.service';
+import { MovieSearchService } from '../../services/movie-search.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
@@ -11,7 +11,7 @@ import { MovieListResult } from '../../interfaces/movie-list-result';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
-  
+
   searchForm: FormGroup;
 
   public barResults: MovieListResult[] = [];

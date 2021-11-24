@@ -19,7 +19,7 @@ import { MainComponent } from './layouts/basic-layout/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* Services */
-import { MovieSearchService } from './shared/shared-services/movie-search.service';
+import { MovieSearchService } from './shared/services/movie-search.service';
 
 @NgModule({
   declarations: [
