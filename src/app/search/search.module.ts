@@ -1,4 +1,4 @@
-import { SearchBarModule } from './../shared/shared-modules/search-bar/search-bar.module';
+import { SearchBarModule } from './../shared/modules/search-bar/search-bar.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgModule } from '@angular/core';

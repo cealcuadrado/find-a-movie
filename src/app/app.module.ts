@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './shared/shared-components/shared-components.module';
-import { SearchBarModule } from './shared/shared-modules/search-bar/search-bar.module';
+import { SearchBarModule } from './shared/modules/search-bar/search-bar.module';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
