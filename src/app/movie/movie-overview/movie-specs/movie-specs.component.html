@@ -27,6 +27,10 @@
       <br>
     </span>
   </p>
+  <p *ngIf="originalLanguage">
+    <strong>Original Language:</strong>
+    <br/>{{originalLanguage.english_name}}
+  </p>
   <p *ngIf="movieDetail.spoken_languages && movieDetail.spoken_languages.length > 0">
     <strong>Spoken Language<span *ngIf="movieDetail.spoken_languages.length > 1">s</span>:</strong>
     <br>
