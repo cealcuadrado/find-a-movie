@@ -1,7 +1,10 @@
+import { ConfigurationService } from './../../shared/services/configuration.service';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-basic-layout',
@@ -10,13 +13,26 @@ import { filter, map } from 'rxjs/operators';
 })
 export class BasicLayoutComponent implements OnInit {
 
+  private langSubscription: Subscription;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private titleService: Title,
+    private configuration: ConfigurationService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
+    this.setTitleByRoute();
+    this.setLanguages();
+  }
+
+  ngOnDestroy(): void {
+    this.langSubscription.unsubscribe();
+  }
+
+  private setTitleByRoute(): void {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -36,5 +52,11 @@ export class BasicLayoutComponent implements OnInit {
       .subscribe((data) => {
         this.titleService.setTitle(`${data} | Find a Movie`);
       });
+  }
+
+  private setLanguages(): void {
+    this.langSubscription = this.configuration.getLanguages().subscribe(languages => {
+      this.localStorageService.set('languages', languages);
+    });
   }
 }
