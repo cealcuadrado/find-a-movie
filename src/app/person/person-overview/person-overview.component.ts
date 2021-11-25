@@ -12,16 +12,10 @@ import { environment } from 'src/environments/environment';
 export class PersonOverviewComponent implements OnInit {
 
   loading = true;
-  posterUrl = environment.posterUrl;
 
   @Input() personDetail: PersonDetail;
   @Input() castCredits: CastCredit[];
   @Input() crewCredits: CrewCredit[];
-
-  backgroundDefaultSettings = {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  };
 
   constructor() { }
 
@@ -38,25 +32,4 @@ export class PersonOverviewComponent implements OnInit {
     this.castCredits = this.castCredits.splice(0, 4);
     this.crewCredits = this.crewCredits.splice(0, 4);
   }
-
-  public hasPosterPath(path: string | null): boolean {
-    return (path != null) ? true : false;
-  }
-
-  public setBackgroundPoster(poster: string | null) {
-    if (poster) {
-      return {
-        backgroundImage: `url(${this.posterUrl}${poster})`,
-        ...this.backgroundDefaultSettings
-      }
-    } else {
-      return this.backgroundDefaultSettings;
-    }
-  }
-
-  public setPosterUrl(url: string): string {
-    return url;
-  }
-
-
 }

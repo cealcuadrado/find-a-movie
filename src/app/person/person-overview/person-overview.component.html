@@ -9,32 +9,9 @@
 
       <hr/>
 
-      <section class="cast-summary" *ngIf="castCredits.length > 0">
-        <h3 class="mb-4">Cast Summary</h3>
-
-        <div class="row">
-          <div class="col-12 col-md-6 col-lg-3" *ngFor="let castCredit of castCredits">
-            <a href="#" class="person-result"
-              [routerLink]="['/movie', castCredit.id]">
-              <div class="person-result-body" [ngStyle]="setBackgroundPoster(castCredit.poster_path)">
-                <div class="person-result-position"></div>
-                <div class="person-result-no-poster-available" *ngIf="!hasPosterPath(castCredit.poster_path)">
-                  No poster available
-                </div>
-                <div class="person-result-content">
-                  <strong>{{castCredit.title}}</strong>
-                  <br/>
-                  <span>{{castCredit.character}}</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <button class="btn btn-primary btn-block text-uppercase">
-          See complete filmography as cast
-        </button>
-      </section>
+      <app-cast-summary
+        [castCredits]="castCredits">
+      </app-cast-summary>
 
       <hr/>
 
