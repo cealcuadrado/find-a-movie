@@ -24,7 +24,11 @@
           <li [ngbNavItem]="1">
             <a ngbNavLink>Overview</a>
             <ng-template ngbNavContent>
-              <app-person-overview [personDetail]="personDetail"></app-person-overview>
+              <app-person-overview
+                [personDetail]="personDetail"
+                [castCredits]="personCastCredits"
+                [crewCredits]="personCrewCredits">
+              </app-person-overview>
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
