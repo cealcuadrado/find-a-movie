@@ -1,13 +1,13 @@
-<a href="#" class="person-cast-result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
+<a href="#" class="person-crew-result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
   <div class="person-result-body" [ngStyle]="setBackgroundPoster(credit.poster_path)">
     <div class="person-result-position"></div>
     <div class="person-result-no-poster-available" *ngIf="!hasPosterPath(credit.poster_path)">
       No poster available
     </div>
     <div class="person-result-content">
-      <span>{{credit.character}}</span>
-      <br/>
       <strong>{{credit.title}}</strong>
+      <br />
+      <span>{{credit.job}}</span>
     </div>
   </div>
 </a>

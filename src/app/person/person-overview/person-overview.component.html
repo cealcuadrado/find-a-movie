@@ -15,11 +15,8 @@
 
       <hr/>
 
-      <section class="crew-summary" *ngIf="crewCredits.length > 0">
-        <h3 class="mb-4">Crew Summary</h3>
-
-        <p>{{crewCredits | json}}</p>
-      </section>
+      <app-crew-summary [crewCredits]="crewCredits">
+      </app-crew-summary>
     </div>
     <div class="col-12 col-lg-3 order-3 order-lg-3">
       <p>Aenean ullamcorper sapien id elit volutpat congue. In accumsan lectus non convallis pretium. Fusce dictum

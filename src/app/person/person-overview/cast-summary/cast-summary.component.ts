@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./cast-summary.component.scss'],
 })
 export class CastSummaryComponent implements OnInit {
-  loading = false;
+  loading = true;
 
   @Input() castCredits: CastCredit[] = [];
 

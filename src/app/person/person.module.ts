@@ -10,10 +10,11 @@ import { PersonOverviewComponent } from './person-overview/person-overview.compo
 import { PersonCastComponent } from './person-cast/person-cast.component';
 import { PersonCrewComponent } from './person-crew/person-crew.component';
 import { CastSummaryComponent } from './person-overview/cast-summary/cast-summary.component';
+import { CrewSummaryComponent } from './person-overview/crew-summary/crew-summary.component';
 
 
 @NgModule({
-  declarations: [PersonComponent, NoPersonFoundComponent, PersonOverviewComponent, PersonCastComponent, PersonCrewComponent, CastSummaryComponent],
+  declarations: [PersonComponent, NoPersonFoundComponent, PersonOverviewComponent, PersonCastComponent, PersonCrewComponent, CastSummaryComponent, CrewSummaryComponent],
   imports: [
     CommonModule,
     PersonRoutingModule,
