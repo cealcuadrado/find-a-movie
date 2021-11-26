@@ -1,0 +1,36 @@
+<aside class="person-info" *ngIf="!loading; else nowLoading">
+  <p *ngIf="personDetail.name">
+    <strong>Name:</strong>
+    <br/>{{personDetail.name}}
+  </p>
+  <p *ngIf="personDetail.birthday">
+    <strong>Birthday:</strong>
+    <br/>{{personDetail.birthday | date }}
+  </p>
+  <p *ngIf="personDetail.deathday">
+    <strong>Deathday:</strong>
+    <br/>{{personDetail.deathday | date}}
+  </p>
+  <p *ngIf="personDetail.place_of_birth">
+    <strong>Place of birth:</strong>
+    <br/>{{personDetail.place_of_birth}}
+  </p>
+  <p *ngIf="personDetail.gender">
+    <strong>Gender:</strong>
+    <br/><i class="fas fa-fw" [ngClass]="setGenderIcon(personDetail.gender)"></i>{{setGender(personDetail.gender)}}
+  </p>
+  <p *ngIf="personDetail.known_for_department">
+    <strong>Known for:</strong>
+    <br />{{personDetail.known_for_department}}
+  </p>
+  <a class="btn btn-warning btn-block" *ngIf="personDetail.imdb_id != null" target="_blank" [href]="setImdbUrl()">
+    <i class="fab fa-imdb fa-fw"></i> IMDB Profile
+  </a>
+  <a class="btn btn-primary btn-block" *ngIf="personDetail.homepage != null" target="_blank" [href]="personDetail.homepage">
+    <i class="fas fa-globe fa-fw"></i> Homepage
+  </a>
+</aside>
+
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>

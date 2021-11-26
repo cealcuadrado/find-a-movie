@@ -11,14 +11,11 @@
         [castCredits]="castCredits">
       </app-cast-summary>
 
-      <hr/>
-
       <app-crew-summary [crewCredits]="crewCredits">
       </app-crew-summary>
     </div>
     <div class="col-12 col-lg-3 order-2">
-      <p>Aenean ullamcorper sapien id elit volutpat congue. In accumsan lectus non convallis pretium. Fusce dictum
-        cursus elit eu molestie.</p>
+      <app-person-info [personDetail]="personDetail"></app-person-info>
     </div>
   </div>
 </section>
