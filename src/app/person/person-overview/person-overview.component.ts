@@ -29,7 +29,5 @@ export class PersonOverviewComponent implements OnInit {
 
   public setCastAndCrew(): void {
     this.loading = false;
-    this.castCredits = this.castCredits.splice(0, 4);
-    this.crewCredits = this.crewCredits.splice(0, 4);
   }
 }
