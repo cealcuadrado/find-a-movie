@@ -3,6 +3,10 @@
     class="btn btn-block btn-warning">
     <i class="fab fa-imdb fa-fw"></i> IMDB Profile
   </a>
+  <a *ngIf="movieDetail.imdb_id != null" [href]="setBoxOfficeMojoLink()" target="_blank"
+    class="btn btn-block btn-warning">
+    <i class="fas fa-ticket-alt fa-fw"></i> Box Office Mojo Profile
+  </a>
   <a *ngIf="isHomepageEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank"
     class="btn btn-block btn-primary">
     <i class="fas fa-globe fa-fw"></i> Official Website

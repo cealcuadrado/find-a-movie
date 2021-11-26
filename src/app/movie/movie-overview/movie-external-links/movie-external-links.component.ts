@@ -8,13 +8,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-external-links.component.scss'],
 })
 export class MovieExternalLinksComponent implements OnInit {
-  
   @Input() movieDetail: MovieDetail;
   @Input() id: string;
 
   public loading: boolean = true;
 
   private imdbUrl: string = environment.imdbUrl;
+  private boxOfficeMojoUrl: string = environment.boxOfficeMojoUrl;
 
   constructor() {}
 
@@ -34,5 +34,9 @@ export class MovieExternalLinksComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  public setBoxOfficeMojoLink(): string {
+    return `${this.boxOfficeMojoUrl}${this.movieDetail.imdb_id}/`;
   }
 }
