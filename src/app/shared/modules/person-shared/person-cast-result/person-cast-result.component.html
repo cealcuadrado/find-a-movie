@@ -5,9 +5,15 @@
       No poster available
     </div>
     <div class="result-content">
-      <span>{{credit.character}}</span>
+      <span *ngIf="isCharacterDefined(credit.character); else noCharacter">
+        {{credit.character}}
+      </span>
       <br/>
       <strong>{{credit.title}}</strong>
     </div>
   </div>
 </a>
+
+<ng-template #noCharacter>
+  No character specified
+</ng-template>

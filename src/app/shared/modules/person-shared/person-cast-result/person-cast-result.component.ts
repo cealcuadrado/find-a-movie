@@ -50,4 +50,8 @@ export class PersonCastResultComponent implements OnInit {
   public setPosterUrl(url: string): string {
     return url;
   }
+
+  isCharacterDefined(characterName: string | null): boolean {
+    return characterName != null && characterName.length > 0;
+  }
 }
