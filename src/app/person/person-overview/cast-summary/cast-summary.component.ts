@@ -8,15 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./cast-summary.component.scss'],
 })
 export class CastSummaryComponent implements OnInit {
-  loading: false;
-  posterUrl = environment.posterUrl;
+  loading = false;
 
   @Input() castCredits: CastCredit[] = [];
-
-  backgroundDefaultSettings = {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
 
   constructor() {}
 
@@ -30,24 +24,5 @@ export class CastSummaryComponent implements OnInit {
 
   setCredits(): void {
     this.loading = false;
-  }
-
-  public hasPosterPath(path: string | null): boolean {
-    return path != null ? true : false;
-  }
-
-  public setBackgroundPoster(poster: string | null) {
-    if (poster) {
-      return {
-        backgroundImage: `url(${this.posterUrl}${poster})`,
-        ...this.backgroundDefaultSettings,
-      };
-    } else {
-      return this.backgroundDefaultSettings;
-    }
-  }
-
-  public setPosterUrl(url: string): string {
-    return url;
   }
 }
