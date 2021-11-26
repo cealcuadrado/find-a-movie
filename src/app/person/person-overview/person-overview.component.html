@@ -1,10 +1,6 @@
 <section class="person-overview" *ngIf="!loading; else nowLoading">
   <div class="row">
-    <div class="col-12 col-lg-3 order-2 order-lg-1">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero diam, tincidunt a purus at, tempus
-        pretium erat. Cras pulvinar vitae augue nec volutpat.</p>
-    </div>
-    <div class="col-12 col-lg-6 order-1 order-lg-2">
+    <div class="col-12 col-lg-9 order-1">
       <section class="person-biography" *ngIf="hasBiography(); else noBiography">
         <p>{{personDetail.biography}}</p>
       </section>
@@ -20,7 +16,7 @@
       <app-crew-summary [crewCredits]="crewCredits">
       </app-crew-summary>
     </div>
-    <div class="col-12 col-lg-3 order-3 order-lg-3">
+    <div class="col-12 col-lg-3 order-2">
       <p>Aenean ullamcorper sapien id elit volutpat congue. In accumsan lectus non convallis pretium. Fusce dictum
         cursus elit eu molestie.</p>
     </div>
