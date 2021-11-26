@@ -5,7 +5,9 @@
         pretium erat. Cras pulvinar vitae augue nec volutpat.</p>
     </div>
     <div class="col-12 col-lg-6 order-1 order-lg-2">
-      <p>{{personDetail.biography}}</p>
+      <section class="person-biography" *ngIf="hasBiography(); else noBiography">
+        <p>{{personDetail.biography}}</p>
+      </section>
 
       <hr/>
 
@@ -24,6 +26,10 @@
     </div>
   </div>
 </section>
+
+<ng-template #noBiography>
+  <p>No biography available</p>
+</ng-template>
 
 <ng-template #nowLoading>
   <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>

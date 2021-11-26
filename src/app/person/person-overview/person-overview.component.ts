@@ -30,4 +30,9 @@ export class PersonOverviewComponent implements OnInit {
   public setCastAndCrew(): void {
     this.loading = false;
   }
+
+  public hasBiography(): boolean {
+    const biography = this.personDetail.biography;
+    return (biography != null && biography.length > 0);
+  }
 }
