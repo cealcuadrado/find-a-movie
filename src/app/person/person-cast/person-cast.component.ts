@@ -10,6 +10,7 @@ export class PersonCastComponent implements OnInit {
 
   loading = true;
 
+  @Input() name: string = '';
   @Input() castCredits: CastCredit[];
 
   constructor() { }
