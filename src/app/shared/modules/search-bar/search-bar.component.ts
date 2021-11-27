@@ -31,10 +31,6 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    this.movieSearchSubscription.unsubscribe();
-  }
-
   public onSearchInput(): void {
     let query = this.searchForm.value.searchQuery;
 
