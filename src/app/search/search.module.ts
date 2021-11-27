@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { SearchDefaultComponent } from './search-default/search-default.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchPersonComponent } from './search-person/search-person.component';
 
@@ -15,7 +14,6 @@ import { SearchPersonComponent } from './search-person/search-person.component';
   declarations: [
     SearchComponent,
     SearchResultComponent,
-    SearchDefaultComponent,
     SearchMovieComponent,
     SearchPersonComponent
   ],

@@ -1,55 +1,9 @@
 <main class="search">
   <div class="container-fluid">
-    <div *ngIf="!flagLoadingResults; else loadingResults">
-      <header>
-        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>{{searchQuery}}</h1>
-
-        <div class="d-flex flex-column flex-lg-row justify-content-lg-between" *ngIf="searchResults.length > 0">
-          <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of
-            <strong>{{totalResults}}</strong> total results</div>
-          <div>Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></div>
-        </div>
-      </header>
-
-      <hr />
-
-      <section class="search-results">
-        <div class="row" *ngIf="searchResults.length > 0; else noResultsFound">
-          <div
-            *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}"
-            class="col-12 col-md-4 col-lg-2">
-            <app-search-result [searchResult]="searchResult"></app-search-result>
-          </div>
-        </div>
-      </section>
-
-      <section class="search-pagination">
-        <div class="d-flex flex-column flex-lg-row justify-content-between">
-          <form class="form-inline text-center mb-4" *ngIf="totalPages > 1">
-            <label class="mr-2" for="pageNumber">Go to page:</label>
-            <select class="form-control" id="pageNumber" name="pageNumber" (change)="changeSelectPage($event)" [(ngModel)]="selectPage">
-              <option *ngFor="let number of pageNumbers">
-                {{number}}
-              </option>
-            </select>
-          </form>
-          <pagination-controls
-            (pageChange)="onPageChange($event)"
-            [autoHide]="true"
-            [maxSize]="5">
-          </pagination-controls>
-        </div>
-      </section>
-    </div>
-    <ng-template #loadingResults>
-      <div class="loading">
-        <p><i class="fas fa-circle-notch fa-spin fa-fw"></i> Loading...</p>
-      </div>
-    </ng-template>
-    <ng-template #noResultsFound>
-      <div class="no-results">
-        <p>Sorry, no results found.</p>
-      </div>
-    </ng-template>
+    <section class="search-bar">
+      <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search</h1>
+      <p>Hey! You want to find a movie? Come on! Write it on the input below!</p>
+      <app-search-bar></app-search-bar>
+    </section>
   </div>
 </main>

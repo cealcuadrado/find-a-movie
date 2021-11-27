@@ -1,14 +1,12 @@
 import { SearchMovieComponent } from './search-movie/search-movie.component';
-import { SearchDefaultComponent } from './search-default/search-default.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { SearchComponent } from './search.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchDefaultComponent,
+    component: SearchComponent,
   },
   {
     path: ':query',
