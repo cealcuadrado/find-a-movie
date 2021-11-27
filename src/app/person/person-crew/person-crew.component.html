@@ -1,1 +1,8 @@
-<p>person-crew works!</p>
+<section class="person-crew">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let credit of crewCredits">
+      <app-person-crew-result [credit]="credit"></app-person-crew-result>
+    </div>
+  </div>
+</section>
+

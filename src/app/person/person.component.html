@@ -41,7 +41,7 @@
           <li [ngbNavItem]="3">
             <a ngbNavLink>Crew Filmography</a>
             <ng-template ngbNavContent>
-              <app-person-crew></app-person-crew>
+              <app-person-crew [crewCredits]="personCrewCredits"></app-person-crew>
             </ng-template>
           </li>
         </ul>
