@@ -3,6 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GeneralSharedModule } from '../shared/modules/general-shared/general-shared.module';
+
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
@@ -23,7 +25,8 @@ import { MovieResultComponent } from './search-movie/movie-result/movie-result.c
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    SearchBarModule
+    SearchBarModule,
+    GeneralSharedModule
   ]
 })
 export class SearchModule { }
