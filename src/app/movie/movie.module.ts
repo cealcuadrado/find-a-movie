@@ -1,5 +1,5 @@
 /* Modules */
-import { SharedComponentsModule } from '../shared/components/shared-components.module';
+import { GeneralSharedModule } from './../shared/modules/general-shared/general-shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieRoutingModule } from './movie-routing.module';
@@ -42,7 +42,7 @@ import { MovieOverviewComponent } from './movie-overview/movie-overview.componen
   imports: [
     CommonModule,
     MovieRoutingModule,
-    SharedComponentsModule,
+    GeneralSharedModule,
     EmbeddedMediaModule.forRoot(),
     RouterModule,
     NgbModule,
