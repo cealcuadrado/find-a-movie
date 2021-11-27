@@ -1,8 +1,18 @@
 <div class="search-form">
   <form class="flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
     <div class="input-group">
-      <input type="search" class="form-control" placeholder="Enter a title" list="foo" formControlName="searchQuery"
+      <div class="input-group-prepend" ngbDropdown aria-label="Change search mode">
+        <button class="btn btn-light btn-outline-dark" type="button" id="searchModeDropdown" ngbDropdownToggle>
+          {{searchMode}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="searchModeDropdown">
+          <button ngbDropdownItem (click)="changeSearchMode('Movies')" type="button">Movies</button>
+          <button ngbDropdownItem (click)="changeSearchMode('People')" type="button">People</button>
+        </div>
+      </div>
+      <input *ngIf="searchMode == 'Movies'" type="search" class="form-control" placeholder="Enter movie title" formControlName="searchQuery"
         (input)="onSearchInput()" (keydown)="onSearchKeyDown($event)" />
+      <input *ngIf="searchMode == 'People'" type="search" class="form-control" placeholder="Enter name" />
       <div class="input-group-append">
         <button type="submit" class="btn btn-light btn-outline-dark">
           <i class="fas fa-search fa-fw"></i>

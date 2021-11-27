@@ -14,6 +14,7 @@ export class SearchBarComponent implements OnInit {
 
   searchForm: FormGroup;
 
+  public searchMode = 'Movies';
   public barResults: MovieListResult[] = [];
   public currentResult: number = 0;
 
@@ -29,6 +30,10 @@ export class SearchBarComponent implements OnInit {
     this.searchForm = this.fb.group({
       searchQuery: new FormControl(''),
     });
+  }
+
+  public changeSearchMode(searchMode: string): void {
+    this.searchMode = searchMode;
   }
 
   public onSearchInput(): void {
