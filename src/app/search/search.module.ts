@@ -9,13 +9,15 @@ import { SearchComponent } from './search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchDefaultComponent } from './search-default/search-default.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
+import { SearchPersonComponent } from './search-person/search-person.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchResultComponent,
     SearchDefaultComponent,
-    SearchMovieComponent
+    SearchMovieComponent,
+    SearchPersonComponent
   ],
   imports: [
     CommonModule,
