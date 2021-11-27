@@ -13,6 +13,8 @@
   </button>
 </section>
 
+<hr *ngIf="castCredits && castCredits.length > 0" />
+
 <ng-template #nowLoading>
   <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
 </ng-template>
