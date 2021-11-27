@@ -12,6 +12,7 @@ import { PersonCrewComponent } from './person-crew/person-crew.component';
 import { CastSummaryComponent } from './person-overview/cast-summary/cast-summary.component';
 import { CrewSummaryComponent } from './person-overview/crew-summary/crew-summary.component';
 import { PersonInfoComponent } from './person-overview/person-info/person-info.component';
+import { GeneralSharedModule } from '../shared/modules/general-shared/general-shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PersonInfoComponent } from './person-overview/person-info/person-info.c
     CommonModule,
     PersonRoutingModule,
     NgbModule,
-    PersonSharedModule
+    PersonSharedModule,
+    GeneralSharedModule
   ]
 })
 export class PersonModule { }

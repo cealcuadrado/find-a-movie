@@ -1,7 +1,10 @@
 <section class="person-crew">
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let credit of crewCredits">
-      <app-person-crew-result [credit]="credit"></app-person-crew-result>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3" *ngFor="let credit of crewCredits">
+        <app-person-crew-result [height]="400" [credit]="credit">
+        </app-person-crew-result>
+      </div>
     </div>
   </div>
 </section>

@@ -1,21 +1,22 @@
 <section class="person-overview" *ngIf="!loading; else nowLoading">
-  <div class="row">
-    <div class="col-12 col-lg-9 order-1">
-      <section class="person-biography" *ngIf="hasBiography(); else noBiography">
-        <p>{{personDetail.biography}}</p>
-      </section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-9 order-1">
+        <section class="person-biography" *ngIf="hasBiography(); else noBiography">
+          <p>{{personDetail.biography}}</p>
+        </section>
 
-      <hr/>
+        <hr />
 
-      <app-cast-summary
-        [castCredits]="castCredits">
-      </app-cast-summary>
+        <app-cast-summary [castCredits]="castCredits">
+        </app-cast-summary>
 
-      <app-crew-summary [crewCredits]="crewCredits">
-      </app-crew-summary>
-    </div>
-    <div class="col-12 col-lg-3 order-2">
-      <app-person-info [personDetail]="personDetail"></app-person-info>
+        <app-crew-summary [crewCredits]="crewCredits">
+        </app-crew-summary>
+      </div>
+      <div class="col-12 col-lg-3 order-2">
+        <app-person-info [personDetail]="personDetail"></app-person-info>
+      </div>
     </div>
   </div>
 </section>

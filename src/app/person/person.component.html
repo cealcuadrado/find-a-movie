@@ -19,35 +19,31 @@
       </div>
     </header>
     <main class="person-body">
-      <div class="container-fluid">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-          <li [ngbNavItem]="1">
-            <a ngbNavLink>Overview</a>
-            <ng-template ngbNavContent>
-              <app-person-overview
-                [personDetail]="personDetail"
-                [castCredits]="personCastCredits"
-                [crewCredits]="personCrewCredits">
-              </app-person-overview>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="2" *ngIf="personCastCredits && personCastCredits.length > 0">
-            <a ngbNavLink>Cast Filmography</a>
-            <ng-template ngbNavContent>
-              <app-person-cast [castCredits]="personCastCredits">
-              </app-person-cast>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="3" *ngIf="personCrewCredits && personCrewCredits.length > 0">
-            <a ngbNavLink>Crew Filmography</a>
-            <ng-template ngbNavContent>
-              <app-person-crew [crewCredits]="personCrewCredits"></app-person-crew>
-            </ng-template>
-          </li>
-        </ul>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Overview</a>
+          <ng-template ngbNavContent>
+            <app-person-overview [personDetail]="personDetail" [castCredits]="personCastCredits"
+              [crewCredits]="personCrewCredits">
+            </app-person-overview>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2" *ngIf="personCastCredits && personCastCredits.length > 0">
+          <a ngbNavLink>Cast Filmography</a>
+          <ng-template ngbNavContent>
+            <app-person-cast [castCredits]="personCastCredits">
+            </app-person-cast>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3" *ngIf="personCrewCredits && personCrewCredits.length > 0">
+          <a ngbNavLink>Crew Filmography</a>
+          <ng-template ngbNavContent>
+            <app-person-crew [crewCredits]="personCrewCredits"></app-person-crew>
+          </ng-template>
+        </li>
+      </ul>
 
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-      </div>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </main>
   </section>
 </div>
@@ -61,7 +57,5 @@
 </ng-template>
 
 <ng-template #loadingPerson>
-  <div class="loading-person">
-    <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>
-  </div>
+  <app-loading></app-loading>
 </ng-template>
