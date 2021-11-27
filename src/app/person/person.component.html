@@ -31,14 +31,14 @@
               </app-person-overview>
             </ng-template>
           </li>
-          <li [ngbNavItem]="2">
+          <li [ngbNavItem]="2" *ngIf="personCastCredits && personCastCredits.length > 0">
             <a ngbNavLink>Cast Filmography</a>
             <ng-template ngbNavContent>
               <app-person-cast [castCredits]="personCastCredits">
               </app-person-cast>
             </ng-template>
           </li>
-          <li [ngbNavItem]="3">
+          <li [ngbNavItem]="3" *ngIf="personCrewCredits && personCrewCredits.length > 0">
             <a ngbNavLink>Crew Filmography</a>
             <ng-template ngbNavContent>
               <app-person-crew [crewCredits]="personCrewCredits"></app-person-crew>
