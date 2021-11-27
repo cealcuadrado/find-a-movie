@@ -10,6 +10,7 @@ export class PersonCrewComponent implements OnInit {
 
   loading = true;
 
+  @Input() name: string = '';
   @Input() crewCredits: CrewCredit[];
 
   constructor() { }
