@@ -18,7 +18,7 @@
           <div
             *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}"
             class="col-12 col-md-4 col-lg-2">
-            <app-search-result [searchResult]="searchResult"></app-search-result>
+            <app-movie-result [searchResult]="searchResult"></app-movie-result>
           </div>
         </div>
       </section>

@@ -6,16 +6,16 @@ import { CommonModule } from '@angular/common';
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchPersonComponent } from './search-person/search-person.component';
+import { MovieResultComponent } from './search-movie/movie-result/movie-result.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
-    SearchResultComponent,
     SearchMovieComponent,
-    SearchPersonComponent
+    SearchPersonComponent,
+    MovieResultComponent
   ],
   imports: [
     CommonModule,

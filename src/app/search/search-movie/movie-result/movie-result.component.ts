@@ -1,14 +1,14 @@
-import { environment } from 'src/environments/environment';
-import { MovieListResult } from './../../shared/interfaces/movie-list-result';
+import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.scss'],
+  selector: 'app-movie-result',
+  templateUrl: './movie-result.component.html',
+  styleUrls: ['./movie-result.component.scss'],
 })
-export class SearchResultComponent implements OnInit {
-
+export class MovieResultComponent implements OnInit {
+  
   private posterUrl: string = environment.posterUrl;
   @Input() searchResult: MovieListResult;
 
@@ -27,7 +27,8 @@ export class SearchResultComponent implements OnInit {
   }
 
   public setLocalOrForeignTitle(): string {
-    return !this.searchResult.original_language.match('en') && !this.searchResult.original_title.match(this.searchResult.title)
+    return !this.searchResult.original_language.match('en') &&
+      !this.searchResult.original_title.match(this.searchResult.title)
       ? `${this.searchResult.title} (${this.searchResult.original_title})`
       : this.searchResult.title;
   }

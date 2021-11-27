@@ -1,8 +1,8 @@
-a.search-result {
+a.movie-result {
   z-index: 100;
   text-decoration: none;
 
-  .search-result-body {
+  .movie-result-body {
     border: 1px solid black;
     height: 300px;
     margin-bottom: 1rem;
@@ -11,11 +11,11 @@ a.search-result {
     justify-content: space-between;
     align-items: center;
 
-    .search-result-no-poster-available {
+    .movie-result-no-poster-available {
       color: black;
     }
 
-    .search-result-content {
+    .movie-result-content {
       font-size: 0.7rem;
       width: 100%;
       padding: 0.5rem;
@@ -31,9 +31,6 @@ a.search-result {
   &:hover {
     .search-result-body {
       opacity: 0.75;
-      .search-result-content {
-        // background-color: black;
-      }
     }
   }
 }
