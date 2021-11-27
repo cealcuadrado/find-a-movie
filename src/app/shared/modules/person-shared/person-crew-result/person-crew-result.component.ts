@@ -12,6 +12,7 @@ export class PersonCrewResultComponent implements OnInit {
   posterUrl = environment.posterUrl;
 
   @Input() credit: CrewCredit;
+  @Input() height: number = 300;
 
   backgroundDefaultSettings = {
     backgroundSize: 'cover',
@@ -34,6 +35,13 @@ export class PersonCrewResultComponent implements OnInit {
 
   public hasPosterPath(path: string | null): boolean {
     return path != null ? true : false;
+  }
+
+  public setStyle(poster: string | null) {
+    return {
+      height: `${this.height}px`,
+      ...this.setBackgroundPoster(poster)
+    };
   }
 
   public setBackgroundPoster(poster: string | null) {
