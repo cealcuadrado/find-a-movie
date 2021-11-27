@@ -34,7 +34,8 @@
           <li [ngbNavItem]="2">
             <a ngbNavLink>Cast Filmography</a>
             <ng-template ngbNavContent>
-              <app-person-cast></app-person-cast>
+              <app-person-cast [castCredits]="personCastCredits">
+              </app-person-cast>
             </ng-template>
           </li>
           <li [ngbNavItem]="3">

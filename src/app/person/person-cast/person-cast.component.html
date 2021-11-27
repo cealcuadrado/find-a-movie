@@ -1,1 +1,12 @@
-<p>person-cast works!</p>
+<section class="person-cast" *ngIf="!loading; else nowLoading">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let castCredit of castCredits">
+      <app-person-cast-result [credit]="castCredit">
+      </app-person-cast-result>
+    </div>
+  </div>
+</section>
+
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>
