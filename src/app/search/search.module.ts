@@ -8,10 +8,15 @@ import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchDefaultComponent } from './search-default/search-default.component';
-
+import { SearchMovieComponent } from './search-movie/search-movie.component';
 
 @NgModule({
-  declarations: [SearchComponent, SearchResultComponent, SearchDefaultComponent],
+  declarations: [
+    SearchComponent,
+    SearchResultComponent,
+    SearchDefaultComponent,
+    SearchMovieComponent
+  ],
   imports: [
     CommonModule,
     SearchRoutingModule,
