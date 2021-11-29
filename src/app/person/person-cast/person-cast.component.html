@@ -6,19 +6,21 @@
 
     <div class="person-cast-body">
       <div class="current-page-info">
-        <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
+        <div class="row flex-column flex-lg-row justify-content-lg-between mb-4">
           <div class="col-auto mr-auto">
-            <div>Showing <strong>X</strong>-<strong>Y</strong> of
-              <strong>Z</strong> total results</div>
+            <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of
+              <strong>{{totalResults}}</strong> total results</div>
           </div>
           <div class="col-auto">
-            <div>Page <strong>A</strong> of <strong>B</strong></div>
+            <div>Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></div>
           </div>
         </div>
       </div>
       <div class="person-cast-results">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-3" *ngFor="let castCredit of castCredits">
+          <div
+            *ngFor="let castCredit of castCredits | paginate: {itemsPerPage: resultsPerPage, currentPage: currentPage, totalItems: totalResults}"
+            class="col-12 col-md-6 col-lg-3">
             <app-person-cast-result [height]="400" [credit]="castCredit">
             </app-person-cast-result>
           </div>
@@ -27,10 +29,19 @@
       <div class="person-cast-pagination">
         <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
           <div class="col-auto mr-auto">
-            Go To Page Select
+            <form class="form-inline text-center mb-4" *ngIf="totalPages > 1">
+              <label class="mr-2" for="pageNumber">Go to page:</label>
+              <select class="form-control" id="pageNumber" name="pageNumber" (change)="changeSelectPage($event)"
+                [(ngModel)]="selectPage">
+                <option *ngFor="let number of pageNumbers">
+                  {{number}}
+                </option>
+              </select>
+            </form>
           </div>
           <div class="col-auto">
-            Paginator
+            <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true" [maxSize]="5">
+            </pagination-controls>
           </div>
         </div>
       </div>
