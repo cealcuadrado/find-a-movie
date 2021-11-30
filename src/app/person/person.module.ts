@@ -15,9 +15,10 @@ import { CastSummaryComponent } from './person-overview/cast-summary/cast-summar
 import { CrewSummaryComponent } from './person-overview/crew-summary/crew-summary.component';
 import { PersonInfoComponent } from './person-overview/person-info/person-info.component';
 import { GeneralSharedModule } from '../shared/modules/general-shared/general-shared.module';
+import { FilterCastPipe } from './person-cast/filter-cast.pipe';
 
 @NgModule({
-  declarations: [PersonComponent, NoPersonFoundComponent, PersonOverviewComponent, PersonCastComponent, PersonCrewComponent, CastSummaryComponent, CrewSummaryComponent, PersonInfoComponent],
+  declarations: [PersonComponent, NoPersonFoundComponent, PersonOverviewComponent, PersonCastComponent, PersonCrewComponent, CastSummaryComponent, CrewSummaryComponent, PersonInfoComponent, FilterCastPipe],
   imports: [
     CommonModule,
     PersonRoutingModule,

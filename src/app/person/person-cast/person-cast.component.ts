@@ -13,7 +13,7 @@ export class PersonCastComponent implements OnInit {
   public resultsPerPage = 20;
   public totalResults: number;
 
-  public filterInput: string;
+  public filterInput: string = '';
 
   @Input() name: string = '';
   @Input() castCredits: CastCredit[];
@@ -32,6 +32,7 @@ export class PersonCastComponent implements OnInit {
     this.currentPage = 1;
     this.loading = false;
     this.totalResults = this.castCredits.length;
+    this.filterInput = '';
   }
 
   public onPageChange(event: any): void {
