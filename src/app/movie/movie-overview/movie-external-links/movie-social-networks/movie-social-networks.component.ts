@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { MovieService } from '../../../movie.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -16,6 +17,8 @@ export class MovieSocialNetworksComponent implements OnInit {
   public instagramId: string | null;
   public twitterId: string | null;
 
+  private movieSocialNetworksSubscription: Subscription;
+
   constructor(
     private movie: MovieService
   ) { }
@@ -30,7 +33,7 @@ export class MovieSocialNetworksComponent implements OnInit {
   }
 
   private setExternalIds(): void {
-    this.movie.getExternalIds(this.id).subscribe((result) => {
+    this.movieSocialNetworksSubscription = this.movie.getExternalIds(this.id).subscribe((result) => {
       this.facebookId = result.facebook_id;
       this.instagramId = result.instagram_id;
       this.twitterId = result.twitter_id;
@@ -38,4 +41,7 @@ export class MovieSocialNetworksComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.movieSocialNetworksSubscription.unsubscribe();
+  }
 }
