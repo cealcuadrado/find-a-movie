@@ -8,12 +8,18 @@ import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
 })
 export class PersonCrewComponent implements OnInit {
 
-  loading = true;
+  public loading = true;
+
+  public currentPage: number;
+  public resultsPerPage = 20;
+  public totalResults: number;
+
+  public filterInput: string = '';
 
   @Input() name: string = '';
   @Input() crewCredits: CrewCredit[];
 
-  constructor() { }
+  constructor(private window: Window) { }
 
   ngOnInit(): void {
     this.setCrew();
@@ -25,5 +31,13 @@ export class PersonCrewComponent implements OnInit {
 
   public setCrew(): void {
     this.loading = false;
+    this.currentPage = 1;
+    this.totalResults = this.crewCredits.length;
+    this.filterInput = '';
+  }
+
+  public onPageChange(event: number): void {
+    this.currentPage = event;
+    this.window.scrollTo({ top: 400 });
   }
 }

@@ -4,34 +4,35 @@
       <p><strong>{{name}}</strong> has been part of the crew in the following movies, TV movies, and/or specials:</p>
     </header>
     <div class="person-crew-body">
-      <div class="current-page-info">
-        <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
-          <div class="col-auto mr-auto">
-            <div>Showing <strong>X</strong>-<strong>Y</strong> of
-              <strong>Z</strong> total results</div>
-          </div>
-          <div class="col-auto">
-            <div>Page <strong>A</strong> of <strong>B</strong></div>
+      <div class="person-crew-filter">
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="input-group">
+              <div class="input-group-append">
+                <label class="input-group-text" for="filterCrewInput">
+                  <i class="fas fa-filter fa-fw"></i>
+                </label>
+              </div>
+              <input type="text" class="form-control"
+                    [(ngModel)]="filterInput" id="filterCrewInput" name="filterCrewInput" placeholder="Filter crew"/>
+            </div>
           </div>
         </div>
       </div>
       <div class="person-crew-results">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-3" *ngFor="let credit of crewCredits">
+          <div class="col-12 col-md-6 col-lg-3"
+              *ngFor="let credit of crewCredits | filterCrew:filterInput | paginate: {itemsPerPage: resultsPerPage, currentPage: currentPage}">
             <app-person-crew-result [height]="400" [credit]="credit">
             </app-person-crew-result>
           </div>
         </div>
       </div>
       <div class="person-crew-pagination">
-        <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
-          <div class="col-auto mr-auto">
-            Go To Page Select
-          </div>
-          <div class="col-auto">
-            Paginator
-          </div>
-        </div>
+         <div class="text-center">
+           <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true" [maxSize]="5">
+           </pagination-controls>
+         </div>
       </div>
     </div>
   </div>
