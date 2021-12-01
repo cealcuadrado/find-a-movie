@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./person-cast.component.scss'],
 })
 export class PersonCastComponent implements OnInit {
-  loading = true;
+  public loading = true;
 
   public currentPage: number;
   public resultsPerPage = 20;
@@ -29,8 +29,8 @@ export class PersonCastComponent implements OnInit {
   }
 
   public setCast(): void {
-    this.currentPage = 1;
     this.loading = false;
+    this.currentPage = 1;
     this.totalResults = this.castCredits.length;
     this.filterInput = '';
   }
