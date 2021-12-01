@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
 import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
 import { environment } from './../../environments/environment';
@@ -33,6 +34,10 @@ export class MovieComponent implements OnInit {
   @ViewChild(MovieTrailerComponent, { static: true })
   movieTrailer: MovieTrailerComponent;
 
+  private activatedRouteSubscription: Subscription;
+  private movieDetailSubscription: Subscription;
+  private movieCastAndCrewSubscription: Subscription;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
@@ -40,10 +45,14 @@ export class MovieComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMovie();
+    this.initMovie();
   }
 
   ngOnChanges(): void {
+    this.initMovie();
+  }
+
+  private initMovie(): void {
     this.loading = true;
     this.getMovie();
   }
@@ -53,7 +62,7 @@ export class MovieComponent implements OnInit {
   }
 
   private getMovie(): void {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
         this.getDetails();
@@ -64,7 +73,7 @@ export class MovieComponent implements OnInit {
 
   private getDetails(): void {
     this.setMainTab();
-    this.movie.getMovieDetail(this.id).subscribe((detail) => {
+    this.movieDetailSubscription = this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
         this.setWindowTitle();
@@ -74,7 +83,7 @@ export class MovieComponent implements OnInit {
   }
 
   private getCastAndCrew(): void {
-    this.movie.getCastAndCrew(this.id).subscribe((result) => {
+    this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
       this.getDirector();
@@ -104,5 +113,11 @@ export class MovieComponent implements OnInit {
       !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`
       : detail.title;
+  }
+
+  ngOnDestroy() {
+    this.activatedRouteSubscription.unsubscribe();
+    this.movieDetailSubscription.unsubscribe();
+    this.movieCastAndCrewSubscription.unsubscribe();
   }
 }
