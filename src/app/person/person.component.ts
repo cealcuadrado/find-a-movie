@@ -1,9 +1,11 @@
+import { CastCredit } from './../shared/interfaces/cast-credit';
 import { PersonService } from './person.service';
 import { PersonDetail } from './../shared/interfaces/person-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
+import { CrewCredit } from '../shared/interfaces/crew-credit';
 
 @Component({
   selector: 'app-person',
@@ -18,6 +20,9 @@ export class PersonComponent implements OnInit {
 
   public personDetail: PersonDetail;
   private backdropUrl: string = environment.backdropUrl;
+
+  public personCastCredits: CastCredit[];
+  public personCrewCredits: CrewCredit[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,8 +59,17 @@ export class PersonComponent implements OnInit {
       if (Object.values(person).length > 0) {
         this.personDetail = person;
         this.setTitle();
+        this.getPersonCredits();
       }
       this.loading = false;
+    });
+  }
+
+  private getPersonCredits(): void {
+    this.person.getMovieCredits(this.id).subscribe(movieCredits => {
+      console.log(movieCredits);
+      this.personCastCredits = movieCredits.cast;
+      this.personCrewCredits = movieCredits.crew;
     });
   }
 

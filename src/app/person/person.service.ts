@@ -10,7 +10,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PersonService {
-
   private url = environment.apiUrl;
   private key = environment.apiKey;
   private language = environment.language;

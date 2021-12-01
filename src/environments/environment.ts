@@ -11,6 +11,7 @@ export const environment = {
   backdropUrl: 'https://image.tmdb.org/t/p/original',
   imdbUrl: 'https://www.imdb.com/title/',
   boxOfficeMojoUrl: 'https://www.boxofficemojo.com/title/',
+  imdbNameUrl: 'https://www.imdb.com/name/',
   tmdbUrl: '',
 };
 

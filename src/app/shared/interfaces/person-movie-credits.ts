@@ -1,7 +1,7 @@
-import { Cast } from "./cast";
-import { Crew } from "./crew";
+import { CastCredit } from './cast-credit';
+import { CrewCredit } from './crew-credit';
 
 export interface PersonMovieCredits {
-  cast: Cast[];
-  crew: Crew[];
+  cast: CastCredit[];
+  crew: CrewCredit[];
 }

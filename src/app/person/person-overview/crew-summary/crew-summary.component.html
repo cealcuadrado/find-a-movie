@@ -1,0 +1,16 @@
+<section class="crew-summary" *ngIf="crewCredits && crewCredits.length > 0">
+  <h3 class="mb-4 text-uppercase">Crew Summary</h3>
+
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3" *ngFor="let crewCredit of crewCredits | slice:0:8">
+      <app-person-crew-result [height]="250" [credit]="crewCredit">
+      </app-person-crew-result>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block text-uppercase">
+    See complete filmography as crew
+  </button>
+</section>
+
+<hr *ngIf="crewCredits && crewCredits.length> 0" />
