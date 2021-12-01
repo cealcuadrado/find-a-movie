@@ -12,6 +12,7 @@ export const environment = {
   imdbUrl: 'https://www.imdb.com/title/',
   boxOfficeMojoUrl: 'https://www.boxofficemojo.com/title/',
   imdbNameUrl: 'https://www.imdb.com/name/',
+  youtubeBaseUrl: 'https://www.youtube.com/embed/',
   tmdbUrl: '',
 };
 
