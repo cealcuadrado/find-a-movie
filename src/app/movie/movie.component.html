@@ -1,7 +1,7 @@
 <div class="movie-content" *ngIf="!loading; else loadingMovie">
   <section class="movie" *ngIf="movieDetail; else noMovieFound">
     <header>
-      <app-movie-header [movieDetail]="movieDetail" [crew]="crew" [director]="director">
+      <app-movie-header [movieDetail]="movieDetail" [crew]="crew">
       </app-movie-header>
     </header>
 

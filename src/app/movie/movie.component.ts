@@ -22,7 +22,6 @@ export class MovieComponent implements OnInit {
 
   public movieDetail: MovieDetail;
   public id: string;
-  public director: string;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
@@ -86,16 +85,7 @@ export class MovieComponent implements OnInit {
     this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.cast = result.cast;
       this.crew = result.crew;
-      this.getDirector();
     });
-  }
-
-  private getDirector(): void {
-    if (this.crew) {
-      this.director = this.crew.filter(
-        (member) => member.job === 'Director'
-      )[0].name;
-    }
   }
 
   private setWindowTitle(): void {
