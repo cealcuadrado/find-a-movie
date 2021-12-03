@@ -1,0 +1,20 @@
+<section class="cast-summary" *ngIf="castCredits && castCredits.length > 0">
+  <h3 class="mb-4 text-uppercase">Cast Summary</h3>
+
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3" *ngFor="let castCredit of castCredits | slice:0:8">
+      <app-person-cast-result [height]="250" [credit]="castCredit">
+      </app-person-cast-result>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block text-uppercase">
+    See complete filmography as cast
+  </button>
+</section>
+
+<hr *ngIf="castCredits && castCredits.length > 0" />
+
+<ng-template #nowLoading>
+  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>
