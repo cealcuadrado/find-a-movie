@@ -1,28 +1,21 @@
-<div class="search-form">
-  <form class="flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
-    <div class="input-group">
-      <div class="input-group-prepend" ngbDropdown aria-label="Change search mode">
-        <button class="btn btn-light btn-outline-dark" type="button" id="searchModeDropdown" ngbDropdownToggle>
-          {{searchMode}}
-        </button>
-        <div ngbDropdownMenu aria-labelledby="searchModeDropdown">
-          <button ngbDropdownItem (click)="changeSearchMode('Movies')" type="button">Movies</button>
-          <button ngbDropdownItem (click)="changeSearchMode('People')" type="button">People</button>
-        </div>
-      </div>
-      <input *ngIf="searchMode == 'Movies'" type="search" class="form-control" placeholder="Enter movie title" formControlName="searchQuery"
-        (input)="onSearchInput()" (keydown)="onSearchKeyDown($event)" />
-      <input *ngIf="searchMode == 'People'" type="search" class="form-control" placeholder="Enter name" />
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-light btn-outline-dark">
-          <i class="fas fa-search fa-fw"></i>
+<div class="search-bar">
+  <div class="search-row d-flex align-items-center">
+    <div ngbDropdown aria-label="Change search mode">
+      <button class="btn btn-light btn-outline-dark" type="button" id="searchModeDropdown" ngbDropdownToggle>
+        {{searchMode.name}}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="searchModeDropdown">
+        <button *ngFor="let dropdownSearchMode of searchModes" ngbDropdownItem
+          (click)="changeSearchMode(dropdownSearchMode)" type="button">
+          {{dropdownSearchMode.name}}
         </button>
       </div>
     </div>
-    <div class="search-autocomplete" *ngIf="barResults.length > 0">
-      <input *ngFor="let barResult of barResults; let i = index" class="bar-result"
-        [ngClass]="{'active' : i+1 == currentResult}" (click)="goToMovie(barResult.id)"
-        (mouseover)="onMouseOver($event, i)" [value]="getFormattedTitle(barResult, barResult.release_date)">
+    <div class="flex-grow-1" *ngIf="searchMode.value == 'movies'">
+      <app-bar-movie></app-bar-movie>
     </div>
-  </form>
+    <div class="flex-grow-1" *ngIf="searchMode.value == 'people'">
+      <span class="text-white">People Search</span>
+    </div>
+  </div>
 </div>
