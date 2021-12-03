@@ -1,10 +1,5 @@
 import { SearchMode } from './../../interfaces/search-mode';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { MovieListResult } from '../../interfaces/movie-list-result';
-import { SearchService } from 'src/app/search/search.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,8 +10,8 @@ export class SearchBarComponent implements OnInit {
   public searchMode: SearchMode;
 
   public searchModes: SearchMode[] = [
-    { name: 'Movies', value: 'movies' },
-    { name: 'People', value: 'people' }
+    { name: 'Movies', value: 'movies', icon: 'fa-film' },
+    { name: 'People', value: 'people', icon: 'fa-user' }
   ];
 
   constructor() {}
