@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from './search-bar.component';
 import { BarMovieComponent } from './bar-movie/bar-movie.component';
+import { BarPeopleComponent } from './bar-people/bar-people.component';
 
 @NgModule({
-  declarations: [SearchBarComponent, BarMovieComponent],
+  declarations: [SearchBarComponent, BarMovieComponent, BarPeopleComponent],
   imports: [
     CommonModule,
     FormsModule,

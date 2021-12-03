@@ -1,0 +1,13 @@
+<div class="flex-grow-1">
+  <form class="search-people-form" [formGroup]="searchPeopleForm" (ngSubmit)="onSubmitPeopleForm()">
+    <div class="input-group">
+      <input type="search" class="form-control" formControlName="personQuery" id="personQuery" name="personQuery"
+             placeholder="Enter cast or crew member name (Harrison Ford, Steven Spielberg, etc.)"/>
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-light btn-outline-dark">
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
