@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of  } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuerySearchResult } from '../shared/interfaces/query-search-result';
 import { catchError } from 'rxjs/operators';
+import { QueryMovieResult } from '../shared/interfaces/query-movie-result';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,9 @@ export class SearchService {
     private http: HttpClient
   ) { }
 
-  searchMovies(query: string, page: number): Observable<QuerySearchResult> {
+  searchMovies(query: string, page: number): Observable<QueryMovieResult> {
     return this.http
-      .get<QuerySearchResult>(
+      .get<QueryMovieResult>(
         `${this.url}/search/movie?api_key=${this.key}&query=${query}&language=${this.language}&page=${page}&include_adult=false`
       )
       .pipe(
