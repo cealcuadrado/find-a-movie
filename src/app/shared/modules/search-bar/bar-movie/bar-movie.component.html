@@ -1,8 +1,7 @@
 <div class="flex-grow-1">
-  <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
+  <form class="search-form search-movie-form" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
     <div class="input-group">
-
-      <input type="search" class="form-control" formControlName="movieQuery" (input)="onSearchInput()"
+      <input type="search" class="form-control" formControlName="movieQuery" id="movieQuery" name="movieQuery" (input)="onSearchInput()"
              (keydown)="onSearchKeyDown($event)" placeholder="Enter movie title (Indiana Jones, Jaws, etc.)" />
       <div class="input-group-append">
         <button type="submit" class="btn btn-light btn-outline-dark">
