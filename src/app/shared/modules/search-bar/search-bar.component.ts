@@ -1,9 +1,9 @@
-import { MovieSearchService } from '../../services/movie-search.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MovieListResult } from '../../interfaces/movie-list-result';
+import { SearchService } from 'src/app/search/search.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private movieSearch: MovieSearchService
+    private search: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class SearchBarComponent implements OnInit {
       return;
     }
 
-    this.movieSearchSubscription = this.movieSearch
+    this.movieSearchSubscription = this.search
       .searchMovies(query, 1)
       .subscribe((querySearchResult) => {
         if (querySearchResult.results) {

@@ -1,9 +1,9 @@
 import { Title } from '@angular/platform-browser';
-import { MovieSearchService } from './../../shared/services/movie-search.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
 import { environment } from 'src/environments/environment';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-search-movie',
@@ -28,7 +28,7 @@ export class SearchMovieComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private search: MovieSearchService,
+    private search: SearchService,
     private window: Window,
     private titleService: Title
   ) {}
