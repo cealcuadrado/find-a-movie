@@ -1,6 +1,18 @@
 <main class="search search-person">
   <div class="container">
-    <p>search-person works!</p>
+    <div *ngIf="!loading; else loadingResults">
+      <header>
+        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>Search People</h1>
+        <h2 class="text-uppercase"><i class="fas fa-user fa-fw"></i> {{searchQuery}}</h2>
+      </header>
+
+      <hr/>
+
+      <p>{{searchResults | json}}</p>
+    </div>
   </div>
 </main>
 
+<ng-template #loadingResults>
+  <app-loading></app-loading>
+</ng-template>

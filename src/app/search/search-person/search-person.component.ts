@@ -1,4 +1,9 @@
+import { Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../search.service';
+import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
 
 @Component({
   selector: 'app-search-person',
@@ -7,9 +12,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPersonComponent implements OnInit {
 
-  constructor() { }
+  public loading = true;
+
+  public currentPage: number;
+  public resultsPerPage = 20;
+
+  public totalResults: number;
+  public totalPages: number;
+  public searchResults: PersonListResult[] = [];
+
+  public searchQuery: string;
+
+  private searchSubscription: Subscription;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private search: SearchService,
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
+    this.setSearch();
+  }
+
+  ngOnChanges(): void {
+    this.setSearch();
+  }
+
+  private setSearch(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.searchQuery = params.query;
+      this.firstSearch();
+    });
+  }
+
+  private firstSearch(): void {
+    this.currentPage = 1;
+    this.searchMovies();
+  }
+
+  private searchMovies(): void {
+    this.searchSubscription = this.search.searchPeople(this.searchQuery, this.currentPage).subscribe(queryPersonResult => {
+      if (queryPersonResult.results) {
+        console.log(queryPersonResult.results);
+        this.searchResults = queryPersonResult.results;
+        this.totalResults = queryPersonResult.total_results;
+        this.totalPages = queryPersonResult.total_pages;
+        this.titleService.setTitle(`Search Results for: ${this.searchQuery} | Find a Movie`);
+        this.loading = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 
 }
