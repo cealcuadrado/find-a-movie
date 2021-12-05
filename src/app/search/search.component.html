@@ -2,8 +2,32 @@
   <div class="container-fluid">
     <section class="search-bar">
       <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search</h1>
-      <p>Hey! You want to find a movie? Come on! Write it on the input below!</p>
-      <app-search-bar></app-search-bar>
+
+      <p>Hey! You want to find a movie, an actor, or a crew member of a movie.</p>
+      <p>Depending on the case, you have two options:</p>
+
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>
+            <i class="fas fa-film fa-fw"></i> Find by Movie
+          </a>
+          <ng-template ngbNavContent>
+            <p>Find a movie by the title of it.</p>
+            <app-bar-movie></app-bar-movie>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>
+            <i class="fas fa-film fa-fw"></i> Find by Person
+          </a>
+          <ng-template ngbNavContent>
+            <p>Find a cast member of a crew member of a movie by name.</p>
+            <app-bar-people></app-bar-people>
+          </ng-template>
+        </li>
+      </ul>
+
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </section>
   </div>
 </main>

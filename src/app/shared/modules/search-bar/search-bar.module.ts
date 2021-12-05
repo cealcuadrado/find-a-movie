@@ -7,7 +7,11 @@ import { BarMovieComponent } from './bar-movie/bar-movie.component';
 import { BarPeopleComponent } from './bar-people/bar-people.component';
 
 @NgModule({
-  declarations: [SearchBarComponent, BarMovieComponent, BarPeopleComponent],
+  declarations: [
+    SearchBarComponent,
+    BarMovieComponent,
+    BarPeopleComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -15,7 +19,9 @@ import { BarPeopleComponent } from './bar-people/bar-people.component';
     NgbModule
   ],
   exports: [
-    SearchBarComponent
+    SearchBarComponent,
+    BarMovieComponent,
+    BarPeopleComponent
   ]
 })
 export class SearchBarModule { }

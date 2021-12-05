@@ -11,6 +11,7 @@ import { SearchComponent } from './search.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchPersonComponent } from './search-person/search-person.component';
 import { MovieResultComponent } from './search-movie/movie-result/movie-result.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MovieResultComponent } from './search-movie/movie-result/movie-result.c
     FormsModule,
     ReactiveFormsModule,
     SearchBarModule,
-    GeneralSharedModule
+    GeneralSharedModule,
+    NgbModule
   ]
 })
 export class SearchModule { }
