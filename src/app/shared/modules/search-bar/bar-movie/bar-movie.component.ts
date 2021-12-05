@@ -13,7 +13,7 @@ import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
 export class BarMovieComponent implements OnInit {
   public searchForm: FormGroup;
 
-  public barResults: MovieListResult[] = [];
+  public movieBarResults: MovieListResult[] = [];
   public currentResult: number = 0;
 
   public movieSearchSubscription: Subscription;
@@ -34,17 +34,17 @@ export class BarMovieComponent implements OnInit {
     let query = this.searchForm.value.movieQuery;
 
     if (query.length < 2) {
-      this.barResults = [];
-      console.log(this.barResults);
+      this.movieBarResults = [];
+      console.log(this.movieBarResults);
       return;
     }
 
     this.movieSearchSubscription = this.search
       .searchMovies(query, 1)
-      .subscribe((querySearchResult) => {
+      .subscribe(querySearchResult => {
         if (querySearchResult.results) {
           console.log(querySearchResult.results);
-          this.barResults = querySearchResult.results.slice(0, 5);
+          this.movieBarResults = querySearchResult.results.slice(0, 5);
           this.resetCurrentResult();
         }
       });
@@ -53,18 +53,18 @@ export class BarMovieComponent implements OnInit {
   public onSubmit(event: any): void {
     if (this.currentResult != 0) {
       event.preventDefault();
-      this.goToMovie(this.barResults[this.currentResult - 1].id);
+      this.goToMovie(this.movieBarResults[this.currentResult - 1].id);
     } else {
       let value = this.searchForm.value.movieQuery;
-      this.router.navigate(['/search', value]).then((result) => {
-        this.barResults = [];
+      this.router.navigate(['/search/movie', value]).then(result => {
+        this.movieBarResults = [];
       });
     }
   }
 
   public goToMovie(id: number): void {
-    this.router.navigate(['/movie', id]).then((result) => {
-      this.barResults = [];
+    this.router.navigate(['/movie', id]).then(result => {
+      this.movieBarResults = [];
     });
   }
 
@@ -86,7 +86,7 @@ export class BarMovieComponent implements OnInit {
   }
 
   public onSearchKeyDown(event: any): void {
-    if (this.barResults.length > 0) {
+    if (this.movieBarResults.length > 0) {
       if (event.keyCode == 40) {
         this.setCurrentResult('subtract');
       } else if (event.keyCode == 38) {
@@ -103,11 +103,11 @@ export class BarMovieComponent implements OnInit {
     if (op == 'add') {
       this.currentResult =
         this.currentResult - 1 < 0
-          ? this.barResults.length
+          ? this.movieBarResults.length
           : this.currentResult - 1;
     } else if (op == 'subtract') {
       this.currentResult =
-        this.currentResult + 1 > this.barResults.length
+        this.currentResult + 1 > this.movieBarResults.length
           ? 0
           : this.currentResult + 1;
     }
