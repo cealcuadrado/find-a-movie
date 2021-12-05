@@ -1,0 +1,27 @@
+.search {
+  padding-top: 5rem;
+
+  .search-results {
+    .current-page-info {
+
+    }
+
+    .results-body {
+
+    }
+
+    .search-pagination {
+      pagination-controls {
+        ::ng-deep .ngx-pagination {
+          @media screen and (max-width: 991px) {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .no-results {
+    height: 65vh;
+  }
+}

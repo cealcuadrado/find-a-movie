@@ -1,8 +1,9 @@
-<main class="search-movie">
+<main class="search search-movie">
   <div class="container">
     <div *ngIf="!flagLoadingResults; else loadingResults">
       <header>
-        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>{{searchQuery}}</h1>
+        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>Search Movie</h1>
+        <h2 class="text-uppercase"><i class="fas fa-film fa-fw"></i>{{searchQuery}}</h2>
       </header>
 
       <hr />
