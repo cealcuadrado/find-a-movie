@@ -4,15 +4,16 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search.service';
 import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-person',
   templateUrl: './search-person.component.html',
-  styleUrls: ['./search-person.component.scss']
+  styleUrls: ['./search-person.component.scss'],
 })
 export class SearchPersonComponent implements OnInit {
-
   public loading = true;
+  public backdropPath: string = environment.backdropUrl;
 
   public currentPage: number;
   public resultsPerPage = 20;
@@ -28,8 +29,9 @@ export class SearchPersonComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private search: SearchService,
+    private window: Window,
     private titleService: Title
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.setSearch();
@@ -40,7 +42,8 @@ export class SearchPersonComponent implements OnInit {
   }
 
   private setSearch(): void {
-    this.activatedRoute.params.subscribe(params => {
+    this.loading = true;
+    this.activatedRoute.params.subscribe((params) => {
       this.searchQuery = params.query;
       this.firstSearch();
     });
@@ -48,24 +51,43 @@ export class SearchPersonComponent implements OnInit {
 
   private firstSearch(): void {
     this.currentPage = 1;
-    this.searchMovies();
+    this.searchPeople();
   }
 
-  private searchMovies(): void {
-    this.searchSubscription = this.search.searchPeople(this.searchQuery, this.currentPage).subscribe(queryPersonResult => {
-      if (queryPersonResult.results) {
-        console.log(queryPersonResult.results);
-        this.searchResults = queryPersonResult.results;
-        this.totalResults = queryPersonResult.total_results;
-        this.totalPages = queryPersonResult.total_pages;
-        this.titleService.setTitle(`Search Results for: ${this.searchQuery} | Find a Movie`);
-        this.loading = false;
-      }
-    });
+  private searchPeople(): void {
+    this.searchSubscription = this.search
+      .searchPeople(this.searchQuery, this.currentPage)
+      .subscribe((queryPersonResult) => {
+        if (queryPersonResult.results) {
+          console.log(queryPersonResult.results);
+          this.searchResults = queryPersonResult.results;
+          this.totalResults = queryPersonResult.total_results;
+          this.totalPages = queryPersonResult.total_pages;
+          this.titleService.setTitle(
+            `Search Results for: ${this.searchQuery} | Find a Movie`
+          );
+          this.loading = false;
+        }
+      });
+  }
+
+  public calculateLeftCounter(): number {
+    return this.resultsPerPage * (this.currentPage - 1) + 1;
+  }
+
+  public calculateRightCounter(): number {
+    return this.resultsPerPage * this.currentPage < this.totalResults
+      ? this.resultsPerPage * this.currentPage
+      : this.totalResults;
+  }
+
+  public onPageChange(event: any): void {
+    this.currentPage = event;
+    this.window.scrollTo({ top: 0 });
+    this.searchPeople();
   }
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
   }
-
 }
