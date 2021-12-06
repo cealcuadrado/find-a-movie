@@ -24,6 +24,9 @@ export class SearchPersonComponent implements OnInit {
 
   public searchQuery: string;
 
+  public pageNumbers: number[];
+  public selectPage: number;
+
   private searchSubscription: Subscription;
 
   constructor(
@@ -51,6 +54,7 @@ export class SearchPersonComponent implements OnInit {
 
   private firstSearch(): void {
     this.currentPage = 1;
+    this.selectPage = 1;
     this.searchPeople();
   }
 
@@ -66,6 +70,7 @@ export class SearchPersonComponent implements OnInit {
           this.titleService.setTitle(
             `Search Results for: ${this.searchQuery} | Find a Movie`
           );
+          this.generateSelectPageNumbers();
           this.loading = false;
         }
       });
@@ -79,6 +84,18 @@ export class SearchPersonComponent implements OnInit {
     return this.resultsPerPage * this.currentPage < this.totalResults
       ? this.resultsPerPage * this.currentPage
       : this.totalResults;
+  }
+
+  private generateSelectPageNumbers(): void {
+    this.pageNumbers = [];
+    for (let i = 0; i < this.totalPages; i++) {
+      this.pageNumbers.push(i + 1);
+    }
+    console.log(this.pageNumbers);
+  }
+
+  public changeSelectPage(event: any) {
+    this.onPageChange(event.target.value);
   }
 
   public onPageChange(event: any): void {

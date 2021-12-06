@@ -34,7 +34,14 @@
         <section class="search-pagination">
           <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
             <div class="col-12 col-lg-auto mr-auto">
-
+              <form class="form-inline mb-4" *ngIf="totalPages > 1">
+                <label class="mr-2" fo="pageNumber">Go to page:</label>
+                <select class="form-control" id="pageNumber" name="pageNumber" (change)="changeSelectPage($event)">
+                  <option *ngFor="let number of pageNumbers">
+                    {{number}}
+                  </option>
+                </select>
+              </form>
             </div>
             <div class="col-12 col-lg-auto">
               <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true" [maxSize]="5">
