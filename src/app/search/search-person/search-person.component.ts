@@ -12,8 +12,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search-person.component.scss'],
 })
 export class SearchPersonComponent implements OnInit {
+  
   public loading = true;
-  public backdropPath: string = environment.backdropUrl;
 
   public currentPage: number;
   public resultsPerPage = 20;

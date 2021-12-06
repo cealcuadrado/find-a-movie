@@ -1,4 +1,4 @@
-.person-result {
+a.person-result {
   z-index: 100;
   text-decoration: none;
 
@@ -8,7 +8,29 @@
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+
+    .person-result-no-poster-available {
+      color: black;
+    }
+
+    .person-result-content {
+      font-size: 0.7rem;
+      width: 100%;
+      padding: 0.5rem;
+      background-color: rgba(0,0,0,0.75);
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    .search-result-body {
+      opacity: 0.75;
+    }
   }
 }
