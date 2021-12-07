@@ -1,20 +1,21 @@
-<a class="movie-result" href="#" [routerLink]="['/movie', searchResult.id]" [title]="setLocalOrForeignTitle()">
-  <div class="movie-result-body"
-    [ngStyle]="{'background':'url(' + setPosterUrl(searchResult.poster_path) + ')', 'background-size':'cover', 'background-position':'center'}">
+<a class="movie-result" href="#" [routerLink]="['/movie', searchResult.id]" [title]="setTitleAndYear()">
+  <div class="movie-result-body" [ngStyle]="setPoster()">
     <div class="movie-result-position"></div>
     <div class="movie-result-no-poster-available" *ngIf="!isPosterUrl(searchResult.poster_path)">
-      <i class="fas fa-unlink fa-fw"></i> No poster available
+      <small><i class="fas fa-unlink fa-fw"></i> No poster image available</small>
     </div>
     <div class="movie-result-content">
       <strong>{{setLocalOrForeignTitle()}}</strong>
       <br>
       <div *ngIf="searchResult.release_date; else noReleaseDate">
-        <span
-          *ngIf="!isDateEmpty(searchResult.release_date); else noReleaseDate">{{searchResult.release_date | date:'yyyy'}}</span>
+        <span *ngIf="!isDateEmpty(searchResult.release_date); else noReleaseDate">
+          {{searchResult.release_date | date:'yyyy'}}
+        </span>
       </div>
     </div>
   </div>
 </a>
+
 <ng-template #noReleaseDate>
   <span>No Release Date</span>
 </ng-template>
