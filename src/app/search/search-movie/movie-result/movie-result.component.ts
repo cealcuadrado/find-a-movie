@@ -8,16 +8,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-result.component.scss'],
 })
 export class MovieResultComponent implements OnInit {
-
+  
+  @Input() searchResult: MovieListResult;
   private posterUrl: string = environment.posterUrl;
 
   date: Date;
 
-  @Input() searchResult: MovieListResult;
-
   backgroundDefaultProperties = {
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   };
 
   constructor() {}
@@ -29,9 +28,11 @@ export class MovieResultComponent implements OnInit {
   public setPoster() {
     if (this.isPosterUrl(this.searchResult.poster_path)) {
       return {
-        backgroundImage: `url(${this.setPosterUrl(this.searchResult.poster_path)})`,
-        ...this.backgroundDefaultProperties
-      }
+        backgroundImage: `url(${this.setPosterUrl(
+          this.searchResult.poster_path
+        )})`,
+        ...this.backgroundDefaultProperties,
+      };
     } else {
       return {};
     }
@@ -48,7 +49,7 @@ export class MovieResultComponent implements OnInit {
   }
 
   public setTitleAndYear(): string {
-    return (`${this.setLocalOrForeignTitle()} (${this.setYear()})`);
+    return `${this.setLocalOrForeignTitle()} (${this.setYear()})`;
   }
 
   public setLocalOrForeignTitle(): string {
@@ -64,14 +65,13 @@ export class MovieResultComponent implements OnInit {
 
   public setYear(): number | string {
     if (this.searchResult.release_date) {
-       if (this.searchResult.release_date.length > 0) {
-         return this.date.getFullYear();
-       } else {
-         return 'No release date';
-       }
+      if (this.searchResult.release_date.length > 0) {
+        return this.date.getFullYear();
+      } else {
+        return 'No release date';
+      }
     } else {
       return 'No release date';
     }
-
   }
 }

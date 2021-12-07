@@ -18,6 +18,8 @@ export class PersonResultComponent implements OnInit {
 
   constructor() {}
 
+  ngOnInit(): void {}
+
   public setPosterUrl() {
     if (this.isPosterUrl(this.personResult.profile_path)) {
       return {
@@ -25,13 +27,11 @@ export class PersonResultComponent implements OnInit {
         ...this.backdropDefaultSettings,
       };
     } else {
-      return {}
+      return {};
     }
   }
 
   public isPosterUrl(posterPath: string | null) {
     return posterPath;
   }
-
-  ngOnInit(): void {}
 }
