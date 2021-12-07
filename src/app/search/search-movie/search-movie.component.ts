@@ -3,7 +3,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
-import { environment } from 'src/environments/environment';
 import { SearchService } from '../search.service';
 
 @Component({
@@ -14,7 +13,6 @@ import { SearchService } from '../search.service';
 export class SearchMovieComponent implements OnInit {
   public loadingView: boolean = true;
   public loadingResults: boolean = true;
-  public posterUrl: string = environment.posterUrl;
 
   public currentPage: number;
   public resultsPerPage = 20;
