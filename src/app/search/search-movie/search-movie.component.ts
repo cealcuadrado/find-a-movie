@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,8 @@ import { SearchService } from '../search.service';
   styleUrls: ['./search-movie.component.scss'],
 })
 export class SearchMovieComponent implements OnInit {
-  public flagLoadingResults: boolean = false;
+  public loadingView: boolean = true;
+  public loadingResults: boolean = true;
   public posterUrl: string = environment.posterUrl;
 
   public currentPage: number;
@@ -25,6 +27,8 @@ export class SearchMovieComponent implements OnInit {
 
   public pageNumbers: number[];
   public selectPage: number;
+
+  private searchSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,8 +46,12 @@ export class SearchMovieComponent implements OnInit {
   }
 
   private setSearch(): void {
+    this.loadingView = true;
+    this.loadingResults = true;
+
     this.activatedRoute.params.subscribe((params) => {
       this.searchQuery = params.query;
+      this.loadingView = false;
       this.firstSearch();
     });
   }
@@ -55,8 +63,7 @@ export class SearchMovieComponent implements OnInit {
   }
 
   private searchMovies(): void {
-    this.flagLoadingResults = true;
-    this.search.searchMovies(this.searchQuery, this.currentPage).subscribe(
+    this.searchSubscription = this.search.searchMovies(this.searchQuery, this.currentPage).subscribe(
       (querySearchResult) => {
         console.log(querySearchResult);
         if (querySearchResult.results) {
@@ -74,7 +81,7 @@ export class SearchMovieComponent implements OnInit {
         console.log(error);
       },
       () => {
-        this.flagLoadingResults = false;
+        this.loadingResults = false;
       }
     );
   }
@@ -107,5 +114,9 @@ export class SearchMovieComponent implements OnInit {
     this.selectPage = this.currentPage;
     this.window.scrollTo({ top: 0 });
     this.searchMovies();
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
   }
 }

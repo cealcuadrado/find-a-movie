@@ -1,13 +1,13 @@
-<main class="search search-movie">
+<main class="search search-movie" *ngIf="!loadingView; else loadView">
   <div class="container">
-    <div *ngIf="!flagLoadingResults; else loadingResults">
-      <header>
-        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i>Search Movie</h1>
-        <h2 class="text-uppercase"><i class="fas fa-film fa-fw"></i>{{searchQuery}}</h2>
-      </header>
+    <header>
+      <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search Movie</h1>
+      <h2 class="text-uppercase"><i class="fas fa-film fa-fw"></i> {{searchQuery}}</h2>
+    </header>
 
-      <hr />
+    <hr />
 
+    <div *ngIf="!loadingResults; else loadResults">
       <section class="search-results" *ngIf="searchResults.length > 0; else noResultsFound">
         <section class="current-page-info">
           <div class="row flex-column flex-lg-row mb-4">
@@ -52,14 +52,17 @@
         </section>
       </section>
     </div>
-    <ng-template #loadingResults>
-      <app-loading></app-loading>
-    </ng-template>
-    <ng-template #noResultsFound>
-      <div class="no-results">
-        <p>Sorry, no results found.</p>
-      </div>
-    </ng-template>
   </div>
 </main>
 
+<ng-template #loadView>
+  <app-loading></app-loading>
+</ng-template>
+<ng-template #loadResults>
+  <app-loading [center]="false"></app-loading>
+</ng-template>
+<ng-template #noResultsFound>
+  <div class="no-results">
+    <p>Sorry, no results found.</p>
+  </div>
+</ng-template>
