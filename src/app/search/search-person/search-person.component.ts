@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../search.service';
 import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search-person',
@@ -12,8 +11,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search-person.component.scss'],
 })
 export class SearchPersonComponent implements OnInit {
-  
-  public loading = true;
+
+  public loadingView: boolean = true;
+  public loadingResults: boolean = true;
 
   public currentPage: number;
   public resultsPerPage = 20;
@@ -45,9 +45,12 @@ export class SearchPersonComponent implements OnInit {
   }
 
   private setSearch(): void {
-    this.loading = true;
+    this.loadingView = true;
+    this.loadingResults = true;
+
     this.activatedRoute.params.subscribe((params) => {
       this.searchQuery = params.query;
+      this.loadingView = false;
       this.firstSearch();
     });
   }
@@ -71,7 +74,7 @@ export class SearchPersonComponent implements OnInit {
             `Search Results for: ${this.searchQuery} | Find a Movie`
           );
           this.generateSelectPageNumbers();
-          this.loading = false;
+          this.loadingResults = false;
         }
       });
   }

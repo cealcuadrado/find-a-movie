@@ -1,13 +1,13 @@
-<main class="search search-person">
+<main class="search search-person" *ngIf="!loadingView; else loadView">
   <div class="container">
-    <div *ngIf="!loading; else loadingResults">
-      <header>
-        <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search People</h1>
-        <h2 class="text-uppercase"><i class="fas fa-user fa-fw"></i> {{searchQuery}}</h2>
-      </header>
+    <header>
+      <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search People</h1>
+      <h2 class="text-uppercase"><i class="fas fa-user fa-fw"></i> {{searchQuery}}</h2>
+    </header>
 
-      <hr/>
+    <hr />
 
+    <div *ngIf="!loadingResults; else loadResults">
       <section class="search-results" *ngIf="searchResults.length > 0; else noResultsFound">
         <section class="current-page-info">
           <div class="row flex-column flex-lg-row mb-4">
@@ -50,14 +50,15 @@
           </div>
         </section>
       </section>
-
-
     </div>
   </div>
 </main>
 
-<ng-template #loadingResults>
+<ng-template #loadView>
   <app-loading></app-loading>
+</ng-template>
+<ng-template #loadResults>
+  <app-loading [center]="false"></app-loading>
 </ng-template>
 <ng-template #noResultsFound>
   <div class="no-results">
