@@ -23,4 +23,8 @@ export class SearchBarComponent implements OnInit {
   public changeSearchMode(searchMode: SearchMode): void {
     this.searchMode = searchMode;
   }
+
+  public isSameSearchMode(searchMode: SearchMode): string {
+    return (this.searchMode.name == searchMode.name) ? 'active' : '';
+  }
 }
