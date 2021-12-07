@@ -5,11 +5,25 @@
     margin-top: 0.5rem;
   }
 
-  .search-row {
-    & > *:not(:last-child) {
-      margin-right: 0.5rem;
-    }
+  .search-bar-column {
+    & > .col-auto {
+      padding-right: 0;
 
-    
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        @media screen and (max-width: 991px) {
+          padding-left: 0;
+        }
+      }
+
+      &:not(:last-child) {
+        @media screen and (max-width: 991px) {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
   }
 }
