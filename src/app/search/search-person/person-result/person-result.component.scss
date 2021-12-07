@@ -1,6 +1,7 @@
 a.person-result {
   z-index: 100;
   text-decoration: none;
+  font-family: 'Jost', 'Arial', 'sans-serif';
 
   .person-result-body {
     border: 1px solid black;
@@ -20,16 +21,18 @@ a.person-result {
       width: 100%;
       padding: 0.5rem;
       background-color: rgba(0,0,0,0.75);
+      border-top: 1px solid white;
       color: white;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: center;
+      text-transform: uppercase;
     }
   }
 
   &:hover {
-    .search-result-body {
+    .person-result-body {
       opacity: 0.75;
     }
   }

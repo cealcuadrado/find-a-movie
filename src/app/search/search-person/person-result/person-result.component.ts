@@ -18,21 +18,15 @@ export class PersonResultComponent implements OnInit {
 
   constructor() {}
 
-  public setPosterUrl(profilePath: string | null) {
-    if (this.isPosterUrl(profilePath)) {
+  public setPosterUrl() {
+    if (this.isPosterUrl(this.personResult.profile_path)) {
       return {
-        backgroundImage: `url(${this.backdropPath}${profilePath})`,
-        ...this.backdropDefaultSettings
-      }
+        backgroundImage: `url(${this.backdropPath}${this.personResult.profile_path})`,
+        ...this.backdropDefaultSettings,
+      };
     } else {
       return {}
     }
-
-    /*
-    return !posterPath
-      ? 'null'
-      : `${this.posterUrl}${this.searchResult.poster_path}`;
-    */
   }
 
   public isPosterUrl(posterPath: string | null) {
