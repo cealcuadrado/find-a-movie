@@ -25,12 +25,14 @@ export class PersonComponent implements OnInit {
   public personCastCredits: CastCredit[];
   public personCrewCredits: CrewCredit[];
 
+  public tabSubscription: Subscription;
   public personSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private person: PersonService,
-    private titleService: Title
+    private titleService: Title,
+    private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,12 @@ export class PersonComponent implements OnInit {
   }
 
   private setMainTab() {
-    this.currentTab = 1;
+    this.person.setCurrentTab(1);
+
+    this.tabSubscription = this.person.getCurrentTab().subscribe(currentTab => {
+      this.currentTab = currentTab;
+      this.window.scrollTo({ top: 50 });
+    });
   }
 
   private getPerson(): void {
@@ -105,6 +112,7 @@ export class PersonComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.tabSubscription.unsubscribe();
     this.personSubscription.unsubscribe();
   }
 }
