@@ -14,7 +14,7 @@ import { CrewCredit } from '../shared/interfaces/crew-credit';
 })
 export class PersonComponent implements OnInit {
 
-  public active = 1;
+  public currentTab = 1;
   public id: string;
   public loading = true;
 
@@ -40,7 +40,7 @@ export class PersonComponent implements OnInit {
   }
 
   private setMainTab() {
-    this.active = 1;
+    this.currentTab = 1;
   }
 
   private getPerson(): void {
