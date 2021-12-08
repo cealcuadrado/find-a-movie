@@ -1,25 +1,28 @@
-.search-form {
+.search-bar {
   position: relative;
 
   @media screen and (max-width: 991px) {
     margin-top: 0.5rem;
   }
 
-  .search-autocomplete {
-    position: absolute;
-    width: 100%;
-    background-color: white;
-    box-shadow: 5px 5px 5px black;
+  .search-bar-column {
+    & > .col-auto {
+      padding-right: 0;
 
-    .bar-result {
-      border: 0;
-      width: 100%;
-      cursor: pointer;
-      padding: 0.375rem 0.75rem;
+      &:first-child {
+        padding-left: 0;
+      }
 
-      &.active {
-        background-color: dodgerblue;
-        color: white;
+      &:last-child {
+        @media screen and (max-width: 991px) {
+          padding-left: 0;
+        }
+      }
+
+      &:not(:last-child) {
+        @media screen and (max-width: 991px) {
+          margin-bottom: 0.5rem;
+        }
       }
     }
   }

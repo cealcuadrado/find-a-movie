@@ -1,0 +1,30 @@
+<div class="flex-grow-1">
+  <form class="search-form search-movie-form" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
+    <div class="input-group">
+      <input
+        type="search"
+        class="form-control"
+        formControlName="movieQuery"
+        id="movieQuery"
+        name="movieQuery"
+        (input)="onSearchInput()"
+        (keydown)="onSearchKeyDown($event)"
+        placeholder="Enter movie title (Raiders of the Lost Ark, Jaws, etc.)" />
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-light btn-outline-dark">
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+    </div>
+    <div class="search-autocomplete" *ngIf="movieBarResults.length > 0">
+      <input
+        *ngFor="let barResult of movieBarResults; let i = index"
+        class="bar-result"
+        [ngClass]="{'active' : i+1 == currentResult}"
+        (click)="goToMovie(barResult.id)"
+        (mouseover)="onMouseOver($event, i)"
+        [value]="getFormattedTitle(barResult, barResult.release_date)">
+    </div>
+  </form>
+</div>
+

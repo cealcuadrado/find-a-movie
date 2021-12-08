@@ -18,9 +18,6 @@ import { FooterComponent } from './layouts/basic-layout/footer/footer.component'
 import { MainComponent } from './layouts/basic-layout/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-/* Services */
-import { MovieSearchService } from './shared/services/movie-search.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +44,6 @@ import { MovieSearchService } from './shared/services/movie-search.service';
       provide: Window,
       useValue: window
     },
-    MovieSearchService
   ],
   bootstrap: [AppComponent]
 })

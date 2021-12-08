@@ -1,12 +1,13 @@
 .search {
   padding-top: 5rem;
+  height: 100vh;
 
-  .pagination {
-    .page-select {
+  .nav-tabs {
+    &.nav {
+      a {
+        font-family: "Jost", "Arial", "sans-serif";
+        text-transform: uppercase;
+      }
     }
-  }
-
-  .loading, .no-results {
-    height: 65vh;
   }
 }

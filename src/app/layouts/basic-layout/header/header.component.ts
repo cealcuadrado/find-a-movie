@@ -1,9 +1,4 @@
-import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
-import { MovieSearchService } from '../../../shared/services/movie-search.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
