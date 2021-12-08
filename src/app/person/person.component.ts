@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { CastCredit } from './../shared/interfaces/cast-credit';
 import { PersonService } from './person.service';
 import { PersonDetail } from './../shared/interfaces/person-detail';
@@ -23,6 +24,8 @@ export class PersonComponent implements OnInit {
 
   public personCastCredits: CastCredit[];
   public personCrewCredits: CrewCredit[];
+
+  public personSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -66,7 +69,7 @@ export class PersonComponent implements OnInit {
   }
 
   private getPersonCredits(): void {
-    this.person.getMovieCredits(this.id).subscribe(movieCredits => {
+    this.personSubscription = this.person.getMovieCredits(this.id).subscribe(movieCredits => {
       console.log(movieCredits);
       this.personCastCredits = movieCredits.cast;
       this.personCrewCredits = movieCredits.crew;
@@ -99,5 +102,9 @@ export class PersonComponent implements OnInit {
 
   public hasAtLeastBirthOrDeathDay(birthday: string | null, deathday: string | null): boolean {
     return (birthday != null || deathday != null);
+  }
+
+  ngOnDestroy() {
+    this.personSubscription.unsubscribe();
   }
 }
