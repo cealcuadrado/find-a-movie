@@ -2,7 +2,7 @@ import { SearchService } from 'src/app/search/search.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
 
 @Component({
@@ -16,12 +16,16 @@ export class BarPeopleComponent implements OnInit {
   public personBarResults: PersonListResult[] = [];
   public currentResult: number = 0;
 
+  public showAutocompleteResults: boolean = true;
+
   public personSearchSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private search: SearchService
+    private search: SearchService,
+    private eRef: ElementRef,
+    private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -30,11 +34,20 @@ export class BarPeopleComponent implements OnInit {
     });
   }
 
-  public onSearchInput(): void {
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    this.showAutocompleteResults = this.eRef.nativeElement.contains(event.target);
+
+    if (this.showAutocompleteResults) {
+      this.onSearchInput(event);
+    }
+  }
+
+  public onSearchInput(event: any): void {
     let query = this.searchPeopleForm.value.personQuery;
 
-    if (query.length < 2) {
-      this.personBarResults = [];
+    if (!query || query.length < 2) {
+      this.resetAutocomplete();
       return;
     }
 
@@ -46,6 +59,13 @@ export class BarPeopleComponent implements OnInit {
           this.resetCurrentResult();
         }
       });
+  }
+
+  public onSearch(event: any): void {
+    this.window.setTimeout(() => {
+      this.searchPeopleForm.reset();
+      this.onSearchInput(event);
+    }, 250);
   }
 
   public onSubmitPeopleForm(event: any): void {
@@ -95,8 +115,13 @@ export class BarPeopleComponent implements OnInit {
   }
 
   public resetCurrentResult(): void {
+    this.showAutocompleteResults = true;
     this.currentResult = 0;
   }
 
-  ngOnDestroy() {}
+  public resetAutocomplete(): void {
+    this.showAutocompleteResults = false;
+    this.personBarResults = [];
+    this.currentResult = 0;
+  }
 }
