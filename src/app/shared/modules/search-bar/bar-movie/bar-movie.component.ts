@@ -1,9 +1,10 @@
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/search/search.service';
 import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-bar-movie',
@@ -16,12 +17,17 @@ export class BarMovieComponent implements OnInit {
   public movieBarResults: MovieListResult[] = [];
   public currentResult: number = 0;
 
+  public text: string;
+  public showAutocompleteResults: boolean = true;
+
   public movieSearchSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private search: SearchService
+    private search: SearchService,
+    private eRef: ElementRef,
+    private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -30,24 +36,40 @@ export class BarMovieComponent implements OnInit {
     });
   }
 
-  public onSearchInput(): void {
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    this.showAutocompleteResults = this.eRef.nativeElement.contains(
+      event.target
+    );
+
+    if (this.showAutocompleteResults) {
+      this.onSearchInput(event);
+    }
+  }
+
+  public onSearchInput(event: any): void {
     let query = this.searchForm.value.movieQuery;
 
-    if (query.length < 2) {
-      this.movieBarResults = [];
-      console.log(this.movieBarResults);
+    if (!query || query.length < 2) {
+      this.resetAutocomplete();
       return;
     }
 
     this.movieSearchSubscription = this.search
       .searchMovies(query, 1)
-      .subscribe(querySearchResult => {
+      .subscribe((querySearchResult) => {
         if (querySearchResult.results) {
-          console.log(querySearchResult.results);
           this.movieBarResults = querySearchResult.results.slice(0, 5);
           this.resetCurrentResult();
         }
       });
+  }
+
+  public onSearch(event: any): void {
+    this.window.setTimeout(() => {
+      this.searchForm.reset();
+      this.onSearchInput(event);
+    }, 250);
   }
 
   public onSubmit(event: any): void {
@@ -56,14 +78,15 @@ export class BarMovieComponent implements OnInit {
       this.goToMovie(this.movieBarResults[this.currentResult - 1].id);
     } else {
       let value = this.searchForm.value.movieQuery;
-      this.router.navigate(['/search/movie', value]).then(result => {
+      this.router.navigate(['/search/movie', value]).then((result) => {
         this.movieBarResults = [];
       });
     }
+    this.showAutocompleteResults = false;
   }
 
   public goToMovie(id: number): void {
-    this.router.navigate(['/movie', id]).then(result => {
+    this.router.navigate(['/movie', id]).then((result) => {
       this.movieBarResults = [];
     });
   }
@@ -114,6 +137,13 @@ export class BarMovieComponent implements OnInit {
   }
 
   public resetCurrentResult(): void {
+    this.showAutocompleteResults = true;
+    this.currentResult = 0;
+  }
+
+  public resetAutocomplete(): void {
+    this.showAutocompleteResults = false;
+    this.movieBarResults = [];
     this.currentResult = 0;
   }
 }
