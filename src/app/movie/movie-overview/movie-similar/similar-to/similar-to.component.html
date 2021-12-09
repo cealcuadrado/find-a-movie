@@ -1,4 +1,4 @@
-<a class="similar-to" href="#" [routerLink]="['/movie', movie.id]">
+<a class="similar-to" href="#" [routerLink]="['/movie', movie.id]" [title]="movie.title">
   <div class="similar-content" [ngStyle]="setPoster()">
     <div class="similar-position"></div>
     <div class="similar-no-poster-available" *ngIf="!isPosterUrl(movie.poster_path)">
