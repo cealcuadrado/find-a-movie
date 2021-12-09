@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./similar-to.component.scss'],
 })
 export class SimilarToComponent implements OnInit {
-
   private posterUrl = environment.posterUrl;
 
   @Input() movie: MovieListResult;
@@ -20,13 +19,13 @@ export class SimilarToComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   public setPoster() {
     if (this.isPosterUrl(this.movie.poster_path)) {
       return {
         backgroundImage: `url(${this.setPosterUrl(this.movie.poster_path)})`,
-        ...this.backgroundDefaultProperties
+        ...this.backgroundDefaultProperties,
       };
     } else {
       return {};
@@ -34,12 +33,20 @@ export class SimilarToComponent implements OnInit {
   }
 
   public setPosterUrl(posterPath: string | null) {
-    return !posterPath
-      ? 'null'
-      : `${this.posterUrl}${this.movie.poster_path}`;
+    return !posterPath ? 'null' : `${this.posterUrl}${this.movie.poster_path}`;
   }
 
   public isPosterUrl(posterPath: string | null) {
     return posterPath;
+  }
+
+  public setTitle(): string {
+    let year = !this.isDateEmpty() ? new Date(this.movie.release_date).getFullYear() : 'No Release Date';
+
+    return `${this.movie.title} (${year})`
+  }
+
+  public isDateEmpty(): boolean {
+    return this.movie.release_date.length == 0;
   }
 }
