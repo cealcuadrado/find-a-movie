@@ -23,6 +23,8 @@ import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component
 import { MovieHeaderComponent } from './movie-header/movie-header.component';
 import { MovieExternalLinksComponent } from './movie-overview/movie-external-links/movie-external-links.component';
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
+import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-similar.component';
+import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/similar-to.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { MovieOverviewComponent } from './movie-overview/movie-overview.componen
     MovieHeaderComponent,
     MovieExternalLinksComponent,
     MovieOverviewComponent,
+    MovieSimilarComponent,
+    SimilarToComponent,
   ],
   imports: [
     CommonModule,

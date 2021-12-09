@@ -1,0 +1,7 @@
+.movie-similar {
+  .movies-similar-to {
+    & > * {
+      margin-bottom: 1rem;
+    }
+  }
+}
