@@ -40,8 +40,8 @@ export class PersonCastResultComponent implements OnInit {
   public setStyle(poster: string | null) {
     return {
       height: `${this.height}px`,
-      ...this.setBackgroundPoster(poster)
-    }
+      ...this.setBackgroundPoster(poster),
+    };
   }
 
   public setBackgroundPoster(poster: string | null) {
@@ -59,7 +59,27 @@ export class PersonCastResultComponent implements OnInit {
     return url;
   }
 
-  isCharacterDefined(characterName: string | null): boolean {
+  public isCharacterDefined(characterName: string | null): boolean {
     return characterName != null && characterName.length > 0;
+  }
+
+  public setTitle(): string {
+    let year: number | string;
+
+    let setCharacter = this.isCharacterDefined(this.credit.character)
+      ? this.credit.character
+      : 'No character specified';
+
+    if (!this.isDateEmpty()) {
+      year = new Date(this.credit.release_date).getFullYear();
+    } else {
+      year = 'No release date';
+    }
+
+    return `${setCharacter} in "${this.credit.title}" (${year})`;
+  }
+
+  public isDateEmpty(): boolean {
+    return this.credit.release_date.length == 0;
   }
 }
