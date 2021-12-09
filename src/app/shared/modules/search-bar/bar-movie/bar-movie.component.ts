@@ -17,7 +17,6 @@ export class BarMovieComponent implements OnInit {
   public movieBarResults: MovieListResult[] = [];
   public currentResult: number = 0;
 
-  public text: string;
   public showAutocompleteResults: boolean = true;
 
   public movieSearchSubscription: Subscription;
