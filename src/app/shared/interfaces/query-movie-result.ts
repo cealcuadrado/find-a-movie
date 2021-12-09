@@ -1,6 +1,6 @@
-import { MovieListResult } from './movie-list-result';
+import { MovieListResult } from "./movie-list-result";
 
-export interface QuerySearchResult {
+export interface QueryMovieResult {
   page: number;
   results: MovieListResult[];
   total_results: number;

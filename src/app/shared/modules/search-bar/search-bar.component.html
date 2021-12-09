@@ -1,18 +1,25 @@
-<div class="search-form">
-  <form class="flex-grow-1" [formGroup]="searchForm" (ngSubmit)="onSubmit($event)">
-    <div class="input-group">
-      <input type="search" class="form-control" placeholder="Enter a title" list="foo" formControlName="searchQuery"
-        (input)="onSearchInput()" (keydown)="onSearchKeyDown($event)" />
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-light btn-outline-dark">
-          <i class="fas fa-search fa-fw"></i>
+<div class="search-bar">
+  <div class="d-flex flex-column flex-lg-row search-bar-column">
+    <div class="col-auto">
+      <div ngbDropdown aria-label="Change search mode">
+        <button class="btn btn-light btn-outline-dark btn-block" type="button" id="searchModeDropdown" ngbDropdownToggle>
+          <i class="fa fa-fw" [ngClass]="searchMode.icon"></i> {{searchMode.name}}
         </button>
+        <div ngbDropdownMenu aria-labelledby="searchModeDropdown">
+          <button *ngFor="let dropdownSearchMode of searchModes" ngbDropdownItem
+            (click)="changeSearchMode(dropdownSearchMode)" type="button"
+            [ngClass]="isSameSearchMode(dropdownSearchMode)">
+            <i class="fa fa-fw" [ngClass]="dropdownSearchMode.icon"></i>
+            {{dropdownSearchMode.name}}
+          </button>
+        </div>
       </div>
     </div>
-    <div class="search-autocomplete" *ngIf="barResults.length > 0">
-      <input *ngFor="let barResult of barResults; let i = index" class="bar-result"
-        [ngClass]="{'active' : i+1 == currentResult}" (click)="goToMovie(barResult.id)"
-        (mouseover)="onMouseOver($event, i)" [value]="getFormattedTitle(barResult, barResult.release_date)">
+    <div class="col-auto flex-grow-1" *ngIf="searchMode.value == 'movies'">
+      <app-bar-movie></app-bar-movie>
     </div>
-  </form>
+    <div class="col-auto flex-grow-1" *ngIf="searchMode.value == 'people'">
+      <app-bar-people></app-bar-people>
+    </div>
+  </div>
 </div>

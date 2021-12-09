@@ -1,0 +1,67 @@
+<main class="search search-person" *ngIf="!loadingView; else loadView">
+  <div class="container">
+    <header>
+      <h1 class="text-uppercase"><i class="fas fa-search fa-fw"></i> Search People</h1>
+      <h2 class="text-uppercase"><i class="fas fa-user fa-fw"></i> {{searchQuery}}</h2>
+    </header>
+
+    <hr />
+
+    <div *ngIf="!loadingResults; else loadResults">
+      <section class="search-results" *ngIf="searchResults.length > 0; else noResultsFound">
+        <section class="current-page-info">
+          <div class="row flex-column flex-lg-row mb-4">
+            <div class="col-auto mr-auto">
+              <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of
+                <strong>{{totalResults}}</strong> total results</div>
+            </div>
+            <div class="col-auto">
+              <div>Page <strong>{{currentPage}}</strong> of <strong>{{totalPages}}</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="results-body">
+          <div class="row">
+            <div
+              *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: resultsPerPage, currentPage: currentPage, totalItems: totalResults}"
+              class="col-12 col-md-6 col-lg-3">
+              <app-person-result [personResult]="searchResult"></app-person-result>
+            </div>
+          </div>
+        </section>
+
+        <section class="search-pagination">
+          <div class="row flex-column flex-lg-row align-items-center justify-content-lg-between mb-4">
+            <div class="col-12 col-lg-auto mr-auto">
+              <form class="form-inline mb-4" *ngIf="totalPages > 1">
+                <label class="mr-2" fo="pageNumber">Go to page:</label>
+                <select class="form-control" id="pageNumber" name="pageNumber" (change)="changeSelectPage($event)">
+                  <option *ngFor="let number of pageNumbers">
+                    {{number}}
+                  </option>
+                </select>
+              </form>
+            </div>
+            <div class="col-12 col-lg-auto">
+              <pagination-controls (pageChange)="onPageChange($event)" [autoHide]="true" [maxSize]="5">
+              </pagination-controls>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+</main>
+
+<ng-template #loadView>
+  <app-loading></app-loading>
+</ng-template>
+<ng-template #loadResults>
+  <app-loading [center]="false"></app-loading>
+</ng-template>
+<ng-template #noResultsFound>
+  <div class="no-results">
+    <p>Sorry, no results found.</p>
+  </div>
+</ng-template>
