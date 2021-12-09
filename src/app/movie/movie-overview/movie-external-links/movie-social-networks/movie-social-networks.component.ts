@@ -41,6 +41,10 @@ export class MovieSocialNetworksComponent implements OnInit {
     });
   }
 
+  public allSocialNetworksAreNull(): boolean {
+    return (this.facebookId == null) && (this.instagramId == null) && (this.twitterId == null);
+  }
+
   ngOnDestroy(): void {
     this.movieSocialNetworksSubscription.unsubscribe();
   }
