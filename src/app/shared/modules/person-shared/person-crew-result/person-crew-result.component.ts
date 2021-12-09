@@ -29,7 +29,7 @@ export class PersonCrewResultComponent implements OnInit {
     this.setCredits();
   }
 
-  setCredits(): void {
+  public setCredits(): void {
     this.loading = false;
   }
 
@@ -40,7 +40,7 @@ export class PersonCrewResultComponent implements OnInit {
   public setStyle(poster: string | null) {
     return {
       height: `${this.height}px`,
-      ...this.setBackgroundPoster(poster)
+      ...this.setBackgroundPoster(poster),
     };
   }
 
@@ -57,5 +57,22 @@ export class PersonCrewResultComponent implements OnInit {
 
   public setPosterUrl(url: string): string {
     return url;
+  }
+
+  public isRoleDefined(): boolean {
+    return this.credit.job != null && this.credit.job.length > 0;
+  }
+
+  public setTitle(): string {
+    let year: number | string;
+
+    let setRole = this.isRoleDefined() ? this.credit.job : 'No Role Specified';
+    year = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
+
+    return `${setRole} in "${this.credit.title}" (${year})`;
+  }
+
+  public isDateEmpty(): boolean {
+    return this.credit.release_date.length == 0;
   }
 }
