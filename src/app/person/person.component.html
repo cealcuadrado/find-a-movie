@@ -19,7 +19,7 @@
       </div>
     </header>
     <main class="person-body">
-      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="currentTab" class="nav-tabs">
         <li [ngbNavItem]="1">
           <a ngbNavLink>Overview</a>
           <ng-template ngbNavContent>
@@ -62,5 +62,5 @@
 </ng-template>
 
 <ng-template #loadingPerson>
-  <app-loading></app-loading>
+  <app-loading [center]="true"></app-loading>
 </ng-template>
