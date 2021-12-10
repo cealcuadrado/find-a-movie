@@ -1,17 +1,40 @@
 <aside class="external-links" *ngIf="!loading; else nowLoading">
-  <a *ngIf="movieDetail.imdb_id != null" [href]="setImdbUrl(movieDetail.imdb_id)" target="_blank"
-    class="btn btn-block btn-content btn-warning">
-    <i class="fab fa-imdb fa-fw"></i> IMDB Profile
-  </a>
-  <a *ngIf="movieDetail.imdb_id != null" [href]="setBoxOfficeMojoLink()" target="_blank"
-    class="btn btn-block btn-content btn-warning">
-    <i class="fas fa-ticket-alt fa-fw"></i> Box Office Mojo Profile
-  </a>
-  <a *ngIf="isHomepageEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank"
-    class="btn btn-block btn-content btn-primary">
-    <i class="fas fa-globe fa-fw"></i> Official Website
-  </a>
-  <app-movie-social-networks [id]="id"></app-movie-social-networks>
+  <div class="imdb-links">
+    <a *ngIf="movieDetail.imdb_id != null" [href]="setImdbUrl(movieDetail.imdb_id)" target="_blank"
+      class="btn btn-block btn-content btn-warning">
+      <i class="fab fa-imdb fa-fw"></i> IMDB Profile
+    </a>
+    <a *ngIf="movieDetail.imdb_id != null" [href]="setBoxOfficeMojoLink()" target="_blank"
+      class="btn btn-block btn-content btn-warning">
+      <i class="fas fa-ticket-alt fa-fw"></i> Box Office Mojo Profile
+    </a>
+    <a *ngIf="!isStrEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank"
+      class="btn btn-block btn-content btn-primary">
+      <i class="fas fa-globe fa-fw"></i> Official Website
+    </a>
+  </div>
+
+  <hr *ngIf="!isStrEmpty(movieDetail.homepage) || !isStrEmpty(movieDetail.imdb_id)" />
+
+  <div class="social-networks">
+    <div class="btn-group-vertical btn-content btn-block" role="group" aria-label="Movie Social Networks"
+      *ngIf="!allSocialNetworksAreNull()">
+      <a *ngIf="facebookId" href="https://facebook.com/{{facebookId}}" class="btn btn-info" target="_blank"
+        title="Facebook">
+        <i class="fab fa-facebook-f fa-fw"></i> Facebook Page
+      </a>
+      <a *ngIf="twitterId" href="https://twitter.com/{{twitterId}}" class="btn btn-info" target="_blank"
+        title="Twitter">
+        <i class="fab fa-twitter fa-fw"></i> Twitter Profile
+      </a>
+      <a *ngIf="instagramId" href="https://instagram.com/{{instagramId}}" class="btn btn-info" target="_blank"
+        title="Instagram">
+        <i class="fab fa-instagram fa-fw"></i> Instagram Profile
+      </a>
+    </div>
+  </div>
+
+  <hr *ngIf="!allSocialNetworksAreNull()" />
 </aside>
 
 <ng-template #nowLoading>
