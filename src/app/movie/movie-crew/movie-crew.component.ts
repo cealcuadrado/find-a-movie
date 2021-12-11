@@ -113,15 +113,11 @@ export class MovieCrewComponent implements OnInit {
   }
 
   private getBasedOnCharacters(): void {
-    console.log('getBasedOnCharacters()');
-
     let basedOnCharacterAuthors = this.crew
       .filter(member => member.job === 'Characters')
       .map(member => {
         return { name: member.name, id: member.id };
       });
-
-    console.log(basedOnCharacterAuthors);
 
     if (basedOnCharacterAuthors.length > 0) {
       this.isBasedOnCharacters = true;
