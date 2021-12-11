@@ -24,6 +24,7 @@ import { MovieExternalLinksComponent } from './movie-overview/movie-external-lin
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
 import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-similar.component';
 import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/similar-to.component';
+import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/si
     MovieOverviewComponent,
     MovieSimilarComponent,
     SimilarToComponent,
+    SimilarMoviesComponent
   ],
   imports: [
     CommonModule,

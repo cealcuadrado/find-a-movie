@@ -31,6 +31,12 @@
               <app-movie-crew [crew]="crew"></app-movie-crew>
             </ng-template>
           </li>
+          <li [ngbNavItem]="4">
+            <a ngbNavLink>Similar Movies</a>
+            <ng-template ngbNavContent>
+              <app-similar-movies></app-similar-movies>
+            </ng-template>
+          </li>
         </ul>
 
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
