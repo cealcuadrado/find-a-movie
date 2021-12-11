@@ -14,7 +14,7 @@
             </td>
           </tr>
           <tr *ngIf="writing && writing.length > 0">
-            <th>Written by</th>
+            <th>Written by:</th>
             <td>
               <div *ngFor="let writer of writing">
                 <a href="#" [routerLink]="['/person', writer.id]">
@@ -49,6 +49,16 @@
               <div *ngFor="let originalWorkAuthor of basedOnWorkAuthors">
                 <a href="#" [routerLink]="['/person', originalWorkAuthor.id]">
                   {{originalWorkAuthor.name}}
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="isBasedOnCharacters && basedOnCharacterAuthors && basedOnCharacterAuthors.length > 0">
+            <th>Based on characters created by:</th>
+            <td>
+              <div *ngFor="let characterAuthor of basedOnCharacterAuthors">
+                <a href="#" [routerLink]="['/person', characterAuthor.id]">
+                  {{characterAuthor.name}}
                 </a>
               </div>
             </td>

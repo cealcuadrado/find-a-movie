@@ -30,6 +30,9 @@ export class MovieCrewComponent implements OnInit {
   public isBasedOnWork: boolean = false;
   public basedOnWorkAuthors: PersonLink[] = [];
 
+  public isBasedOnCharacters: boolean = false;
+  public basedOnCharacterAuthors: PersonLink[] = [];
+
   constructor() {}
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class MovieCrewComponent implements OnInit {
     this.getScreenPlayers();
     this.getStoryPlayers();
     this.getBasedOnWork();
+    this.getBasedOnCharacters();
     this.getProducers();
     this.getExecutiveProducers();
     this.getCinematographers();
@@ -105,6 +109,25 @@ export class MovieCrewComponent implements OnInit {
       this.basedOnWorkAuthors = basedOnWorkAuthors;
     } else {
       this.isBasedOnWork = false;
+    }
+  }
+
+  private getBasedOnCharacters(): void {
+    console.log('getBasedOnCharacters()');
+
+    let basedOnCharacterAuthors = this.crew
+      .filter(member => member.job === 'Characters')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+
+    console.log(basedOnCharacterAuthors);
+
+    if (basedOnCharacterAuthors.length > 0) {
+      this.isBasedOnCharacters = true;
+      this.basedOnCharacterAuthors = basedOnCharacterAuthors;
+    } else {
+      this.isBasedOnCharacters = false;
     }
   }
 
