@@ -9,7 +9,6 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./cast-and-crew-summary.component.scss'],
 })
 export class CastAndCrewSummaryComponent implements OnInit {
-  
   public loading: boolean = true;
 
   @Input() cast: Cast[] = [];
@@ -24,6 +23,9 @@ export class CastAndCrewSummaryComponent implements OnInit {
 
   public isBasedOnWork: boolean = false;
   public basedOnWork: PersonLink[];
+
+  public isBasedOnCharacters: boolean = false;
+  public basedOnCharacterAuthors: PersonLink[] = [];
 
   constructor() {}
 
@@ -44,6 +46,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
     this.getProducers();
     this.getCast();
     this.getBasedOnWork();
+    this.getBasedOnCharacters();
     this.loading = false;
   }
 
@@ -93,6 +96,21 @@ export class CastAndCrewSummaryComponent implements OnInit {
       this.basedOnWork = basedOnWorkOf;
     } else {
       this.isBasedOnWork = false;
+    }
+  }
+
+  private getBasedOnCharacters(): void {
+    let basedOnCharacterAuthors = this.crew
+      .filter((member) => member.job === 'Characters')
+      .map((member) => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (basedOnCharacterAuthors.length > 0) {
+      this.isBasedOnCharacters = true;
+      this.basedOnCharacterAuthors = basedOnCharacterAuthors;
+    } else {
+      this.isBasedOnCharacters = false;
     }
   }
 

@@ -34,6 +34,13 @@
       <span *ngIf="i+1 != basedOnWork.length" class="mr-1">,</span>
     </span>
   </p>
+  <p *ngIf="isBasedOnCharacters && basedOnCharacterAuthors && basedOnCharacterAuthors.length > 0">
+    <strong class="mr-1">Based on characters created by:</strong>
+    <span *ngFor="let characterAuthor of basedOnCharacterAuthors; let i=index">
+      <a href="#" [routerLink]="['/person', characterAuthor.id]">{{characterAuthor.name}}</a>
+      <span *ngIf="i+1 != basedOnCharacterAuthors.length" class="mr-1">,</span>
+    </span>
+  </p>
   <p *ngIf="production && production.length > 0">
     <strong class="mr-1">Produced by:</strong>
     <span *ngFor="let producer of production; let i = index">
