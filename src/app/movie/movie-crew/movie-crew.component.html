@@ -1,6 +1,4 @@
-<p>Movie Crew</p>
-<!--
-<section class="crew">
+<section class="crew" *ngIf="!loading; else nowLoading">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
       <div class="table-responsive">
@@ -180,5 +178,8 @@
     </div>
   </div>
 </section>
--->
+
+<ng-template #nowLoading>
+  <app-loading></app-loading>
+</ng-template>
 

@@ -1,3 +1,7 @@
+import { Title } from '@angular/platform-browser';
+import { MovieService } from './../movie.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PersonLink } from './../../shared/interfaces/person-link';
 import { Component, Input, OnInit } from '@angular/core';
 import { Crew } from 'src/app/shared/interfaces/crew';
@@ -10,7 +14,8 @@ import { Crew } from 'src/app/shared/interfaces/crew';
 export class MovieCrewComponent implements OnInit {
   public loading: boolean = true;
 
-  @Input() crew: Crew[] = [];
+  public id: string;
+  public crew: Crew[] = [];
 
   public direction: PersonLink[] = [];
   public writing: PersonLink[] = [];
@@ -33,17 +38,40 @@ export class MovieCrewComponent implements OnInit {
   public isBasedOnCharacters: boolean = false;
   public basedOnCharacterAuthors: PersonLink[] = [];
 
-  constructor() {}
+  private activatedRouteSubscription: Subscription | undefined;
+  private movieCrewSubscription: Subscription;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private movie: MovieService,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
-    this.setCrew();
+    this.setCrewView();
   }
 
   ngOnChanges(): void {
-    this.setCrew();
+    this.setCrewView();
   }
 
-  private setCrew(): void {
+  private setCrewView(): void {
+    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
+      if (params.id) {
+        this.id = params.id;
+        this.getCrew();
+      }
+    });
+  }
+
+  private getCrew(): void {
+    this.movieCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe(result => {
+      this.crew = result.crew;
+      this.setCrewContent();
+    });
+  }
+
+  private setCrewContent(): void {
     this.getDirection();
     this.getWriting();
     this.getScreenPlayers();
@@ -205,5 +233,10 @@ export class MovieCrewComponent implements OnInit {
       .map(member => {
         return { name: member.name, id: member.id };
       });
+  }
+
+  ngOnDestroy() {
+    this.activatedRouteSubscription?.unsubscribe();
+    this.movieCrewSubscription.unsubscribe();
   }
 }
