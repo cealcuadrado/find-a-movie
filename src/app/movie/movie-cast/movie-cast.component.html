@@ -1,5 +1,3 @@
-<p>Movie Cast</p>
-<!--
 <section class="cast">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
@@ -26,7 +24,10 @@
     </div>
   </div>
 </section>
--->
+
+<ng-template #nowLoading>
+  <app-loading [center]="true"></app-loading>
+</ng-template>
 
 <ng-template #noCharacter>
   No character specified
