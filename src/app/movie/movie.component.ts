@@ -1,7 +1,6 @@
 import { Subscription } from 'rxjs';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
 import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
-import { environment } from './../../environments/environment';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +22,8 @@ export class MovieComponent implements OnInit {
   public movieDetail: MovieDetail;
   public id: string;
 
-  public cast: Cast[] = [];
+  public castResults: number = 0;
+  public crewResults: number = 0;
   public crew: Crew[] = [];
 
   @ViewChild(CastAndCrewSummaryComponent, { static: true })
@@ -81,7 +81,8 @@ export class MovieComponent implements OnInit {
 
   private getCastAndCrew(): void {
     this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
-      this.cast = result.cast;
+      this.castResults = result.cast.length;
+      this.crewResults = result.crew.length;
       this.crew = result.crew;
     });
   }

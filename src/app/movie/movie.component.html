@@ -17,6 +17,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link"
+              *ngIf="castResults > 0"
               [routerLink]="['/movie', movieDetail.id, 'cast']"
               routerLinkActive="active" href="#">
               Cast
@@ -24,6 +25,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link"
+              *ngIf="crewResults > 0"
               [routerLink]="['/movie', movieDetail.id, 'crew']"
               routerLinkActive="active" href="#">
               Crew
@@ -39,42 +41,6 @@
         </ul>
 
         <router-outlet></router-outlet>
-
-        <!--
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-          <li [ngbNavItem]="1">
-            <a ngbNavLink>Overview</a>
-            <ng-template ngbNavContent>
-              <app-movie-overview
-                [id]="id"
-                [movieDetail]="movieDetail"
-                [cast]="cast"
-                [crew]="crew">
-              </app-movie-overview>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="2" *ngIf="cast.length > 0">
-            <a ngbNavLink>Cast</a>
-            <ng-template ngbNavContent>
-              <app-movie-cast [cast]="cast"></app-movie-cast>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="3" *ngIf="crew.length > 0">
-            <a ngbNavLink>Crew</a>
-            <ng-template ngbNavContent>
-              <app-movie-crew [crew]="crew"></app-movie-crew>
-            </ng-template>
-          </li>
-          <li [ngbNavItem]="4">
-            <a ngbNavLink>Similar Movies</a>
-            <ng-template ngbNavContent>
-              <app-similar-movies></app-similar-movies>
-            </ng-template>
-          </li>
-        </ul>
-
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-        -->
       </div>
     </main>
   </section>
