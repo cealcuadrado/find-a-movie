@@ -6,6 +6,13 @@
       <span *ngIf="i+1 != direction.length" class="mr-1">,</span>
     </span>
   </p>
+  <p *ngIf="isCoDirected && coDirection && coDirection.length > 0">
+    <strong class="mr-1">Co-Directed by:</strong>
+    <span *ngFor="let coDirector of coDirection; let i = index">
+      <a href="#" [routerLink]="['/person', coDirector.id]">{{coDirector.name}}</a>
+      <span *ngIf="i+1 != coDirection.length" class="mr-1">,</span>
+    </span>
+  </p>
   <p *ngIf="writing && writing.length > 0">
     <strong class="mr-1">Written by:</strong>
     <span *ngFor="let writer of writing; let i = index">

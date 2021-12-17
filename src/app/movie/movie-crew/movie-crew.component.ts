@@ -32,6 +32,9 @@ export class MovieCrewComponent implements OnInit {
   public coProducers: PersonLink[] = [];
   public castingPeople: PersonLink[] = [];
 
+  public isCoDirected: boolean = false;
+  public coDirection: PersonLink[] = [];
+
   public isBasedOnWork: boolean = false;
   public basedOnWorkAuthors: PersonLink[] = [];
 
@@ -48,31 +51,37 @@ export class MovieCrewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.setCrewView();
   }
 
   ngOnChanges(): void {
+    this.loading = true;
     this.setCrewView();
   }
 
   private setCrewView(): void {
-    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
-      if (params.id) {
-        this.id = params.id;
-        this.getCrew();
-      }
-    });
+    this.activatedRouteSubscription =
+      this.activatedRoute.parent?.params.subscribe((params) => {
+        if (params.id) {
+          this.id = params.id;
+          this.getCrew();
+        }
+      });
   }
 
   private getCrew(): void {
-    this.movieCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe(result => {
-      this.crew = result.crew;
-      this.setCrewContent();
-    });
+    this.movieCrewSubscription = this.movie
+      .getCastAndCrew(this.id)
+      .subscribe((result) => {
+        this.crew = result.crew;
+        this.setCrewContent();
+      });
   }
 
   private setCrewContent(): void {
     this.getDirection();
+    this.getCoDirection();
     this.getWriting();
     this.getScreenPlayers();
     this.getStoryPlayers();
@@ -93,42 +102,57 @@ export class MovieCrewComponent implements OnInit {
 
   private getDirection(): void {
     this.direction = this.crew
-      .filter(member => member.job == 'Director')
-      .map(member => {
+      .filter((member) => member.job === 'Director')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
+  private getCoDirection(): void {
+    let coDirection = this.crew
+      .filter(member => member.job === 'Co-Director')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (coDirection.length > 0) {
+      this.isCoDirected = true;
+      this.coDirection = coDirection;
+    } else {
+      this.isCoDirected = false;
+    }
+  }
+
   private getWriting(): void {
     this.writing = this.crew
-      .filter(member => member.job === 'Writer')
-      .map(member => {
+      .filter((member) => member.job === 'Writer')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getScreenPlayers(): void {
     this.screenPlayers = this.crew
-      .filter(member => member.job === 'Screenplay')
-      .map(member => {
+      .filter((member) => member.job === 'Screenplay')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getStoryPlayers(): void {
     this.storyPlayers = this.crew
-      .filter(member => member.job === 'Story')
-      .map(member => {
+      .filter((member) => member.job === 'Story')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getBasedOnWork(): void {
     let basedOnWorkAuthors = this.crew
-      .filter(member => {
+      .filter((member) => {
         return member.job === 'Novel' || member.job === 'Author';
       })
-      .map(member => {
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
 
@@ -142,8 +166,8 @@ export class MovieCrewComponent implements OnInit {
 
   private getBasedOnCharacters(): void {
     let basedOnCharacterAuthors = this.crew
-      .filter(member => member.job === 'Characters')
-      .map(member => {
+      .filter((member) => member.job === 'Characters')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
 
@@ -157,80 +181,83 @@ export class MovieCrewComponent implements OnInit {
 
   private getProducers(): void {
     this.producers = this.crew
-      .filter(member => member.job === 'Producer')
-      .map(member => {
+      .filter((member) => member.job === 'Producer')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getExecutiveProducers(): void {
     this.executiveProducers = this.crew
-      .filter(member => member.job === 'Executive Producer')
-      .map(member => {
+      .filter((member) => member.job === 'Executive Producer')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getCinematographers(): void {
     this.cinematographers = this.crew
-      .filter(member => member.job === 'Director of Photography')
-      .map(member => {
+      .filter((member) => member.job === 'Director of Photography')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getProductionDesigners(): void {
     this.productionDesigners = this.crew
-      .filter(member => member.job === 'Production Design')
-      .map(member => {
+      .filter((member) => member.job === 'Production Design')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getEditors(): void {
     this.editors = this.crew
-      .filter(member => member.job === 'Editor')
-      .map(member => {
+      .filter((member) => member.job === 'Editor')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getCostumeDesigners(): void {
     this.costumeDesigners = this.crew
-      .filter(member => member.job === 'Costume Design')
-      .map(member => {
+      .filter((member) => member.job === 'Costume Design')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getMusicComposers(): void {
     this.musicComposers = this.crew
-      .filter(member => member.job === 'Original Music Composer' || member.job === 'Music')
-      .map(member => {
+      .filter(
+        (member) =>
+          member.job === 'Original Music Composer' || member.job === 'Music'
+      )
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getMusicSupervisors(): void {
     this.musicSupervisors = this.crew
-      .filter(member => member.job === 'Music Supervisor')
-      .map(member => {
+      .filter((member) => member.job === 'Music Supervisor')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getCoProducers(): void {
     this.coProducers = this.crew
-      .filter(member => member.job === 'Co-Producer')
-      .map(member => {
+      .filter((member) => member.job === 'Co-Producer')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }
 
   private getCastingPeople(): void {
     this.castingPeople = this.crew
-      .filter(member => member.job === 'Casting')
-      .map(member => {
+      .filter((member) => member.job === 'Casting')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
   }

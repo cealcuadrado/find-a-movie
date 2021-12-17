@@ -21,6 +21,9 @@ export class CastAndCrewSummaryComponent implements OnInit {
   public production: PersonLink[] = [];
   public movieCast: PersonLink[] = [];
 
+  public isCoDirected: boolean = false;
+  public coDirection: PersonLink[] = [];
+
   public isBasedOnWork: boolean = false;
   public basedOnWork: PersonLink[];
 
@@ -40,6 +43,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
 
   private setCastAndCrew(): void {
     this.getDirection();
+    this.getCoDirection();
     this.getWriting();
     this.getScreenplay();
     this.getStory();
@@ -56,6 +60,21 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+  }
+
+  private getCoDirection(): void {
+    let coDirection = this.crew
+      .filter(member => member.job === 'Co-Director')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (coDirection.length > 0) {
+      this.isCoDirected = true;
+      this.coDirection = coDirection;
+    } else {
+      this.isCoDirected = false;
+    }
   }
 
   private getWriting(): void {
