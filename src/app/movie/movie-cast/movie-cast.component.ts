@@ -2,9 +2,8 @@ import { Title } from '@angular/platform-browser';
 import { MovieService } from './../movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cast } from 'src/app/shared/interfaces/cast';
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Component({
   selector: 'app-movie-cast',
@@ -28,14 +27,14 @@ export class MovieCastComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.setCast();
+    this.setCastView();
   }
 
   ngOnChanges(): void {
-    this.setCast();
+    this.setCastView();
   }
 
-  private setCast(): void {
+  private setCastView(): void {
     this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(
       params => {
         if (params.id) {
@@ -53,6 +52,7 @@ export class MovieCastComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.activatedRouteSubscription?.unsubscribe();
     this.movieCastSubscription.unsubscribe();
   }
 }

@@ -1,9 +1,9 @@
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { MovieService } from './../movie.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from './../../shared/interfaces/movie-detail';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cast } from 'src/app/shared/interfaces/cast';
 import { Crew } from 'src/app/shared/interfaces/crew';
 import { environment } from 'src/environments/environment';
@@ -30,7 +30,6 @@ export class MovieOverviewComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
     private movie: MovieService,
     private titleService: Title
   ) {}
@@ -50,7 +49,6 @@ export class MovieOverviewComponent implements OnInit {
   private setOverview(): void {
     this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(
       (params) => {
-        console.log(params);
         if (params.id) {
           this.id = params.id;
           this.getDetails();
@@ -64,7 +62,6 @@ export class MovieOverviewComponent implements OnInit {
     this.movieDetailSubscription = this.movie
       .getMovieDetail(this.id)
       .subscribe((detail) => {
-        console.log(detail);
         if (Object.values(detail).length > 0) {
           this.movieDetail = detail;
           this.setWindowTitle();
@@ -106,10 +103,7 @@ export class MovieOverviewComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.activatedRouteSubscription) {
-      this.activatedRouteSubscription.unsubscribe();
-    }
-
+    this.activatedRouteSubscription?.unsubscribe();
     this.movieDetailSubscription.unsubscribe();
     this.movieCastAndCrewSubscription.unsubscribe();
   }

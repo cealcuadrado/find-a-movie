@@ -3,7 +3,7 @@ import { MovieService } from './../movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PersonLink } from './../../shared/interfaces/person-link';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Crew } from 'src/app/shared/interfaces/crew';
 
 @Component({
