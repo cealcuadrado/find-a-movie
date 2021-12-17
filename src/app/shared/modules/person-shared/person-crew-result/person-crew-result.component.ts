@@ -73,6 +73,9 @@ export class PersonCrewResultComponent implements OnInit {
   }
 
   public isDateEmpty(): boolean {
-    return this.credit.release_date.length == 0;
+    return (
+      this.credit.release_date == (undefined || null) ||
+      this.credit.release_date.length == 0
+    );
   }
 }
