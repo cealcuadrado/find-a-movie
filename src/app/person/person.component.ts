@@ -22,8 +22,8 @@ export class PersonComponent implements OnInit {
   public personDetail: PersonDetail;
   private backdropUrl: string = environment.backdropUrl;
 
-  public personCastCredits: CastCredit[];
-  public personCrewCredits: CrewCredit[];
+  public personCastResults: number = 0;
+  public personCrewResults: number = 0;
 
   public tabSubscription: Subscription;
   public personSubscription: Subscription;
@@ -68,8 +68,8 @@ export class PersonComponent implements OnInit {
       console.log(person);
       if (Object.values(person).length > 0) {
         this.personDetail = person;
-        this.setTitle();
         this.getPersonCredits();
+        this.setTitle();
       }
       this.loading = false;
     });
@@ -77,9 +77,8 @@ export class PersonComponent implements OnInit {
 
   private getPersonCredits(): void {
     this.personSubscription = this.person.getMovieCredits(this.id).subscribe(movieCredits => {
-      console.log(movieCredits);
-      this.personCastCredits = movieCredits.cast;
-      this.personCrewCredits = movieCredits.crew;
+      this.personCastResults = movieCredits.cast.length;
+      this.personCrewResults = movieCredits.crew.length;
     });
   }
 
