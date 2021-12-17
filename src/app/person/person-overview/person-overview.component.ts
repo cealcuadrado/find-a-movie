@@ -1,9 +1,10 @@
+import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { PersonService } from './../person.service';
 import { ActivatedRoute } from '@angular/router';
 import { CastCredit } from './../../shared/interfaces/cast-credit';
 import { PersonDetail } from './../../shared/interfaces/person-detail';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
 
 @Component({
@@ -16,10 +17,14 @@ export class PersonOverviewComponent implements OnInit {
   public loadingPersonDetail = true;
   public loadingCastAndCrew = true;
 
-  public personId: string;
+  public personId: string = '';
   public personDetail: PersonDetail;
   public castCredits: CastCredit[] = [];
   public crewCredits: CrewCredit[] = [];
+
+  private activatedRouteSubscription: Subscription | undefined;
+  private personDetailSubscription: Subscription;
+  private personCastCrewSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,17 +35,17 @@ export class PersonOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.loadingPersonDetail = true;
     this.loadingCastAndCrew = true;
-    this.setCastAndCrew();
+    this.setOverviewView();
   }
 
   ngOnChanges(): void {
     this.loadingPersonDetail = true;
     this.loadingCastAndCrew = true;
-    this.setCastAndCrew();
+    this.setOverviewView();
   }
 
-  private setCastAndCrew(): void {
-    this.activatedRoute.parent?.params.subscribe(params => {
+  private setOverviewView(): void {
+    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
       if (params.id) {
         this.personId = params.id;
         this.getPersonDetail();
@@ -51,7 +56,7 @@ export class PersonOverviewComponent implements OnInit {
   }
 
   public getPersonDetail(): void {
-    this.person.getPerson(this.personId).subscribe(personDetail => {
+    this.personDetailSubscription = this.person.getPerson(this.personId).subscribe(personDetail => {
       console.log(personDetail);
       this.personDetail = personDetail;
       this.loadingPersonDetail = false;
@@ -59,7 +64,7 @@ export class PersonOverviewComponent implements OnInit {
   }
 
   public getCastAndCrew(): void {
-    this.person.getMovieCredits(this.personId).subscribe(personMovieCredits => {
+    this.personCastCrewSubscription = this.person.getMovieCredits(this.personId).subscribe(personMovieCredits => {
       console.log(personMovieCredits);
       this.castCredits = personMovieCredits.cast;
       this.crewCredits = personMovieCredits.crew;
@@ -77,6 +82,8 @@ export class PersonOverviewComponent implements OnInit {
   }
 
   ngOnDestroy() {
-
+    this.activatedRouteSubscription?.unsubscribe();
+    this.personDetailSubscription.unsubscribe();
+    this.personCastCrewSubscription.unsubscribe();
   }
 }

@@ -15,9 +15,9 @@ export class PersonCastComponent implements OnInit {
   public loadingPersonDetail = true;
   public loadingCast = true;
 
-  public currentPage: number;
+  public currentPage: number = 1;
   public resultsPerPage = 20;
-  public totalResults: number;
+  public totalResults: number = 0;
 
   public filterInput: string = '';
 
