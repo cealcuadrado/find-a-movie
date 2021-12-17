@@ -1,7 +1,4 @@
-<p>Person Crew</p>
-
-<!--
-<section class="person-crew">
+<section class="person-crew" *ngIf="!loading(); else nowLoading">
   <div class="container">
     <header>
       <p><strong>{{name}}</strong> has been part of the crew in the following movies, TV movies, and/or specials:</p>
@@ -41,5 +38,7 @@
     </div>
   </div>
 </section>
--->
 
+<ng-template #nowLoading>
+  <app-loading [center]="true"></app-loading>
+</ng-template>
