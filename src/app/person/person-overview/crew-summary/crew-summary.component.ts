@@ -1,5 +1,3 @@
-import { Subscription } from 'rxjs';
-import { PersonService } from './../../person.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
 
@@ -11,11 +9,10 @@ import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
 export class CrewSummaryComponent implements OnInit {
   loading = true;
 
-  @Input() crewCredits: CrewCredit[];
+  @Input() id: string = '';
+  @Input() crewCredits: CrewCredit[] = [];
 
-  constructor(
-    private person: PersonService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.setCredits();
@@ -27,9 +24,5 @@ export class CrewSummaryComponent implements OnInit {
 
   setCredits(): void {
     this.loading = false;
-  }
-
-  seeCompleteCrew(): void {
-    this.person.setCurrentTab(3);
   }
 }
