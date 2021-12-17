@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PersonSharedModule } from './../shared/modules/person-shared/person-shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +20,18 @@ import { FilterCastPipe } from './person-cast/filter-cast.pipe';
 import { FilterCrewPipe } from './person-crew/filter-crew.pipe';
 
 @NgModule({
-  declarations: [PersonComponent, NoPersonFoundComponent, PersonOverviewComponent, PersonCastComponent, PersonCrewComponent, CastSummaryComponent, CrewSummaryComponent, PersonInfoComponent, FilterCastPipe, FilterCrewPipe],
+  declarations: [
+    PersonComponent,
+    NoPersonFoundComponent,
+    PersonOverviewComponent,
+    PersonCastComponent,
+    PersonCrewComponent,
+    CastSummaryComponent,
+    CrewSummaryComponent,
+    PersonInfoComponent,
+    FilterCastPipe,
+    FilterCrewPipe
+  ],
   imports: [
     CommonModule,
     PersonRoutingModule,
@@ -28,7 +40,8 @@ import { FilterCrewPipe } from './person-crew/filter-crew.pipe';
     GeneralSharedModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class PersonModule { }
