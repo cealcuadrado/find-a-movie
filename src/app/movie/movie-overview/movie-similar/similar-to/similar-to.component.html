@@ -1,4 +1,4 @@
-<a class="similar-to" href="#" [routerLink]="['/movie', movie.id]" [title]="movie.title">
+<a class="similar-to" href="#" [routerLink]="['/movie', movie.id]" [title]="setTitle()">
   <div class="similar-content" [ngStyle]="setPoster()">
     <div class="similar-position"></div>
     <div class="similar-no-poster-available" *ngIf="!isPosterUrl(movie.poster_path)">
@@ -6,6 +6,15 @@
         <i class="fas fa-unlink fa-fw"></i> No poster image available
       </small>
     </div>
-    <div class="similar-title">{{movie.title}}</div>
+    <div class="similar-title">
+      <strong>
+        {{movie.title}}
+        (<span *ngIf="!isDateEmpty(); else noReleaseDate">{{movie.release_date | date:'yyyy'}}</span>)
+      </strong>
+    </div>
   </div>
 </a>
+
+<ng-template #noReleaseDate>
+  <span>No Release Date</span>
+</ng-template>

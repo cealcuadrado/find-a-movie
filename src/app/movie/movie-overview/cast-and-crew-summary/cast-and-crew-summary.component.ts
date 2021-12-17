@@ -9,7 +9,6 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./cast-and-crew-summary.component.scss'],
 })
 export class CastAndCrewSummaryComponent implements OnInit {
-  
   public loading: boolean = true;
 
   @Input() cast: Cast[] = [];
@@ -22,8 +21,14 @@ export class CastAndCrewSummaryComponent implements OnInit {
   public production: PersonLink[] = [];
   public movieCast: PersonLink[] = [];
 
+  public isCoDirected: boolean = false;
+  public coDirection: PersonLink[] = [];
+
   public isBasedOnWork: boolean = false;
   public basedOnWork: PersonLink[];
+
+  public isBasedOnCharacters: boolean = false;
+  public basedOnCharacterAuthors: PersonLink[] = [];
 
   constructor() {}
 
@@ -38,12 +43,14 @@ export class CastAndCrewSummaryComponent implements OnInit {
 
   private setCastAndCrew(): void {
     this.getDirection();
+    this.getCoDirection();
     this.getWriting();
     this.getScreenplay();
     this.getStory();
     this.getProducers();
     this.getCast();
     this.getBasedOnWork();
+    this.getBasedOnCharacters();
     this.loading = false;
   }
 
@@ -53,6 +60,21 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+  }
+
+  private getCoDirection(): void {
+    let coDirection = this.crew
+      .filter(member => member.job === 'Co-Director')
+      .map(member => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (coDirection.length > 0) {
+      this.isCoDirected = true;
+      this.coDirection = coDirection;
+    } else {
+      this.isCoDirected = false;
+    }
   }
 
   private getWriting(): void {
@@ -93,6 +115,21 @@ export class CastAndCrewSummaryComponent implements OnInit {
       this.basedOnWork = basedOnWorkOf;
     } else {
       this.isBasedOnWork = false;
+    }
+  }
+
+  private getBasedOnCharacters(): void {
+    let basedOnCharacterAuthors = this.crew
+      .filter((member) => member.job === 'Characters')
+      .map((member) => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (basedOnCharacterAuthors.length > 0) {
+      this.isBasedOnCharacters = true;
+      this.basedOnCharacterAuthors = basedOnCharacterAuthors;
+    } else {
+      this.isBasedOnCharacters = false;
     }
   }
 

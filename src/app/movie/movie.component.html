@@ -7,6 +7,40 @@
 
     <main class="movie-body">
       <div class="container-fluid">
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'overview']"
+              routerLinkActive="active" href="#">
+              Overview
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'cast']"
+              routerLinkActive="active" href="#">
+              Cast
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'crew']"
+              routerLinkActive="active" href="#">
+              Crew
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'similar']"
+              routerLinkActive="active" href="#">
+              Similar Movies
+            </a>
+          </li>
+        </ul>
+
+        <router-outlet></router-outlet>
+
+        <!--
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
             <a ngbNavLink>Overview</a>
@@ -31,9 +65,16 @@
               <app-movie-crew [crew]="crew"></app-movie-crew>
             </ng-template>
           </li>
+          <li [ngbNavItem]="4">
+            <a ngbNavLink>Similar Movies</a>
+            <ng-template ngbNavContent>
+              <app-similar-movies></app-similar-movies>
+            </ng-template>
+          </li>
         </ul>
 
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        -->
       </div>
     </main>
   </section>
@@ -43,7 +84,5 @@
 </div>
 
 <ng-template #loadingMovie>
-  <div class="loading-movie">
-    <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>
-  </div>
+  <app-loading [center]="true"></app-loading>
 </ng-template>

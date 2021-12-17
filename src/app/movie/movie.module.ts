@@ -15,7 +15,6 @@ import { RuntimePipe } from './runtime.pipe';
 import { MovieComponent } from './movie.component';
 import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
 import { MovieSpecsComponent } from './movie-overview/movie-specs/movie-specs.component';
-import { MovieSocialNetworksComponent } from './movie-overview/movie-external-links/movie-social-networks/movie-social-networks.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
@@ -25,6 +24,7 @@ import { MovieExternalLinksComponent } from './movie-overview/movie-external-lin
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
 import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-similar.component';
 import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/similar-to.component';
+import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/si
     RuntimePipe,
     MovieTrailerComponent,
     MovieSpecsComponent,
-    MovieSocialNetworksComponent,
     MovieCastComponent,
     MovieCrewComponent,
     CastAndCrewSummaryComponent,
@@ -42,6 +41,7 @@ import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/si
     MovieOverviewComponent,
     MovieSimilarComponent,
     SimilarToComponent,
+    SimilarMoviesComponent
   ],
   imports: [
     CommonModule,

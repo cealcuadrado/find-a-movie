@@ -22,8 +22,6 @@ export class MovieComponent implements OnInit {
 
   public movieDetail: MovieDetail;
   public id: string;
-  private posterUrl: string = environment.posterUrl;
-  private backdropUrl: string = environment.backdropUrl;
 
   public cast: Cast[] = [];
   public crew: Crew[] = [];
