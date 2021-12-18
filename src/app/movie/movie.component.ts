@@ -1,12 +1,9 @@
 import { Subscription } from 'rxjs';
-import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
-import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Cast } from '../shared/interfaces/cast';
 import { Crew } from '../shared/interfaces/crew';
 
 @Component({
@@ -16,7 +13,6 @@ import { Crew } from '../shared/interfaces/crew';
 })
 export class MovieComponent implements OnInit {
 
-  public active = 1;
   public loading = true;
 
   public movieDetail: MovieDetail;
@@ -25,11 +21,6 @@ export class MovieComponent implements OnInit {
   public castResults: number = 0;
   public crewResults: number = 0;
   public crew: Crew[] = [];
-
-  @ViewChild(CastAndCrewSummaryComponent, { static: true })
-  castAndCrewSummary: CastAndCrewSummaryComponent;
-  @ViewChild(MovieTrailerComponent, { static: true })
-  movieTrailer: MovieTrailerComponent;
 
   private activatedRouteSubscription: Subscription;
   private movieDetailSubscription: Subscription;
@@ -54,10 +45,6 @@ export class MovieComponent implements OnInit {
     this.getMovie();
   }
 
-  private setMainTab() {
-    this.active = 1;
-  }
-
   private getMovie(): void {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
@@ -69,7 +56,6 @@ export class MovieComponent implements OnInit {
   }
 
   private getDetails(): void {
-    this.setMainTab();
     this.movieDetailSubscription = this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
