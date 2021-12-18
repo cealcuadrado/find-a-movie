@@ -1,18 +1,17 @@
 <div class="header-backdrop" [ngStyle]="setHeaderBackdrop(this.movieDetail.backdrop_path)" *ngIf="!loading">
   <section class="header-title">
-    <h1>{{movieDetail.title}}</h1>
+    <h1>
+      {{movieDetail.title}}
+      <small>
+        (<span *ngIf="movieDetail.release_date; else noReleaseDate">
+          <span
+            *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">{{movieDetail.release_date | date:'yyyy'}}</span>
+        </span>)
+      </small>
+    </h1>
     <div class="header-info">
       <span class="director" *ngIf="director">
         Dir. {{director}}
-      </span>
-      <span class="year">
-        <span *ngIf="movieDetail.release_date; else noReleaseDate">
-          <span
-            *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">{{movieDetail.release_date | date:'yyyy'}}</span>
-        </span>
-        <ng-template #noReleaseDate>
-          <span>No Release Date</span>
-        </ng-template>
       </span>
       <span class="runtime">
         <i class="fas fa-clock fa-fw"></i> {{movieDetail.runtime | runtime}}
@@ -28,3 +27,7 @@
     </div>
   </section>
 </div>
+
+<ng-template #noReleaseDate>
+  <span>No Release Date</span>
+</ng-template>
