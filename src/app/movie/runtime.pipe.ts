@@ -14,7 +14,7 @@ export class RuntimePipe implements PipeTransform {
     }
 
     if ((runtime == 0) || (runtime == null)) {
-      runTimeStr = runTimeStr.concat('No runtime defined');
+      runTimeStr = runTimeStr.concat('No runtime defined').toUpperCase();
     } else {
       if (Math.floor(runtime / 60) >= 1) {
         runTimeStr = runTimeStr.concat(`${Math.floor(runtime / 60)}h`);
