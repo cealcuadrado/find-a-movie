@@ -1,6 +1,8 @@
+import { Subscription } from 'rxjs';
 import { VideoResult } from '../../../shared/interfaces/video-result';
 import { MovieTrailerService } from './movie-trailer.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-trailer',
@@ -11,11 +13,14 @@ export class MovieTrailerComponent implements OnInit {
   public loading: boolean = true;
 
   @Input() movieId: string;
-  private youtubeBaseUrl: string = 'https://www.youtube.com/embed/';
   public youtubeId: string;
 
   public key: string;
   public provider: string;
+
+  private youtubeBaseUrl: string = environment.youtubeBaseUrl;
+
+  private movieTrailerSubscription: Subscription;
 
   constructor(private movieTrailer: MovieTrailerService) {}
 
@@ -24,22 +29,13 @@ export class MovieTrailerComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    // console.log('onChanges()')
+    this.loading = true;
     this.youtubeId = '';
-    this.loading = true;
     this.setTrailer();
   }
-
-  /*
-  resetMovieTrailer(): void {
-    this.loading = true;
-    this.setTrailer();
-  }
-  */
 
   setTrailer(): void {
-    // console.log('setTrailer()');
-    this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
+    this.movieTrailerSubscription = this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
       let results: VideoResult[];
       let filteredResults: VideoResult[];
 
@@ -57,5 +53,9 @@ export class MovieTrailerComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.movieTrailerSubscription.unsubscribe();
   }
 }

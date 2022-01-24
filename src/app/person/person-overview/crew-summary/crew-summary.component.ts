@@ -9,10 +9,11 @@ import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
 export class CrewSummaryComponent implements OnInit {
   loading = true;
 
-  @Input() crewCredits: CrewCredit[];
+  @Input() id: string = '';
+  @Input() crewCredits: CrewCredit[] = [];
 
   constructor() { }
-  
+
   ngOnInit(): void {
     this.setCredits();
   }

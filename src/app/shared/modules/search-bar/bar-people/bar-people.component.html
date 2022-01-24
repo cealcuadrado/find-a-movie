@@ -1,27 +1,33 @@
-<div class="flex-grow-1">
-  <form class="search-form search-people-form" [formGroup]="searchPeopleForm" (ngSubmit)="onSubmitPeopleForm($event)">
-    <div class="input-group">
-      <input type="search"
-             class="form-control"
-             formControlName="personQuery"
-             id="personQuery"
-             name="personQuery"
-             (input)="onSearchInput()"
-             (keydown)="onSearchKeyDown($event)"
-             placeholder="Enter cast or crew member name (Harrison Ford, Steven Spielberg, etc.)"/>
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-light btn-outline-dark">
-          <i class="fas fa-search fa-fw"></i>
-        </button>
+<div class="bar-people">
+  <div class="flex-grow-1">
+    <form class="search-form search-people-form" [formGroup]="searchPeopleForm" (ngSubmit)="onSubmitPeopleForm($event)">
+      <div class="input-group">
+        <input
+          type="search"
+          class="form-control"
+          formControlName="personQuery"
+          id="personQuery"
+          name="personQuery"
+          (input)="onSearchInput($event)"
+          (keydown)="onSearchKeyDown($event)"
+          (search)="onSearch($event)"
+          placeholder="Enter cast or crew member name (Harrison Ford, Steven Spielberg, etc.)" />
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-light btn-outline-dark">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="search-autocomplete" *ngIf="personBarResults.length > 0">
-      <input *ngFor="let personBarResult of personBarResults; let i = index"
-            class="bar-result"
-            [ngClass]="{'active': i+1 == currentResult}"
-            (click)="goToPerson(personBarResult.id)"
-            (mouseover)="onMouseOver($event, i)"
-            [value]="personBarResult.name"/>
-    </div>
-  </form>
+      <div class="search-autocomplete" *ngIf="showAutocompleteResults && personBarResults.length > 0">
+        <input
+          *ngFor="let personBarResult of personBarResults; let i = index"
+          class="bar-result"
+          [ngClass]="{'active': i+1 == currentResult}"
+          (click)="goToPerson(personBarResult.id)"
+          (mouseover)="onMouseOver($event, i)"
+          [value]="personBarResult.name" />
+      </div>
+    </form>
+  </div>
 </div>
+

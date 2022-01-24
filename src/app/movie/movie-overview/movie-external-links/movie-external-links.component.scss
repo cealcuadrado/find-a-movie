@@ -1,0 +1,7 @@
+.external-networks {
+  .imdb-links, .social-networks {
+    & > *:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

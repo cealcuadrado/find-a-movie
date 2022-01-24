@@ -1,28 +1,23 @@
 .search-form {
+  position: relative;
+
   .search-autocomplete {
-      position: absolute;
+    position: absolute;
+    width: 100%;
 
-      @media screen and (max-width: 991px) {
-        width: inherit;
-      }
+    background-color: white;
+    box-shadow: 5px 5px 5px black;
 
-      @media screen and (min-width: 992px) {
-        width: 92%;
-      }
+    .bar-result {
+      border: 0;
+      width: 100%;
+      cursor: pointer;
+      padding: 0.375rem 0.75rem;
 
-      background-color: white;
-      box-shadow: 5px 5px 5px black;
-
-      .bar-result {
-        border: 0;
-        width: 100%;
-        cursor: pointer;
-        padding: 0.375rem 0.75rem;
-
-        &.active {
-          background-color: dodgerblue;
-          color: white;
-        }
+      &.active {
+        background-color: dodgerblue;
+        color: white;
       }
     }
+  }
 }

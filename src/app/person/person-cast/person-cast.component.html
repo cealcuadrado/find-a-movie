@@ -1,4 +1,4 @@
-<section class="person-cast" *ngIf="!loading; else nowLoading">
+<section class="person-cast" *ngIf="!loading(); else nowLoading">
   <div class="container">
     <header>
       <p><strong>{{name}}</strong> has starred in the following movies, TV movies, and/or specials: </p>
@@ -15,7 +15,8 @@
                  </label>
                </div>
                <input type="text" class="form-control"
-               [(ngModel)]="filterInput" id="filterCastInput" name="filterCastInput" placeholder="Filter role" />
+                      [(ngModel)]="filterInput" id="filterCastInput"
+                      name="filterCastInput" placeholder="Filter cast role (By movie, character)" />
              </div>
            </div>
          </div>
@@ -42,5 +43,5 @@
 </section>
 
 <ng-template #nowLoading>
-  <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+  <app-loading [center]="true"></app-loading>
 </ng-template>

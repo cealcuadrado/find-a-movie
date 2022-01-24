@@ -1,6 +1,6 @@
+import { Subscription } from 'rxjs';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
 import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
-import { environment } from './../../environments/environment';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
 import { ActivatedRoute } from '@angular/router';
@@ -21,17 +21,19 @@ export class MovieComponent implements OnInit {
 
   public movieDetail: MovieDetail;
   public id: string;
-  public director: string;
-  private posterUrl: string = environment.posterUrl;
-  private backdropUrl: string = environment.backdropUrl;
 
-  public cast: Cast[] = [];
+  public castResults: number = 0;
+  public crewResults: number = 0;
   public crew: Crew[] = [];
 
   @ViewChild(CastAndCrewSummaryComponent, { static: true })
   castAndCrewSummary: CastAndCrewSummaryComponent;
   @ViewChild(MovieTrailerComponent, { static: true })
   movieTrailer: MovieTrailerComponent;
+
+  private activatedRouteSubscription: Subscription;
+  private movieDetailSubscription: Subscription;
+  private movieCastAndCrewSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,10 +42,14 @@ export class MovieComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMovie();
+    this.initMovie();
   }
 
   ngOnChanges(): void {
+    this.initMovie();
+  }
+
+  private initMovie(): void {
     this.loading = true;
     this.getMovie();
   }
@@ -53,7 +59,7 @@ export class MovieComponent implements OnInit {
   }
 
   private getMovie(): void {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
         this.getDetails();
@@ -64,7 +70,7 @@ export class MovieComponent implements OnInit {
 
   private getDetails(): void {
     this.setMainTab();
-    this.movie.getMovieDetail(this.id).subscribe((detail) => {
+    this.movieDetailSubscription = this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
         this.setWindowTitle();
@@ -74,19 +80,11 @@ export class MovieComponent implements OnInit {
   }
 
   private getCastAndCrew(): void {
-    this.movie.getCastAndCrew(this.id).subscribe((result) => {
-      this.cast = result.cast;
+    this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
+      this.castResults = result.cast.length;
+      this.crewResults = result.crew.length;
       this.crew = result.crew;
-      this.getDirector();
     });
-  }
-
-  private getDirector(): void {
-    if (this.crew) {
-      this.director = this.crew.filter(
-        (member) => member.job === 'Director'
-      )[0].name;
-    }
   }
 
   private setWindowTitle(): void {
@@ -104,5 +102,11 @@ export class MovieComponent implements OnInit {
       !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`
       : detail.title;
+  }
+
+  ngOnDestroy() {
+    this.activatedRouteSubscription.unsubscribe();
+    this.movieDetailSubscription.unsubscribe();
+    this.movieCastAndCrewSubscription.unsubscribe();
   }
 }

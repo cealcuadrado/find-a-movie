@@ -1,0 +1,37 @@
+a.similar-to {
+  text-decoration: none;
+  font-family: 'Jost', 'Arial', 'sans-serif';
+
+  .similar-content {
+    border: 1px solid black;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .similar-no-poster-available {
+      color: black;
+    }
+
+    .similar-title {
+      font-size: 0.7rem;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 0.5rem;
+      color: white;
+      width: inherit;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  &:hover {
+    .similar-content {
+      opacity: 0.75;
+    }
+  }
+}

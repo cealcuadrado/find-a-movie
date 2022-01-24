@@ -1,4 +1,3 @@
-import { environment } from './../../../../environments/environment';
 import { CastCredit } from './../../../shared/interfaces/cast-credit';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -10,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CastSummaryComponent implements OnInit {
   loading = true;
 
+  @Input() id: string = '';
   @Input() castCredits: CastCredit[] = [];
 
   constructor() {}
@@ -22,7 +22,7 @@ export class CastSummaryComponent implements OnInit {
     this.setCredits();
   }
 
-  setCredits(): void {
+  private setCredits(): void {
     this.loading = false;
   }
 }

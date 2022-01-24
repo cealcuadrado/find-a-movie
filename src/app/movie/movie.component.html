@@ -1,39 +1,46 @@
 <div class="movie-content" *ngIf="!loading; else loadingMovie">
   <section class="movie" *ngIf="movieDetail; else noMovieFound">
     <header>
-      <app-movie-header [movieDetail]="movieDetail" [crew]="crew" [director]="director">
+      <app-movie-header [movieDetail]="movieDetail" [crew]="crew">
       </app-movie-header>
     </header>
 
     <main class="movie-body">
       <div class="container-fluid">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-          <li [ngbNavItem]="1">
-            <a ngbNavLink>Overview</a>
-            <ng-template ngbNavContent>
-              <app-movie-overview
-                [id]="id"
-                [movieDetail]="movieDetail"
-                [cast]="cast"
-                [crew]="crew">
-              </app-movie-overview>
-            </ng-template>
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'overview']"
+              routerLinkActive="active" href="#">
+              Overview
+            </a>
           </li>
-          <li [ngbNavItem]="2" *ngIf="cast.length > 0">
-            <a ngbNavLink>Cast</a>
-            <ng-template ngbNavContent>
-              <app-movie-cast [cast]="cast"></app-movie-cast>
-            </ng-template>
+          <li class="nav-item">
+            <a class="nav-link"
+              *ngIf="castResults > 0"
+              [routerLink]="['/movie', movieDetail.id, 'cast']"
+              routerLinkActive="active" href="#">
+              Cast
+            </a>
           </li>
-          <li [ngbNavItem]="3" *ngIf="crew.length > 0">
-            <a ngbNavLink>Crew</a>
-            <ng-template ngbNavContent>
-              <app-movie-crew [crew]="crew"></app-movie-crew>
-            </ng-template>
+          <li class="nav-item">
+            <a class="nav-link"
+              *ngIf="crewResults > 0"
+              [routerLink]="['/movie', movieDetail.id, 'crew']"
+              routerLinkActive="active" href="#">
+              Crew
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+              [routerLink]="['/movie', movieDetail.id, 'similar']"
+              routerLinkActive="active" href="#">
+              Similar Movies
+            </a>
           </li>
         </ul>
 
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        <router-outlet></router-outlet>
       </div>
     </main>
   </section>
@@ -43,7 +50,5 @@
 </div>
 
 <ng-template #loadingMovie>
-  <div class="loading-movie">
-    <i class="fas fa-circle-notch fa-spin fa-5x fa-fw"></i>
-  </div>
+  <app-loading [center]="true"></app-loading>
 </ng-template>

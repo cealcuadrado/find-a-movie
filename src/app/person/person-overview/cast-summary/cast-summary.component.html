@@ -8,9 +8,10 @@
     </div>
   </div>
 
-  <button class="btn btn-primary btn-block text-uppercase">
-    See complete filmography as cast
-  </button>
+  <a class="btn btn-primary btn-block btn-lg btn-complete text-uppercase"
+    [routerLink]="['/person', id, 'cast']" href="#">
+    <i class="fas fa-user fa-fw"></i> See complete filmography as cast
+  </a>
 </section>
 
 <hr *ngIf="castCredits && castCredits.length > 0" />
