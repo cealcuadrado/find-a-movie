@@ -35,7 +35,7 @@ export class MovieSimilarComponent implements OnInit {
 
   getSimilar(): void {
     this.similarMovieSubscription = this.movie
-      .getSimilarMovies(this.movieDetail.id)
+      .getRecommendedMovies(this.movieDetail.id)
       .subscribe(queryResult => {
         this.similarMovies = queryResult.results.slice(0, 5);
         this.loading = false;

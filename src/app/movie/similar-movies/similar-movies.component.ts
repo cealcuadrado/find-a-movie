@@ -49,7 +49,7 @@ export class SimilarMoviesComponent implements OnInit {
 
   private getSimilarMovies(): void {
     this.similarMoviesSubscription = this.movie
-      .getSimilarMovies(this.id)
+      .getRecommendedMovies(this.id)
       .subscribe(queryResult => {
         this.similarMovies = queryResult.results.slice(0, 20);
         this.loadingMovies = false;
