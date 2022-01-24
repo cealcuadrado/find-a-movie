@@ -18,7 +18,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
-  getMovieDetail(id: string): Observable<MovieDetail> {
+  getMovieDetail(id: number | string): Observable<MovieDetail> {
     return this.http.get<MovieDetail>(
       `${this.url}/movie/${id}?api_key=${this.key}&language=${this.language}`
     ).pipe(
@@ -28,7 +28,7 @@ export class MovieService {
     );
   }
 
-  getCastAndCrew(id: string): Observable<CastCrewResult> {
+  getCastAndCrew(id: number | string): Observable<CastCrewResult> {
     return this.http.get<CastCrewResult>(
         `${this.url}/movie/${id}/credits?api_key=${this.key}&language=${this.language}`
     ).pipe(
@@ -38,7 +38,7 @@ export class MovieService {
     );
   }
 
-  getExternalIds(id: string): Observable<ExternalIds> {
+  getExternalIds(id: number | string): Observable<ExternalIds> {
     return this.http.get<ExternalIds>(
       `${this.url}/movie/${id}/external_ids?api_key=${this.key}`
     ).pipe(
@@ -51,6 +51,16 @@ export class MovieService {
   getSimilarMovies(id: number | string): Observable<QueryMovieResult> {
     return this.http.get<QueryMovieResult>(
       `${this.url}/movie/${id}/similar?api_key=${this.key}`
+    ).pipe(
+      catchError((error: any): Observable<any> => {
+        return of({});
+      })
+    );
+  }
+
+  getRecommendedMovies(id: number | string): Observable<QueryMovieResult> {
+    return this.http.get<QueryMovieResult>(
+      `${this.url}/movie/${id}/recommendations?api_key=${this.key}`
     ).pipe(
       catchError((error: any): Observable<any> => {
         return of({});
