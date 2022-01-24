@@ -48,7 +48,7 @@ export class MovieService {
     );
   }
 
-  getSimilarMovies(id: number): Observable<QueryMovieResult> {
+  getSimilarMovies(id: number | string): Observable<QueryMovieResult> {
     return this.http.get<QueryMovieResult>(
       `${this.url}/movie/${id}/similar?api_key=${this.key}`
     ).pipe(
