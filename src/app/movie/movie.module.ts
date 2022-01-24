@@ -23,8 +23,9 @@ import { MovieHeaderComponent } from './movie-header/movie-header.component';
 import { MovieExternalLinksComponent } from './movie-overview/movie-external-links/movie-external-links.component';
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
 import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-similar.component';
-import { SimilarToComponent } from './movie-overview/movie-similar/similar-to/similar-to.component';
+import { SimilarToComponent } from './similar-movies/similar-to/similar-to.component';
 import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
+import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overview-similar-to/overview-similar-to.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SimilarMoviesComponent } from './similar-movies/similar-movies.componen
     MovieOverviewComponent,
     MovieSimilarComponent,
     SimilarToComponent,
-    SimilarMoviesComponent
+    SimilarMoviesComponent,
+    OverviewSimilarToComponent
   ],
   imports: [
     CommonModule,
