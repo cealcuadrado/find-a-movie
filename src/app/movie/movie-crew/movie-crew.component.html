@@ -1,189 +1,191 @@
-<section class="crew" *ngIf="!loading; else nowLoading">
+<section class="movie-crew" *ngIf="!loading; else nowLoading">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <div class="table-responsive">
-        <table class="table">
-          <tr *ngIf="direction && direction.length > 0">
-            <th>Directed by:</th>
-            <td>
-              <div *ngFor="let director of direction">
-                <a href="#" [routerLink]="['/person', director.id]">
-                  {{director.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="isCoDirected && coDirection && coDirection.length > 0">
-            <th>Co-Directed by:</th>
-            <td>
-              <div *ngFor="let coDirector of coDirection">
-                <a href="#" [routerLink]="['/person', coDirector.id]">
-                  {{coDirector.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="writing && writing.length > 0">
-            <th>Written by:</th>
-            <td>
-              <div *ngFor="let writer of writing">
-                <a href="#" [routerLink]="['/person', writer.id]">
-                  {{writer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="screenPlayers && screenPlayers.length > 0">
-            <th>Screenplay by:</th>
-            <td>
-              <div *ngFor="let screenPlayer of screenPlayers">
-                <a href="#" [routerLink]="['/person', screenPlayer.id]">
-                  {{screenPlayer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="storyPlayers && storyPlayers.length > 0">
-            <th>Story by:</th>
-            <td>
-              <div *ngFor="let storyPlayer of storyPlayers">
-                <a href="#" [routerLink]="['/person', storyPlayer.id]">
-                  {{storyPlayer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="isBasedOnWork && basedOnWorkAuthors && basedOnWorkAuthors.length > 0">
-            <th>Based on the work by:</th>
-            <td>
-              <div *ngFor="let originalWorkAuthor of basedOnWorkAuthors">
-                <a href="#" [routerLink]="['/person', originalWorkAuthor.id]">
-                  {{originalWorkAuthor.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="isBasedOnCharacters && basedOnCharacterAuthors && basedOnCharacterAuthors.length > 0">
-            <th>Based on characters created by:</th>
-            <td>
-              <div *ngFor="let characterAuthor of basedOnCharacterAuthors">
-                <a href="#" [routerLink]="['/person', characterAuthor.id]">
-                  {{characterAuthor.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="producers && producers.length > 0">
-            <th>Produced by:</th>
-            <td>
-              <div *ngFor="let producer of producers">
-                <a href="#" [routerLink]="['/person', producer.id]">
-                  {{producer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="executiveProducers && executiveProducers.length > 0">
-            <th>
-              Executive Producer<span *ngIf="executiveProducers.length > 1">s</span>:
-            </th>
-            <td>
-              <div *ngFor="let executiveProducer of executiveProducers">
-                <a href="#" [routerLink]="['/person', executiveProducer.id]">
-                  {{executiveProducer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="cinematographers && cinematographers.length > 0">
-            <th>
-              Director<span *ngIf="cinematographers.length > 1">s</span> of Photography:
-            </th>
-            <td>
-              <div *ngFor="let cinematographer of cinematographers">
-                <a href="#" [routerLink]="['/person', cinematographer.id]">
-                  {{cinematographer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="productionDesigners && productionDesigners.length > 0">
-            <th>
-              Production Design:
-            </th>
-            <td>
-              <div *ngFor="let productionDesign of productionDesigners">
-                <a href="#" [routerLink]="['/person', productionDesign.id]">
-                  {{productionDesign.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="editors && editors.length > 0">
-            <th>Edited by:</th>
-            <td>
-              <div *ngFor="let editor of editors">
-                <a href="#" [routerLink]="['/person', editor.id]">
-                  {{editor.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="costumeDesigners && costumeDesigners.length > 0">
-            <th>Costume Design:</th>
-            <td>
-              <div *ngFor="let costumeDesigner of costumeDesigners">
-                <a href="#" [routerLink]="['/person', costumeDesigner.id]">
-                  {{costumeDesigner.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="musicComposers && musicComposers.length > 0">
-            <th>Music by:</th>
-            <td>
-              <div *ngFor="let musicComposer of musicComposers">
-                <a href="#" [routerLink]="['/person', musicComposer.id]">
-                  {{musicComposer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="musicSupervisors && musicSupervisors.length > 0">
-            <th>
-              Music Supervisor<span *ngIf="musicSupervisors.length > 1">s</span>:
-            </th>
-            <td>
-              <div *ngFor="let musicSupervisor of musicSupervisors">
-                <a href="#" [routerLink]="['/person', musicSupervisor.id]">
-                  {{musicSupervisor.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="coProducers && coProducers.length > 0">
-            <th>
-              Co-Producer<span *ngIf="coProducers.length > 1">s</span>:
-            </th>
-            <td>
-              <div *ngFor="let coProducer of coProducers">
-                <a href="#" [routerLink]="['/person', coProducer.id]">
-                  {{coProducer.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr *ngIf="castingPeople && castingPeople.length > 0">
-            <th>Casting by:</th>
-            <td>
-              <div *ngFor="let castingPerson of castingPeople">
-                <a href="#" [routerLink]="['/person', castingPerson.id]">
-                  {{castingPerson.name}}
-                </a>
-              </div>
-            </td>
-          </tr>
-        </table>
+      <div *ngIf="crewMembers > 0; else noCrew">
+        <div class="table-responsive">
+          <table class="table">
+            <tr *ngIf="direction && direction.length > 0">
+              <th>Directed by:</th>
+              <td>
+                <div *ngFor="let director of direction">
+                  <a href="#" [routerLink]="['/person', director.id]">
+                    {{director.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="isCoDirected && coDirection && coDirection.length > 0">
+              <th>Co-Directed by:</th>
+              <td>
+                <div *ngFor="let coDirector of coDirection">
+                  <a href="#" [routerLink]="['/person', coDirector.id]">
+                    {{coDirector.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="writing && writing.length > 0">
+              <th>Written by:</th>
+              <td>
+                <div *ngFor="let writer of writing">
+                  <a href="#" [routerLink]="['/person', writer.id]">
+                    {{writer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="screenPlayers && screenPlayers.length > 0">
+              <th>Screenplay by:</th>
+              <td>
+                <div *ngFor="let screenPlayer of screenPlayers">
+                  <a href="#" [routerLink]="['/person', screenPlayer.id]">
+                    {{screenPlayer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="storyPlayers && storyPlayers.length > 0">
+              <th>Story by:</th>
+              <td>
+                <div *ngFor="let storyPlayer of storyPlayers">
+                  <a href="#" [routerLink]="['/person', storyPlayer.id]">
+                    {{storyPlayer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="isBasedOnWork && basedOnWorkAuthors && basedOnWorkAuthors.length > 0">
+              <th>Based on the work by:</th>
+              <td>
+                <div *ngFor="let originalWorkAuthor of basedOnWorkAuthors">
+                  <a href="#" [routerLink]="['/person', originalWorkAuthor.id]">
+                    {{originalWorkAuthor.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="isBasedOnCharacters && basedOnCharacterAuthors && basedOnCharacterAuthors.length > 0">
+              <th>Based on characters created by:</th>
+              <td>
+                <div *ngFor="let characterAuthor of basedOnCharacterAuthors">
+                  <a href="#" [routerLink]="['/person', characterAuthor.id]">
+                    {{characterAuthor.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="producers && producers.length > 0">
+              <th>Produced by:</th>
+              <td>
+                <div *ngFor="let producer of producers">
+                  <a href="#" [routerLink]="['/person', producer.id]">
+                    {{producer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="executiveProducers && executiveProducers.length > 0">
+              <th>
+                Executive Producer<span *ngIf="executiveProducers.length > 1">s</span>:
+              </th>
+              <td>
+                <div *ngFor="let executiveProducer of executiveProducers">
+                  <a href="#" [routerLink]="['/person', executiveProducer.id]">
+                    {{executiveProducer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="cinematographers && cinematographers.length > 0">
+              <th>
+                Director<span *ngIf="cinematographers.length > 1">s</span> of Photography:
+              </th>
+              <td>
+                <div *ngFor="let cinematographer of cinematographers">
+                  <a href="#" [routerLink]="['/person', cinematographer.id]">
+                    {{cinematographer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="productionDesigners && productionDesigners.length > 0">
+              <th>
+                Production Design:
+              </th>
+              <td>
+                <div *ngFor="let productionDesign of productionDesigners">
+                  <a href="#" [routerLink]="['/person', productionDesign.id]">
+                    {{productionDesign.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="editors && editors.length > 0">
+              <th>Edited by:</th>
+              <td>
+                <div *ngFor="let editor of editors">
+                  <a href="#" [routerLink]="['/person', editor.id]">
+                    {{editor.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="costumeDesigners && costumeDesigners.length > 0">
+              <th>Costume Design:</th>
+              <td>
+                <div *ngFor="let costumeDesigner of costumeDesigners">
+                  <a href="#" [routerLink]="['/person', costumeDesigner.id]">
+                    {{costumeDesigner.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="musicComposers && musicComposers.length > 0">
+              <th>Music by:</th>
+              <td>
+                <div *ngFor="let musicComposer of musicComposers">
+                  <a href="#" [routerLink]="['/person', musicComposer.id]">
+                    {{musicComposer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="musicSupervisors && musicSupervisors.length > 0">
+              <th>
+                Music Supervisor<span *ngIf="musicSupervisors.length > 1">s</span>:
+              </th>
+              <td>
+                <div *ngFor="let musicSupervisor of musicSupervisors">
+                  <a href="#" [routerLink]="['/person', musicSupervisor.id]">
+                    {{musicSupervisor.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="coProducers && coProducers.length > 0">
+              <th>
+                Co-Producer<span *ngIf="coProducers.length > 1">s</span>:
+              </th>
+              <td>
+                <div *ngFor="let coProducer of coProducers">
+                  <a href="#" [routerLink]="['/person', coProducer.id]">
+                    {{coProducer.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="castingPeople && castingPeople.length > 0">
+              <th>Casting by:</th>
+              <td>
+                <div *ngFor="let castingPerson of castingPeople">
+                  <a href="#" [routerLink]="['/person', castingPerson.id]">
+                    {{castingPerson.name}}
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -191,5 +193,10 @@
 
 <ng-template #nowLoading>
   <app-loading></app-loading>
+</ng-template>
+
+<ng-template #noCrew>
+  <h2>No crew found</h2>
+  <p>No crew found for this movie.</p>
 </ng-template>
 
