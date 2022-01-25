@@ -1,5 +1,5 @@
-<a href="#" class="result" [routerLink]="['/movie', credit.id]" [title]="setTitle()">
-  <div class="result-body" [ngStyle]="setStyle(credit.poster_path)">
+<a class="result person-cast-result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
+  <div class="result-body person-cast-result-body" [ngStyle]="setStyle(credit.poster_path)">
     <div class="result-position"></div>
     <div class="result-no-poster-available" *ngIf="!hasPosterPath(credit.poster_path)">
       No poster available
