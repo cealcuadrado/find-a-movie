@@ -68,9 +68,40 @@ export class MovieComponent implements OnInit {
   private getCastAndCrew(): void {
     this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.castResults = result.cast.length;
-      this.crewResults = result.crew.length;
       this.crew = result.crew;
+      this.getMainCrewMembers();
     });
+  }
+
+  private getMainCrewMembers(): void {
+    this.crewResults = this.crew.filter((member) => {
+      return this.isMainCrew(member.job)
+    }).length;
+  }
+
+  private isMainCrew(crewJob: string): boolean {
+    return (
+      crewJob === 'Director' ||
+      crewJob === 'Co-Director' ||
+      crewJob === 'Writer' ||
+      crewJob === 'Screenplay' ||
+      crewJob === 'Story' ||
+      crewJob === 'Novel' ||
+      crewJob === 'Author' ||
+      crewJob === 'Characters' ||
+      crewJob === 'Producer' ||
+      crewJob === 'Executive Producer' ||
+      crewJob === 'Director of Photography' ||
+      crewJob === 'Production Design' ||
+      crewJob === 'Editor' ||
+      crewJob === 'Costume Design' ||
+      crewJob === 'Original Music Composer' ||
+      crewJob === 'Music' ||
+      crewJob === 'Music Supervisor' ||
+      crewJob === 'Co-Producer' ||
+      crewJob === 'Casting' ||
+      crewJob === 'Presenter'
+    );
   }
 
   private setWindowTitle(): void {
