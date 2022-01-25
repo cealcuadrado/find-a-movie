@@ -10,7 +10,9 @@ export const environment = {
   posterUrl: 'https://image.tmdb.org/t/p/w500',
   backdropUrl: 'https://image.tmdb.org/t/p/original',
   imdbUrl: 'https://www.imdb.com/title/',
+  boxOfficeMojoUrl: 'https://www.boxofficemojo.com/title/',
   imdbNameUrl: 'https://www.imdb.com/name/',
+  youtubeBaseUrl: 'https://www.youtube.com/embed/',
   tmdbUrl: '',
 };
 

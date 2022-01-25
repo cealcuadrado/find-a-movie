@@ -9,23 +9,28 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./movie-header.component.scss'],
 })
 export class MovieHeaderComponent implements OnInit {
-
   public loading = true;
 
   @Input() movieDetail: MovieDetail;
-  @Input() crew: Crew[];
-  @Input() director: string;
+  @Input() crew: Crew[] = [];
+
+  public director: string | undefined;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.loading = false;
+    this.setHeader();
   }
 
   ngOnChanges(): void {
+    this.setHeader();
+  }
+
+  public setHeader(): void {
     this.loading = false;
+    this.getDirector();
   }
 
   public setPosterUrl(posterPath: string | null) {
@@ -63,6 +68,20 @@ export class MovieHeaderComponent implements OnInit {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       };
+    }
+  }
+
+  private getDirector(): void {
+    let directorArr: Crew[] = this.crew.filter(
+      (member) => member.job === 'Director'
+    );
+
+    if (this.crew) {
+      if (directorArr.length > 0) {
+        this.director = directorArr[0].name;
+      } else {
+        this.director = undefined;
+      }
     }
   }
 

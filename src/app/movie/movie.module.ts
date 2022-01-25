@@ -15,7 +15,6 @@ import { RuntimePipe } from './runtime.pipe';
 import { MovieComponent } from './movie.component';
 import { MovieTrailerComponent } from './movie-overview/movie-trailer/movie-trailer.component';
 import { MovieSpecsComponent } from './movie-overview/movie-specs/movie-specs.component';
-import { MovieSocialNetworksComponent } from './movie-overview/movie-external-links/movie-social-networks/movie-social-networks.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
 import { CastAndCrewSummaryComponent } from './movie-overview/cast-and-crew-summary/cast-and-crew-summary.component';
@@ -23,6 +22,10 @@ import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component
 import { MovieHeaderComponent } from './movie-header/movie-header.component';
 import { MovieExternalLinksComponent } from './movie-overview/movie-external-links/movie-external-links.component';
 import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
+import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-similar.component';
+import { SimilarToComponent } from './similar-movies/similar-to/similar-to.component';
+import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
+import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overview-similar-to/overview-similar-to.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,6 @@ import { MovieOverviewComponent } from './movie-overview/movie-overview.componen
     RuntimePipe,
     MovieTrailerComponent,
     MovieSpecsComponent,
-    MovieSocialNetworksComponent,
     MovieCastComponent,
     MovieCrewComponent,
     CastAndCrewSummaryComponent,
@@ -38,6 +40,10 @@ import { MovieOverviewComponent } from './movie-overview/movie-overview.componen
     MovieHeaderComponent,
     MovieExternalLinksComponent,
     MovieOverviewComponent,
+    MovieSimilarComponent,
+    SimilarToComponent,
+    SimilarMoviesComponent,
+    OverviewSimilarToComponent
   ],
   imports: [
     CommonModule,

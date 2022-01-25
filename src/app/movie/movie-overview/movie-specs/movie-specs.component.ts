@@ -36,8 +36,4 @@ export class MovieSpecsComponent implements OnInit {
       return language.iso_639_1 === this.movieDetail.original_language
     })[0];
   }
-
-  public setBoxOfficeMojoLink(): string {
-    return `https://www.boxofficemojo.com/title/${this.movieDetail.imdb_id}/`;
-  }
 }

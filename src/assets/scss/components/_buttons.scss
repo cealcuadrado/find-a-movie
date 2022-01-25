@@ -1,0 +1,8 @@
+.btn-content {
+  font-family: 'Jost', 'Arial', 'sans-serif';
+}
+
+.btn-uppercase-content {
+  @extend .btn-content;
+  text-transform: uppercase;
+}

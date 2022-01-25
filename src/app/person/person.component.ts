@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { CastCredit } from './../shared/interfaces/cast-credit';
 import { PersonService } from './person.service';
 import { PersonDetail } from './../shared/interfaces/person-detail';
@@ -14,7 +15,7 @@ import { CrewCredit } from '../shared/interfaces/crew-credit';
 })
 export class PersonComponent implements OnInit {
 
-  public active = 1;
+  public currentTab = 1;
   public id: string;
   public loading = true;
 
@@ -24,10 +25,14 @@ export class PersonComponent implements OnInit {
   public personCastCredits: CastCredit[];
   public personCrewCredits: CrewCredit[];
 
+  public tabSubscription: Subscription;
+  public personSubscription: Subscription;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private person: PersonService,
-    private titleService: Title
+    private titleService: Title,
+    private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +45,12 @@ export class PersonComponent implements OnInit {
   }
 
   private setMainTab() {
-    this.active = 1;
+    this.person.setCurrentTab(1);
+
+    this.tabSubscription = this.person.getCurrentTab().subscribe(currentTab => {
+      this.currentTab = currentTab;
+      this.window.scrollTo({ top: 50 });
+    });
   }
 
   private getPerson(): void {
@@ -66,7 +76,7 @@ export class PersonComponent implements OnInit {
   }
 
   private getPersonCredits(): void {
-    this.person.getMovieCredits(this.id).subscribe(movieCredits => {
+    this.personSubscription = this.person.getMovieCredits(this.id).subscribe(movieCredits => {
       console.log(movieCredits);
       this.personCastCredits = movieCredits.cast;
       this.personCrewCredits = movieCredits.crew;
@@ -99,5 +109,10 @@ export class PersonComponent implements OnInit {
 
   public hasAtLeastBirthOrDeathDay(birthday: string | null, deathday: string | null): boolean {
     return (birthday != null || deathday != null);
+  }
+
+  ngOnDestroy() {
+    this.tabSubscription.unsubscribe();
+    this.personSubscription.unsubscribe();
   }
 }
