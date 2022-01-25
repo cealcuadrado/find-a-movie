@@ -1,25 +1,27 @@
-<section class="cast">
+<section class="cast" *ngIf="!loading; else nowLoading">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <div class="table-responsive">
-        <table class="table">
-          <tr>
-            <th>Actor</th>
-            <th>Character</th>
-          </tr>
-          <tr *ngFor="let castMember of cast">
-            <td>
-              <a href="#" [routerLink]="['/person', castMember.id]">
-                {{castMember.name}}
-              </a>
-            </td>
-            <td>
-              <span *ngIf="castMember.character; else noCharacter">
-                {{castMember.character}}
-              </span>
-            </td>
-          </tr>
-        </table>
+      <div *ngIf="cast.length > 0; else noCast">
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th>Actor</th>
+              <th>Character</th>
+            </tr>
+            <tr *ngFor="let castMember of cast">
+              <td>
+                <a href="#" [routerLink]="['/person', castMember.id]">
+                  {{castMember.name}}
+                </a>
+              </td>
+              <td>
+                <span *ngIf="castMember.character; else noCharacter">
+                  {{castMember.character}}
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +31,13 @@
   <app-loading [center]="true"></app-loading>
 </ng-template>
 
+<ng-template #noCast>
+  <h2>No cast found</h2>
+  <p>No cast found for this movie.</p>
+</ng-template>
+
 <ng-template #noCharacter>
   No character specified
 </ng-template>
+
+

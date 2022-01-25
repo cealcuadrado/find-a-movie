@@ -27,10 +27,12 @@ export class MovieCastComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.setCastView();
   }
 
   ngOnChanges(): void {
+    this.loading = true;
     this.setCastView();
   }
 
@@ -48,6 +50,7 @@ export class MovieCastComponent implements OnInit {
   private getCast(): void {
     this.movieCastSubscription = this.movie.getCastAndCrew(this.id).subscribe(result => {
       this.cast = result.cast;
+      this.loading = false;
     });
   }
 
