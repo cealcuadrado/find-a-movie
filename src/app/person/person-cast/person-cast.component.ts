@@ -1,5 +1,9 @@
+import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { PersonService } from './../person.service';
+import { ActivatedRoute } from '@angular/router';
 import { CastCredit } from './../../shared/interfaces/cast-credit';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-person-cast',
@@ -7,36 +11,86 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./person-cast.component.scss'],
 })
 export class PersonCastComponent implements OnInit {
-  public loading = true;
 
-  public currentPage: number;
+  public loadingPersonDetail = true;
+  public loadingCast = true;
+
+  public currentPage: number = 1;
   public resultsPerPage = 20;
-  public totalResults: number;
+  public totalResults: number = 0;
 
   public filterInput: string = '';
 
-  @Input() name: string = '';
-  @Input() castCredits: CastCredit[];
+  public personId: string = '';
+  public name: string = '';
+  public castCredits: CastCredit[] = [];
 
-  constructor(private window: Window) {}
+  private activatedRouteSubscription: Subscription | undefined;
+  private personDetailSubscription: Subscription;
+  private personCastSubscription: Subscription;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private person: PersonService,
+    private titleService: Title,
+    private window: Window
+  ) { }
 
   ngOnInit(): void {
-    this.setCast();
+    this.loadingPersonDetail = true;
+    this.loadingCast = true;
+    this.setCastView();
   }
 
   ngOnChanges(): void {
-    this.setCast();
+    this.loadingPersonDetail = true;
+    this.loadingCast = true;
+    this.setCastView();
   }
 
-  public setCast(): void {
-    this.loading = false;
+  public setCastView(): void {
     this.currentPage = 1;
     this.totalResults = this.castCredits.length;
     this.filterInput = '';
+
+    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
+      if (params.id) {
+        this.personId = params.id;
+        this.getPersonDetail();
+        this.getCast();
+      }
+    });
+  }
+
+  public getPersonDetail(): void {
+    this.personDetailSubscription = this.person.getPerson(this.personId).subscribe(personDetail => {
+      this.name = personDetail.name
+      this.loadingPersonDetail = false;
+    });
+  }
+
+  public getCast(): void {
+    this.personCastSubscription = this.person.getMovieCredits(this.personId).subscribe(personMovieCredits => {
+      this.castCredits = personMovieCredits.cast;
+      this.currentPage = 1;
+      this.totalResults = this.castCredits.length;
+      this.filterInput = '';
+      this.loadingCast = false;
+    });
+  }
+
+  public loading(): boolean {
+    return this.loadingPersonDetail || this.loadingCast;
   }
 
   public onPageChange(event: any): void {
     this.currentPage = event;
     this.window.scrollTo({ top: 400 });
+  }
+
+  ngOnDestroy() {
+    this.activatedRouteSubscription?.unsubscribe();
+    this.personDetailSubscription.unsubscribe();
+    this.personCastSubscription.unsubscribe();
   }
 }

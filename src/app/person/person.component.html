@@ -18,37 +18,38 @@
         </section>
       </div>
     </header>
+
     <main class="person-body">
-      <ul ngbNav #nav="ngbNav" [(activeId)]="currentTab" class="nav-tabs">
-        <li [ngbNavItem]="1">
-          <a ngbNavLink>Overview</a>
-          <ng-template ngbNavContent>
-            <app-person-overview [personDetail]="personDetail" [castCredits]="personCastCredits"
-              [crewCredits]="personCrewCredits">
-            </app-person-overview>
-          </ng-template>
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a class="nav-link"
+            [routerLink]="['/person', id, 'overview']"
+            routerLinkActive="active"
+            href="#">
+            Overview
+          </a>
         </li>
-        <li [ngbNavItem]="2" *ngIf="personCastCredits && personCastCredits.length > 0">
-          <a ngbNavLink>Cast Filmography</a>
-          <ng-template ngbNavContent>
-            <app-person-cast
-              [name]="personDetail.name"
-              [castCredits]="personCastCredits">
-            </app-person-cast>
-          </ng-template>
+        <li class="nav-item">
+          <a class="nav-link"
+            *ngIf="personCastResults > 0"
+            [routerLink]="['/person', id, 'cast']"
+            routerLinkActive="active"
+            href="#">
+            Cast
+          </a>
         </li>
-        <li [ngbNavItem]="3" *ngIf="personCrewCredits && personCrewCredits.length > 0">
-          <a ngbNavLink>Crew Filmography</a>
-          <ng-template ngbNavContent>
-            <app-person-crew
-              [name]="personDetail.name"
-              [crewCredits]="personCrewCredits">
-            </app-person-crew>
-          </ng-template>
+        <li class="nav-item">
+          <a class="nav-link"
+            *ngIf="personCrewResults > 0"
+            [routerLink]="['/person', id, 'crew']"
+            routerLinkActive="active"
+            href="#">
+            Crew
+          </a>
         </li>
       </ul>
 
-      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      <router-outlet></router-outlet>
     </main>
   </section>
 </div>

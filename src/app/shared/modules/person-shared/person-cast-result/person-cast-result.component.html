@@ -1,5 +1,5 @@
-<a href="#" class="result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
-  <div class="result-body" [ngStyle]="setStyle(credit.poster_path)">
+<a class="result person-cast-result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
+  <div class="result-body person-cast-result-body" [ngStyle]="setStyle(credit.poster_path)">
     <div class="result-position"></div>
     <div class="result-no-poster-available" *ngIf="!hasPosterPath(credit.poster_path)">
       No poster available
@@ -9,11 +9,17 @@
         {{credit.character}}
       </span>
       <br/>
-      <strong>{{credit.title}}</strong>
+      <strong>
+        {{credit.title}}
+        (<span *ngIf="!isDateEmpty(); else noReleaseDate">{{credit.release_date | date:'yyyy'}}</span>)
+      </strong>
     </div>
   </div>
 </a>
 
 <ng-template #noCharacter>
-  No character specified
+  <span>No Character Specified</span>
+</ng-template>
+<ng-template #noReleaseDate>
+  <span>No Release Date</span>
 </ng-template>
