@@ -41,6 +41,9 @@ export class MovieCrewComponent implements OnInit {
   public isBasedOnCharacters: boolean = false;
   public basedOnCharacterAuthors: PersonLink[] = [];
 
+  public isPresented: boolean = false;
+  public presenters: PersonLink[] = [];
+
   public crewMembers: number = 0;
 
   private activatedRouteSubscription: Subscription | undefined;
@@ -99,6 +102,7 @@ export class MovieCrewComponent implements OnInit {
     this.getMusicSupervisors();
     this.getCoProducers();
     this.getCastingPeople();
+    this.getPresenters();
     this.loading = false;
   }
 
@@ -113,8 +117,8 @@ export class MovieCrewComponent implements OnInit {
 
   private getCoDirection(): void {
     let coDirection = this.crew
-      .filter(member => member.job === 'Co-Director')
-      .map(member => {
+      .filter((member) => member.job === 'Co-Director')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
 
@@ -279,6 +283,22 @@ export class MovieCrewComponent implements OnInit {
         return { name: member.name, id: member.id };
       });
     this.crewMembers += this.castingPeople.length;
+  }
+
+  private getPresenters(): void {
+    let presenters = this.crew
+      .filter((member) => member.job === 'Presenter')
+      .map((member) => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (presenters.length > 0) {
+      this.isPresented = true;
+      this.presenters = presenters;
+      this.crewMembers += this.presenters.length;
+    } else {
+      this.isPresented = false;
+    }
   }
 
   ngOnDestroy() {
