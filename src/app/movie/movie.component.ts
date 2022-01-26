@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../shared/services/local-storage.service';
 import { Subscription } from 'rxjs';
 import { MovieService } from './movie.service';
 import { MovieDetail } from './../shared/interfaces/movie-detail';
@@ -29,7 +30,8 @@ export class MovieComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
-    private titleService: Title
+    private titleService: Title,
+    private localStorage: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +62,7 @@ export class MovieComponent implements OnInit {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
         this.setWindowTitle();
+        this.localStorage.set('currentMovie', this.movieDetail);
       }
       this.loading = false;
     });
@@ -125,5 +128,6 @@ export class MovieComponent implements OnInit {
     this.activatedRouteSubscription.unsubscribe();
     this.movieDetailSubscription.unsubscribe();
     this.movieCastAndCrewSubscription.unsubscribe();
+    this.localStorage.remove('currentMovie');
   }
 }
