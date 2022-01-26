@@ -1,3 +1,5 @@
+import { MovieDetail } from './../../shared/interfaces/movie-detail';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { Title } from '@angular/platform-browser';
 import { MovieService } from './../movie.service';
 import { ActivatedRoute } from '@angular/router';
@@ -52,7 +54,8 @@ export class MovieCrewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
-    private titleService: Title
+    private titleService: Title,
+    private localStorage: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +84,7 @@ export class MovieCrewComponent implements OnInit {
       .subscribe((result) => {
         this.crew = result.crew;
         this.setCrewContent();
+        this.setWindowTitle();
       });
   }
 
@@ -299,6 +303,27 @@ export class MovieCrewComponent implements OnInit {
     } else {
       this.isPresented = false;
     }
+  }
+
+  private setWindowTitle(): void {
+    let detail = this.localStorage.get('currentMovie');
+    let year = !this.isDateEmpty(detail)
+      ? new Date(detail.release_date).getFullYear()
+      : 'No Release Date';
+    this.titleService.setTitle(
+      `Crew of ${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`
+    );
+  }
+
+  public isDateEmpty(detail: MovieDetail): boolean {
+    return detail.release_date.length == 0;
+  }
+
+  private setLocalOrForeignTitle(detail: MovieDetail): string {
+    return !detail.original_language.match('en') &&
+      !detail.original_title.match(detail.title)
+      ? `${detail.title} (${detail.original_title})`
+      : detail.title;
   }
 
   ngOnDestroy() {
