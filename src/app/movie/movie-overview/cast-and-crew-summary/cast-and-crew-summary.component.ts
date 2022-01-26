@@ -30,6 +30,9 @@ export class CastAndCrewSummaryComponent implements OnInit {
   public isBasedOnCharacters: boolean = false;
   public basedOnCharacterAuthors: PersonLink[] = [];
 
+  public castMembers: number = 0;
+  public crewMembers: number = 0;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -60,6 +63,8 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+
+    this.crewMembers += this.direction.length;
   }
 
   private getCoDirection(): void {
@@ -72,6 +77,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
     if (coDirection.length > 0) {
       this.isCoDirected = true;
       this.coDirection = coDirection;
+      this.crewMembers += this.coDirection.length;
     } else {
       this.isCoDirected = false;
     }
@@ -83,6 +89,8 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+
+    this.crewMembers += this.writing.length;
   }
 
   private getScreenplay(): void {
@@ -91,6 +99,8 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+
+    this.crewMembers += this.screenPlayers.length;
   }
 
   private getStory(): void {
@@ -99,6 +109,8 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+
+    this.crewMembers += this.story.length;
   }
 
   private getBasedOnWork(): void {
@@ -113,6 +125,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
     if (basedOnWorkOf.length > 0) {
       this.isBasedOnWork = true;
       this.basedOnWork = basedOnWorkOf;
+      this.crewMembers += this.basedOnWork.length;
     } else {
       this.isBasedOnWork = false;
     }
@@ -128,6 +141,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
     if (basedOnCharacterAuthors.length > 0) {
       this.isBasedOnCharacters = true;
       this.basedOnCharacterAuthors = basedOnCharacterAuthors;
+      this.crewMembers += this.basedOnCharacterAuthors.length;
     } else {
       this.isBasedOnCharacters = false;
     }
@@ -139,23 +153,15 @@ export class CastAndCrewSummaryComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+
+    this.crewMembers += this.production.length;
   }
 
   private getCast(): void {
     this.movieCast = this.cast.slice(0, 7).map((member) => {
       return { name: member.name, id: member.id };
     });
-  }
 
-  private atLeastItsOneField(): boolean {
-    return (
-      !this.direction &&
-      !this.writing &&
-      !this.screenPlayers &&
-      !this.story &&
-      !this.isBasedOnWork &&
-      !this.production &&
-      !this.movieCast
-    );
+    this.castMembers = this.movieCast.length;
   }
 }
