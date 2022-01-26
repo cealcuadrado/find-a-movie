@@ -85,10 +85,9 @@ export class MovieOverviewComponent implements OnInit {
   }
 
   private setWindowTitle(): void {
-    let year = !this.isDateEmpty() ? new Date(this.movieDetail.release_date).getFullYear(): 'No Release Date';
     let detail = this.movieDetail;
-    this.titleService.setTitle(`${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`
-    );
+    let year = !this.isDateEmpty() ? new Date(this.movieDetail.release_date).getFullYear(): 'No Release Date';
+    this.titleService.setTitle(`${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`);
   }
 
   public isDateEmpty(): boolean {
