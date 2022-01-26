@@ -1,12 +1,10 @@
 import { Subscription } from 'rxjs';
-import { CastCredit } from './../shared/interfaces/cast-credit';
 import { PersonService } from './person.service';
 import { PersonDetail } from './../shared/interfaces/person-detail';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
-import { CrewCredit } from '../shared/interfaces/crew-credit';
 
 @Component({
   selector: 'app-person',
