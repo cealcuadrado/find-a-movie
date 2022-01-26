@@ -47,15 +47,14 @@ export class MovieOverviewComponent implements OnInit {
   }
 
   private setOverview(): void {
-    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(
-      (params) => {
+    this.activatedRouteSubscription =
+      this.activatedRoute.parent?.params.subscribe((params) => {
         if (params.id) {
           this.id = params.id;
           this.getDetails();
           this.getCastAndCrew();
         }
-      }
-    );
+      });
   }
 
   private getDetails(): void {
@@ -86,13 +85,14 @@ export class MovieOverviewComponent implements OnInit {
   }
 
   private setWindowTitle(): void {
-    let date = new Date(this.movieDetail.release_date);
+    let year = !this.isDateEmpty() ? new Date(this.movieDetail.release_date).getFullYear(): 'No Release Date';
     let detail = this.movieDetail;
-    this.titleService.setTitle(
-      `${this.setLocalOrForeignTitle(
-        detail
-      )} (${date.getFullYear()}) | Find a Movie`
+    this.titleService.setTitle(`${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`
     );
+  }
+
+  public isDateEmpty(): boolean {
+    return this.movieDetail.release_date.length == 0;
   }
 
   private setLocalOrForeignTitle(detail: MovieDetail): string {
