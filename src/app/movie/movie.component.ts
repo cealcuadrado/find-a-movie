@@ -14,7 +14,9 @@ import { Crew } from '../shared/interfaces/crew';
 })
 export class MovieComponent implements OnInit {
 
-  public loading = true;
+  public loadingDetails: boolean = true;
+  public loadingCastAndCrew: boolean = true;
+  public loadingMainCrew: boolean = true;
 
   public movieDetail: MovieDetail;
   public id: string;
@@ -43,7 +45,9 @@ export class MovieComponent implements OnInit {
   }
 
   private initMovie(): void {
-    this.loading = true;
+    this.loadingDetails = true;
+    this.loadingCastAndCrew = true;
+    this.loadingMainCrew = true;
     this.getMovie();
   }
 
@@ -64,7 +68,7 @@ export class MovieComponent implements OnInit {
         this.setWindowTitle();
         this.localStorage.set('currentMovie', this.movieDetail);
       }
-      this.loading = false;
+      this.loadingDetails = false;
     });
   }
 
@@ -72,6 +76,7 @@ export class MovieComponent implements OnInit {
     this.movieCastAndCrewSubscription = this.movie.getCastAndCrew(this.id).subscribe((result) => {
       this.castResults = result.cast.length;
       this.crew = result.crew;
+      this.loadingCastAndCrew = false;
       this.getMainCrewMembers();
     });
   }
@@ -80,6 +85,7 @@ export class MovieComponent implements OnInit {
     this.crewResults = this.crew.filter((member) => {
       return this.isMainCrew(member.job)
     }).length;
+    this.loadingMainCrew = false;
   }
 
   private isMainCrew(crewJob: string): boolean {
@@ -122,6 +128,10 @@ export class MovieComponent implements OnInit {
       !detail.original_title.match(detail.title)
       ? `${detail.title} (${detail.original_title})`
       : detail.title;
+  }
+
+  public loading(): boolean {
+    return (this.loadingDetails || this.loadingCastAndCrew || this.loadingMainCrew);
   }
 
   ngOnDestroy() {
