@@ -64,9 +64,18 @@ export class PersonCrewResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
+    let year: number | string = !this.isDateEmpty()
+      ? new Date(this.credit.release_date).getFullYear()
+      : 'No Release Date';
     let setRole = this.isRoleDefined() ? this.credit.job : 'No Role Specified';
-    return `${setRole} in "${this.credit.title}" (${year})`;
+    return `${setRole} in "${this.setLocalOrForeignTitle(this.credit)}" (${year})`;
+  }
+
+  public setLocalOrForeignTitle(credit: CrewCredit): string {
+    return !this.credit.original_language.match('en') &&
+      !this.credit.original_title.match(this.credit.title)
+      ? `${this.credit.title} (${this.credit.original_title})`
+      : this.credit.title;
   }
 
   public isDateEmpty(): boolean {
