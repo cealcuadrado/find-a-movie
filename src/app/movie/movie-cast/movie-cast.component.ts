@@ -29,11 +29,14 @@ export class MovieCastComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.setCastView();
+    this.initMovieCast();
   }
 
   ngOnChanges(): void {
+    this.initMovieCast();
+  }
+
+  private initMovieCast(): void {
     this.loading = true;
     this.setCastView();
   }
