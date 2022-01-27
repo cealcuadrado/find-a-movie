@@ -64,12 +64,26 @@ export class PersonCastResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear(): 'No Release Date';
-    let setCharacter = this.isCharacterDefined(this.credit.character) ? this.credit.character: 'No Character Specified';
-    return `${setCharacter} in "${this.credit.title}" (${year})`;
+    let year: number | string = !this.isDateEmpty()
+      ? new Date(this.credit.release_date).getFullYear()
+      : 'No Release Date';
+    let setCharacter = this.isCharacterDefined(this.credit.character)
+      ? this.credit.character
+      : 'No Character Specified';
+    return `${setCharacter} in "${this.setLocalOrForeignTitle(this.credit)}" (${year})`;
+  }
+
+  public setLocalOrForeignTitle(credit: CastCredit): string {
+    return !this.credit.original_language.match('en') &&
+      !this.credit.original_title.match(this.credit.title)
+      ? `${this.credit.title} (${this.credit.original_title})`
+      : this.credit.title;
   }
 
   public isDateEmpty(): boolean {
-    return (this.credit.release_date == (undefined || null) || this.credit.release_date.length == 0);
+    return (
+      this.credit.release_date == (undefined || null) ||
+      this.credit.release_date.length == 0
+    );
   }
 }
