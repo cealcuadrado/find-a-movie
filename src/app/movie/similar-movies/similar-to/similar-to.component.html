@@ -7,7 +7,7 @@
       </small>
     </div>
     <div class="result-content">
-      <strong>{{movie.title}}</strong>
+      <strong>{{setLocalOrForeignTitle()}}</strong>
       <br/>
       <div *ngIf="movie.release_date; else noReleaseDate">
         <span *ngIf="!isDateEmpty(); else noReleaseDate">
