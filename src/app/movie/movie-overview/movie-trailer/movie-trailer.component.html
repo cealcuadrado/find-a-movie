@@ -1,5 +1,5 @@
 <section class="trailer">
-  <div *ngIf="!loading; else nowLoading">
+  <div *ngIf="!loading(); else nowLoading">
     <div *ngIf="youtubeId; else noTrailer">
       <embedded-media [video]='key' provider="youtube" attributes='{"width": "100%", "height": 500}'>
       </embedded-media>
