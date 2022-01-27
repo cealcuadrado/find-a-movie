@@ -1,4 +1,4 @@
-<section class="cast-and-crew-summary" *ngIf="!loading; else nowLoading">
+<section class="cast-and-crew-summary" *ngIf="!loading(); else nowLoading">
   <p *ngIf="direction && direction.length > 0">
     <strong class="mr-1">Directed by:</strong>
     <span *ngFor="let director of direction; let i = index">

@@ -9,7 +9,9 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./cast-and-crew-summary.component.scss'],
 })
 export class CastAndCrewSummaryComponent implements OnInit {
-  public loading: boolean = true;
+
+  public loadingView: boolean = true;
+  public loadingCrew: boolean = true;
 
   @Input() cast: Cast[] = [];
   @Input() crew: Crew[] = [];
@@ -36,15 +38,21 @@ export class CastAndCrewSummaryComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.setCastAndCrew();
+    this.initCastCrewSummary();
   }
 
   ngOnChanges(): void {
-    this.loading = true;
+    this.initCastCrewSummary();
+  }
+
+  private initCastCrewSummary(): void {
+    this.loadingView = true;
+    this.loadingCrew = true;
     this.setCastAndCrew();
   }
 
   private setCastAndCrew(): void {
+    this.loadingView = false;
     this.getDirection();
     this.getCoDirection();
     this.getWriting();
@@ -54,7 +62,7 @@ export class CastAndCrewSummaryComponent implements OnInit {
     this.getCast();
     this.getBasedOnWork();
     this.getBasedOnCharacters();
-    this.loading = false;
+    this.loadingCrew = false;
   }
 
   private getDirection(): void {
@@ -163,5 +171,9 @@ export class CastAndCrewSummaryComponent implements OnInit {
     });
 
     this.castMembers = this.movieCast.length;
+  }
+
+  public loading(): boolean {
+    return (this.loadingView || this.loadingCrew);
   }
 }
