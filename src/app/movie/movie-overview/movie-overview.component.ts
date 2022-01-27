@@ -6,7 +6,6 @@ import { MovieDetail } from './../../shared/interfaces/movie-detail';
 import { Component, OnInit } from '@angular/core';
 import { Cast } from 'src/app/shared/interfaces/cast';
 import { Crew } from 'src/app/shared/interfaces/crew';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-overview',
@@ -14,6 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-overview.component.scss'],
 })
 export class MovieOverviewComponent implements OnInit {
+  
   public loadingDetails = true;
   public loadingCastAndCrew = true;
 
@@ -21,8 +21,6 @@ export class MovieOverviewComponent implements OnInit {
   public movieDetail: MovieDetail;
   public cast: Cast[] = [];
   public crew: Crew[] = [];
-
-  private imdbUrl: string = environment.imdbUrl;
 
   private activatedRouteSubscription: Subscription | undefined;
   private movieDetailSubscription: Subscription;
@@ -35,12 +33,14 @@ export class MovieOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadingDetails = true;
-    this.loadingCastAndCrew = true;
-    this.setOverview();
+    this.initMovieOverview();
   }
 
   ngOnChanges(): void {
+    this.initMovieOverview();
+  }
+
+  private initMovieOverview(): void {
     this.loadingDetails = true;
     this.loadingCastAndCrew = true;
     this.setOverview();
