@@ -56,7 +56,6 @@ export class MovieComponent implements OnInit {
       if (params.id) {
         this.id = params.id;
         this.getDetails();
-        this.getCastAndCrew();
       }
     });
   }
@@ -65,8 +64,13 @@ export class MovieComponent implements OnInit {
     this.movieDetailSubscription = this.movie.getMovieDetail(this.id).subscribe((detail) => {
       if (Object.values(detail).length > 0) {
         this.movieDetail = detail;
-        this.setWindowTitle();
+        this.getCastAndCrew();
+        this.setWindowTitle(true);
         this.localStorage.set('currentMovie', this.movieDetail);
+      } else {
+        this.loadingCastAndCrew = false;
+        this.loadingMainCrew = false;
+        this.setWindowTitle(false);
       }
       this.loadingDetails = false;
     });
@@ -113,14 +117,18 @@ export class MovieComponent implements OnInit {
     );
   }
 
-  private setWindowTitle(): void {
-    let date = new Date(this.movieDetail.release_date);
-    let detail = this.movieDetail;
-    this.titleService.setTitle(
-      `${this.setLocalOrForeignTitle(
-        detail
-      )} (${date.getFullYear()}) | Find a Movie`
-    );
+  private setWindowTitle(found: boolean): void {
+    if (found) {
+      let date = new Date(this.movieDetail.release_date);
+      let detail = this.movieDetail;
+      this.titleService.setTitle(
+        `${this.setLocalOrForeignTitle(
+          detail
+        )} (${date.getFullYear()}) | Find a Movie`
+      );
+    } else {
+      this.titleService.setTitle('Movie Not Found | Find a Movie');
+    }
   }
 
   private setLocalOrForeignTitle(detail: MovieDetail): string {
