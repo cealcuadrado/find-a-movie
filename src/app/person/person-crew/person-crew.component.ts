@@ -1,3 +1,5 @@
+import { PersonDetail } from './../../shared/interfaces/person-detail';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { Subscription } from 'rxjs';
 import { PersonService } from './../person.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,19 +23,19 @@ export class PersonCrewComponent implements OnInit {
 
   public filterInput: string = '';
 
-  personId: string = '';
-  name: string = '';
-  crewCredits: CrewCredit[] = [];
+  public personDetail: PersonDetail;
+  public personId: string = '';
+  public crewCredits: CrewCredit[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private person: PersonService,
     private titleService: Title,
-    private window: Window
+    private window: Window,
+    private localStorage: LocalStorageService
   ) { }
 
   private activatedRouteSubscription: Subscription | undefined;
-  private personDetailSubscription: Subscription;
   private personCrewSubscription: Subscription;
 
   ngOnInit(): void {
@@ -49,28 +51,25 @@ export class PersonCrewComponent implements OnInit {
   }
 
   public setCrewView(): void {
+    this.currentPage = 1;
+    this.totalResults = this.crewCredits.length;
+    this.filterInput = '';
+    this.personDetail = this.localStorage.get('currentPerson');
+
+    this.setWindowTitle();
+    this.loadingPersonDetail = false;
+
     this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
       if (params.id) {
         this.personId = params.id;
-        this.getPersonDetail();
         this.getCrew();
       }
-    });
-  }
-
-  public getPersonDetail(): void {
-    this.personDetailSubscription = this.person.getPerson(this.personId).subscribe(personDetail => {
-      this.name = personDetail.name;
-      this.loadingPersonDetail = false;
     });
   }
 
   public getCrew(): void {
     this.personCrewSubscription = this.person.getMovieCredits(this.personId).subscribe(personMovieCredits => {
       this.crewCredits = personMovieCredits.crew;
-      this.currentPage = 1;
-      this.totalResults = this.crewCredits.length;
-      this.filterInput = '';
       this.loadingCrew = false;
     });
   }
@@ -84,9 +83,12 @@ export class PersonCrewComponent implements OnInit {
     this.window.scrollTo({ top: 400 });
   }
 
+  private setWindowTitle(): void {
+    this.titleService.setTitle(`Work of ${this.personDetail.name} as Crew | Find a Movie`);
+  }
+
   ngOnDestroy() {
     this.activatedRouteSubscription?.unsubscribe();
-    this.personDetailSubscription.unsubscribe();
     this.personCrewSubscription.unsubscribe();
   }
 }
