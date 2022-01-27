@@ -64,11 +64,8 @@ export class PersonCrewResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string;
-
+    let year: number | string = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
     let setRole = this.isRoleDefined() ? this.credit.job : 'No Role Specified';
-    year = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
-
     return `${setRole} in "${this.credit.title}" (${year})`;
   }
 
