@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { MovieDetail } from '../shared/interfaces/movie-detail';
 import { catchError, map } from 'rxjs/operators';
 import { ExternalIds } from '../shared/interfaces/external-ids';
+import { MovieTitlesResult } from '../shared/interfaces/movie-titles-result';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,16 @@ export class MovieService {
     ).pipe(
       catchError((error: any): Observable<any> => {
         return of({});
+      })
+    );
+  }
+
+  getAlternateTitles(id: number | string): Observable<MovieTitlesResult> {
+    return this.http.get<MovieTitlesResult>(
+      `${this.url}/movie/${id}/alternative_titles?api_key=${this.key}`
+    ).pipe(
+      catchError((error: any): Observable<any> => {
+        return of({})
       })
     );
   }
