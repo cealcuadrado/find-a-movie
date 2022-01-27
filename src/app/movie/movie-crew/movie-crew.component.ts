@@ -59,11 +59,14 @@ export class MovieCrewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.setCrewView();
+    this.initMovieCrew();
   }
 
   ngOnChanges(): void {
+    this.initMovieCrew();
+  }
+
+  private initMovieCrew(): void {
     this.loading = true;
     this.setCrewView();
   }
