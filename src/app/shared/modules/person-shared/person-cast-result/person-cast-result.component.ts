@@ -64,11 +64,8 @@ export class PersonCastResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string;
-
+    let year: number | string = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear(): 'No Release Date';
     let setCharacter = this.isCharacterDefined(this.credit.character) ? this.credit.character: 'No Character Specified';
-    year = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
-
     return `${setCharacter} in "${this.credit.title}" (${year})`;
   }
 
