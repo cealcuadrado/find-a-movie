@@ -10,7 +10,7 @@
       </span>
       <br/>
       <strong>
-        {{credit.title}}
+        {{setLocalOrForeignTitle(credit)}}
         (<span *ngIf="!isDateEmpty(); else noReleaseDate">{{credit.release_date | date:'yyyy'}}</span>)
       </strong>
     </div>
