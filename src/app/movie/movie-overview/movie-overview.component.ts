@@ -13,7 +13,7 @@ import { Crew } from 'src/app/shared/interfaces/crew';
   styleUrls: ['./movie-overview.component.scss'],
 })
 export class MovieOverviewComponent implements OnInit {
-  
+
   public loadingDetails = true;
   public loadingCastAndCrew = true;
 
@@ -24,7 +24,7 @@ export class MovieOverviewComponent implements OnInit {
 
   private activatedRouteSubscription: Subscription | undefined;
   private movieDetailSubscription: Subscription;
-  private movieCastAndCrewSubscription: Subscription;
+  private movieCastAndCrewSubscription: Subscription | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -104,6 +104,6 @@ export class MovieOverviewComponent implements OnInit {
   ngOnDestroy() {
     this.activatedRouteSubscription?.unsubscribe();
     this.movieDetailSubscription.unsubscribe();
-    this.movieCastAndCrewSubscription.unsubscribe();
+    this.movieCastAndCrewSubscription?.unsubscribe();
   }
 }
