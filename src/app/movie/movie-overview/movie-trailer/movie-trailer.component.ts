@@ -10,10 +10,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-trailer.component.scss'],
 })
 export class MovieTrailerComponent implements OnInit {
-  public loading: boolean = true;
+
+  public loadingView: boolean = true;
+  public loadingTrailer: boolean = true;
 
   @Input() movieId: string;
-  public youtubeId: string;
+  public youtubeId: string = '';
 
   public key: string;
   public provider: string;
@@ -25,16 +27,22 @@ export class MovieTrailerComponent implements OnInit {
   constructor(private movieTrailer: MovieTrailerService) {}
 
   ngOnInit(): void {
-    this.setTrailer();
+    this.initTrailer();
   }
 
   ngOnChanges(): void {
-    this.loading = true;
+    this.initTrailer();
+  }
+
+  private initTrailer(): void {
+    this.loadingView = true;
+    this.loadingTrailer = true;
     this.youtubeId = '';
     this.setTrailer();
   }
 
   setTrailer(): void {
+    this.loadingView = false;
     this.movieTrailerSubscription = this.movieTrailer.getVideos(this.movieId).subscribe((result) => {
       let results: VideoResult[];
       let filteredResults: VideoResult[];
@@ -50,9 +58,13 @@ export class MovieTrailerComponent implements OnInit {
           }
         }
 
-        this.loading = false;
+        this.loadingTrailer = false;
       }
     });
+  }
+
+  public loading(): boolean {
+    return (this.loadingView || this.loadingTrailer);
   }
 
   ngOnDestroy() {
