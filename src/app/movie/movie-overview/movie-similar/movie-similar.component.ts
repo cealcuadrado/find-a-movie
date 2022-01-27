@@ -11,7 +11,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MovieSimilarComponent implements OnInit {
 
-  public loading = true;
+  public loadingView: boolean = true;
+  public loadingSimilar: boolean = true;
 
   @Input() movieDetail: MovieDetail;
 
@@ -24,22 +25,31 @@ export class MovieSimilarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.getSimilar();
+    this.initMovieSimilar();
   }
 
   ngOnChanges(): void {
-    this.loading = true;
+    this.initMovieSimilar();
+  }
+
+  private initMovieSimilar(): void {
+    this.loadingView = true;
+    this.loadingSimilar = true;
     this.getSimilar();
   }
 
-  getSimilar(): void {
+  private getSimilar(): void {
+    this.loadingView = false;
     this.similarMovieSubscription = this.movie
       .getRecommendedMovies(this.movieDetail.id)
       .subscribe(queryResult => {
         this.similarMovies = queryResult.results.slice(0, 5);
-        this.loading = false;
+        this.loadingSimilar = false;
       });
+  }
+
+  public loading(): boolean {
+    return (this.loadingView || this.loadingSimilar);
   }
 
   ngOnDestroy(): void {
