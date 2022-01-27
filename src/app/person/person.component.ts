@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../shared/services/local-storage.service';
 import { Subscription } from 'rxjs';
 import { PersonService } from './person.service';
 import { PersonDetail } from './../shared/interfaces/person-detail';
@@ -30,7 +31,8 @@ export class PersonComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private person: PersonService,
     private titleService: Title,
-    private window: Window
+    private window: Window,
+    private localStorage: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +70,7 @@ export class PersonComponent implements OnInit {
         this.personDetail = person;
         this.getPersonCredits();
         this.setTitle();
+        this.localStorage.set('currentPerson', this.personDetail);
       }
       this.loading = false;
     });
@@ -111,5 +114,6 @@ export class PersonComponent implements OnInit {
   ngOnDestroy() {
     this.tabSubscription.unsubscribe();
     this.personSubscription.unsubscribe();
+    this.localStorage.remove('currentPerson');
   }
 }
