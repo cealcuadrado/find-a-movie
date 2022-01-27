@@ -21,14 +21,14 @@ export class MovieHeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.setHeader();
+    this.initMovieHeader();
   }
 
   ngOnChanges(): void {
-    this.setHeader();
+    this.initMovieHeader();
   }
 
-  public setHeader(): void {
+  public initMovieHeader(): void {
     this.loading = false;
     this.getDirector();
   }
