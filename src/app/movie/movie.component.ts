@@ -27,7 +27,7 @@ export class MovieComponent implements OnInit {
 
   private activatedRouteSubscription: Subscription;
   private movieDetailSubscription: Subscription;
-  private movieCastAndCrewSubscription: Subscription;
+  private movieCastAndCrewSubscription: Subscription | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -145,7 +145,7 @@ export class MovieComponent implements OnInit {
   ngOnDestroy() {
     this.activatedRouteSubscription.unsubscribe();
     this.movieDetailSubscription.unsubscribe();
-    this.movieCastAndCrewSubscription.unsubscribe();
+    this.movieCastAndCrewSubscription?.unsubscribe();
     this.localStorage.remove('currentMovie');
   }
 }
