@@ -1,4 +1,4 @@
-<div class="person-content" *ngIf="!loading; else loadingPerson">
+<div class="person-content" *ngIf="!loading(); else loadingPerson">
   <section class="person" *ngIf="personDetail; else noPersonFound">
     <header>
       <div class="header-backdrop" [ngStyle]="setHeaderProfile(this.personDetail.profile_path)">
