@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./cast-summary.component.scss'],
 })
 export class CastSummaryComponent implements OnInit {
-  loading = true;
+
+  public loading: boolean = true;
 
   @Input() id: string = '';
   @Input() castCredits: CastCredit[] = [];
@@ -15,14 +16,14 @@ export class CastSummaryComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.setCredits();
+    this.initCastSummary();
   }
 
   ngOnChanges(): void {
-    this.setCredits();
+    this.initCastSummary();
   }
 
-  private setCredits(): void {
+  private initCastSummary(): void {
     this.loading = false;
   }
 }
