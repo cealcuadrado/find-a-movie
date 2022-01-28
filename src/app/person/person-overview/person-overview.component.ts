@@ -33,12 +33,14 @@ export class PersonOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadingPersonDetail = true;
-    this.loadingCastAndCrew = true;
-    this.setOverviewView();
+    this.initPersonOverview();
   }
 
   ngOnChanges(): void {
+    this.initPersonOverview();
+  }
+
+  private initPersonOverview(): void {
     this.loadingPersonDetail = true;
     this.loadingCastAndCrew = true;
     this.setOverviewView();
@@ -52,7 +54,6 @@ export class PersonOverviewComponent implements OnInit {
         this.getCastAndCrew();
       }
     });
-
   }
 
   public getPersonDetail(): void {
