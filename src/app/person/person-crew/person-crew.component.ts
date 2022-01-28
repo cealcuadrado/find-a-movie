@@ -10,10 +10,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-person-crew',
   templateUrl: './person-crew.component.html',
-  styleUrls: ['./person-crew.component.scss']
+  styleUrls: ['./person-crew.component.scss'],
 })
 export class PersonCrewComponent implements OnInit {
-
   public loadingPersonDetail = true;
   public loadingCrew = true;
 
@@ -33,24 +32,26 @@ export class PersonCrewComponent implements OnInit {
     private titleService: Title,
     private window: Window,
     private localStorage: LocalStorageService
-  ) { }
+  ) {}
 
   private activatedRouteSubscription: Subscription | undefined;
   private personCrewSubscription: Subscription;
 
   ngOnInit(): void {
-    this.loadingPersonDetail = true;
-    this.loadingCrew = true;
-    this.setCrewView();
+    this.initPersonCrew();
   }
 
   ngOnChanges(): void {
+    this.initPersonCrew();
+  }
+
+  private initPersonCrew(): void {
     this.loadingPersonDetail = true;
     this.loadingCrew = true;
     this.setCrewView();
   }
 
-  public setCrewView(): void {
+  private setCrewView(): void {
     this.currentPage = 1;
     this.totalResults = this.crewCredits.length;
     this.filterInput = '';
@@ -59,23 +60,22 @@ export class PersonCrewComponent implements OnInit {
     this.setWindowTitle();
     this.loadingPersonDetail = false;
 
-    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(params => {
-      if (params.id) {
-        this.personId = params.id;
-        this.getCrew();
-      }
-    });
+    this.activatedRouteSubscription =
+      this.activatedRoute.parent?.params.subscribe((params) => {
+        if (params.id) {
+          this.personId = params.id;
+          this.getCrew();
+        }
+      });
   }
 
-  public getCrew(): void {
-    this.personCrewSubscription = this.person.getMovieCredits(this.personId).subscribe(personMovieCredits => {
-      this.crewCredits = personMovieCredits.crew;
-      this.loadingCrew = false;
-    });
-  }
-
-  public loading(): boolean {
-    return this.loadingPersonDetail || this.loadingCrew;
+  private getCrew(): void {
+    this.personCrewSubscription = this.person
+      .getMovieCredits(this.personId)
+      .subscribe((personMovieCredits) => {
+        this.crewCredits = personMovieCredits.crew;
+        this.loadingCrew = false;
+      });
   }
 
   public onPageChange(event: number): void {
@@ -84,7 +84,13 @@ export class PersonCrewComponent implements OnInit {
   }
 
   private setWindowTitle(): void {
-    this.titleService.setTitle(`Work of ${this.personDetail.name} as Crew | Find a Movie`);
+    this.titleService.setTitle(
+      `Work of ${this.personDetail.name} as Crew | Find a Movie`
+    );
+  }
+
+  public loading(): boolean {
+    return this.loadingPersonDetail || this.loadingCrew;
   }
 
   ngOnDestroy() {
