@@ -7,7 +7,8 @@ import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
   styleUrls: ['./crew-summary.component.scss'],
 })
 export class CrewSummaryComponent implements OnInit {
-  loading = true;
+  
+  public loading: boolean = true;
 
   @Input() id: string = '';
   @Input() crewCredits: CrewCredit[] = [];
@@ -15,14 +16,14 @@ export class CrewSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.setCredits();
+    this.initCrewSummary();
   }
 
   ngOnChanges(): void {
-    this.setCredits();
+    this.initCrewSummary();
   }
 
-  setCredits(): void {
+  private initCrewSummary(): void {
     this.loading = false;
   }
 }
