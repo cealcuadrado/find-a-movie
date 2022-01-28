@@ -36,10 +36,14 @@ export class PersonComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getPerson();
+    this.initPerson();
   }
 
   ngOnChanges(): void {
+    this.initPerson();
+  }
+
+  private initPerson(): void {
     this.loading = true;
     this.getPerson();
   }
