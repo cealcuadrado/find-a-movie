@@ -8,7 +8,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./person-info.component.scss'],
 })
 export class PersonInfoComponent implements OnInit {
-  loading = true;
+
+  public loading: boolean = true;
+
   @Input() personDetail: PersonDetail;
 
   imdbNameUrl = environment.imdbNameUrl;
@@ -16,16 +18,15 @@ export class PersonInfoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.setInfo();
+    this.initPersonInfo();
   }
 
   ngOnChanges(): void {
-    this.setInfo();
+    this.initPersonInfo();
   }
 
-  private setInfo(): void {
+  private initPersonInfo(): void {
     this.loading = false;
-    console.log(this.personDetail);
   }
 
   public setGenderIcon(n: number): string {
