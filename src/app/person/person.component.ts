@@ -13,7 +13,6 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./person.component.scss'],
 })
 export class PersonComponent implements OnInit {
-
   public currentTab = 1;
   public id: string;
 
@@ -27,8 +26,10 @@ export class PersonComponent implements OnInit {
   public personCastResults: number = 0;
   public personCrewResults: number = 0;
 
+  public activatedRouteSubscription: Subscription;
   public tabSubscription: Subscription;
-  public personSubscription: Subscription;
+  public personDetailSubscription: Subscription;
+  public personCastCrewSubscription: Subscription | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -56,26 +57,29 @@ export class PersonComponent implements OnInit {
   private setMainTab() {
     this.person.setCurrentTab(1);
 
-    this.tabSubscription = this.person.getCurrentTab().subscribe(currentTab => {
-      this.currentTab = currentTab;
-      this.window.scrollTo({ top: 50 });
-    });
+    this.tabSubscription = this.person
+      .getCurrentTab()
+      .subscribe((currentTab) => {
+        this.currentTab = currentTab;
+        this.window.scrollTo({ top: 50 });
+      });
   }
 
   private getPerson(): void {
     this.loadingView = false;
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.id) {
-        this.id = params.id;
-        this.getPersonDetail();
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe(
+      (params) => {
+        if (params.id) {
+          this.id = params.id;
+          this.getPersonDetail();
+        }
       }
-    });
+    );
   }
 
   private getPersonDetail(): void {
     this.setMainTab();
-    this.person.getPerson(this.id).subscribe((person) => {
-      console.log(person);
+    this.personDetailSubscription = this.person.getPerson(this.id).subscribe((person) => {
       if (Object.values(person).length > 0) {
         this.personDetail = person;
         this.getPersonCredits();
@@ -90,15 +94,19 @@ export class PersonComponent implements OnInit {
   }
 
   private getPersonCredits(): void {
-    this.personSubscription = this.person.getMovieCredits(this.id).subscribe(movieCredits => {
-      this.personCastResults = movieCredits.cast.length;
-      this.personCrewResults = movieCredits.crew.length;
-      this.loadingPersonCastCrew = false;
-    });
+    this.personCastCrewSubscription = this.person
+      .getMovieCredits(this.id)
+      .subscribe((movieCredits) => {
+        this.personCastResults = movieCredits.cast.length;
+        this.personCrewResults = movieCredits.crew.length;
+        this.loadingPersonCastCrew = false;
+      });
   }
 
   private setWindowTitle(detail: boolean): void {
-    let title = detail ? `${this.personDetail.name} Filmography` : 'No Person Found';
+    let title = detail
+      ? `${this.personDetail.name} Filmography`
+      : 'No Person Found';
     this.titleService.setTitle(`${title} | Find a Movie`);
   }
 
@@ -118,17 +126,26 @@ export class PersonComponent implements OnInit {
       : `${this.backdropUrl}${profilePath}`;
   }
 
-  public hasAtLeastBirthOrDeathDay(birthday: string | null, deathday: string | null): boolean {
-    return (birthday != null || deathday != null);
+  public hasAtLeastBirthOrDeathDay(
+    birthday: string | null,
+    deathday: string | null
+  ): boolean {
+    return birthday != null || deathday != null;
   }
 
   public loading(): boolean {
-    return (this.loadingView || this.loadingPersonCastCrew || this.loadingPersonCastCrew);
+    return (
+      this.loadingView ||
+      this.loadingPersonCastCrew ||
+      this.loadingPersonCastCrew
+    );
   }
 
   ngOnDestroy() {
+    this.activatedRouteSubscription.unsubscribe();
     this.tabSubscription.unsubscribe();
-    this.personSubscription.unsubscribe();
+    this.personDetailSubscription.unsubscribe();
+    this.personCastCrewSubscription?.unsubscribe();
     this.localStorage.remove('currentPerson');
   }
 }
