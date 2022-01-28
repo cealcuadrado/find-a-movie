@@ -16,7 +16,10 @@ export class PersonComponent implements OnInit {
 
   public currentTab = 1;
   public id: string;
-  public loading = true;
+
+  public loadingView: boolean = true;
+  public loadingPersonDetail: boolean = true;
+  public loadingPersonCastCrew: boolean = true;
 
   public personDetail: PersonDetail;
   private backdropUrl: string = environment.backdropUrl;
@@ -44,7 +47,9 @@ export class PersonComponent implements OnInit {
   }
 
   private initPerson(): void {
-    this.loading = true;
+    this.loadingView = true;
+    this.loadingPersonDetail = true;
+    this.loadingPersonCastCrew = true;
     this.getPerson();
   }
 
@@ -58,6 +63,7 @@ export class PersonComponent implements OnInit {
   }
 
   private getPerson(): void {
+    this.loadingView = false;
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.id = params.id;
@@ -73,10 +79,13 @@ export class PersonComponent implements OnInit {
       if (Object.values(person).length > 0) {
         this.personDetail = person;
         this.getPersonCredits();
-        this.setTitle();
+        this.setWindowTitle(true);
         this.localStorage.set('currentPerson', this.personDetail);
+      } else {
+        this.setWindowTitle(false);
+        this.loadingPersonCastCrew = false;
       }
-      this.loading = false;
+      this.loadingPersonDetail = false;
     });
   }
 
@@ -84,15 +93,14 @@ export class PersonComponent implements OnInit {
     this.personSubscription = this.person.getMovieCredits(this.id).subscribe(movieCredits => {
       this.personCastResults = movieCredits.cast.length;
       this.personCrewResults = movieCredits.crew.length;
+      this.loadingPersonCastCrew = false;
     });
   }
 
-  private setTitle(): void {
-    this.titleService.setTitle(
-      `${this.personDetail.name} Filmography | Find a Movie`
-    );
+  private setWindowTitle(detail: boolean): void {
+    let title = detail ? `${this.personDetail.name} Filmography` : 'No Person Found';
+    this.titleService.setTitle(`${title} | Find a Movie`);
   }
-
 
   public setHeaderProfile(backdropPath: string | null) {
     return {
@@ -104,7 +112,6 @@ export class PersonComponent implements OnInit {
     };
   }
 
-
   private setProfileUrl(profilePath: string | null): string {
     return !profilePath
       ? 'https://via.placeholder.com/600x450?text=No+profile+image+available'
@@ -113,6 +120,10 @@ export class PersonComponent implements OnInit {
 
   public hasAtLeastBirthOrDeathDay(birthday: string | null, deathday: string | null): boolean {
     return (birthday != null || deathday != null);
+  }
+
+  public loading(): boolean {
+    return (this.loadingView || this.loadingPersonCastCrew || this.loadingPersonCastCrew);
   }
 
   ngOnDestroy() {
