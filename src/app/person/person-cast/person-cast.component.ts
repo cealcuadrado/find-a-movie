@@ -38,18 +38,20 @@ export class PersonCastComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadingPersonDetail = true;
-    this.loadingCast = true;
-    this.setCastView();
+    this.initPersonCast();
   }
 
   ngOnChanges(): void {
+    this.initPersonCast();
+  }
+
+  private initPersonCast(): void {
     this.loadingPersonDetail = true;
     this.loadingCast = true;
     this.setCastView();
   }
 
-  public setCastView(): void {
+  private setCastView(): void {
     this.currentPage = 1;
     this.totalResults = this.castCredits.length;
     this.filterInput = '';
@@ -67,7 +69,7 @@ export class PersonCastComponent implements OnInit {
       });
   }
 
-  public getCast(): void {
+  private getCast(): void {
     this.personCastSubscription = this.person
       .getMovieCredits(this.personId)
       .subscribe((personMovieCredits) => {
@@ -79,17 +81,19 @@ export class PersonCastComponent implements OnInit {
       });
   }
 
-  public loading(): boolean {
-    return this.loadingPersonDetail || this.loadingCast;
-  }
-
   public onPageChange(event: any): void {
     this.currentPage = event;
     this.window.scrollTo({ top: 400 });
   }
 
   private setWindowTitle(): void {
-    this.titleService.setTitle(`Work of ${this.personDetail.name} as Cast | Find a Movie`);
+    this.titleService.setTitle(
+      `Work of ${this.personDetail.name} as Cast | Find a Movie`
+    );
+  }
+
+  public loading(): boolean {
+    return this.loadingPersonDetail || this.loadingCast;
   }
 
   ngOnDestroy() {
