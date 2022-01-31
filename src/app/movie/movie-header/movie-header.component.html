@@ -27,7 +27,9 @@
     <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
       [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
       <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
-        No poster available
+        <i class="fa fa-unlink fa-2x fa-fw mb-4"></i>
+        <br/>
+        <small>No poster image available</small>
       </span>
     </div>
   </section>

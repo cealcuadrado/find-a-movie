@@ -79,6 +79,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-transform: uppercase;
 
       @media screen and (max-width: 991px) {
         display: none;
@@ -86,6 +87,7 @@
 
       .no-poster-text {
         color: black;
+        text-align: center;
       }
     }
   }
