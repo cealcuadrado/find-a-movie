@@ -1,11 +1,16 @@
-<div *ngIf="!loading; else nowLoading">
-  <div *ngIf="youtubeId; else noTrailer">
-    <embedded-media [video]='key' provider="youtube" attributes='{"width": "100%", "height": 500}'>
-    </embedded-media>
+<section class="trailer">
+  <div *ngIf="!loading(); else nowLoading">
+    <div *ngIf="youtubeId; else noTrailer">
+      <embedded-media [video]='key' provider="youtube" attributes='{"width": "100%", "height": 500}'>
+      </embedded-media>
+    </div>
   </div>
-  <ng-template #noTrailer>
-  </ng-template>
-</div>
+</section>
+<hr class="trailer-separator" *ngIf="youtubeId" />
+
 <ng-template #nowLoading>
   <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>
+</ng-template>
+
+<ng-template #noTrailer>
 </ng-template>

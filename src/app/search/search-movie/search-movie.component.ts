@@ -69,9 +69,7 @@ export class SearchMovieComponent implements OnInit {
           this.totalResults = querySearchResult.total_results;
           this.totalPages = querySearchResult.total_pages;
           console.log(this.totalPages);
-          this.titleService.setTitle(
-            `Search Results for: ${this.searchQuery} | Find a Movie`
-          );
+          this.setTitleForQuery();
           this.generateSelectPageNumbers();
         }
       },
@@ -81,6 +79,12 @@ export class SearchMovieComponent implements OnInit {
       () => {
         this.loadingResults = false;
       }
+    );
+  }
+
+  private setTitleForQuery(): void {
+    this.titleService.setTitle(
+      `Search Results for: ${this.searchQuery} | Find a Movie`
     );
   }
 

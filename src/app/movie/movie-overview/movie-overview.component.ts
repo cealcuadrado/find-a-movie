@@ -6,7 +6,6 @@ import { MovieDetail } from './../../shared/interfaces/movie-detail';
 import { Component, OnInit } from '@angular/core';
 import { Cast } from 'src/app/shared/interfaces/cast';
 import { Crew } from 'src/app/shared/interfaces/crew';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-overview',
@@ -14,6 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-overview.component.scss'],
 })
 export class MovieOverviewComponent implements OnInit {
+
   public loadingDetails = true;
   public loadingCastAndCrew = true;
 
@@ -22,11 +22,9 @@ export class MovieOverviewComponent implements OnInit {
   public cast: Cast[] = [];
   public crew: Crew[] = [];
 
-  private imdbUrl: string = environment.imdbUrl;
-
   private activatedRouteSubscription: Subscription | undefined;
   private movieDetailSubscription: Subscription;
-  private movieCastAndCrewSubscription: Subscription;
+  private movieCastAndCrewSubscription: Subscription | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,27 +33,28 @@ export class MovieOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadingDetails = true;
-    this.loadingCastAndCrew = true;
-    this.setOverview();
+    this.initMovieOverview();
   }
 
   ngOnChanges(): void {
+    this.initMovieOverview();
+  }
+
+  private initMovieOverview(): void {
     this.loadingDetails = true;
     this.loadingCastAndCrew = true;
     this.setOverview();
   }
 
   private setOverview(): void {
-    this.activatedRouteSubscription = this.activatedRoute.parent?.params.subscribe(
-      (params) => {
+    this.activatedRouteSubscription =
+      this.activatedRoute.parent?.params.subscribe((params) => {
         if (params.id) {
           this.id = params.id;
           this.getDetails();
           this.getCastAndCrew();
         }
-      }
-    );
+      });
   }
 
   private getDetails(): void {
@@ -86,13 +85,13 @@ export class MovieOverviewComponent implements OnInit {
   }
 
   private setWindowTitle(): void {
-    let date = new Date(this.movieDetail.release_date);
     let detail = this.movieDetail;
-    this.titleService.setTitle(
-      `${this.setLocalOrForeignTitle(
-        detail
-      )} (${date.getFullYear()}) | Find a Movie`
-    );
+    let year = !this.isDateEmpty() ? new Date(this.movieDetail.release_date).getFullYear(): 'No Release Date';
+    this.titleService.setTitle(`${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`);
+  }
+
+  public isDateEmpty(): boolean {
+    return this.movieDetail.release_date.length == 0;
   }
 
   private setLocalOrForeignTitle(detail: MovieDetail): string {
@@ -105,6 +104,6 @@ export class MovieOverviewComponent implements OnInit {
   ngOnDestroy() {
     this.activatedRouteSubscription?.unsubscribe();
     this.movieDetailSubscription.unsubscribe();
-    this.movieCastAndCrewSubscription.unsubscribe();
+    this.movieCastAndCrewSubscription?.unsubscribe();
   }
 }

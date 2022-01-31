@@ -10,6 +10,11 @@
       </small>
     </h1>
     <div class="header-info">
+      <span class="year">
+        <span *ngIf="!isDateEmpty(movieDetail.release_date); else noReleaseDate">
+          {{movieDetail.release_date | date:'yyyy'}}
+        </span>
+      </span>
       <span class="director" *ngIf="director">
         Dir. {{director}}
       </span>
