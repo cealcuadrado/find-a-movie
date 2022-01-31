@@ -89,6 +89,29 @@
         color: black;
         text-align: center;
       }
+
+      a {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity linear 0.1s;
+
+        .zoom {
+          width: 150px;
+          height: 225px;
+          border: 1px solid white;
+          background-color: rgba(0,0,0,0.25);
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }

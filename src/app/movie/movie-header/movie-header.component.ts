@@ -85,6 +85,10 @@ export class MovieHeaderComponent implements OnInit {
     }
   }
 
+  public zoomImage(): void {
+    console.log('zoomImage()');
+  }
+
   public isDateEmpty(dateStr: string): boolean {
     return dateStr.length == 0;
   }
