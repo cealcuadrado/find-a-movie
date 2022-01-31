@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralSharedModule } from './shared/modules/general-shared/general-shared.module';
 import { SearchBarModule } from './shared/modules/search-bar/search-bar.module';
-import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 
 /* Components */
@@ -34,7 +33,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ToastrModule.forRoot(),
     GeneralSharedModule,
     SearchBarModule,
     RouterModule
