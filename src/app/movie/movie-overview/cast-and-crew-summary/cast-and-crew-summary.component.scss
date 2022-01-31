@@ -1,0 +1,7 @@
+.cast-and-crew-summary {
+  .cast-and-crew-separator {
+    @media screen and (min-width: 992px) {
+      display: none;
+    }
+  }
+}

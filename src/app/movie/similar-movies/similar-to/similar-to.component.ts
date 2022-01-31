@@ -41,12 +41,21 @@ export class SimilarToComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year = !this.isDateEmpty() ? new Date(this.movie.release_date).getFullYear() : 'No Release Date';
+    let year = !this.isDateEmpty()
+      ? new Date(this.movie.release_date).getFullYear()
+      : 'No Release Date';
 
-    return `${this.movie.title} (${year})`
+    return `${this.setLocalOrForeignTitle()} (${year})`;
   }
 
   public isDateEmpty(): boolean {
     return this.movie.release_date.length == 0;
+  }
+
+  public setLocalOrForeignTitle(): string {
+    return !this.movie.original_language.match('en') &&
+      !this.movie.original_title.match(this.movie.title)
+      ? `${this.movie.title} (${this.movie.original_title})`
+      : this.movie.title;
   }
 }

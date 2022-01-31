@@ -1,8 +1,7 @@
-<aside class="movie-similar" *ngIf="!loading; else nowLoading">
+<aside class="movie-similar" *ngIf="!loading(); else nowLoading">
   <h4 class="text-uppercase jost-font">Similar Movies</h4>
 
   <div *ngIf="similarMovies.length > 0; else noSimilarMoviesFound">
-
     <div class="movies-similar-to">
       <div *ngFor="let similarMovie of similarMovies">
         <app-overview-similar-to [movie]="similarMovie"></app-overview-similar-to>

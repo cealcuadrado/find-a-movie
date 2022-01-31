@@ -1,3 +1,5 @@
+import { MovieDetail } from './../../shared/interfaces/movie-detail';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { Title } from '@angular/platform-browser';
 import { MovieService } from './../movie.service';
 import { ActivatedRoute } from '@angular/router';
@@ -41,21 +43,30 @@ export class MovieCrewComponent implements OnInit {
   public isBasedOnCharacters: boolean = false;
   public basedOnCharacterAuthors: PersonLink[] = [];
 
+  public isPresented: boolean = false;
+  public presenters: PersonLink[] = [];
+
+  public crewMembers: number = 0;
+
   private activatedRouteSubscription: Subscription | undefined;
   private movieCrewSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private movie: MovieService,
-    private titleService: Title
+    private titleService: Title,
+    private localStorage: LocalStorageService
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.setCrewView();
+    this.initMovieCrew();
   }
 
   ngOnChanges(): void {
+    this.initMovieCrew();
+  }
+
+  private initMovieCrew(): void {
     this.loading = true;
     this.setCrewView();
   }
@@ -76,6 +87,7 @@ export class MovieCrewComponent implements OnInit {
       .subscribe((result) => {
         this.crew = result.crew;
         this.setCrewContent();
+        this.setWindowTitle();
       });
   }
 
@@ -97,6 +109,7 @@ export class MovieCrewComponent implements OnInit {
     this.getMusicSupervisors();
     this.getCoProducers();
     this.getCastingPeople();
+    this.getPresenters();
     this.loading = false;
   }
 
@@ -106,18 +119,20 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.direction.length;
   }
 
   private getCoDirection(): void {
     let coDirection = this.crew
-      .filter(member => member.job === 'Co-Director')
-      .map(member => {
+      .filter((member) => member.job === 'Co-Director')
+      .map((member) => {
         return { name: member.name, id: member.id };
       });
 
     if (coDirection.length > 0) {
       this.isCoDirected = true;
       this.coDirection = coDirection;
+      this.crewMembers += this.coDirection.length;
     } else {
       this.isCoDirected = false;
     }
@@ -129,6 +144,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.writing.length;
   }
 
   private getScreenPlayers(): void {
@@ -137,6 +153,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.screenPlayers.length;
   }
 
   private getStoryPlayers(): void {
@@ -145,6 +162,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.storyPlayers.length;
   }
 
   private getBasedOnWork(): void {
@@ -159,6 +177,7 @@ export class MovieCrewComponent implements OnInit {
     if (basedOnWorkAuthors.length > 0) {
       this.isBasedOnWork = true;
       this.basedOnWorkAuthors = basedOnWorkAuthors;
+      this.crewMembers += this.basedOnWorkAuthors.length;
     } else {
       this.isBasedOnWork = false;
     }
@@ -174,6 +193,7 @@ export class MovieCrewComponent implements OnInit {
     if (basedOnCharacterAuthors.length > 0) {
       this.isBasedOnCharacters = true;
       this.basedOnCharacterAuthors = basedOnCharacterAuthors;
+      this.crewMembers += this.basedOnCharacterAuthors.length;
     } else {
       this.isBasedOnCharacters = false;
     }
@@ -185,6 +205,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.producers.length;
   }
 
   private getExecutiveProducers(): void {
@@ -193,6 +214,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.executiveProducers.length;
   }
 
   private getCinematographers(): void {
@@ -201,6 +223,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.cinematographers.length;
   }
 
   private getProductionDesigners(): void {
@@ -209,6 +232,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.productionDesigners.length;
   }
 
   private getEditors(): void {
@@ -217,6 +241,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.editors.length;
   }
 
   private getCostumeDesigners(): void {
@@ -225,6 +250,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.costumeDesigners.length;
   }
 
   private getMusicComposers(): void {
@@ -236,6 +262,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.musicComposers.length;
   }
 
   private getMusicSupervisors(): void {
@@ -244,6 +271,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.musicSupervisors.length;
   }
 
   private getCoProducers(): void {
@@ -252,6 +280,7 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.coProducers.length;
   }
 
   private getCastingPeople(): void {
@@ -260,6 +289,44 @@ export class MovieCrewComponent implements OnInit {
       .map((member) => {
         return { name: member.name, id: member.id };
       });
+    this.crewMembers += this.castingPeople.length;
+  }
+
+  private getPresenters(): void {
+    let presenters = this.crew
+      .filter((member) => member.job === 'Presenter')
+      .map((member) => {
+        return { name: member.name, id: member.id };
+      });
+
+    if (presenters.length > 0) {
+      this.isPresented = true;
+      this.presenters = presenters;
+      this.crewMembers += this.presenters.length;
+    } else {
+      this.isPresented = false;
+    }
+  }
+
+  private setWindowTitle(): void {
+    let detail = this.localStorage.get('currentMovie');
+    let year = !this.isDateEmpty(detail)
+      ? new Date(detail.release_date).getFullYear()
+      : 'No Release Date';
+    this.titleService.setTitle(
+      `Crew of ${this.setLocalOrForeignTitle(detail)} (${year}) | Find a Movie`
+    );
+  }
+
+  public isDateEmpty(detail: MovieDetail): boolean {
+    return detail.release_date.length == 0;
+  }
+
+  private setLocalOrForeignTitle(detail: MovieDetail): string {
+    return !detail.original_language.match('en') &&
+      !detail.original_title.match(detail.title)
+      ? `${detail.title} (${detail.original_title})`
+      : detail.title;
   }
 
   ngOnDestroy() {
