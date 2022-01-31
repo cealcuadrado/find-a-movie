@@ -16,7 +16,7 @@
           <p>No overview available.</p>
         </ng-template>
       </section>
-      <hr *ngIf="movieDetail.tagline || movieDetail.overview"/>
+      <hr/>
       <app-cast-and-crew-summary [cast]="cast" [crew]="crew"></app-cast-and-crew-summary>
       <app-movie-trailer [movieId]="id"></app-movie-trailer>
     </div>
