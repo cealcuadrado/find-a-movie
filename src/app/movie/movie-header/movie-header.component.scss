@@ -66,6 +66,20 @@
   .header-poster {
     position: relative;
 
+    .see-background-image {
+      position: absolute;
+      right: calc(1.5rem + 150px);
+      bottom: 1rem;
+
+      button {
+        text-transform: uppercase;
+      }
+
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+
     .movie-poster {
       position: absolute;
       right: 1rem;
@@ -87,6 +101,9 @@
 
       .no-poster-text {
         color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         text-align: center;
       }
 
@@ -101,9 +118,10 @@
           width: 150px;
           height: 225px;
           border: 1px solid white;
-          background-color: rgba(0,0,0,0.25);
+          background-color: rgba(0,0,0,0.75);
           text-align: center;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
         }
