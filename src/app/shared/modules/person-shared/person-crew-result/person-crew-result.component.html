@@ -1,4 +1,4 @@
-<a class="result person-crew-result" [routerLink]="['/movie', credit.id]" [title]="credit.title">
+<a class="result person-crew-result" [routerLink]="['/movie', credit.id]" [title]="setTitle()">
   <div class="result-body person-crew-result-body" [ngStyle]="setStyle(credit.poster_path)">
     <div class="result-position"></div>
     <div class="result-no-poster-available" *ngIf="!hasPosterPath(credit.poster_path)">
@@ -8,7 +8,7 @@
       <span>{{credit.job}}</span>
       <br/>
       <strong>
-        {{credit.title}}
+        {{setLocalOrForeignTitle(credit)}}
         (<span *ngIf="!isDateEmpty(); else noReleaseDate">{{credit.release_date | date:'yyyy'}}</span>)
       </strong>
     </div>

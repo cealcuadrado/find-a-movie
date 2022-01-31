@@ -1,4 +1,4 @@
-<div class="person-content" *ngIf="!loading; else loadingPerson">
+<div class="person-content" *ngIf="!loading(); else loadingPerson">
   <section class="person" *ngIf="personDetail; else noPersonFound">
     <header>
       <div class="header-backdrop" [ngStyle]="setHeaderProfile(this.personDetail.profile_path)">
@@ -35,7 +35,7 @@
             [routerLink]="['/person', id, 'cast']"
             routerLinkActive="active"
             href="#">
-            Cast
+            Work as Cast
           </a>
         </li>
         <li class="nav-item">
@@ -44,7 +44,7 @@
             [routerLink]="['/person', id, 'crew']"
             routerLinkActive="active"
             href="#">
-            Crew
+            Work as Crew
           </a>
         </li>
       </ul>
