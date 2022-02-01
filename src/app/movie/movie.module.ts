@@ -7,6 +7,7 @@ import { EmbeddedMediaModule } from 'ngx-embedded-media';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 /* Pipes */
 import { RuntimePipe } from './runtime.pipe';
@@ -53,7 +54,8 @@ import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overv
     RouterModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxImageGalleryModule
   ]
 })
 export class MovieModule { }

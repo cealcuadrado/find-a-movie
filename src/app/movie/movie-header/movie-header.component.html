@@ -24,20 +24,15 @@
     </div>
   </section>
   <section class="header-poster">
-    <div class="see-background-image" *ngIf="this.movieDetail.backdrop_path">
-      <button class="btn btn-dark">
-        <i class="fas fa-search-plus fa-fw"></i> Background
-      </button>
-    </div>
     <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
       [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
-      <div *ngIf="!isPosterUrl(movieDetail.poster_path); else zoom" class="no-poster-text">
+      <div *ngIf="!isPosterUrl(movieDetail.poster_path); else viewGallery" class="no-poster-text">
         <i class="fa fa-unlink fa-2x fa-fw mb-4"></i>
         <span>No poster image available</span>
       </div>
-      <ng-template #zoom>
-        <a (click)="zoomImage()">
-          <div class="zoom">
+      <ng-template #viewGallery>
+        <a (click)="openGallery(0)" title="View Poster and/or Header Background">
+          <div class="view-gallery">
             <i class="fas fa-search-plus fa-2x fa-fw"></i>
           </div>
         </a>
@@ -49,3 +44,13 @@
 <ng-template #noReleaseDate>
   <span>No Release Date</span>
 </ng-template>
+
+<ngx-image-gallery 
+  [images]="images" 
+  [conf]="galleryConfig" 
+  (onOpen)="galleryOpened($event)" 
+  (onClose)="galleryClosed()"
+  (onImageClicked)="galleryImageClicked($event)" 
+  (onImageChange)="galleryImageChanged($event)"
+  (onDelete)="deleteImage($event)">
+</ngx-image-gallery>
