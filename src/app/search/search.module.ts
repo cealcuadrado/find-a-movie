@@ -12,6 +12,7 @@ import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchPersonComponent } from './search-person/search-person.component';
 import { MovieResultComponent } from './search-movie/movie-result/movie-result.component';
 import { PersonResultComponent } from './search-person/person-result/person-result.component';
+import { GridDisplayMovieComponent } from './search-movie/grid-display-movie/grid-display-movie.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PersonResultComponent } from './search-person/person-result/person-resu
     SearchMovieComponent,
     SearchPersonComponent,
     MovieResultComponent,
-    PersonResultComponent
+    PersonResultComponent,
+    GridDisplayMovieComponent,
   ],
   imports: [
     CommonModule,

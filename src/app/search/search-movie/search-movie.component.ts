@@ -26,6 +26,8 @@ export class SearchMovieComponent implements OnInit {
   public pageNumbers: number[];
   public selectPage: number;
 
+  public displayMode: string = 'grid';
+
   private searchSubscription: Subscription;
 
   constructor(
@@ -68,7 +70,6 @@ export class SearchMovieComponent implements OnInit {
           this.searchResults = querySearchResult.results;
           this.totalResults = querySearchResult.total_results;
           this.totalPages = querySearchResult.total_pages;
-          console.log(this.totalPages);
           this.setTitleForQuery();
           this.generateSelectPageNumbers();
         }
@@ -111,11 +112,19 @@ export class SearchMovieComponent implements OnInit {
   }
 
   public onPageChange(event: any): void {
-    console.log(event);
     this.currentPage = event;
     this.selectPage = this.currentPage;
     this.window.scrollTo({ top: 0 });
+    this.loadingResults = true;
     this.searchMovies();
+  }
+
+  public changeDisplayMode(str: string): void {
+    this.displayMode = str;
+  }
+
+  public isDisplayMode(str: string): string {
+    return this.displayMode.includes(str) ? 'active' : '';
   }
 
   ngOnDestroy() {
