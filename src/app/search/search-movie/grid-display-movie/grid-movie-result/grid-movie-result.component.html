@@ -1,4 +1,4 @@
-<a class="result movie-result" [routerLink]="['/movie', searchResult.id]" [title]="setTitleAndYear()">
+<a class="result grid-movie-result" [routerLink]="['/movie', searchResult.id]" [title]="setTitleAndYear()">
   <div class="result-body movie-result-body" [ngStyle]="setPoster()">
     <div class="result-position"></div>
     <div class="result-no-poster-available" *ngIf="!isPosterUrl(searchResult.poster_path)">

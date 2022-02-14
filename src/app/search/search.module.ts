@@ -10,18 +10,18 @@ import { SearchBarModule } from '../shared/modules/search-bar/search-bar.module'
 import { SearchComponent } from './search.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { SearchPersonComponent } from './search-person/search-person.component';
-import { MovieResultComponent } from './search-movie/movie-result/movie-result.component';
 import { PersonResultComponent } from './search-person/person-result/person-result.component';
 import { GridDisplayMovieComponent } from './search-movie/grid-display-movie/grid-display-movie.component';
+import { GridMovieResultComponent } from './search-movie/grid-display-movie/grid-movie-result/grid-movie-result.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchMovieComponent,
     SearchPersonComponent,
-    MovieResultComponent,
     PersonResultComponent,
     GridDisplayMovieComponent,
+    GridMovieResultComponent
   ],
   imports: [
     CommonModule,

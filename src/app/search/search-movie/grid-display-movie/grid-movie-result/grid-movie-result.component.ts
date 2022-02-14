@@ -1,13 +1,13 @@
-import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
-import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-movie-result',
-  templateUrl: './movie-result.component.html',
-  styleUrls: ['./movie-result.component.scss'],
+  selector: 'app-grid-movie-result',
+  templateUrl: './grid-movie-result.component.html',
+  styleUrls: ['./grid-movie-result.component.scss'],
 })
-export class MovieResultComponent implements OnInit {
+export class GridMovieResultComponent implements OnInit {
   
   @Input() searchResult: MovieListResult;
   private posterUrl: string = environment.posterUrl;
