@@ -10,7 +10,7 @@
     <div *ngIf="!loadingResults; else loadResults">
       <section class="search-results" *ngIf="searchResults.length > 0; else noResultsFound">
         <section class="current-page-info">
-          <div class="row flex-column flex-lg-row mb-4">
+          <div class="row flex-column flex-lg-row">
             <div class="col-auto mr-auto">
               <div>Showing <strong>{{calculateLeftCounter()}}</strong>-<strong>{{calculateRightCounter()}}</strong> of
                 <strong>{{totalResults}}</strong> total results</div>
@@ -21,13 +21,37 @@
           </div>
         </section>
 
+        <section class="display-mode">
+          <div class="btn-group btn-group-toggle">
+            <button class="btn btn-secondary"
+              [ngClass]="isDisplayMode('grid')"
+              (click)="changeDisplayMode('grid')"
+              title="Show grid">
+              <i class="fas fa-th fa-fw"></i>
+            </button>
+            <button class="btn btn-secondary"
+              [ngClass]="isDisplayMode('list')"
+              (click)="changeDisplayMode('list')"
+              title="Show list">
+              <i class="fas fa-list fa-fw"></i>
+            </button>
+          </div>
+        </section>
+
         <section class="results-body">
-          <div class="row">
-            <div
-              *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}"
-              class="col-12 col-md-6 col-lg-3">
-              <app-movie-result [searchResult]="searchResult"></app-movie-result>
-            </div>
+          <div *ngIf="isDisplayMode('grid')">
+             <app-grid-display-movie
+              [searchResults]="searchResults"
+              [currentPage]="currentPage"
+              [totalResults]="totalResults">
+             </app-grid-display-movie>
+          </div>
+          <div *ngIf="isDisplayMode('list')">
+            <app-list-display-movie
+              [searchResults]="searchResults"
+              [currentPage]="currentPage"
+              [totalResults]="totalResults">
+            </app-list-display-movie>
           </div>
         </section>
 

@@ -1,0 +1,25 @@
+<a class="list-result list-movie-result" [routerLink]="['/movie', searchResult.id]" [title]="setTitleAndYear()">
+  <span *ngIf="isPosterUrl(searchResult.poster_path); else noPoster">
+    <div class="list-result-image result-poster" [ngStyle]="setPoster()"></div>
+  </span>
+  <div class="list-result-content">
+    <strong>{{searchResult.title}}</strong>
+    <br/>
+    <div *ngIf="searchResult.release_date; else noReleaseDate">
+      <span *ngIf="!isDateEmpty(searchResult.release_date); else noReleaseDate">
+        {{searchResult.release_date | date:'yyyy'}}
+      </span>
+    </div>
+  </div>
+
+</a>
+
+<ng-template #noPoster>
+  <div class="list-result-no-image-available no-poster-available">
+    <span><i class="fas fa-unlink fa-fw"></i></span>
+  </div>
+</ng-template>
+
+<ng-template #noReleaseDate>
+  <span>No Release Date</span>
+</ng-template>

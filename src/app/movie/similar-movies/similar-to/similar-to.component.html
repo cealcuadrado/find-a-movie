@@ -1,12 +1,10 @@
-<a class="result result-similar-to" [routerLink]="['/movie', movie.id]" [title]="setTitle()">
-  <div class="result-body result-similar-to-body" [ngStyle]="setPoster()">
-    <div class="result-position"></div>
-    <div class="result-no-poster-available" *ngIf="!isPosterUrl(movie.poster_path)">
-      <small>
-        <i class="fas fa-unlink fa-fw"></i> No poster image available
-      </small>
+<a class="box result-similar-to" [routerLink]="['/movie', movie.id]" [title]="setTitle()">
+  <div class="box-body result-similar-to-body" [ngStyle]="setPoster()">
+    <div class="box-position"></div>
+    <div class="box-no-image-available result-no-poster-available" *ngIf="!isPosterUrl(movie.poster_path)">
+      <small><i class="fas fa-unlink fa-fw"></i> No poster image available</small>
     </div>
-    <div class="result-content">
+    <div class="box-content">
       <strong>{{setLocalOrForeignTitle()}}</strong>
       <br/>
       <div *ngIf="movie.release_date; else noReleaseDate">

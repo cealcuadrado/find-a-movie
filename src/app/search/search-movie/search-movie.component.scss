@@ -1,0 +1,11 @@
+.search-movie {
+  .search-results {
+    & > * {
+      margin-bottom: 1rem;
+    }
+
+    .display-mode {
+      text-align: center;
+    }
+  }
+}
