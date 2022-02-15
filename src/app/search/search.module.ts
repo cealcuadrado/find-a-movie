@@ -16,6 +16,8 @@ import { ListDisplayMovieComponent } from './search-movie/list-display-movie/lis
 import { ListMovieResultComponent } from './search-movie/list-display-movie/list-movie-result/list-movie-result.component';
 import { GridDisplayPersonComponent } from './search-person/grid-display-person/grid-display-person.component';
 import { GridPersonResultComponent } from './search-person/grid-display-person/grid-person-result/grid-person-result.component';
+import { ListDisplayPersonComponent } from './search-person/list-display-person/list-display-person.component';
+import { ListPersonResultComponent } from './search-person/list-display-person/list-person-result/list-person-result.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { GridPersonResultComponent } from './search-person/grid-display-person/g
     ListDisplayMovieComponent,
     ListMovieResultComponent,
     GridDisplayPersonComponent,
-    GridPersonResultComponent
+    GridPersonResultComponent,
+    ListDisplayPersonComponent,
+    ListPersonResultComponent
   ],
   imports: [
     CommonModule,

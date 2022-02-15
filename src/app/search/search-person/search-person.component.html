@@ -45,7 +45,11 @@
             ></app-grid-display-person>
           </div>
           <div *ngIf="isDisplayMode('list')">
-            <p>List</p>
+            <app-list-display-person
+              [searchResults]="searchResults"
+              [currentPage]="currentPage"
+              [totalResults]="totalResults">
+            </app-list-display-person>
           </div>
         </section>
 
