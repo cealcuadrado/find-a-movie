@@ -1,10 +1,10 @@
-<a class="result grid-person-result" [routerLink]="['/person', personResult.id]" [title]="personResult.name">
-	<div class="result-body person-result-body" [ngStyle]="setPosterUrl()">
-		<div class="result-position"></div>
-		<div class="result-no-poster-available" *ngIf="!isPosterUrl(personResult.profile_path)">
+<a class="box grid-person-result" [routerLink]="['/person', personResult.id]" [title]="personResult.name">
+	<div class="box-body person-result-body" [ngStyle]="setPosterUrl()">
+		<div class="box-position"></div>
+		<div class="box-no-image-available no-profile-img-available" *ngIf="!isPosterUrl(personResult.profile_path)">
 			<small><i class="fas fa-unlink fa-fw"></i> No profile image available</small>
 		</div>
-		<div class="result-content">
+		<div class="box-content">
 			<strong>{{personResult.name}}</strong>
 		</div>
 	</div>
