@@ -119,8 +119,8 @@ export class SearchMovieComponent implements OnInit {
     this.searchMovies();
   }
 
-  public changeDisplayMode(str: string): void {
-    this.displayMode = str;
+  public changeDisplayMode(mode: string): void {
+    this.displayMode = mode;
   }
 
   public isDisplayMode(str: string): string {

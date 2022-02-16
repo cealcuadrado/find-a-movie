@@ -22,20 +22,10 @@
         </section>
 
         <section class="display-mode">
-          <div class="btn-group btn-group-toggle">
-            <button class="btn btn-secondary"
-              [ngClass]="isDisplayMode('grid')"
-              (click)="changeDisplayMode('grid')"
-              title="Show grid">
-              <i class="fas fa-th fa-fw"></i>
-            </button>
-            <button class="btn btn-secondary"
-              [ngClass]="isDisplayMode('list')"
-              (click)="changeDisplayMode('list')"
-              title="Show list">
-              <i class="fas fa-list fa-fw"></i>
-            </button>
-          </div>
+          <app-display-mode 
+            [displayMode]="displayMode"
+            (changeDisplayMode)="changeDisplayMode($event)">
+          </app-display-mode>
         </section>
 
         <section class="results-body">

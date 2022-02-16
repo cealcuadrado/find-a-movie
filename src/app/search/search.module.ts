@@ -18,6 +18,7 @@ import { GridDisplayPersonComponent } from './search-person/grid-display-person/
 import { GridPersonResultComponent } from './search-person/grid-display-person/grid-person-result/grid-person-result.component';
 import { ListDisplayPersonComponent } from './search-person/list-display-person/list-display-person.component';
 import { ListPersonResultComponent } from './search-person/list-display-person/list-person-result/list-person-result.component';
+import { SearchSharedModule } from '../shared/modules/search-shared/search-shared.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ListPersonResultComponent } from './search-person/list-display-person/l
     ReactiveFormsModule,
     SearchBarModule,
     GeneralSharedModule,
-    NgbModule
+    NgbModule,
+    SearchSharedModule
   ]
 })
 export class SearchModule { }

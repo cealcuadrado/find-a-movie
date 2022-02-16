@@ -1,0 +1,11 @@
+<section class="display-mode">
+  <div class="btn-group btn-group-toggle">
+    <button class="btn btn-secondary" 
+      *ngFor="let currentDisplayMode of displayModes"
+      [ngClass]="isDisplayMode(currentDisplayMode.mode)"
+      (click)="changeModeTo(currentDisplayMode.mode)"
+      [title]="setTitle(currentDisplayMode.name)">
+      <i class="fas fa-fw" [ngClass]="currentDisplayMode.icon"></i>
+    </button>
+  </div>
+</section>
