@@ -23,6 +23,9 @@
       </span>
     </div>
   </section>
+  <app-header-poster [movieDetail]="movieDetail">
+  </app-header-poster>
+  <!--
   <section class="header-poster">
     <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
       [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
@@ -39,6 +42,7 @@
       </ng-template>
     </div>
   </section>
+  -->
 </div>
 
 <ng-template #noReleaseDate>

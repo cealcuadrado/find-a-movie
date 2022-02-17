@@ -1,21 +1,16 @@
-import { environment } from 'src/environments/environment';
-import { MovieDetail } from './../../shared/interfaces/movie-detail';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Crew } from 'src/app/shared/interfaces/crew';
 import { GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent } from 'ngx-image-gallery';
+import { MovieDetail } from 'src/app/shared/interfaces/movie-detail';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-movie-header',
-  templateUrl: './movie-header.component.html',
-  styleUrls: ['./movie-header.component.scss'],
+  selector: 'app-header-poster',
+  templateUrl: './header-poster.component.html',
+  styleUrls: ['./header-poster.component.scss']
 })
-export class MovieHeaderComponent implements OnInit {
-  public loading = true;
+export class HeaderPosterComponent implements OnInit {
 
   @Input() movieDetail: MovieDetail;
-  @Input() crew: Crew[] = [];
-
-  public director: string | undefined;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
@@ -35,19 +30,11 @@ export class MovieHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.initMovieHeader();
-  }
-
-  ngOnChanges(): void {
-    this.initMovieHeader();
-  }
-
-  public initMovieHeader(): void {
-    console.log('initMovieHeader()');
-    this.loading = false;
-    // this.resetImageGallery();
-    this.getDirector();
     // this.setImageGallery();
+  }
+
+  public isPosterUrl(posterPath: string | null) {
+    return posterPath;
   }
 
   public setPosterUrl(posterPath: string | null) {
@@ -58,48 +45,10 @@ export class MovieHeaderComponent implements OnInit {
     };
   }
 
-  public isPosterUrl(posterPath: string | null) {
-    return posterPath;
-  }
-
   private setBackdropUrl(backdropPath: string | null): string {
     return !backdropPath
       ? 'https://via.placeholder.com/600x450?text=No+image+available'
       : `${this.backdropUrl}${backdropPath}`;
-  }
-
-  public setHeaderBackdrop(backdropPath: string | null) {
-    if (backdropPath) {
-      return {
-        backgroundImage: `url(${this.setBackdropUrl(
-          this.movieDetail.backdrop_path
-        )})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'top',
-      };
-    } else {
-      return {
-        backgroundImage: `url(${this.setBackdropUrl(
-          this.movieDetail.backdrop_path
-        )})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      };
-    }
-  }
-
-  private getDirector(): void {
-    let directorArr: Crew[] = this.crew.filter(
-      (member) => member.job === 'Director'
-    );
-
-    if (this.crew) {
-      if (directorArr.length > 0) {
-        this.director = directorArr[0].name;
-      } else {
-        this.director = undefined;
-      }
-    }
   }
 
   private setLocalOrForeignTitle(detail: MovieDetail): string {
@@ -114,14 +63,16 @@ export class MovieHeaderComponent implements OnInit {
     let year = `${!this.isDateEmpty(this.movieDetail.release_date) ? new Date(this.movieDetail.release_date).getFullYear() : 'No Release Date'}`;
 
     let posterTitle = `${title} (${year}) Poster`;
-    let headerBgTitle =  `${title} (${year}) Header Background`;
+    // let headerBgTitle =  `${title} (${year}) Header Background`;
 
     if(this.isPosterUrl(this.movieDetail.poster_path)) {
       this.pushImageGallery(`${this.posterUrl}${this.movieDetail.poster_path}`,posterTitle,posterTitle);
     }
+    /*
     if(this.movieDetail.backdrop_path) {
       this.pushImageGallery(`${this.setBackdropUrl(this.movieDetail.backdrop_path)}`,headerBgTitle, headerBgTitle);
     }
+    */
 
     this.newImage(0);
   }
@@ -182,5 +133,5 @@ export class MovieHeaderComponent implements OnInit {
   public deleteImage(index: number): void {
     console.log(`Delete image at index ${index}`);
   }
-}
 
+}
