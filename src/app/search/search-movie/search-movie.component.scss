@@ -8,4 +8,16 @@
       text-align: center;
     }
   }
+
+  .search-pagination {
+    @media screen and (max-width: 991px) {
+      margin-right: auto; 
+    }
+
+    .my-pagination {
+      &::ng-deep .ngx-pagination  {
+        padding-left: 0;
+      }
+    } 
+  }
 }

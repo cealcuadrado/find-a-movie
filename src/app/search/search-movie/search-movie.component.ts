@@ -18,13 +18,13 @@ export class SearchMovieComponent implements OnInit {
   public resultsPerPage = 20;
 
   public totalResults: number;
-  public totalPages: number;
+  public totalPages: number = 0;
   public searchResults: MovieListResult[] = [];
 
   public searchQuery: string;
 
-  public pageNumbers: number[];
-  public selectPage: number;
+  public pageNumbers: number[] = [];
+  public selectPage: number = 0;
 
   public displayMode: string = 'grid';
 
@@ -117,6 +117,10 @@ export class SearchMovieComponent implements OnInit {
     this.window.scrollTo({ top: 0 });
     this.loadingResults = true;
     this.searchMovies();
+  }
+
+  public changePageBySelect(page: number) {
+    this.onPageChange(page);
   }
 
   public changeDisplayMode(mode: string): void {

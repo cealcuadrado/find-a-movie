@@ -1,0 +1,18 @@
+<form *ngIf="totalPages > 1">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="pageNumber">
+        Go to page
+      </label>
+    </div>
+    <select class="form-control" 
+      id="pageNumber" 
+      name="pageNumber" 
+      (change)="changeSelectPage($event)"
+      [(ngModel)]="currentPage">
+      <option *ngFor="let number of pageNumbers">
+        {{number}}
+      </option>
+    </select>
+  </div>
+</form>
