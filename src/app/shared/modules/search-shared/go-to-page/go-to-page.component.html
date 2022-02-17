@@ -9,7 +9,7 @@
       id="pageNumber" 
       name="pageNumber" 
       (change)="changeSelectPage($event)"
-      [(ngModel)]="currentPage">
+      [(ngModel)]="selectPage">
       <option *ngFor="let number of pageNumbers">
         {{number}}
       </option>
