@@ -1,0 +1,70 @@
+.header-poster {
+  position: relative;
+
+  .see-background-image {
+    position: absolute;
+    right: calc(1.5rem + 150px);
+    bottom: 1rem;
+
+    button {
+      text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  .movie-poster {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    border: 1px solid white;
+    width: 150px;
+    height: 225px;
+    box-shadow: 5px 5px 10px black;
+    background-size: cover;
+    background-position: center;
+    background-color:  black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 991px) {
+      display: none;
+    }
+
+    .no-poster-text {
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity linear 0.1s;
+
+      .view-gallery {
+        width: 150px;
+        height: 225px;
+        border: 1px solid white;
+        background-color: rgba(0,0,0,0.75);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

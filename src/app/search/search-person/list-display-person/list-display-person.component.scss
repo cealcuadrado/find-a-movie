@@ -1,0 +1,7 @@
+.list-display-person {
+  & > .result {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}

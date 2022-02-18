@@ -7,7 +7,6 @@ import { EmbeddedMediaModule } from 'ngx-embedded-media';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 /* Pipes */
 import { RuntimePipe } from './runtime.pipe';
@@ -27,6 +26,7 @@ import { MovieSimilarComponent } from './movie-overview/movie-similar/movie-simi
 import { SimilarToComponent } from './similar-movies/similar-to/similar-to.component';
 import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
 import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overview-similar-to/overview-similar-to.component';
+import { HeaderPosterComponent } from './movie-header/header-poster/header-poster.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overv
     MovieSimilarComponent,
     SimilarToComponent,
     SimilarMoviesComponent,
-    OverviewSimilarToComponent
+    OverviewSimilarToComponent,
+    HeaderPosterComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +56,6 @@ import { OverviewSimilarToComponent } from './movie-overview/movie-similar/overv
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxImageGalleryModule
   ]
 })
 export class MovieModule { }

@@ -1,0 +1,6 @@
+<div class="list-result-display list-display-person">
+  <div class="result person-result"
+    *ngFor="let searchResult of searchResults | paginate: { itemsPerPage: 20 ,currentPage: currentPage, totalItems: totalResults}">
+    <app-list-person-result [personResult]="searchResult"></app-list-person-result>
+  </div>
+</div>

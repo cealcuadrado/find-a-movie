@@ -27,6 +27,8 @@ export class SearchPersonComponent implements OnInit {
   public pageNumbers: number[];
   public selectPage: number;
 
+  public displayMode: string = 'grid';
+
   private searchSubscription: Subscription;
 
   constructor(
@@ -105,6 +107,14 @@ export class SearchPersonComponent implements OnInit {
     this.currentPage = event;
     this.window.scrollTo({ top: 0 });
     this.searchPeople();
+  }
+
+  public changeDisplayMode(str: string): void {
+    this.displayMode = str;
+  }
+
+  public isDisplayMode(str: string): string {
+    return this.displayMode.includes(str) ? 'active' : '';
   }
 
   ngOnDestroy() {

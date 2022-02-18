@@ -1,13 +1,14 @@
-import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
 import { Component, Input, OnInit } from '@angular/core';
+import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-person-result',
-  templateUrl: './person-result.component.html',
-  styleUrls: ['./person-result.component.scss'],
+  selector: 'app-grid-person-result',
+  templateUrl: './grid-person-result.component.html',
+  styleUrls: ['./grid-person-result.component.scss']
 })
-export class PersonResultComponent implements OnInit {
+export class GridPersonResultComponent implements OnInit {
+
   @Input() personResult: PersonListResult;
   public backdropPath: string = environment.backdropUrl;
 
@@ -16,9 +17,10 @@ export class PersonResultComponent implements OnInit {
     backgroundPosition: 'center',
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   public setPosterUrl() {
     if (this.isPosterUrl(this.personResult.profile_path)) {
@@ -34,4 +36,5 @@ export class PersonResultComponent implements OnInit {
   public isPosterUrl(posterPath: string | null) {
     return posterPath;
   }
+
 }
