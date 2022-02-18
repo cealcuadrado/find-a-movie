@@ -18,7 +18,7 @@ export class MovieHeaderComponent implements OnInit {
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.initMovieHeader();

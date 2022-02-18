@@ -7,7 +7,6 @@ import { EmbeddedMediaModule } from 'ngx-embedded-media';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 /* Pipes */
 import { RuntimePipe } from './runtime.pipe';
@@ -57,7 +56,6 @@ import { HeaderPosterComponent } from './movie-header/header-poster/header-poste
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxImageGalleryModule
   ]
 })
 export class MovieModule { }

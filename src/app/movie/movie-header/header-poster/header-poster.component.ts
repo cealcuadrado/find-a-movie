@@ -5,18 +5,16 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-header-poster',
   templateUrl: './header-poster.component.html',
-  styleUrls: ['./header-poster.component.scss']
+  styleUrls: ['./header-poster.component.scss'],
 })
 export class HeaderPosterComponent implements OnInit {
-
   @Input() movieDetail: MovieDetail;
   private posterUrl: string = environment.posterUrl;
   private backdropUrl: string = environment.backdropUrl;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    
   }
 
   public isPosterUrl(posterPath: string | null) {
