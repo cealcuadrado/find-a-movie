@@ -1,14 +1,13 @@
-import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
-import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-movie-result',
-  templateUrl: './movie-result.component.html',
-  styleUrls: ['./movie-result.component.scss'],
+  selector: 'app-list-movie-result',
+  templateUrl: './list-movie-result.component.html',
+  styleUrls: ['./list-movie-result.component.scss'],
 })
-export class MovieResultComponent implements OnInit {
-  
+export class ListMovieResultComponent implements OnInit {
   @Input() searchResult: MovieListResult;
   private posterUrl: string = environment.posterUrl;
 
@@ -41,6 +40,12 @@ export class MovieResultComponent implements OnInit {
   public setPosterUrl(posterPath: string | null) {
     return !posterPath
       ? 'null'
+      : `${this.posterUrl}${this.searchResult.poster_path}`;
+  }
+
+  public setPosterImage(posterPath: string | null) {
+    return !posterPath
+      ? 'asdf'
       : `${this.posterUrl}${this.searchResult.poster_path}`;
   }
 
