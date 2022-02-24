@@ -17,9 +17,7 @@ export class MovieHeaderComponent implements OnInit {
   public director: string | undefined;
 
   private baseUrl: string;
-  private posterSize: string;
   private backdropSize: string;
-  private originalPosterSize: string;
 
   constructor(
     private localStorageService: LocalStorageService
@@ -27,7 +25,6 @@ export class MovieHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMovieHeader();
-
   }
 
   ngOnChanges(): void {

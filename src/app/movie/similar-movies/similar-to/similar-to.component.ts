@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../shared/services/local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-similar-to',
@@ -8,18 +8,27 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./similar-to.component.scss'],
 })
 export class SimilarToComponent implements OnInit {
-  private posterUrl = environment.posterUrl;
 
   @Input() movie: MovieListResult;
+
+  private baseUrl: string;
+  private posterSize: string;
 
   public backgroundDefaultProperties = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
 
-  constructor() {}
+  constructor(private localStorageService: LocalStorageService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setImageBases();
+  }
+
+  private setImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
+  }
 
   public setPoster() {
     if (this.isPosterUrl(this.movie.poster_path)) {
@@ -33,7 +42,7 @@ export class SimilarToComponent implements OnInit {
   }
 
   public setPosterUrl(posterPath: string | null) {
-    return !posterPath ? 'null' : `${this.posterUrl}${this.movie.poster_path}`;
+    return !posterPath ? 'null' : `${this.baseUrl}${this.posterSize}${this.movie.poster_path}`;
   }
 
   public isPosterUrl(posterPath: string | null) {
