@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { LocalStorageService } from './../../shared/services/local-storage.service';
 import { MovieDetail } from './../../shared/interfaces/movie-detail';
 import { Component, Input, OnInit } from '@angular/core';
 import { Crew } from 'src/app/shared/interfaces/crew';
@@ -15,41 +15,40 @@ export class MovieHeaderComponent implements OnInit {
   @Input() crew: Crew[] = [];
 
   public director: string | undefined;
-  private posterUrl: string = environment.posterUrl;
-  private backdropUrl: string = environment.backdropUrl;
 
-  constructor() {}
+  private baseUrl: string;
+  private posterSize: string;
+  private backdropSize: string;
+  private originalPosterSize: string;
+
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
     this.initMovieHeader();
+
   }
 
   ngOnChanges(): void {
     this.initMovieHeader();
   }
 
-  public initMovieHeader(): void {
-    console.log('initMovieHeader()');
+  private initMovieHeader(): void {
     this.loading = false;
     this.getDirector();
+    this.getImageBases();
   }
 
-  public setPosterUrl(posterPath: string | null) {
-    return {
-      backgroundImage: posterPath
-        ? `url(${this.posterUrl}${posterPath})`
-        : null,
-    };
-  }
-
-  public isPosterUrl(posterPath: string | null) {
-    return posterPath;
+  private getImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.backdropSize = this.localStorageService.get('backdropSize');
   }
 
   private setBackdropUrl(backdropPath: string | null): string {
     return !backdropPath
       ? 'https://via.placeholder.com/600x450?text=No+image+available'
-      : `${this.backdropUrl}${backdropPath}`;
+      : `${this.baseUrl}${this.backdropSize}${backdropPath}`;
   }
 
   public setHeaderBackdrop(backdropPath: string | null) {
@@ -84,13 +83,6 @@ export class MovieHeaderComponent implements OnInit {
         this.director = undefined;
       }
     }
-  }
-
-  private setLocalOrForeignTitle(detail: MovieDetail): string {
-    return !detail.original_language.match('en') &&
-      !detail.original_title.match(detail.title)
-      ? `${detail.title} (${detail.original_title})`
-      : detail.title;
   }
 
   public isDateEmpty(dateStr: string): boolean {
