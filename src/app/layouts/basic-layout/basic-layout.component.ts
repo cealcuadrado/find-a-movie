@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class BasicLayoutComponent implements OnInit {
 
   private langSubscription: Subscription;
+  private configurationInfoSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -26,10 +27,12 @@ export class BasicLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.setTitleByRoute();
     this.setLanguages();
+    this.setConfigurationInfo();
   }
 
   ngOnDestroy(): void {
     this.langSubscription.unsubscribe();
+    this.configurationInfoSubscription.unsubscribe();
   }
 
   private setTitleByRoute(): void {
@@ -57,6 +60,22 @@ export class BasicLayoutComponent implements OnInit {
   private setLanguages(): void {
     this.langSubscription = this.configuration.getLanguages().subscribe(languages => {
       this.localStorageService.set('languages', languages);
+    });
+  }
+
+  private setConfigurationInfo(): void {
+    this.configurationInfoSubscription = this.configuration.getConfiguration().subscribe(info => {
+      let logoArray = info.images.logo_sizes;
+      let posterArray = info.images.poster_sizes;
+      let backdropArray = info.images.backdrop_sizes;
+      let profileArray = info.images.profile_sizes;
+      let stillArray = info.images.still_sizes;
+
+      this.localStorageService.set('configInfo', info);
+      this.localStorageService.set('baseUrl', info.images.secure_base_url);
+      this.localStorageService.set('posterSize', posterArray[2]);
+      this.localStorageService.set('originalPosterSize', posterArray[posterArray.length - 1]);
+      this.localStorageService.set('backdropSize', backdropArray[backdropArray.length - 1]);
     });
   }
 }

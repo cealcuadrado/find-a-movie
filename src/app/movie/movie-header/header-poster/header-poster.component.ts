@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../shared/services/local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieDetail } from 'src/app/shared/interfaces/movie-detail';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header-poster',
@@ -9,30 +9,39 @@ import { environment } from 'src/environments/environment';
 })
 export class HeaderPosterComponent implements OnInit {
   @Input() movieDetail: MovieDetail;
-  private posterUrl: string = environment.posterUrl;
-  private backdropUrl: string = environment.backdropUrl;
 
-  constructor() {}
+  private baseUrl: string;
+  private posterSize: string;
+  private originalPosterSize: string;
+
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
+    this.getImageBases();
+  }
+
+  private getImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
+    this.originalPosterSize = this.localStorageService.get('originalPosterSize');
   }
 
   public isPosterUrl(posterPath: string | null) {
     return posterPath;
   }
 
-  public setPosterUrl(posterPath: string | null) {
+  public setPosterBg(posterPath: string | null) {
     return {
       backgroundImage: posterPath
-        ? `url(${this.posterUrl}${posterPath})`
+        ? `url(${this.baseUrl}${this.posterSize}${posterPath})`
         : null,
     };
   }
 
-  private setBackdropUrl(backdropPath: string | null): string {
-    return !backdropPath
-      ? 'https://via.placeholder.com/600x450?text=No+image+available'
-      : `${this.backdropUrl}${backdropPath}`;
+  public setPosterUrl(posterPath: string | null): string {
+    return posterPath ? `${this.baseUrl}${this.originalPosterSize}${posterPath}` : '';
   }
 
   private setLocalOrForeignTitle(detail: MovieDetail): string {

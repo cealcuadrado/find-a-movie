@@ -15,7 +15,6 @@ export class MovieExternalLinksComponent implements OnInit {
   public loadingSocialNetworks: boolean = true;
 
   private imdbUrl: string = environment.imdbUrl;
-  private boxOfficeMojoUrl: string = environment.boxOfficeMojoUrl;
 
   @Input() movieDetail: MovieDetail;
   @Input() id: string;
@@ -66,10 +65,6 @@ export class MovieExternalLinksComponent implements OnInit {
     } else {
       return false;
     }
-  }
-
-  public setBoxOfficeMojoLink(): string {
-    return `${this.boxOfficeMojoUrl}${this.movieDetail.imdb_id}/`;
   }
 
   public allSocialNetworksAreNull(): boolean {
