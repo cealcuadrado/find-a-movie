@@ -76,6 +76,7 @@ export class BasicLayoutComponent implements OnInit {
       this.localStorageService.set('posterSize', posterArray[2]);
       this.localStorageService.set('originalPosterSize', posterArray[posterArray.length - 1]);
       this.localStorageService.set('backdropSize', backdropArray[backdropArray.length - 1]);
+      this.localStorageService.set('profileSize', profileArray[profileArray.length - 1]);
     });
   }
 }
