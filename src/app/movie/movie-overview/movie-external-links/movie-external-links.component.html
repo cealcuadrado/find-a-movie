@@ -1,12 +1,8 @@
-<aside class="external-links" *ngIf="!loading; else nowLoading">
+<aside class="external-links" *ngIf="!loading(); else nowLoading">
   <div class="imdb-links">
     <a *ngIf="movieDetail.imdb_id != null" [href]="setImdbUrl(movieDetail.imdb_id)" target="_blank"
       class="btn btn-block btn-content btn-warning">
       <i class="fab fa-imdb fa-fw"></i> IMDB Profile
-    </a>
-    <a *ngIf="movieDetail.imdb_id != null" [href]="setBoxOfficeMojoLink()" target="_blank"
-      class="btn btn-block btn-content btn-warning">
-      <i class="fas fa-ticket-alt fa-fw"></i> Box Office Mojo Profile
     </a>
     <a *ngIf="!isStrEmpty(movieDetail.homepage)" [href]="movieDetail.homepage" target="_blank"
       class="btn btn-block btn-content btn-primary">

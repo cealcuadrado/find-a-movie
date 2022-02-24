@@ -1,11 +1,13 @@
 <section class="similar-movies" *ngIf="!loadingView; else nowLoading">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <p>If you liked this movie, you might want to check out these similar movies:</p>
+      <div *ngIf="similarMovies.length > 0; else noSimilarMovies">
+        <p>If you liked <strong>{{setLocalOrForeignTitle()}}</strong>, you might want to check out these similar movies:</p>
 
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-3" *ngFor="let movie of similarMovies">
-          <app-similar-to [movie]="movie"></app-similar-to>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3" *ngFor="let movie of similarMovies">
+            <app-similar-to [movie]="movie"></app-similar-to>
+          </div>
         </div>
       </div>
     </div>
@@ -14,4 +16,9 @@
 
 <ng-template #nowLoading>
   <app-loading [center]="true"></app-loading>
+</ng-template>
+
+<ng-template #noSimilarMovies>
+  <h2>No similar movies</h2>
+  <p>No similar movies for this movie has been found.</p>
 </ng-template>

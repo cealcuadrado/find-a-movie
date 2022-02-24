@@ -1,0 +1,55 @@
+.header-backdrop {
+  height: 400px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url("https://via.placeholder.com/500x300?text=No+poster+available");
+  background-position: center;
+  box-shadow: 3px 3px 5px black;
+  font-family: "Jost", "Arial", "sans-serif";
+
+  .header-title {
+    padding: 15px;
+    color: white;
+    position: relative;
+    display: inline;
+
+    h1 {
+      border: 1px solid white;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 0.5rem;
+      display: inline-block;
+      text-transform: uppercase;
+
+      @media screen and (min-width: 992px) {
+        max-width: 75%;
+      }
+    }
+  }
+
+  .header-info {
+    & > span {
+      border: 1px solid white;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: inline-block;
+      padding: 0.5rem;
+
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .birth-and-death-years {
+      text-transform: uppercase;
+    }
+
+    .known-for {
+      text-transform: uppercase;
+
+      @media screen and (max-width: 991px) {
+        display: none;
+      }
+    }
+  }
+}

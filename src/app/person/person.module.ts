@@ -18,6 +18,7 @@ import { PersonInfoComponent } from './person-overview/person-info/person-info.c
 import { GeneralSharedModule } from '../shared/modules/general-shared/general-shared.module';
 import { FilterCastPipe } from './person-cast/filter-cast.pipe';
 import { FilterCrewPipe } from './person-crew/filter-crew.pipe';
+import { PersonHeaderComponent } from './person-header/person-header.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FilterCrewPipe } from './person-crew/filter-crew.pipe';
     CrewSummaryComponent,
     PersonInfoComponent,
     FilterCastPipe,
-    FilterCrewPipe
+    FilterCrewPipe,
+    PersonHeaderComponent
   ],
   imports: [
     CommonModule,

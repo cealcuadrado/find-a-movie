@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../services/local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { CrewCredit } from 'src/app/shared/interfaces/crew-credit';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-person-crew-result',
@@ -9,7 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class PersonCrewResultComponent implements OnInit {
   loading = true;
-  posterUrl = environment.posterUrl;
+
+  baseUrl: string;
+  posterSize: string;
 
   @Input() credit: CrewCredit;
   @Input() height: number = 300;
@@ -19,18 +21,30 @@ export class PersonCrewResultComponent implements OnInit {
     backgroundPosition: 'center',
   };
 
-  constructor() {}
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
-    this.setCredits();
+    this.initPersonCrew();
   }
 
   ngOnChanges(): void {
-    this.setCredits();
+    this.initPersonCrew();
   }
 
-  public setCredits(): void {
+  private initPersonCrew(): void {
+    this.setCredits();
+    this.getImageBases();
+  }
+
+  private setCredits(): void {
     this.loading = false;
+  }
+
+  private getImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
   }
 
   public hasPosterPath(path: string | null): boolean {
@@ -44,10 +58,10 @@ export class PersonCrewResultComponent implements OnInit {
     };
   }
 
-  public setBackgroundPoster(poster: string | null) {
-    if (poster) {
+  public setBackgroundPoster(posterPath: string | null) {
+    if (posterPath) {
       return {
-        backgroundImage: `url(${this.posterUrl}${poster})`,
+        backgroundImage: `url(${this.baseUrl}${this.posterSize}${posterPath})`,
         ...this.backgroundDefaultSettings,
       };
     } else {
@@ -64,12 +78,18 @@ export class PersonCrewResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string;
-
+    let year: number | string = !this.isDateEmpty()
+      ? new Date(this.credit.release_date).getFullYear()
+      : 'No Release Date';
     let setRole = this.isRoleDefined() ? this.credit.job : 'No Role Specified';
-    year = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
+    return `${setRole} in "${this.setLocalOrForeignTitle(this.credit)}" (${year})`;
+  }
 
-    return `${setRole} in "${this.credit.title}" (${year})`;
+  public setLocalOrForeignTitle(credit: CrewCredit): string {
+    return !this.credit.original_language.match('en') &&
+      !this.credit.original_title.match(this.credit.title)
+      ? `${this.credit.title} (${this.credit.original_title})`
+      : this.credit.title;
   }
 
   public isDateEmpty(): boolean {

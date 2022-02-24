@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../services/local-storage.service';
 import { CastCredit } from './../../../interfaces/cast-credit';
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-person-cast-result',
@@ -9,9 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export class PersonCastResultComponent implements OnInit {
   loading = true;
-  posterUrl = environment.posterUrl;
 
-  constructor() {}
+  baseUrl: string;
+  posterSize: string;
+
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   @Input() credit: CastCredit;
   @Input() height: number = 300;
@@ -22,15 +26,25 @@ export class PersonCastResultComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.setCredits();
+    this.initPersonCast();
   }
 
   ngOnChanges(): void {
-    this.setCredits();
+    this.initPersonCast();
   }
 
-  setCredits(): void {
+  private initPersonCast(): void {
+    this.setCredits();
+    this.setImageBases();
+  }
+
+  private setCredits(): void {
     this.loading = false;
+  }
+
+  private setImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
   }
 
   public hasPosterPath(path: string | null): boolean {
@@ -44,10 +58,10 @@ export class PersonCastResultComponent implements OnInit {
     };
   }
 
-  public setBackgroundPoster(poster: string | null) {
-    if (poster) {
+  public setBackgroundPoster(posterPath: string | null) {
+    if (posterPath) {
       return {
-        backgroundImage: `url(${this.posterUrl}${poster})`,
+        backgroundImage: `url(${this.baseUrl}${this.posterSize}${posterPath})`,
         ...this.backgroundDefaultSettings,
       };
     } else {
@@ -64,15 +78,26 @@ export class PersonCastResultComponent implements OnInit {
   }
 
   public setTitle(): string {
-    let year: number | string;
+    let year: number | string = !this.isDateEmpty()
+      ? new Date(this.credit.release_date).getFullYear()
+      : 'No Release Date';
+    let setCharacter = this.isCharacterDefined(this.credit.character)
+      ? this.credit.character
+      : 'No Character Specified';
+    return `${setCharacter} in "${this.setLocalOrForeignTitle(this.credit)}" (${year})`;
+  }
 
-    let setCharacter = this.isCharacterDefined(this.credit.character) ? this.credit.character: 'No Character Specified';
-    year = !this.isDateEmpty() ? new Date(this.credit.release_date).getFullYear() : 'No Release Date';
-
-    return `${setCharacter} in "${this.credit.title}" (${year})`;
+  public setLocalOrForeignTitle(credit: CastCredit): string {
+    return !this.credit.original_language.match('en') &&
+      !this.credit.original_title.match(this.credit.title)
+      ? `${this.credit.title} (${this.credit.original_title})`
+      : this.credit.title;
   }
 
   public isDateEmpty(): boolean {
-    return (this.credit.release_date == (undefined || null) || this.credit.release_date.length == 0);
+    return (
+      this.credit.release_date == (undefined || null) ||
+      this.credit.release_date.length == 0
+    );
   }
 }

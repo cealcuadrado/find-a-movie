@@ -10,9 +10,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-external-links.component.scss'],
 })
 export class MovieExternalLinksComponent implements OnInit {
-  public loading: boolean = true;
+
+  public loadingView: boolean = true;
+  public loadingSocialNetworks: boolean = true;
+
   private imdbUrl: string = environment.imdbUrl;
-  private boxOfficeMojoUrl: string = environment.boxOfficeMojoUrl;
 
   @Input() movieDetail: MovieDetail;
   @Input() id: string;
@@ -26,24 +28,28 @@ export class MovieExternalLinksComponent implements OnInit {
   constructor(private movie: MovieService) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.setLinks();
+    this.initMovieExternalLinks();
   }
 
   ngOnChanges(): void {
-    this.loading = true;
+    this.initMovieExternalLinks();
+  }
+
+  private initMovieExternalLinks(): void {
+    this.loadingView = true;
+    this.loadingSocialNetworks = true;
     this.setLinks();
   }
 
   public setLinks(): void {
-    console.log(this.movieDetail);
+    this.loadingView = false;
     this.movieSocialNetworksSubscription = this.movie
       .getExternalIds(this.id)
       .subscribe((result) => {
         this.facebookId = result.facebook_id;
         this.instagramId = result.instagram_id;
         this.twitterId = result.twitter_id;
-        this.loading = false;
+        this.loadingSocialNetworks = false;
       });
   }
 
@@ -61,16 +67,16 @@ export class MovieExternalLinksComponent implements OnInit {
     }
   }
 
-  public setBoxOfficeMojoLink(): string {
-    return `${this.boxOfficeMojoUrl}${this.movieDetail.imdb_id}/`;
-  }
-
   public allSocialNetworksAreNull(): boolean {
     return (
       this.facebookId == null &&
       this.instagramId == null &&
       this.twitterId == null
     );
+  }
+
+  public loading(): boolean {
+    return (this.loadingView || this.loadingSocialNetworks);
   }
 
   ngOnDestroy() {

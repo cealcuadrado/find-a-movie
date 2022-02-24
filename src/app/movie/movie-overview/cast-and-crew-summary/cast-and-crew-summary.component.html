@@ -1,4 +1,4 @@
-<section class="cast-and-crew-summary" *ngIf="!loading; else nowLoading">
+<section class="cast-and-crew-summary" *ngIf="!loading(); else nowLoading">
   <p *ngIf="direction && direction.length > 0">
     <strong class="mr-1">Directed by:</strong>
     <span *ngFor="let director of direction; let i = index">
@@ -63,6 +63,7 @@
     </span>
   </p>
 </section>
+<hr class="cast-and-crew-separator" *ngIf="castMembers > 0 && crewMembers > 0"/>
 
 <ng-template #nowLoading>
   <p>Loading... <i class="fas fa-circle-notch fa-spin fa-fw"></i></p>

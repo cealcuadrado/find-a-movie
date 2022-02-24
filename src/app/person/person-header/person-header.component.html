@@ -1,0 +1,20 @@
+<div class="header-backdrop" [ngStyle]="setHeaderProfile(this.personDetail.profile_path)">
+  <section class="header-title">
+    <h1>{{personDetail.name}}</h1>
+    <div class="header-info">
+      <span class="birth-and-death-years"
+        *ngIf="hasAtLeastBirthOrDeathDay(personDetail.birthday, personDetail.deathday)">
+        <span *ngIf="personDetail.birthday; else dateUnknown">{{personDetail.birthday | date:'yyyy'}}</span>
+        -
+        <span *ngIf="personDetail.deathday">{{personDetail.deathday | date:'yyyy'}}</span>
+      </span>
+      <span class="known-for" *ngIf="personDetail.known_for_department">
+        Known for: {{personDetail.known_for_department}}
+      </span>
+    </div>
+  </section>
+</div>
+
+<ng-template #dateUnknown>
+  Unknown
+</ng-template>

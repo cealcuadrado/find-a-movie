@@ -1,22 +1,7 @@
-<div class="person-content" *ngIf="!loading; else loadingPerson">
+<div class="person-content" *ngIf="!loading(); else loadingPerson">
   <section class="person" *ngIf="personDetail; else noPersonFound">
     <header>
-      <div class="header-backdrop" [ngStyle]="setHeaderProfile(this.personDetail.profile_path)">
-        <section class="header-title">
-          <h1>{{personDetail.name}}</h1>
-          <div class="header-info">
-            <span class="birth-and-death-years"
-              *ngIf="hasAtLeastBirthOrDeathDay(personDetail.birthday, personDetail.deathday)">
-              <span *ngIf="personDetail.birthday; else dateUnknown">{{personDetail.birthday | date:'yyyy'}}</span>
-               -
-              <span *ngIf="personDetail.deathday">{{personDetail.deathday | date:'yyyy'}}</span>
-            </span>
-            <span class="known-for" *ngIf="personDetail.known_for_department">
-              Known for: {{personDetail.known_for_department}}
-            </span>
-          </div>
-        </section>
-      </div>
+      <app-person-header [personDetail]="personDetail"></app-person-header>
     </header>
 
     <main class="person-body">
@@ -35,7 +20,7 @@
             [routerLink]="['/person', id, 'cast']"
             routerLinkActive="active"
             href="#">
-            Cast
+            Work as Cast
           </a>
         </li>
         <li class="nav-item">
@@ -44,7 +29,7 @@
             [routerLink]="['/person', id, 'crew']"
             routerLinkActive="active"
             href="#">
-            Crew
+            Work as Crew
           </a>
         </li>
       </ul>
@@ -53,10 +38,6 @@
     </main>
   </section>
 </div>
-
-<ng-template #dateUnknown>
-  Unknown
-</ng-template>
 
 <ng-template #noPersonFound>
   <app-no-person-found></app-no-person-found>
