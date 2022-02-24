@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../services/local-storage.service';
 import { CastCredit } from './../../../interfaces/cast-credit';
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-person-cast-result',
@@ -9,9 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export class PersonCastResultComponent implements OnInit {
   loading = true;
-  posterUrl = environment.posterUrl;
 
-  constructor() {}
+  baseUrl: string;
+  posterSize: string;
+
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   @Input() credit: CastCredit;
   @Input() height: number = 300;
@@ -22,15 +26,25 @@ export class PersonCastResultComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.setCredits();
+    this.initPersonCast();
   }
 
   ngOnChanges(): void {
-    this.setCredits();
+    this.initPersonCast();
   }
 
-  setCredits(): void {
+  private initPersonCast(): void {
+    this.setCredits();
+    this.setImageBases();
+  }
+
+  private setCredits(): void {
     this.loading = false;
+  }
+
+  private setImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
   }
 
   public hasPosterPath(path: string | null): boolean {
@@ -44,10 +58,10 @@ export class PersonCastResultComponent implements OnInit {
     };
   }
 
-  public setBackgroundPoster(poster: string | null) {
-    if (poster) {
+  public setBackgroundPoster(posterPath: string | null) {
+    if (posterPath) {
       return {
-        backgroundImage: `url(${this.posterUrl}${poster})`,
+        backgroundImage: `url(${this.baseUrl}${this.posterSize}${posterPath})`,
         ...this.backgroundDefaultSettings,
       };
     } else {
