@@ -1,6 +1,6 @@
 <a class="list-result list-person-result" [routerLink]="['/person', personResult.id]" [title]="personResult.name">
   <span *ngIf="isPosterUrl(personResult.profile_path); else noProfile">
-    <div class="list-result-image person-profile" [ngStyle]="setProfileUrl()"></div>
+    <div class="list-result-image person-profile" [ngStyle]="setProfile()"></div>
   </span>
   <div class="list-result-content person-name">
     <strong>{{personResult.name}}</strong>

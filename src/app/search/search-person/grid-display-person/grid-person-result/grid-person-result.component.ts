@@ -1,6 +1,6 @@
+import { LocalStorageService } from './../../../../shared/services/local-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { PersonListResult } from 'src/app/shared/interfaces/person-list-result';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-grid-person-result',
@@ -10,22 +10,32 @@ import { environment } from 'src/environments/environment';
 export class GridPersonResultComponent implements OnInit {
 
   @Input() personResult: PersonListResult;
-  public backdropPath: string = environment.backdropUrl;
+
+  baseUrl: string;
+  profileSize: string;
 
   public backdropDefaultSettings = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
 
-  constructor() { }
+  constructor(
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
+    this.setImageBases();
   }
 
-  public setPosterUrl() {
+  private setImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.profileSize = this.localStorageService.get('profileSize');
+  }
+
+  public setPoster() {
     if (this.isPosterUrl(this.personResult.profile_path)) {
       return {
-        backgroundImage: `url(${this.backdropPath}${this.personResult.profile_path})`,
+        backgroundImage: `url(${this.setPosterUrl(this.personResult.profile_path)})`,
         ...this.backdropDefaultSettings,
       };
     } else {
@@ -33,8 +43,11 @@ export class GridPersonResultComponent implements OnInit {
     }
   }
 
+  private setPosterUrl(posterPath: string | null): string {
+    return posterPath ? `${this.baseUrl}${this.profileSize}${posterPath}` : '';
+  }
+
   public isPosterUrl(posterPath: string | null) {
     return posterPath;
   }
-
 }
