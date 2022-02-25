@@ -23,14 +23,8 @@
       </span>
     </div>
   </section>
-  <section class="header-poster">
-    <div [ngStyle]="setPosterUrl(movieDetail.poster_path)"
-      [ngClass]="{'bg-white':!isPosterUrl(movieDetail.poster_path)}" class="movie-poster">
-      <span *ngIf="!isPosterUrl(movieDetail.poster_path)" class="no-poster-text">
-        No poster available
-      </span>
-    </div>
-  </section>
+  <app-header-poster [movieDetail]="movieDetail">
+  </app-header-poster>
 </div>
 
 <ng-template #noReleaseDate>

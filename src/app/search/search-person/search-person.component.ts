@@ -19,13 +19,15 @@ export class SearchPersonComponent implements OnInit {
   public resultsPerPage = 20;
 
   public totalResults: number;
-  public totalPages: number;
+  public totalPages: number = 0;
   public searchResults: PersonListResult[] = [];
 
   public searchQuery: string;
 
-  public pageNumbers: number[];
-  public selectPage: number;
+  public pageNumbers: number[] = [];
+  public selectPage: number = 0;
+
+  public displayMode: string = 'grid';
 
   private searchSubscription: Subscription;
 
@@ -102,9 +104,23 @@ export class SearchPersonComponent implements OnInit {
   }
 
   public onPageChange(event: any): void {
+    console.log(event);
     this.currentPage = event;
+    this.selectPage = this.currentPage;
     this.window.scrollTo({ top: 0 });
     this.searchPeople();
+  }
+
+  public changePageBySelect(page: number) {
+    this.onPageChange(page);
+  }
+
+  public changeDisplayMode(mode: string): void {
+    this.displayMode = mode;
+  }
+
+  public isDisplayMode(str: string): string {
+    return this.displayMode.includes(str) ? 'active' : '';
   }
 
   ngOnDestroy() {

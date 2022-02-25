@@ -1,11 +1,10 @@
-import { PersonTvResult } from './person-list-result/person-tv-result';
-import { PersonMovieResult } from './person-list-result/person-movie-result';
+import { PersonResult } from './person-list-result/person-result';
 
 export interface PersonListResult {
   profile_path: string | null;
   adult: boolean;
   id: number;
-  known_for: PersonMovieResult | PersonTvResult;
+  known_for: PersonResult[];
   name: string;
   popularity: number;
 }

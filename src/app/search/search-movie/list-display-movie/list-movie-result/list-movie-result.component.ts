@@ -1,16 +1,18 @@
-import { MovieListResult } from './../../../shared/interfaces/movie-list-result';
+import { LocalStorageService } from './../../../../shared/services/local-storage.service';
+import { MovieListResult } from 'src/app/shared/interfaces/movie-list-result';
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-movie-result',
-  templateUrl: './movie-result.component.html',
-  styleUrls: ['./movie-result.component.scss'],
+  selector: 'app-list-movie-result',
+  templateUrl: './list-movie-result.component.html',
+  styleUrls: ['./list-movie-result.component.scss'],
 })
-export class MovieResultComponent implements OnInit {
+export class ListMovieResultComponent implements OnInit {
   
   @Input() searchResult: MovieListResult;
-  private posterUrl: string = environment.posterUrl;
+
+  baseUrl: string;
+  posterSize: string;
 
   date: Date;
 
@@ -19,10 +21,22 @@ export class MovieResultComponent implements OnInit {
     backgroundPosition: 'center',
   };
 
-  constructor() {}
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
+    this.initListMovieResult();
+  }
+
+  private initListMovieResult(): void {
     this.date = new Date(this.searchResult.release_date);
+    this.setImageBases();
+  }
+
+  private setImageBases(): void {
+    this.baseUrl = this.localStorageService.get('baseUrl');
+    this.posterSize = this.localStorageService.get('posterSize');
   }
 
   public setPoster() {
@@ -38,10 +52,10 @@ export class MovieResultComponent implements OnInit {
     }
   }
 
-  public setPosterUrl(posterPath: string | null) {
+  private setPosterUrl(posterPath: string | null) {
     return !posterPath
       ? 'null'
-      : `${this.posterUrl}${this.searchResult.poster_path}`;
+      : `${this.baseUrl}${this.posterSize}${this.searchResult.poster_path}`;
   }
 
   public isPosterUrl(posterPath: string | null) {
