@@ -1,5 +1,5 @@
-<div class="person-content" *ngIf="!loading(); else loadingPerson">
-  <section class="person" *ngIf="personDetail; else noPersonFound">
+<div class="person-content feature-content" *ngIf="!loading(); else loadingPerson">
+  <section class="person feature" *ngIf="personDetail; else noPersonFound">
     <header>
       <app-person-header [personDetail]="personDetail"></app-person-header>
     </header>

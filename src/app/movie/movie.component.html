@@ -1,5 +1,5 @@
-<div class="movie-content" *ngIf="!loading(); else loadingMovie">
-  <section class="movie" *ngIf="movieDetail; else noMovieFound">
+<div class="movie-content feature-content" *ngIf="!loading(); else loadingMovie">
+  <section class="movie feature" *ngIf="movieDetail; else noMovieFound">
     <header>
       <app-movie-header [movieDetail]="movieDetail" [crew]="crew">
       </app-movie-header>
