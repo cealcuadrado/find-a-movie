@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralSharedModule } from './shared/modules/general-shared/general-shared.module';
 import { SearchBarModule } from './shared/modules/search-bar/search-bar.module';
@@ -16,6 +16,9 @@ import { HeaderComponent } from './layouts/basic-layout/header/header.component'
 import { FooterComponent } from './layouts/basic-layout/footer/footer.component';
 import { MainComponent } from './layouts/basic-layout/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+/* Interceptors */
+import { ErrorHandleInterceptor } from './shared/interceptors/error-handle.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       provide: Window,
       useValue: window
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandleInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
