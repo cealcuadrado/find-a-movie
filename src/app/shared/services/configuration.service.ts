@@ -1,9 +1,8 @@
 import { ConfigurationResult } from './../interfaces/configuration-result';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import { Language } from '../interfaces/language';
 
 @Injectable({

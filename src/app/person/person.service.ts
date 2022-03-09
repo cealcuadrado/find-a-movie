@@ -1,10 +1,9 @@
 import { PersonMovieCredits } from './../shared/interfaces/person-movie-credits';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PersonDetail } from '../shared/interfaces/person-detail';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,8 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { VideoSearchResult } from 'src/app/shared/interfaces/video-search-result';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,10 @@
 import { QueryMovieResult } from './../shared/interfaces/query-movie-result';
 import { CastCrewResult } from './../shared/interfaces/cast-crew-result';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { MovieDetail } from '../shared/interfaces/movie-detail';
-import { catchError, map } from 'rxjs/operators';
 import { ExternalIds } from '../shared/interfaces/external-ids';
 import { MovieTitlesResult } from '../shared/interfaces/movie-titles-result';
 

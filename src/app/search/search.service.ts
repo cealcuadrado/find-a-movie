@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of  } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
 import { QueryMovieResult } from '../shared/interfaces/query-movie-result';
 import { QueryPersonResult } from '../shared/interfaces/query-person-result';
 
