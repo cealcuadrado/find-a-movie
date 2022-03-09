@@ -10,7 +10,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PersonService {
-  private url = environment.apiUrl;
   private key = environment.apiKey;
   private language = environment.language;
 
@@ -21,19 +20,11 @@ export class PersonService {
   ) { }
 
   public getPerson(id: string): Observable<PersonDetail> {
-    return this.http.get<PersonDetail>(`${this.url}/person/${id}?api_key=${this.key}&language=${this.language}`).pipe(
-      catchError((error: any): Observable <any> => {
-        return of({});
-      })
-    );
+    return this.http.get<PersonDetail>(`/person/${id}?api_key=${this.key}&language=${this.language}`);
   }
 
   public getMovieCredits(id: string): Observable<PersonMovieCredits> {
-    return this.http.get<PersonMovieCredits>(`${this.url}/person/${id}/movie_credits?api_key=${this.key}&language=${this.language}`).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
-    );
+    return this.http.get<PersonMovieCredits>(`/person/${id}/movie_credits?api_key=${this.key}&language=${this.language}`);
   }
 
   public setCurrentTab(tabNumber: number): void {

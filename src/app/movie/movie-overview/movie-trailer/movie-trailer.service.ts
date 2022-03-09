@@ -10,7 +10,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class MovieTrailerService {
 
-  private url = environment.apiUrl;
   private key = environment.apiKey;
   private language = environment.language;
 
@@ -20,12 +19,8 @@ export class MovieTrailerService {
 
   getVideos(movieId: string): Observable<VideoSearchResult> {
     return this.http.get<VideoSearchResult>(
-      `${this.url}/movie/${movieId}/videos?api_key=${this.key}&language=${this.language}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
-    )
+      `/movie/${movieId}/videos?api_key=${this.key}&language=${this.language}`
+    );
   }
 
 }

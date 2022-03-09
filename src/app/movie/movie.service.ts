@@ -13,7 +13,7 @@ import { MovieTitlesResult } from '../shared/interfaces/movie-titles-result';
   providedIn: 'root',
 })
 export class MovieService {
-  private url = environment.apiUrl;
+
   private key = environment.apiKey;
   private language = environment.language;
 
@@ -21,61 +21,37 @@ export class MovieService {
 
   getMovieDetail(id: number | string): Observable<MovieDetail> {
     return this.http.get<MovieDetail>(
-      `${this.url}/movie/${id}?api_key=${this.key}&language=${this.language}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
+      `/movie/${id}?api_key=${this.key}&language=${this.language}`
     );
   }
 
   getCastAndCrew(id: number | string): Observable<CastCrewResult> {
     return this.http.get<CastCrewResult>(
-        `${this.url}/movie/${id}/credits?api_key=${this.key}&language=${this.language}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
+      `/movie/${id}/credits?api_key=${this.key}&language=${this.language}`
     );
   }
 
   getExternalIds(id: number | string): Observable<ExternalIds> {
     return this.http.get<ExternalIds>(
-      `${this.url}/movie/${id}/external_ids?api_key=${this.key}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
+      `/movie/${id}/external_ids?api_key=${this.key}`
     );
   }
 
   getSimilarMovies(id: number | string): Observable<QueryMovieResult> {
     return this.http.get<QueryMovieResult>(
-      `${this.url}/movie/${id}/similar?api_key=${this.key}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
+      `/movie/${id}/similar?api_key=${this.key}`
     );
   }
 
   getRecommendedMovies(id: number | string): Observable<QueryMovieResult> {
     return this.http.get<QueryMovieResult>(
-      `${this.url}/movie/${id}/recommendations?api_key=${this.key}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
+      `/movie/${id}/recommendations?api_key=${this.key}`
     );
   }
 
   getAlternateTitles(id: number | string): Observable<MovieTitlesResult> {
     return this.http.get<MovieTitlesResult>(
-      `${this.url}/movie/${id}/alternative_titles?api_key=${this.key}`
-    ).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({})
-      })
+      `/movie/${id}/alternative_titles?api_key=${this.key}`
     );
   }
 }

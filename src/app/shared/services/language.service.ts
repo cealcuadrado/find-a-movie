@@ -10,7 +10,6 @@ import { Language } from '../interfaces/language';
 })
 export class LanguageService {
 
-  url = environment.apiUrl;
   key = environment.apiKey;
 
   constructor(
@@ -18,11 +17,7 @@ export class LanguageService {
   ) { }
 
   getLanguages(): Observable<Language[]> {
-    return this.http.get<Language[]>(`${this.url}/configuration/languages?api_key=${this.key}`).pipe(
-      catchError((error: any): Observable<any> => {
-        return of({});
-      })
-    );
+    return this.http.get<Language[]>(`/configuration/languages?api_key=${this.key}`);
   }
 
 }

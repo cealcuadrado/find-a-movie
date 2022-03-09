@@ -11,7 +11,6 @@ import { QueryPersonResult } from '../shared/interfaces/query-person-result';
 })
 export class SearchService {
 
-  private url = environment.apiUrl;
   private key = environment.apiKey;
   private language = environment.language;
 
@@ -22,23 +21,14 @@ export class SearchService {
   searchMovies(query: string, page: number): Observable<QueryMovieResult> {
     return this.http
       .get<QueryMovieResult>(
-        `${this.url}/search/movie?api_key=${this.key}&query=${query}&language=${this.language}&page=${page}&include_adult=false`
-      )
-      .pipe(
-        catchError((error: any): Observable<any> => {
-          return of({});
-        })
+        `/search/movie?api_key=${this.key}&query=${query}&language=${this.language}&page=${page}&include_adult=false`
       );
   }
 
   searchPeople(query: string, page: number): Observable<QueryPersonResult> {
     return this.http
       .get<QueryPersonResult>(
-        `${this.url}/search/person?api_key=${this.key}&query=${query}&language=${this.language}&page=${page}&include_adult=false`
-      ).pipe(
-        catchError((errror: any): Observable<any> => {
-          return of({});
-        })
+        `/search/person?api_key=${this.key}&query=${query}&language=${this.language}&page=${page}&include_adult=false`
       );
   }
 }

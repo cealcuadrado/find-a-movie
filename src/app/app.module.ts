@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* Interceptors */
 import { ErrorHandleInterceptor } from './shared/interceptors/error-handle.interceptor';
+import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,11 @@ import { ErrorHandleInterceptor } from './shared/interceptors/error-handle.inter
     {
       provide: Window,
       useValue: window
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseUrlInterceptor,
+      multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
