@@ -1,3 +1,4 @@
+import { NoPersonFoundComponent } from './no-person-found/no-person-found.component';
 import { PersonCrewComponent } from './person-crew/person-crew.component';
 import { PersonCastComponent } from './person-cast/person-cast.component';
 import { PersonOverviewComponent } from './person-overview/person-overview.component';
@@ -8,6 +9,10 @@ import { PersonComponent } from './person.component';
 
 const routes: Routes = [
   {
+    path: 'not-found',
+    component: NoPersonFoundComponent
+  },
+  {
     path: ':id',
     component: PersonComponent,
     children: [
@@ -16,6 +21,10 @@ const routes: Routes = [
       { path: 'cast', component: PersonCastComponent },
       { path: 'crew', component: PersonCrewComponent }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/home'
   }
 ];
 
