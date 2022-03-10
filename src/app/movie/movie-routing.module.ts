@@ -1,3 +1,4 @@
+import { NoMovieFoundComponent } from './no-movie-found/no-movie-found.component';
 import { SimilarMoviesComponent } from './similar-movies/similar-movies.component';
 import { MovieCrewComponent } from './movie-crew/movie-crew.component';
 import { MovieCastComponent } from './movie-cast/movie-cast.component';
@@ -9,6 +10,10 @@ import { MovieComponent } from './movie.component';
 
 const routes: Routes = [
   {
+    path: 'not-found',
+    component: NoMovieFoundComponent
+  },
+  {
     path: ':id',
     component: MovieComponent,
     children: [
@@ -18,6 +23,10 @@ const routes: Routes = [
       { path: 'crew', component: MovieCrewComponent },
       { path: 'similar', component: SimilarMoviesComponent },
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/home'
   }
 ];
 
